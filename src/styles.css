@@ -386,17 +386,23 @@ svg {
 
 .product-image-viewport {
   overflow: hidden;
+  aspect-ratio: 3 / 2;
   background: #fff;
 }
 
+.product-frame.crop-top .product-image-viewport {
+  aspect-ratio: 1152 / 732;
+}
+
 .product-frame img {
+  display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
 }
 
 .product-frame.crop-top img {
-  margin-top: -36px;
+  object-position: center bottom;
 }
 
 .hero-product {
@@ -1155,10 +1161,6 @@ svg {
 
   .window-bar {
     height: 30px;
-  }
-
-  .product-frame.crop-top img {
-    margin-top: -24px;
   }
 
   .signal-strip {

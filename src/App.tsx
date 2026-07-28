@@ -151,11 +151,13 @@ function ProductFrame({
   src,
   alt,
   cropTop = false,
+  priority = false,
   className = "",
 }: {
   src: string;
   alt: string;
   cropTop?: boolean;
+  priority?: boolean;
   className?: string;
 }) {
   return (
@@ -167,7 +169,12 @@ function ProductFrame({
         <p>知远智能体</p>
       </div>
       <div className="product-image-viewport">
-        <img src={src} alt={alt} loading="lazy" />
+        <img
+          src={src}
+          alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+        />
       </div>
     </figure>
   );
@@ -322,6 +329,7 @@ function App() {
               src="/product/zhiyuan-workspace.jpeg"
               alt="知远智能体真实工作台界面"
               cropTop
+              priority
               className="hero-product"
             />
           </div>
