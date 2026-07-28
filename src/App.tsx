@@ -3,21 +3,17 @@ import { useEffect, useState, type ReactNode } from "react";
 const GITHUB_URL = "https://github.com/rongxinzy/RongxinAI";
 const GITHUB_ISSUES_URL = `${GITHUB_URL}/issues`;
 const RELEASE_WORKFLOW_URL = `${GITHUB_URL}/blob/main/.github/workflows/online-update-release.yml`;
-const CURRENT_RELEASE = {
-  version: "2026.7.28-build.6",
-  artifacts: {
-    windows: {
-      url: "https://downloads.rongxzyai.com/releases/2026.7.28-build.6/win32-x64-lite/知远-Setup-2026.7.28-build.6.exe",
-      size: 330_750_296,
-    },
-    macos: {
-      url: "https://downloads.rongxzyai.com/releases/2026.7.28-build.6/darwin-arm64-default/知远-2026.7.28-build.6-arm64.dmg",
-      size: 314_929_736,
-    },
-  },
-} as const;
 
 type Platform = "windows" | "macos";
+type ReleaseArtifact = {
+  url: string;
+  size: number;
+};
+type Release = {
+  version: string;
+  artifacts: Record<Platform, ReleaseArtifact>;
+};
+type ReleaseStatus = "loading" | "ready" | "unavailable";
 
 type IconProps = {
   className?: string;
@@ -25,6 +21,29 @@ type IconProps = {
 
 function formatArtifactSize(size: number) {
   return `${(size / 1_000_000).toFixed(1)} MB`;
+}
+
+function isReleaseArtifact(value: unknown): value is ReleaseArtifact {
+  if (typeof value !== "object" || value === null) return false;
+  const artifact = value as Record<string, unknown>;
+
+  return (
+    typeof artifact.url === "string" &&
+    artifact.url.startsWith("https://downloads.rongxzyai.com/") &&
+    typeof artifact.size === "number" &&
+    Number.isSafeInteger(artifact.size) &&
+    artifact.size > 0
+  );
+}
+
+function isRelease(value: unknown): value is Release {
+  if (typeof value !== "object" || value === null) return false;
+  const release = value as Record<string, unknown>;
+  if (typeof release.version !== "string" || release.version.length === 0) return false;
+  if (typeof release.artifacts !== "object" || release.artifacts === null) return false;
+
+  const artifacts = release.artifacts as Record<string, unknown>;
+  return isReleaseArtifact(artifacts.windows) && isReleaseArtifact(artifacts.macos);
 }
 
 function ArrowUpRight({ className }: IconProps) {
@@ -144,13 +163,31 @@ function Header() {
 
 function PrimaryDownload({
   platform,
+  release,
+  status,
   compact = false,
 }: {
   platform: Platform;
+  release: Release | null;
+  status: ReleaseStatus;
   compact?: boolean;
 }) {
   const isWindows = platform === "windows";
-  const artifact = isWindows ? CURRENT_RELEASE.artifacts.windows : CURRENT_RELEASE.artifacts.macos;
+  const artifact = release?.artifacts[platform];
+
+  if (!artifact) {
+    return (
+      <span
+        className={`button button-primary button-loading${compact ? " button-compact" : ""}`}
+        aria-live="polite"
+        aria-label="正在读取最新下载链接"
+      >
+        <DownloadIcon />
+        {status === "unavailable" ? "暂时无法读取版本" : "正在读取最新版本…"}
+      </span>
+    );
+  }
+
   return (
     <a
       className={`button button-primary${compact ? " button-compact" : ""}`}
@@ -345,10 +382,42 @@ function Community() {
 
 function App() {
   const [preferredPlatform, setPreferredPlatform] = useState<Platform>("windows");
+  const [release, setRelease] = useState<Release | null>(null);
+  const [releaseStatus, setReleaseStatus] = useState<ReleaseStatus>("loading");
 
   useEffect(() => {
     const platform = navigator.userAgent.toLowerCase();
     if (platform.includes("mac")) setPreferredPlatform("macos");
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadRelease() {
+      try {
+        const response = await fetch("/api/release", {
+          headers: { Accept: "application/json" },
+          signal: controller.signal,
+        });
+        if (!response.ok) {
+          setReleaseStatus("unavailable");
+          return;
+        }
+
+        const payload: unknown = await response.json();
+        if (isRelease(payload)) {
+          setRelease(payload);
+          setReleaseStatus("ready");
+        } else {
+          setReleaseStatus("unavailable");
+        }
+      } catch {
+        if (!controller.signal.aborted) setReleaseStatus("unavailable");
+      }
+    }
+
+    void loadRelease();
+    return () => controller.abort();
   }, []);
 
   return (
@@ -380,14 +449,18 @@ function App() {
               <span>可扩展</span>
             </div>
             <div className="hero-actions">
-              <PrimaryDownload platform={preferredPlatform} />
+              <PrimaryDownload platform={preferredPlatform} release={release} status={releaseStatus} />
               <a className="button button-secondary" href={GITHUB_URL} target="_blank" rel="noreferrer">
                 <GithubIcon />
                 查看源码
               </a>
             </div>
-            <p className="release-line">
-              {CURRENT_RELEASE.version} · Windows x64 · macOS Apple Silicon
+            <p className="release-line" aria-live="polite">
+              {release
+                ? `${release.version} · Windows x64 · macOS Apple Silicon`
+                : releaseStatus === "unavailable"
+                  ? "当前稳定版本暂时不可用，请稍后刷新。"
+                  : "正在读取当前稳定版本…"}
             </p>
           </div>
 
@@ -526,10 +599,10 @@ function App() {
               </div>
               <p>适用于 Windows 10/11 64 位系统</p>
               <div className="download-meta">
-                <span>{CURRENT_RELEASE.version}</span>
-                <span>{formatArtifactSize(CURRENT_RELEASE.artifacts.windows.size)}</span>
+                <span>{release?.version ?? (releaseStatus === "unavailable" ? "暂时不可用" : "正在读取版本…")}</span>
+                <span>{release ? formatArtifactSize(release.artifacts.windows.size) : "—"}</span>
               </div>
-              <PrimaryDownload platform="windows" compact />
+              <PrimaryDownload platform="windows" release={release} status={releaseStatus} compact />
             </article>
             <article>
               <div className="download-platform">
@@ -538,10 +611,10 @@ function App() {
               </div>
               <p>适用于搭载 Apple 芯片的 Mac</p>
               <div className="download-meta">
-                <span>{CURRENT_RELEASE.version}</span>
-                <span>{formatArtifactSize(CURRENT_RELEASE.artifacts.macos.size)}</span>
+                <span>{release?.version ?? (releaseStatus === "unavailable" ? "暂时不可用" : "正在读取版本…")}</span>
+                <span>{release ? formatArtifactSize(release.artifacts.macos.size) : "—"}</span>
               </div>
-              <PrimaryDownload platform="macos" compact />
+              <PrimaryDownload platform="macos" release={release} status={releaseStatus} compact />
             </article>
           </div>
           <p className="download-footnote">
