@@ -298,43 +298,33 @@ function StarCallout() {
   );
 }
 
-function CommunityShareKit() {
+function Community() {
   return (
     <section className="community section" id="community">
       <div className="section-heading centered">
-        <p className="section-index">社区传播包</p>
-        <h2>把知远说清楚，让合适的人一眼看懂。</h2>
-        <p>
-          无需重新组织产品介绍。下面两段可以直接用于技术社区、项目推荐或团队内部分享。
-        </p>
+        <p className="section-index">开源共建</p>
+        <h2>让知远适配更多真实工作流。</h2>
+        <p>知远以开源方式持续迭代。欢迎报告问题、分享需求，或直接参与代码贡献。</p>
       </div>
       <div className="community-grid">
-        <article className="share-card share-card-primary">
-          <p className="share-label">中文 · 一句话介绍</p>
-          <blockquote>
-            知远是一个开源、本地优先的桌面 AI Agent：能读写文件、运行终端、操作浏览器、调用技能与 MCP，
-            也能使用本地 GGUF 模型；敏感操作由用户逐次批准。
-          </blockquote>
-          <p className="share-audience">适合分享给开发者、研究者，以及希望把 AI 接入真实工作流的团队。</p>
+        <article className="community-card community-card-primary">
+          <p className="community-card-label">反馈与讨论</p>
+          <h3>把你的使用场景告诉我们</h3>
+          <p>遇到问题、缺少能力，或有更好的工作流想法，都可以通过 Issue 与社区交流。</p>
+          <a className="community-card-link" href={GITHUB_ISSUES_URL} target="_blank" rel="noreferrer">
+            提交 Issue 或功能建议
+            <ArrowUpRight />
+          </a>
         </article>
-        <article className="share-card">
-          <p className="share-label">English · Short intro</p>
-          <blockquote>
-            ZhiYuan is an open-source, local-first desktop AI agent that works with files, terminals,
-            browsers, skills, MCP tools, and local GGUF models—while keeping sensitive actions approval-gated.
-          </blockquote>
-          <p className="share-audience">Link back to GitHub so readers can inspect the architecture, source, and release process.</p>
+        <article className="community-card">
+          <p className="community-card-label">贡献代码</p>
+          <h3>从源码开始参与</h3>
+          <p>查看项目架构和开发说明；准备好后，欢迎通过 Pull Request 提交可复现、可审查的改进。</p>
+          <a className="community-card-link" href={GITHUB_URL} target="_blank" rel="noreferrer">
+            查看源码与 README
+            <ArrowUpRight />
+          </a>
         </article>
-      </div>
-      <div className="community-actions">
-        <a className="button button-primary" href={GITHUB_URL} target="_blank" rel="noreferrer">
-          <GithubIcon />
-          查看源码与 README
-        </a>
-        <a className="community-issue-link" href={GITHUB_ISSUES_URL} target="_blank" rel="noreferrer">
-          提交问题或功能建议
-          <ArrowUpRight />
-        </a>
       </div>
     </section>
   );
@@ -506,7 +496,7 @@ function App() {
           </div>
         </section>
 
-        <CommunityShareKit />
+        <Community />
 
         <section className="download section" id="download">
           <div className="download-glow" aria-hidden="true" />

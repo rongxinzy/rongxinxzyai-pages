@@ -933,7 +933,7 @@ svg {
   margin: 52px auto 0;
 }
 
-.share-card {
+.community-card {
   min-height: 286px;
   padding: 32px;
   border: 1px solid rgba(179, 196, 221, 0.7);
@@ -943,13 +943,13 @@ svg {
   backdrop-filter: blur(12px);
 }
 
-.share-card-primary {
+.community-card-primary {
   background:
     radial-gradient(circle at 95% 0, rgba(83, 147, 255, 0.16), transparent 38%),
     rgba(255, 255, 255, 0.9);
 }
 
-.share-label {
+.community-card-label {
   margin: 0;
   color: var(--blue-deep);
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
@@ -959,48 +959,39 @@ svg {
   text-transform: uppercase;
 }
 
-.share-card blockquote {
-  margin: 24px 0;
+.community-card h3 {
+  margin: 24px 0 12px;
   color: #273247;
-  font-size: 18px;
-  line-height: 1.75;
+  font-size: 22px;
+  line-height: 1.35;
   font-weight: 560;
   letter-spacing: -0.015em;
 }
 
-.share-audience {
+.community-card > p:not(.community-card-label) {
   margin: 0;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 13px;
   line-height: 1.65;
 }
 
-.community-actions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  margin-top: 34px;
-}
-
-.community-issue-link {
+.community-card-link {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: #344054;
+  margin-top: 28px;
+  color: var(--blue-deep);
   font-size: 14px;
   font-weight: 600;
 }
 
-.community-issue-link svg {
+.community-card-link svg {
   width: 16px;
   height: 16px;
   transition: transform 180ms ease;
 }
 
-.community-issue-link:hover svg {
+.community-card-link:hover svg {
   transform: translate(2px, -2px);
 }
 
@@ -1486,22 +1477,13 @@ svg {
     padding-left: 18px;
   }
 
-  .share-card {
+  .community-card {
     min-height: auto;
     padding: 26px 22px;
   }
 
-  .share-card blockquote {
+  .community-card h3 {
     font-size: 16px;
-  }
-
-  .community-actions {
-    display: grid;
-    gap: 20px;
-  }
-
-  .community-issue-link {
-    justify-content: center;
   }
 
   .download {
