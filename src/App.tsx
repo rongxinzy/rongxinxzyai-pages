@@ -1,6 +1,8 @@
 import { useEffect, useState, type ReactNode } from "react";
 
 const GITHUB_URL = "https://github.com/rongxinzy/RongxinAI";
+const GITHUB_ISSUES_URL = `${GITHUB_URL}/issues`;
+const RELEASE_WORKFLOW_URL = `${GITHUB_URL}/blob/release-2.0/.github/workflows/online-update-release.yml`;
 const RELEASE_VERSION = "2026.7.28-build.4";
 const WINDOWS_URL =
   "https://downloads.rongxzyai.com/releases/2026.7.28-build.4/win32-x64-lite/知远-Setup-2026.7.28-build.4.exe";
@@ -117,6 +119,7 @@ function Header() {
         <a href="#highlights">特色</a>
         <a href="#workflow">工作方式</a>
         <a href="#product">产品</a>
+        <a href="#community">社区</a>
         <a href="#download">下载</a>
       </nav>
       <a className="header-github" href={GITHUB_URL} target="_blank" rel="noreferrer">
@@ -276,6 +279,67 @@ function Feature({
   );
 }
 
+function StarCallout() {
+  return (
+    <section className="star-callout" aria-labelledby="star-callout-title">
+      <div className="star-callout-mark" aria-hidden="true">
+        <GithubIcon />
+      </div>
+      <div className="star-callout-copy">
+        <p>OPEN SOURCE, BUILT IN PUBLIC</p>
+        <h2 id="star-callout-title">如果知远对你有用，给项目一个 Star。</h2>
+        <span>关注后续版本，也让更多人找到一个源码可检查、权限可控制的桌面 AI Agent。</span>
+      </div>
+      <a className="button button-primary" href={GITHUB_URL} target="_blank" rel="noreferrer">
+        <GithubIcon />
+        在 GitHub 上 Star
+      </a>
+    </section>
+  );
+}
+
+function CommunityShareKit() {
+  return (
+    <section className="community section" id="community">
+      <div className="section-heading centered">
+        <p className="section-index">社区传播包</p>
+        <h2>把知远说清楚，让合适的人一眼看懂。</h2>
+        <p>
+          无需重新组织产品介绍。下面两段可以直接用于技术社区、项目推荐或团队内部分享。
+        </p>
+      </div>
+      <div className="community-grid">
+        <article className="share-card share-card-primary">
+          <p className="share-label">中文 · 一句话介绍</p>
+          <blockquote>
+            知远是一个开源、本地优先的桌面 AI Agent：能读写文件、运行终端、操作浏览器、调用技能与 MCP，
+            也能使用本地 GGUF 模型；敏感操作由用户逐次批准。
+          </blockquote>
+          <p className="share-audience">适合分享给开发者、研究者，以及希望把 AI 接入真实工作流的团队。</p>
+        </article>
+        <article className="share-card">
+          <p className="share-label">English · Short intro</p>
+          <blockquote>
+            ZhiYuan is an open-source, local-first desktop AI agent that works with files, terminals,
+            browsers, skills, MCP tools, and local GGUF models—while keeping sensitive actions approval-gated.
+          </blockquote>
+          <p className="share-audience">Link back to GitHub so readers can inspect the architecture, source, and release process.</p>
+        </article>
+      </div>
+      <div className="community-actions">
+        <a className="button button-primary" href={GITHUB_URL} target="_blank" rel="noreferrer">
+          <GithubIcon />
+          查看源码与 README
+        </a>
+        <a className="community-issue-link" href={GITHUB_ISSUES_URL} target="_blank" rel="noreferrer">
+          提交问题或功能建议
+          <ArrowUpRight />
+        </a>
+      </div>
+    </section>
+  );
+}
+
 function App() {
   const [preferredPlatform, setPreferredPlatform] = useState<Platform>("windows");
 
@@ -294,7 +358,7 @@ function App() {
           <div className="hero-inner">
             <div className="hero-brandline">
               <img src="/zhiyuan-logo.svg" alt="" />
-              <span>本地优先的桌面智能体</span>
+              <span>开源 · 本地优先的桌面 AI Agent</span>
             </div>
             <h1>
               让 Agent 真正在你的
@@ -378,6 +442,8 @@ function App() {
           </div>
         </section>
 
+        <StarCallout />
+
         <section className="workflow section" id="workflow">
           <div className="workflow-copy">
             <p className="section-index">工作方式</p>
@@ -440,6 +506,8 @@ function App() {
           </div>
         </section>
 
+        <CommunityShareKit />
+
         <section className="download section" id="download">
           <div className="download-glow" aria-hidden="true" />
           <div className="download-heading">
@@ -469,6 +537,9 @@ function App() {
           </div>
           <p className="download-footnote">
             安装包由官方发布流程构建，并通过签名清单与 SHA-256 校验保护升级过程。
+            <a href={RELEASE_WORKFLOW_URL} target="_blank" rel="noreferrer">
+              想了解构建和升级校验，回 GitHub 查看发布流程。
+            </a>
           </p>
         </section>
       </main>
@@ -481,6 +552,7 @@ function App() {
         <nav aria-label="页脚导航">
           <a href="#highlights">特色</a>
           <a href="#product">产品</a>
+          <a href="#community">社区</a>
           <a href="#download">下载</a>
           <a href={GITHUB_URL} target="_blank" rel="noreferrer">
             GitHub <ArrowUpRight />
