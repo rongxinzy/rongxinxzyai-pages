@@ -2,18 +2,30 @@ import { useEffect, useState, type ReactNode } from "react";
 
 const GITHUB_URL = "https://github.com/rongxinzy/RongxinAI";
 const GITHUB_ISSUES_URL = `${GITHUB_URL}/issues`;
-const RELEASE_WORKFLOW_URL = `${GITHUB_URL}/blob/release-2.0/.github/workflows/online-update-release.yml`;
-const RELEASE_VERSION = "2026.7.28-build.4";
-const WINDOWS_URL =
-  "https://downloads.rongxzyai.com/releases/2026.7.28-build.4/win32-x64-lite/知远-Setup-2026.7.28-build.4.exe";
-const MACOS_URL =
-  "https://downloads.rongxzyai.com/releases/2026.7.28-build.4/darwin-arm64-default/知远-2026.7.28-build.4-arm64.dmg";
+const RELEASE_WORKFLOW_URL = `${GITHUB_URL}/blob/main/.github/workflows/online-update-release.yml`;
+const CURRENT_RELEASE = {
+  version: "2026.7.28-build.6",
+  artifacts: {
+    windows: {
+      url: "https://downloads.rongxzyai.com/releases/2026.7.28-build.6/win32-x64-lite/知远-Setup-2026.7.28-build.6.exe",
+      size: 330_750_296,
+    },
+    macos: {
+      url: "https://downloads.rongxzyai.com/releases/2026.7.28-build.6/darwin-arm64-default/知远-2026.7.28-build.6-arm64.dmg",
+      size: 314_929_736,
+    },
+  },
+} as const;
 
 type Platform = "windows" | "macos";
 
 type IconProps = {
   className?: string;
 };
+
+function formatArtifactSize(size: number) {
+  return `${(size / 1_000_000).toFixed(1)} MB`;
+}
 
 function ArrowUpRight({ className }: IconProps) {
   return (
@@ -138,10 +150,11 @@ function PrimaryDownload({
   compact?: boolean;
 }) {
   const isWindows = platform === "windows";
+  const artifact = isWindows ? CURRENT_RELEASE.artifacts.windows : CURRENT_RELEASE.artifacts.macos;
   return (
     <a
       className={`button button-primary${compact ? " button-compact" : ""}`}
-      href={isWindows ? WINDOWS_URL : MACOS_URL}
+      href={artifact.url}
       aria-label={`下载知远智能体 ${isWindows ? "Windows x64" : "macOS Apple Silicon"} 版本`}
     >
       <DownloadIcon />
@@ -374,7 +387,7 @@ function App() {
               </a>
             </div>
             <p className="release-line">
-              {RELEASE_VERSION} · Windows x64 · macOS Apple Silicon
+              {CURRENT_RELEASE.version} · Windows x64 · macOS Apple Silicon
             </p>
           </div>
 
@@ -512,7 +525,10 @@ function App() {
                 <div><strong>Windows</strong><span>x64 · Lite</span></div>
               </div>
               <p>适用于 Windows 10/11 64 位系统</p>
-              <div className="download-meta"><span>{RELEASE_VERSION}</span><span>330.6 MB</span></div>
+              <div className="download-meta">
+                <span>{CURRENT_RELEASE.version}</span>
+                <span>{formatArtifactSize(CURRENT_RELEASE.artifacts.windows.size)}</span>
+              </div>
               <PrimaryDownload platform="windows" compact />
             </article>
             <article>
@@ -521,7 +537,10 @@ function App() {
                 <div><strong>macOS</strong><span>Apple Silicon</span></div>
               </div>
               <p>适用于搭载 Apple 芯片的 Mac</p>
-              <div className="download-meta"><span>{RELEASE_VERSION}</span><span>314.6 MB</span></div>
+              <div className="download-meta">
+                <span>{CURRENT_RELEASE.version}</span>
+                <span>{formatArtifactSize(CURRENT_RELEASE.artifacts.macos.size)}</span>
+              </div>
               <PrimaryDownload platform="macos" compact />
             </article>
           </div>
