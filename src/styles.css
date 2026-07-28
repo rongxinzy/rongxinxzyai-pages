@@ -563,6 +563,86 @@ svg {
   line-height: 1.75;
 }
 
+.star-callout {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 26px;
+  align-items: center;
+  max-width: calc(var(--container) - 56px);
+  margin: -42px auto 112px;
+  padding: 30px 32px;
+  border: 1px solid rgba(123, 159, 220, 0.42);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 92% 22%, rgba(94, 159, 255, 0.25), transparent 32%),
+    radial-gradient(circle at 12% 110%, rgba(170, 209, 255, 0.27), transparent 34%),
+    linear-gradient(118deg, rgba(251, 253, 255, 0.98), rgba(237, 245, 255, 0.94));
+  box-shadow: 0 22px 60px rgba(45, 86, 150, 0.1);
+  overflow: hidden;
+}
+
+.star-callout::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: radial-gradient(circle at 8px 8px, rgba(65, 102, 159, 0.09) 1px, transparent 1.2px) 0 0 / 18px 18px;
+  mask-image: linear-gradient(90deg, #000, transparent 42%);
+  pointer-events: none;
+}
+
+.star-callout > * {
+  position: relative;
+  z-index: 1;
+}
+
+.star-callout-mark {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border: 1px solid rgba(122, 149, 193, 0.34);
+  border-radius: 15px;
+  color: #fff;
+  background: #121724;
+  box-shadow: 0 12px 24px rgba(18, 23, 36, 0.18);
+}
+
+.star-callout-mark svg {
+  width: 25px;
+  height: 25px;
+}
+
+.star-callout-copy p {
+  margin: 0 0 8px;
+  color: var(--blue-deep);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+}
+
+.star-callout-copy h2 {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.star-callout-copy span {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.star-callout .button {
+  min-height: 48px;
+  padding: 0 20px;
+  white-space: nowrap;
+}
+
 .workflow {
   display: grid;
   grid-template-columns: 0.85fr 1.15fr;
@@ -835,6 +915,86 @@ svg {
   left: 15px;
 }
 
+.community {
+  max-width: none;
+  padding-right: max(28px, calc((100vw - var(--container)) / 2));
+  padding-left: max(28px, calc((100vw - var(--container)) / 2));
+  border-top: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 9px 9px, rgba(92, 112, 145, 0.09) 1px, transparent 1.2px) 0 0 / 18px 18px,
+    linear-gradient(180deg, #fbfdff 0%, #f4f8ff 100%);
+}
+
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1040px;
+  margin: 52px auto 0;
+}
+
+.community-card {
+  min-height: 286px;
+  padding: 32px;
+  border: 1px solid rgba(179, 196, 221, 0.7);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: 0 18px 48px rgba(52, 81, 128, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.community-card-primary {
+  background:
+    radial-gradient(circle at 95% 0, rgba(83, 147, 255, 0.16), transparent 38%),
+    rgba(255, 255, 255, 0.9);
+}
+
+.community-card-label {
+  margin: 0;
+  color: var(--blue-deep);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.community-card h3 {
+  margin: 24px 0 12px;
+  color: #273247;
+  font-size: 22px;
+  line-height: 1.35;
+  font-weight: 560;
+  letter-spacing: -0.015em;
+}
+
+.community-card > p:not(.community-card-label) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.community-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 28px;
+  color: var(--blue-deep);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.community-card-link svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 180ms ease;
+}
+
+.community-card-link:hover svg {
+  transform: translate(2px, -2px);
+}
+
 .download {
   position: relative;
   max-width: none;
@@ -951,6 +1111,20 @@ svg {
   text-align: center;
 }
 
+.download-footnote a {
+  display: block;
+  width: fit-content;
+  margin: 5px auto 0;
+  color: #3d65a3;
+  font-weight: 600;
+}
+
+.download-footnote a:hover {
+  color: var(--blue-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .site-footer {
   display: grid;
   grid-template-columns: 1.2fr 1fr auto;
@@ -1053,6 +1227,17 @@ svg {
     gap: 70px;
   }
 
+  .star-callout {
+    grid-template-columns: auto 1fr;
+    max-width: calc(100% - 56px);
+    margin-bottom: 92px;
+  }
+
+  .star-callout .button {
+    grid-column: 2;
+    justify-self: start;
+  }
+
   .highlights .section-heading,
   .workflow-copy,
   .reach-copy {
@@ -1067,6 +1252,11 @@ svg {
   }
 
   .download-options {
+    max-width: 760px;
+  }
+
+  .community-grid {
+    grid-template-columns: 1fr;
     max-width: 760px;
   }
 
@@ -1203,6 +1393,28 @@ svg {
     gap: 52px;
   }
 
+  .star-callout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    max-width: calc(100% - 36px);
+    margin: -32px auto 78px;
+    padding: 26px 24px;
+  }
+
+  .star-callout-mark {
+    width: 48px;
+    height: 48px;
+  }
+
+  .star-callout-copy h2 {
+    font-size: 26px;
+  }
+
+  .star-callout .button {
+    grid-column: auto;
+    justify-self: stretch;
+  }
+
   .workflow {
     padding-right: 18px;
     padding-left: 18px;
@@ -1258,6 +1470,20 @@ svg {
   .reach-visual {
     min-height: 360px;
     transform: scale(0.82);
+  }
+
+  .community {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .community-card {
+    min-height: auto;
+    padding: 26px 22px;
+  }
+
+  .community-card h3 {
+    font-size: 16px;
   }
 
   .download {

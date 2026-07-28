@@ -1,17 +1,50 @@
 import { useEffect, useState, type ReactNode } from "react";
 
 const GITHUB_URL = "https://github.com/rongxinzy/RongxinAI";
-const RELEASE_VERSION = "2026.7.28-build.4";
-const WINDOWS_URL =
-  "https://downloads.rongxzyai.com/releases/2026.7.28-build.4/win32-x64-lite/知远-Setup-2026.7.28-build.4.exe";
-const MACOS_URL =
-  "https://downloads.rongxzyai.com/releases/2026.7.28-build.4/darwin-arm64-default/知远-2026.7.28-build.4-arm64.dmg";
+const GITHUB_ISSUES_URL = `${GITHUB_URL}/issues`;
+const RELEASE_WORKFLOW_URL = `${GITHUB_URL}/blob/main/.github/workflows/online-update-release.yml`;
 
 type Platform = "windows" | "macos";
+type ReleaseArtifact = {
+  url: string;
+  size: number;
+};
+type Release = {
+  version: string;
+  artifacts: Record<Platform, ReleaseArtifact>;
+};
+type ReleaseStatus = "loading" | "ready" | "unavailable";
 
 type IconProps = {
   className?: string;
 };
+
+function formatArtifactSize(size: number) {
+  return `${(size / 1_000_000).toFixed(1)} MB`;
+}
+
+function isReleaseArtifact(value: unknown): value is ReleaseArtifact {
+  if (typeof value !== "object" || value === null) return false;
+  const artifact = value as Record<string, unknown>;
+
+  return (
+    typeof artifact.url === "string" &&
+    artifact.url.startsWith("https://downloads.rongxzyai.com/") &&
+    typeof artifact.size === "number" &&
+    Number.isSafeInteger(artifact.size) &&
+    artifact.size > 0
+  );
+}
+
+function isRelease(value: unknown): value is Release {
+  if (typeof value !== "object" || value === null) return false;
+  const release = value as Record<string, unknown>;
+  if (typeof release.version !== "string" || release.version.length === 0) return false;
+  if (typeof release.artifacts !== "object" || release.artifacts === null) return false;
+
+  const artifacts = release.artifacts as Record<string, unknown>;
+  return isReleaseArtifact(artifacts.windows) && isReleaseArtifact(artifacts.macos);
+}
 
 function ArrowUpRight({ className }: IconProps) {
   return (
@@ -117,6 +150,7 @@ function Header() {
         <a href="#highlights">特色</a>
         <a href="#workflow">工作方式</a>
         <a href="#product">产品</a>
+        <a href="#community">社区</a>
         <a href="#download">下载</a>
       </nav>
       <a className="header-github" href={GITHUB_URL} target="_blank" rel="noreferrer">
@@ -129,16 +163,35 @@ function Header() {
 
 function PrimaryDownload({
   platform,
+  release,
+  status,
   compact = false,
 }: {
   platform: Platform;
+  release: Release | null;
+  status: ReleaseStatus;
   compact?: boolean;
 }) {
   const isWindows = platform === "windows";
+  const artifact = release?.artifacts[platform];
+
+  if (!artifact) {
+    return (
+      <span
+        className={`button button-primary button-loading${compact ? " button-compact" : ""}`}
+        aria-live="polite"
+        aria-label="正在读取最新下载链接"
+      >
+        <DownloadIcon />
+        {status === "unavailable" ? "暂时无法读取版本" : "正在读取最新版本…"}
+      </span>
+    );
+  }
+
   return (
     <a
       className={`button button-primary${compact ? " button-compact" : ""}`}
-      href={isWindows ? WINDOWS_URL : MACOS_URL}
+      href={artifact.url}
       aria-label={`下载知远智能体 ${isWindows ? "Windows x64" : "macOS Apple Silicon"} 版本`}
     >
       <DownloadIcon />
@@ -276,12 +329,95 @@ function Feature({
   );
 }
 
+function StarCallout() {
+  return (
+    <section className="star-callout" aria-labelledby="star-callout-title">
+      <div className="star-callout-mark" aria-hidden="true">
+        <GithubIcon />
+      </div>
+      <div className="star-callout-copy">
+        <p>OPEN SOURCE, BUILT IN PUBLIC</p>
+        <h2 id="star-callout-title">如果知远对你有用，给项目一个 Star。</h2>
+        <span>关注后续版本，也让更多人找到一个源码可检查、权限可控制的桌面 AI Agent。</span>
+      </div>
+      <a className="button button-primary" href={GITHUB_URL} target="_blank" rel="noreferrer">
+        <GithubIcon />
+        在 GitHub 上 Star
+      </a>
+    </section>
+  );
+}
+
+function Community() {
+  return (
+    <section className="community section" id="community">
+      <div className="section-heading centered">
+        <p className="section-index">开源共建</p>
+        <h2>让知远适配更多真实工作流。</h2>
+        <p>知远以开源方式持续迭代。欢迎报告问题、分享需求，或直接参与代码贡献。</p>
+      </div>
+      <div className="community-grid">
+        <article className="community-card community-card-primary">
+          <p className="community-card-label">反馈与讨论</p>
+          <h3>把你的使用场景告诉我们</h3>
+          <p>遇到问题、缺少能力，或有更好的工作流想法，都可以通过 Issue 与社区交流。</p>
+          <a className="community-card-link" href={GITHUB_ISSUES_URL} target="_blank" rel="noreferrer">
+            提交 Issue 或功能建议
+            <ArrowUpRight />
+          </a>
+        </article>
+        <article className="community-card">
+          <p className="community-card-label">贡献代码</p>
+          <h3>从源码开始参与</h3>
+          <p>查看项目架构和开发说明；准备好后，欢迎通过 Pull Request 提交可复现、可审查的改进。</p>
+          <a className="community-card-link" href={GITHUB_URL} target="_blank" rel="noreferrer">
+            查看源码与 README
+            <ArrowUpRight />
+          </a>
+        </article>
+      </div>
+    </section>
+  );
+}
+
 function App() {
   const [preferredPlatform, setPreferredPlatform] = useState<Platform>("windows");
+  const [release, setRelease] = useState<Release | null>(null);
+  const [releaseStatus, setReleaseStatus] = useState<ReleaseStatus>("loading");
 
   useEffect(() => {
     const platform = navigator.userAgent.toLowerCase();
     if (platform.includes("mac")) setPreferredPlatform("macos");
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadRelease() {
+      try {
+        const response = await fetch("/api/release", {
+          headers: { Accept: "application/json" },
+          signal: controller.signal,
+        });
+        if (!response.ok) {
+          setReleaseStatus("unavailable");
+          return;
+        }
+
+        const payload: unknown = await response.json();
+        if (isRelease(payload)) {
+          setRelease(payload);
+          setReleaseStatus("ready");
+        } else {
+          setReleaseStatus("unavailable");
+        }
+      } catch {
+        if (!controller.signal.aborted) setReleaseStatus("unavailable");
+      }
+    }
+
+    void loadRelease();
+    return () => controller.abort();
   }, []);
 
   return (
@@ -294,7 +430,7 @@ function App() {
           <div className="hero-inner">
             <div className="hero-brandline">
               <img src="/zhiyuan-logo.svg" alt="" />
-              <span>本地优先的桌面智能体</span>
+              <span>开源 · 本地优先的桌面 AI Agent</span>
             </div>
             <h1>
               让 Agent 真正在你的
@@ -313,14 +449,18 @@ function App() {
               <span>可扩展</span>
             </div>
             <div className="hero-actions">
-              <PrimaryDownload platform={preferredPlatform} />
+              <PrimaryDownload platform={preferredPlatform} release={release} status={releaseStatus} />
               <a className="button button-secondary" href={GITHUB_URL} target="_blank" rel="noreferrer">
                 <GithubIcon />
                 查看源码
               </a>
             </div>
-            <p className="release-line">
-              {RELEASE_VERSION} · Windows x64 · macOS Apple Silicon
+            <p className="release-line" aria-live="polite">
+              {release
+                ? `${release.version} · Windows x64 · macOS Apple Silicon`
+                : releaseStatus === "unavailable"
+                  ? "当前稳定版本暂时不可用，请稍后刷新。"
+                  : "正在读取当前稳定版本…"}
             </p>
           </div>
 
@@ -377,6 +517,8 @@ function App() {
             </Feature>
           </div>
         </section>
+
+        <StarCallout />
 
         <section className="workflow section" id="workflow">
           <div className="workflow-copy">
@@ -440,6 +582,8 @@ function App() {
           </div>
         </section>
 
+        <Community />
+
         <section className="download section" id="download">
           <div className="download-glow" aria-hidden="true" />
           <div className="download-heading">
@@ -454,8 +598,11 @@ function App() {
                 <div><strong>Windows</strong><span>x64 · Lite</span></div>
               </div>
               <p>适用于 Windows 10/11 64 位系统</p>
-              <div className="download-meta"><span>{RELEASE_VERSION}</span><span>330.6 MB</span></div>
-              <PrimaryDownload platform="windows" compact />
+              <div className="download-meta">
+                <span>{release?.version ?? (releaseStatus === "unavailable" ? "暂时不可用" : "正在读取版本…")}</span>
+                <span>{release ? formatArtifactSize(release.artifacts.windows.size) : "—"}</span>
+              </div>
+              <PrimaryDownload platform="windows" release={release} status={releaseStatus} compact />
             </article>
             <article>
               <div className="download-platform">
@@ -463,12 +610,18 @@ function App() {
                 <div><strong>macOS</strong><span>Apple Silicon</span></div>
               </div>
               <p>适用于搭载 Apple 芯片的 Mac</p>
-              <div className="download-meta"><span>{RELEASE_VERSION}</span><span>314.6 MB</span></div>
-              <PrimaryDownload platform="macos" compact />
+              <div className="download-meta">
+                <span>{release?.version ?? (releaseStatus === "unavailable" ? "暂时不可用" : "正在读取版本…")}</span>
+                <span>{release ? formatArtifactSize(release.artifacts.macos.size) : "—"}</span>
+              </div>
+              <PrimaryDownload platform="macos" release={release} status={releaseStatus} compact />
             </article>
           </div>
           <p className="download-footnote">
             安装包由官方发布流程构建，并通过签名清单与 SHA-256 校验保护升级过程。
+            <a href={RELEASE_WORKFLOW_URL} target="_blank" rel="noreferrer">
+              想了解构建和升级校验，回 GitHub 查看发布流程。
+            </a>
           </p>
         </section>
       </main>
@@ -481,6 +634,7 @@ function App() {
         <nav aria-label="页脚导航">
           <a href="#highlights">特色</a>
           <a href="#product">产品</a>
+          <a href="#community">社区</a>
           <a href="#download">下载</a>
           <a href={GITHUB_URL} target="_blank" rel="noreferrer">
             GitHub <ArrowUpRight />
