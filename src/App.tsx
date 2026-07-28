@@ -187,7 +187,7 @@ const galleryItems = [
     title: "把一句话，变成一条执行轨迹。",
     description:
       "给出目标，知远会组织文件、工具、技能与模型完成任务。执行过程持续呈现，结果直接留在工作区。",
-    src: "/product/zhiyuan-workspace.jpeg",
+    src: "/product/zhiyuan-workspace.png",
     alt: "知远智能体真实工作台界面，包含工作区、任务输入框、本地推理与自动化入口",
     cropTop: true,
   },
@@ -197,7 +197,7 @@ const galleryItems = [
     title: "把成熟的方法，装进智能体。",
     description:
       "内置网页搜索、文档处理、邮件、代码与营销等技能，也可以创建自己的技能，把团队方法变成可重复的工作流。",
-    src: "/product/zhiyuan-skills.jpeg",
+    src: "/product/zhiyuan-skills.png",
     alt: "知远智能体真实技能中心界面，展示已安装技能、搜索和批量管理",
     cropTop: false,
   },
@@ -207,7 +207,7 @@ const galleryItems = [
     title: "从模型市场，把推理搬回本地。",
     description:
       "搜索并安装 ModelScope 上的 GGUF 模型，统一管理上下文、GPU offload、线程与服务生命周期。",
-    src: "/product/zhiyuan-model-market.jpeg",
+    src: "/product/zhiyuan-model-market.png",
     alt: "知远智能体真实模型市场界面，展示多个 GGUF 模型与安装入口",
     cropTop: false,
   },
@@ -326,7 +326,7 @@ function App() {
 
           <div className="hero-product-wrap">
             <ProductFrame
-              src="/product/zhiyuan-workspace.jpeg"
+              src="/product/zhiyuan-workspace.png"
               alt="知远智能体真实工作台界面"
               cropTop
               priority

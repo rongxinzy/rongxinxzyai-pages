@@ -386,12 +386,12 @@ svg {
 
 .product-image-viewport {
   overflow: hidden;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 8 / 5;
   background: #fff;
 }
 
 .product-frame.crop-top .product-image-viewport {
-  aspect-ratio: 1152 / 732;
+  aspect-ratio: 1920 / 1155;
 }
 
 .product-frame img {
