@@ -75,6 +75,11 @@ svg {
   stroke-linejoin: round;
 }
 
+.github-icon {
+  fill: currentColor;
+  stroke: none;
+}
+
 .site-shell {
   overflow: clip;
 }
@@ -108,6 +113,13 @@ svg {
   height: 28px;
   object-fit: contain;
   object-position: left center;
+}
+
+.brand span {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  line-height: 1;
 }
 
 .site-header nav {
@@ -232,13 +244,18 @@ svg {
   font-size: clamp(48px, 6.3vw, 82px);
   line-height: 1.09;
   font-weight: 800;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
 .hero h1 span {
   color: var(--blue);
   text-shadow: 0 12px 35px rgba(57, 123, 255, 0.18);
+}
+
+.hero h1 .hero-work {
+  color: inherit;
+  text-shadow: none;
 }
 
 .hero-lead {

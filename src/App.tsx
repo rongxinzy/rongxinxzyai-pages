@@ -48,7 +48,7 @@ function isRelease(value: unknown): value is Release {
 
 function ArrowUpRight({ className }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+    <svg className={`github-icon ${className ?? ""}`} viewBox="0 0 24 24" aria-hidden="true">
       <path d="M7 17 17 7M8 7h9v9" />
     </svg>
   );
@@ -56,7 +56,7 @@ function ArrowUpRight({ className }: IconProps) {
 
 function DownloadIcon({ className }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+    <svg className={`github-icon ${className ?? ""}`} viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 3v12m0 0 5-5m-5 5-5-5M5 21h14" />
     </svg>
   );
@@ -64,15 +64,15 @@ function DownloadIcon({ className }: IconProps) {
 
 function GithubIcon({ className }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M15 22v-4.1c.04-1.03-.36-2.02-1.1-2.72 3.6-.4 7.38-1.77 7.38-8A6.22 6.22 0 0 0 19.62 3c.14-.4.58-2.05-.16-4 0 0-1.35-.43-4.42 1.61a15.35 15.35 0 0 0-8.04 0C3.93-1.43 2.58-1 2.58-1c-.74 1.95-.3 3.6-.16 4A6.22 6.22 0 0 0 .76 7.18c0 6.22 3.78 7.6 7.38 8A3.72 3.72 0 0 0 7.04 18v4m0-3c-3.5 1.08-3.5-2-4.9-2.4" />
+    <svg className={`github-icon ${className ?? ""}`} viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.838 1.237 1.838 1.237 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
     </svg>
   );
 }
 
 function ShieldIcon({ className }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+    <svg className={`github-icon ${className ?? ""}`} viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 3 20 6v5c0 5-3.35 8.74-8 10-4.65-1.26-8-5-8-10V6l8-3Z" />
       <path d="m9.2 12 1.8 1.8 3.8-4" />
     </svg>
@@ -81,7 +81,7 @@ function ShieldIcon({ className }: IconProps) {
 
 function FolderIcon({ className }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+    <svg className={`github-icon ${className ?? ""}`} viewBox="0 0 24 24" aria-hidden="true">
       <path d="M3 6.5h6l2 2h10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-11Z" />
     </svg>
   );
@@ -89,7 +89,7 @@ function FolderIcon({ className }: IconProps) {
 
 function TerminalIcon({ className }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+    <svg className={`github-icon ${className ?? ""}`} viewBox="0 0 24 24" aria-hidden="true">
       <path d="m5 7 4 4-4 4m6 0h8" />
       <rect x="2.5" y="3.5" width="19" height="17" rx="2" />
     </svg>
@@ -98,7 +98,7 @@ function TerminalIcon({ className }: IconProps) {
 
 function BrowserIcon({ className }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+    <svg className={`github-icon ${className ?? ""}`} viewBox="0 0 24 24" aria-hidden="true">
       <circle cx="12" cy="12" r="9" />
       <path d="M3.5 9h17M9 21c-1.6-2.4-2.4-5.4-2.4-9S7.4 5.4 9 3m6 18c1.6-2.4 2.4-5.4 2.4-9S16.6 5.4 15 3" />
     </svg>
@@ -107,7 +107,7 @@ function BrowserIcon({ className }: IconProps) {
 
 function SparkIcon({ className }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+    <svg className={`github-icon ${className ?? ""}`} viewBox="0 0 24 24" aria-hidden="true">
       <path d="m12 2 1.15 4.85L18 8l-4.85 1.15L12 14l-1.15-4.85L6 8l4.85-1.15L12 2Z" />
       <path d="m18.5 14 .7 2.8 2.8.7-2.8.7-.7 2.8-.7-2.8-2.8-.7 2.8-.7.7-2.8Z" />
     </svg>
@@ -126,7 +126,7 @@ function CpuIcon({ className }: IconProps) {
 
 function ClockIcon({ className }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+    <svg className={`github-icon ${className ?? ""}`} viewBox="0 0 24 24" aria-hidden="true">
       <circle cx="12" cy="12" r="9" />
       <path d="M12 7v5l3 2" />
     </svg>
@@ -135,7 +135,7 @@ function ClockIcon({ className }: IconProps) {
 
 function AppleIcon({ className }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+    <svg className={`github-icon ${className ?? ""}`} viewBox="0 0 24 24" aria-hidden="true">
       <path d="M16.9 12.8c.02-2.2 1.8-3.25 1.88-3.3a4.08 4.08 0 0 0-3.2-1.73c-1.35-.14-2.66.8-3.35.8-.7 0-1.76-.78-2.9-.75a4.27 4.27 0 0 0-3.6 2.2c-1.55 2.68-.4 6.62 1.09 8.79.74 1.06 1.6 2.25 2.74 2.2 1.11-.04 1.52-.7 2.85-.7 1.32 0 1.7.7 2.86.68 1.2-.02 1.94-1.07 2.65-2.14a8.8 8.8 0 0 0 1.2-2.46 3.84 3.84 0 0 1-2.22-3.59ZM14.7 6.34a3.9 3.9 0 0 0 .9-2.8 4 4 0 0 0-2.6 1.33 3.7 3.7 0 0 0-.93 2.7 3.3 3.3 0 0 0 2.63-1.23Z" />
     </svg>
   );
@@ -143,7 +143,7 @@ function AppleIcon({ className }: IconProps) {
 
 function WindowsIcon({ className }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+    <svg className={`github-icon ${className ?? ""}`} viewBox="0 0 24 24" aria-hidden="true">
       <path d="m3 5.4 7.5-1v7H3v-6Zm8.5-1.15L21 3v8.4h-9.5V4.25ZM3 12.6h7.5v7L3 18.6v-6Zm8.5 0H21V21l-9.5-1.3v-7.1Z" />
     </svg>
   );
@@ -444,12 +444,12 @@ function App() {
             </div>
             <h1>
               让 Agent 真正在你的
-              <span>电脑</span>上工作
+              <span>电脑</span>上<span className="hero-work">工作</span>
             </h1>
             <p className="hero-lead">
               连接文件、终端、浏览器与模型。把复杂任务交给知远，
               <br />
-              过程看得见，敏感操作先批准，数据留在你的设备。
+              过程，敏感操作先批准，数据留在你的设备。
             </p>
             <div className="hero-traits" aria-label="知远智能体产品特点">
               <span>本地优先</span>
