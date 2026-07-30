@@ -452,7 +452,7 @@ function App() {
               <PrimaryDownload platform={preferredPlatform} release={release} status={releaseStatus} />
               <a className="button button-secondary" href={GITHUB_URL} target="_blank" rel="noreferrer">
                 <GithubIcon />
-                查看源码
+                去 GitHub 点个 Star
               </a>
             </div>
             <p className="release-line" aria-live="polite">
@@ -478,7 +478,7 @@ function App() {
         <section className="signal-strip" aria-label="产品信息">
           <dl>
             <div>
-              <dt>42</dt>
+              <dt>49</dt>
               <dd>当前内置技能</dd>
             </div>
             <div>
