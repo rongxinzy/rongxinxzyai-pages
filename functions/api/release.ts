@@ -3,11 +3,11 @@ const DOWNLOAD_HOST = "downloads.rongxzyai.com";
 const SUCCESS_CACHE_CONTROL = "public, max-age=300, s-maxage=300, stale-while-revalidate=86400";
 
 type ArtifactTarget = {
-  name: "windows" | "macos";
-  platform: "win32" | "darwin";
-  arch: "x64" | "arm64";
-  variant: "lite" | "default";
-  extension: ".exe" | ".dmg";
+  name: "linux" | "linuxAppImage" | "macos" | "windows";
+  platform: "darwin" | "linux" | "win32";
+  arch: "arm64" | "x64";
+  variant: "appimage" | "deb" | "default" | "lite";
+  extension: ".AppImage" | ".deb" | ".dmg" | ".exe";
 };
 
 type UpdateArtifact = {
@@ -28,6 +28,14 @@ type ReleasePayload = {
 const ARTIFACT_TARGETS: ArtifactTarget[] = [
   { name: "windows", platform: "win32", arch: "x64", variant: "lite", extension: ".exe" },
   { name: "macos", platform: "darwin", arch: "arm64", variant: "default", extension: ".dmg" },
+  { name: "linux", platform: "linux", arch: "x64", variant: "deb", extension: ".deb" },
+  {
+    name: "linuxAppImage",
+    platform: "linux",
+    arch: "x64",
+    variant: "appimage",
+    extension: ".AppImage",
+  },
 ];
 
 function json(data: unknown, init: ResponseInit = {}) {
@@ -116,17 +124,28 @@ async function fetchRelease(target: ArtifactTarget): Promise<ReleasePayload> {
 
 export async function onRequestGet(): Promise<Response> {
   try {
-    const [windows, macos] = await Promise.all(ARTIFACT_TARGETS.map(fetchRelease));
+    const [windows, macos, linux, linuxAppImage] = await Promise.all([
+      fetchRelease(ARTIFACT_TARGETS[0]),
+      fetchRelease(ARTIFACT_TARGETS[1]),
+      fetchRelease(ARTIFACT_TARGETS[2]).catch(() => null),
+      fetchRelease(ARTIFACT_TARGETS[3]).catch(() => null),
+    ]);
     if (windows.version !== macos.version) {
       throw new Error("The platform manifests point to different versions.");
     }
 
+    const artifacts: Record<string, ReleaseArtifact> = {
+      windows: windows.artifact,
+      macos: macos.artifact,
+    };
+    if (linux?.version === windows.version) artifacts.linux = linux.artifact;
+    if (linuxAppImage?.version === windows.version) {
+      artifacts.linuxAppImage = linuxAppImage.artifact;
+    }
+
     return json({
       version: windows.version,
-      artifacts: {
-        windows: windows.artifact,
-        macos: macos.artifact,
-      },
+      artifacts,
     });
   } catch {
     return json({ error: "Unable to load the current release." }, { status: 502 });

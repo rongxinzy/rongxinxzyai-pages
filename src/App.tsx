@@ -4,19 +4,45 @@ const GITHUB_URL = "https://github.com/rongxinzy/RongxinAI";
 const GITHUB_ISSUES_URL = `${GITHUB_URL}/issues`;
 const RELEASE_WORKFLOW_URL = `${GITHUB_URL}/blob/main/.github/workflows/online-update-release.yml`;
 
-type Platform = "windows" | "macos";
+type Platform = "linux" | "macos" | "windows";
 type ReleaseArtifact = {
   url: string;
   size: number;
 };
 type Release = {
   version: string;
-  artifacts: Record<Platform, ReleaseArtifact>;
+  artifacts: {
+    linux?: ReleaseArtifact;
+    linuxAppImage?: ReleaseArtifact;
+    macos: ReleaseArtifact;
+    windows: ReleaseArtifact;
+  };
 };
 type ReleaseStatus = "loading" | "ready" | "unavailable";
 
 type IconProps = {
   className?: string;
+};
+
+const PLATFORM_DOWNLOAD_COPY: Record<
+  Platform,
+  { ariaName: string; buttonLabel: string; unavailableLabel: string }
+> = {
+  windows: {
+    ariaName: "Windows x64",
+    buttonLabel: "下载 Windows",
+    unavailableLabel: "Windows 版本暂时不可用",
+  },
+  macos: {
+    ariaName: "macOS Apple Silicon",
+    buttonLabel: "下载 macOS",
+    unavailableLabel: "macOS 版本暂时不可用",
+  },
+  linux: {
+    ariaName: "Ubuntu Linux x64 deb",
+    buttonLabel: "下载 Ubuntu 版",
+    unavailableLabel: "Linux 版本尚未发布",
+  },
 };
 
 function formatArtifactSize(size: number) {
@@ -43,7 +69,12 @@ function isRelease(value: unknown): value is Release {
   if (typeof release.artifacts !== "object" || release.artifacts === null) return false;
 
   const artifacts = release.artifacts as Record<string, unknown>;
-  return isReleaseArtifact(artifacts.windows) && isReleaseArtifact(artifacts.macos);
+  return (
+    isReleaseArtifact(artifacts.windows) &&
+    isReleaseArtifact(artifacts.macos) &&
+    (artifacts.linux === undefined || isReleaseArtifact(artifacts.linux)) &&
+    (artifacts.linuxAppImage === undefined || isReleaseArtifact(artifacts.linuxAppImage))
+  );
 }
 
 function ArrowUpRight({ className }: IconProps) {
@@ -149,6 +180,19 @@ function WindowsIcon({ className }: IconProps) {
   );
 }
 
+function LinuxIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={`linux-icon github-icon ${className ?? ""}`}
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <rect x="3" y="4" width="18" height="14" rx="2" />
+      <path d="M8 21h8M12 18v3M7 9l2 2-2 2m5 0h5" />
+    </svg>
+  );
+}
+
 function Header() {
   return (
     <header className="site-header">
@@ -182,7 +226,7 @@ function PrimaryDownload({
   status: ReleaseStatus;
   compact?: boolean;
 }) {
-  const isWindows = platform === "windows";
+  const copy = PLATFORM_DOWNLOAD_COPY[platform];
   const artifact = release?.artifacts[platform];
 
   if (!artifact) {
@@ -193,7 +237,7 @@ function PrimaryDownload({
         aria-label="正在读取最新下载链接"
       >
         <DownloadIcon />
-        {status === "unavailable" ? "暂时无法读取版本" : "正在读取最新版本…"}
+        {status === "loading" ? "正在读取最新版本…" : copy.unavailableLabel}
       </span>
     );
   }
@@ -202,10 +246,10 @@ function PrimaryDownload({
     <a
       className={`button button-primary button-download${compact ? " button-compact" : ""}`}
       href={artifact.url}
-      aria-label={`下载知远智能体 ${isWindows ? "Windows x64" : "macOS Apple Silicon"} 版本`}
+      aria-label={`下载知远智能体 ${copy.ariaName} 版本`}
     >
       <DownloadIcon />
-      下载 {isWindows ? "Windows" : "macOS"}
+      {copy.buttonLabel}
     </a>
   );
 }
@@ -397,7 +441,11 @@ function App() {
 
   useEffect(() => {
     const platform = navigator.userAgent.toLowerCase();
-    if (platform.includes("mac")) setPreferredPlatform("macos");
+    if (platform.includes("mac")) {
+      setPreferredPlatform("macos");
+    } else if (platform.includes("linux")) {
+      setPreferredPlatform("linux");
+    }
   }, []);
 
   useEffect(() => {
@@ -467,7 +515,7 @@ function App() {
             </div>
             <p className="release-line" aria-live="polite">
               {release
-                ? `${release.version} · Windows x64 · macOS Apple Silicon`
+                ? `${release.version} · Windows x64 · macOS Apple Silicon${release.artifacts.linux ? " · Ubuntu Linux x64" : ""}`
                 : releaseStatus === "unavailable"
                   ? "当前稳定版本暂时不可用，请稍后刷新。"
                   : "正在读取当前稳定版本…"}
@@ -628,6 +676,30 @@ function App() {
                 <span>{release ? formatArtifactSize(release.artifacts.macos.size) : "—"}</span>
               </div>
               <PrimaryDownload platform="macos" release={release} status={releaseStatus} compact />
+            </article>
+            <article>
+              <div className="download-platform">
+                <LinuxIcon />
+                <div><strong>Linux / Ubuntu</strong><span>x64 · .deb</span></div>
+              </div>
+              <p>优先支持 Ubuntu 22.04 / 24.04；其他发行版可尝试 AppImage</p>
+              <div className="download-meta">
+                <span>{release?.version ?? (releaseStatus === "unavailable" ? "暂时不可用" : "正在读取版本…")}</span>
+                <span>{release?.artifacts.linux ? formatArtifactSize(release.artifacts.linux.size) : "—"}</span>
+              </div>
+              <div className="download-actions">
+                <PrimaryDownload platform="linux" release={release} status={releaseStatus} compact />
+                {release?.artifacts.linuxAppImage ? (
+                  <a
+                    className="button button-secondary button-compact"
+                    href={release.artifacts.linuxAppImage.url}
+                    aria-label="下载知远智能体 Linux x64 AppImage 版本"
+                  >
+                    <DownloadIcon />
+                    下载 AppImage
+                  </a>
+                ) : null}
+              </div>
             </article>
           </div>
           <p className="download-footnote">

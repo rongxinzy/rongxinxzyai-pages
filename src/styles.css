@@ -1060,9 +1060,9 @@ svg {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
-  max-width: 920px;
+  max-width: 1180px;
   margin: 58px auto 0;
 }
 
@@ -1087,6 +1087,14 @@ svg {
   height: 38px;
   fill: currentColor;
   stroke: none;
+}
+
+.download-platform > .linux-icon {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
 }
 
 .download-platform div {
@@ -1123,6 +1131,16 @@ svg {
   min-height: 46px;
   margin-top: auto;
   font-size: 14px;
+}
+
+.download-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.download-actions .button-compact {
+  margin-top: 0;
 }
 
 .download-footnote {
@@ -1277,7 +1295,8 @@ svg {
   }
 
   .download-options {
-    max-width: 760px;
+    grid-template-columns: 1fr;
+    max-width: 520px;
   }
 
   .community-grid {
