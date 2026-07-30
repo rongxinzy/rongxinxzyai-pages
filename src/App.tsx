@@ -188,7 +188,7 @@ function PrimaryDownload({
   if (!artifact) {
     return (
       <span
-        className={`button button-primary button-loading${compact ? " button-compact" : ""}`}
+        className={`button button-primary button-download button-loading${compact ? " button-compact" : ""}`}
         aria-live="polite"
         aria-label="正在读取最新下载链接"
       >
@@ -200,7 +200,7 @@ function PrimaryDownload({
 
   return (
     <a
-      className={`button button-primary${compact ? " button-compact" : ""}`}
+      className={`button button-primary button-download${compact ? " button-compact" : ""}`}
       href={artifact.url}
       aria-label={`下载知远智能体 ${isWindows ? "Windows x64" : "macOS Apple Silicon"} 版本`}
     >

@@ -312,6 +312,15 @@ svg {
   width: 18px;
   height: 18px;
 }
+.button-download {
+  position: relative;
+}
+
+.button-download > svg {
+  position: absolute;
+  left: 24px;
+}
+
 
 .button-primary {
   color: #fff;
