@@ -33,9 +33,10 @@ jobs:
         run: npm run build
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CF_API }}
+          accountId: 9ac9f96b683fc7350c779e5e8e082513
           command: >-
             pages deploy dist
             --project-name rongxzyai-pages
