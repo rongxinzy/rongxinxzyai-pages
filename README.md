@@ -28,5 +28,6 @@ npm run deploy
 `CF_API` 部署到生产环境。手动运行 Actions 中的 **Deploy website to
 Cloudflare Pages** 也会部署当前 `main`。
 
-当前下载区对应稳定版本 `2026.7.28-build.4`。发布新版本后，应同步更新
-`src/App.tsx` 中的版本号、安装包 URL、文件大小与平台说明。
+下载区通过 `/api/release` 动态读取签名稳定版清单，目前展示 Windows x64、
+macOS Apple Silicon、Ubuntu x64 `.deb`，并为其他 Linux 发行版提供 AppImage。
+发布新版本时无需在页面中手动填写版本号、安装包 URL 或文件大小。
