@@ -452,7 +452,7 @@ function App() {
               <PrimaryDownload platform={preferredPlatform} release={release} status={releaseStatus} />
               <a className="button button-secondary" href={GITHUB_URL} target="_blank" rel="noreferrer">
                 <GithubIcon />
-                点个star
+                去 GitHub 点个 Star
               </a>
             </div>
             <p className="release-line" aria-live="polite">
