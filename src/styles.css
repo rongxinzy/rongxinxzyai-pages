@@ -331,7 +331,7 @@ svg {
 .hero-product-wrap {
   position: relative;
   z-index: 3;
-  max-width: 1050px;
+  max-width: 900px;
   margin: 62px auto 0;
 }
 
@@ -406,8 +406,7 @@ svg {
 }
 
 .hero-product {
-  transform: perspective(1600px) rotateX(1.4deg);
-  transform-origin: center top;
+  transform: none;
 }
 
 .signal-strip {
