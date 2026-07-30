@@ -114,6 +114,16 @@ function SparkIcon({ className }: IconProps) {
   );
 }
 
+function CpuIcon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="7" y="7" width="10" height="10" rx="2" />
+      <path d="M9 2v3m3-3v3m3-3v3M9 19v3m3-3v3m3-3v3M2 9h3m-3 3h3m-3 3h3m14-6h3m-3 3h3m-3 3h3" />
+      <path d="M10 10h4v4h-4z" />
+    </svg>
+  );
+}
+
 function ClockIcon({ className }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
@@ -498,7 +508,7 @@ function App() {
 
         <section className="highlights section" id="highlights">
           <div className="section-heading">
-            <p className="section-index">三件真正重要的事</p>
+            <p className="section-index">四件真正重要的事</p>
             <h2>不是多一个聊天框，<br />是多一位能动手的同事。</h2>
             <p>
               知远把 Agent 的执行环境、模型、技能和连接器装进一个桌面应用。
@@ -509,10 +519,13 @@ function App() {
             <Feature icon={<TerminalIcon />} number="01" title="从建议到执行">
               读取文件、运行命令、操作浏览器、制作文档。每一次工具调用都有清晰的状态与结果。
             </Feature>
-            <Feature icon={<ShieldIcon />} number="02" title="本地与可控">
-              会话、配置和任务元数据保存在本地；需要访问敏感资源时，由你决定是否放行。
+            <Feature icon={<CpuIcon />} number="02" title="端侧推理，数据留在设备">
+              从模型市场安装 GGUF 模型，让模型、上下文与推理服务运行在你的电脑上；本地模型可直接参与 Agent 工作流。
             </Feature>
-            <Feature icon={<SparkIcon />} number="03" title="技能持续扩展">
+            <Feature icon={<ShieldIcon />} number="03" title="按你的硬件调优">
+              按模型控制上下文长度、GPU offload、线程、批大小、主 GPU、内存映射与 keep-alive，权衡速度、占用与响应。
+            </Feature>
+            <Feature icon={<SparkIcon />} number="04" title="技能持续扩展">
               使用内置技能，接入 MCP 工具，也可以把自己的经验封装成下一次仍能复用的能力。
             </Feature>
           </div>
