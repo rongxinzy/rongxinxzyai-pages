@@ -1170,8 +1170,8 @@ svg {
 
 .site-footer {
   display: grid;
-  grid-template-columns: 1.2fr 1fr auto;
-  gap: 60px;
+  grid-template-columns: 1.2fr 1fr auto auto;
+  gap: 40px;
   align-items: end;
   max-width: var(--container);
   margin: 0 auto;
@@ -1214,6 +1214,30 @@ svg {
   color: #98a2b3;
   font-size: 11px;
   text-align: right;
+}
+
+.footer-qr {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #667085;
+  font-size: 11px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.footer-qr img {
+  width: 104px;
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.footer-qr p {
+  max-width: 120px;
+  margin: 0;
 }
 
 :focus-visible {
@@ -1315,6 +1339,11 @@ svg {
   }
 
   .footer-meta {
+    text-align: left;
+  }
+
+  .footer-qr {
+    justify-self: start;
     text-align: left;
   }
 }
