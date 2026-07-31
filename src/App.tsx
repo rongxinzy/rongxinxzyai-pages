@@ -725,6 +725,10 @@ function App() {
             GitHub <ArrowUpRight />
           </a>
         </nav>
+        <aside className="footer-qr" aria-label="知远智能体交流群二维码">
+          <img src="/zhiyuan-community-qr.jpg" alt="扫码加入知远智能体交流群" />
+          <p>扫码加入知远智能体交流群</p>
+        </aside>
         <div className="footer-meta">
           <span>© 2026 北京容芯致远</span>
           <span>AGPL-3.0 开源</span>
