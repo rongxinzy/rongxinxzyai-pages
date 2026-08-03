@@ -358,6 +358,7 @@ function ProductGallery() {
         src={activeItem.src}
         alt={activeItem.alt}
         cropTop={activeItem.cropTop}
+        showWindowBar={false}
         className="gallery-frame"
       />
     </section>
