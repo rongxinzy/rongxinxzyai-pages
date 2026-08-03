@@ -259,22 +259,26 @@ function ProductFrame({
   alt,
   cropTop = false,
   priority = false,
+  showWindowBar = true,
   className = "",
 }: {
   src: string;
   alt: string;
   cropTop?: boolean;
   priority?: boolean;
+  showWindowBar?: boolean;
   className?: string;
 }) {
   return (
     <figure className={`product-frame ${cropTop ? "crop-top" : ""} ${className}`}>
-      <div className="window-bar" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <p>知远智能体</p>
-      </div>
+      {showWindowBar && (
+        <div className="window-bar" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+          <p>知远智能体</p>
+        </div>
+      )}
       <div className="product-image-viewport">
         <img
           src={src}
@@ -528,6 +532,7 @@ function App() {
               alt="知远智能体真实工作台界面"
               cropTop
               priority
+              showWindowBar={false}
               className="hero-product"
             />
           </div>
