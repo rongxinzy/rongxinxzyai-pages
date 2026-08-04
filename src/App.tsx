@@ -19,6 +19,7 @@ type Release = {
   };
 };
 type ReleaseStatus = "loading" | "ready" | "unavailable";
+type Page = "docs" | "enterprise" | "home";
 
 type IconProps = {
   className?: string;
@@ -193,7 +194,7 @@ function LinuxIcon({ className }: IconProps) {
   );
 }
 
-function Header() {
+function Header({ page }: { page: Page }) {
   return (
     <header className="site-header">
       <a className="brand" href="#top" aria-label="知远智能体首页">
@@ -206,12 +207,73 @@ function Header() {
         <a href="#product">产品</a>
         <a href="#community">社区</a>
         <a href="#download">下载</a>
+        <a href="/docs/">文档</a>
       </nav>
+      <a className="header-enterprise" href="#enterprise" aria-current={page === "enterprise" ? "page" : undefined}>
+        企业版
+      </a>
       <a className="header-github" href={GITHUB_URL} target="_blank" rel="noreferrer">
         <GithubIcon />
         <span>GitHub</span>
       </a>
     </header>
+  );
+}
+
+function DocsPage() {
+  return (
+    <main className="docs-view" id="docs">
+      <section className="docs-view-inner" aria-labelledby="docs-title">
+        <p className="section-index">知远智能体文档</p>
+        <h1 id="docs-title">文档正在整理中。</h1>
+        <p>安装、配置、技能与开发说明会持续在这里更新。</p>
+      </section>
+    </main>
+  );
+}
+
+function EnterprisePage() {
+  return (
+    <main className="enterprise-view" id="enterprise">
+      <section className="enterprise-intro" aria-labelledby="enterprise-title">
+        <p className="section-index">知远企业版</p>
+        <h1 id="enterprise-title">让智能体进入企业的真实工作环境。</h1>
+        <p>
+          面向单一企业独立部署：员工在桌面工作空间中完成任务，企业统一管理模型、知识、工具连接与数据范围。
+        </p>
+      </section>
+      <section className="enterprise-grid" aria-label="企业版核心能力">
+        <article className="enterprise-card">
+          <span>01</span>
+          <h2>专属工作空间</h2>
+          <p>把资料、上下文、知识、Skill、MCP、工具与成果组织在同一工作空间，支持共享、模板复用与成果沉淀。</p>
+        </article>
+        <article className="enterprise-card">
+          <span>02</span>
+          <h2>统一模型网关</h2>
+          <p>统一登记企业内部与显式启用的外部模型服务，管理访问策略、调用路由、额度、状态与审计记录。</p>
+        </article>
+        <article className="enterprise-card">
+          <span>03</span>
+          <h2>可控数据与连接</h2>
+          <p>个人数据本地优先；企业知识、权限和审计统一治理，并可按项目接入企业微信、飞书及其他业务系统。</p>
+        </article>
+      </section>
+      <section className="enterprise-governance" aria-labelledby="enterprise-governance-title">
+        <div>
+          <p className="section-index">企业治理与交付</p>
+          <h2 id="enterprise-governance-title">从配置到运行，企业始终掌握边界。</h2>
+        </div>
+        <p>
+          企业增强版 Server 统一管理身份、共享资源、权限、运行记录与平台状态；项目实施覆盖部署、初始化、连接联调、培训、验收与版本更新。
+        </p>
+        <dl>
+          <div><dt>权限与审计</dt><dd>按组织、角色、工作空间与资源范围执行。</dd></div>
+          <div><dt>资源可追溯</dt><dd>知识、模型、连接与成果保留来源、版本和状态。</dd></div>
+          <div><dt>项目制交付</dt><dd>以部署、验收和运维支持保障持续运行。</dd></div>
+        </dl>
+      </section>
+    </main>
   );
 }
 
@@ -434,15 +496,48 @@ function Community() {
             <ArrowUpRight />
           </a>
         </article>
+        <aside className="community-qr" aria-label="知远智能体交流群二维码">
+          <img src="/zhiyuan-community-qr.jpg" alt="扫码加入知远智能体交流群" />
+          <p>扫码加入知远智能体交流群</p>
+        </aside>
       </div>
     </section>
   );
 }
 
 function App() {
+  const [page, setPage] = useState<Page>(() => {
+    if (window.location.hash === "#docs") return "docs";
+    if (window.location.hash === "#enterprise") return "enterprise";
+    return "home";
+  });
   const [preferredPlatform, setPreferredPlatform] = useState<Platform>("windows");
   const [release, setRelease] = useState<Release | null>(null);
   const [releaseStatus, setReleaseStatus] = useState<ReleaseStatus>("loading");
+
+  useEffect(() => {
+    function syncPage() {
+      if (window.location.hash === "#docs") {
+        setPage("docs");
+      } else if (window.location.hash === "#enterprise") {
+        setPage("enterprise");
+      } else {
+        setPage("home");
+      }
+    }
+
+    window.addEventListener("hashchange", syncPage);
+    return () => window.removeEventListener("hashchange", syncPage);
+  }, []);
+
+  useEffect(() => {
+    if (page !== "home") return;
+
+    const targetId = window.location.hash.slice(1);
+    if (!targetId) return;
+
+    requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView());
+  }, [page]);
 
   useEffect(() => {
     const platform = navigator.userAgent.toLowerCase();
@@ -483,9 +578,27 @@ function App() {
     return () => controller.abort();
   }, []);
 
+  if (page === "docs") {
+    return (
+      <div className="site-shell">
+        <Header page={page} />
+        <DocsPage />
+      </div>
+    );
+  }
+
+  if (page === "enterprise") {
+    return (
+      <div className="site-shell">
+        <Header page={page} />
+        <EnterprisePage />
+      </div>
+    );
+  }
+
   return (
     <div className="site-shell" id="top">
-      <Header />
+      <Header page={page} />
 
       <main>
         <section className="hero">
@@ -731,10 +844,6 @@ function App() {
             GitHub <ArrowUpRight />
           </a>
         </nav>
-        <aside className="footer-qr" aria-label="知远智能体交流群二维码">
-          <img src="/zhiyuan-community-qr.jpg" alt="扫码加入知远智能体交流群" />
-          <p>扫码加入知远智能体交流群</p>
-        </aside>
         <div className="footer-meta">
           <span>© 2026 北京容芯致远</span>
           <span>AGPL-3.0 开源</span>
