@@ -235,43 +235,59 @@ function DocsPage() {
 function EnterprisePage() {
   return (
     <main className="enterprise-view" id="enterprise">
-      <section className="enterprise-intro" aria-labelledby="enterprise-title">
-        <p className="section-index">知远企业版</p>
-        <h1 id="enterprise-title">让智能体进入企业的真实工作环境。</h1>
-        <p>
-          面向单一企业独立部署：员工在桌面工作空间中完成任务，企业统一管理模型、知识、工具连接与数据范围。
-        </p>
-      </section>
-      <section className="enterprise-grid" aria-label="企业版核心能力">
-        <article className="enterprise-card">
-          <span>01</span>
-          <h2>专属工作空间</h2>
-          <p>把资料、上下文、知识、Skill、MCP、工具与成果组织在同一工作空间，支持共享、模板复用与成果沉淀。</p>
-        </article>
-        <article className="enterprise-card">
-          <span>02</span>
-          <h2>统一模型网关</h2>
-          <p>统一登记企业内部与显式启用的外部模型服务，管理访问策略、调用路由、额度、状态与审计记录。</p>
-        </article>
-        <article className="enterprise-card">
-          <span>03</span>
-          <h2>可控数据与连接</h2>
-          <p>个人数据本地优先；企业知识、权限和审计统一治理，并可按项目接入企业微信、飞书及其他业务系统。</p>
-        </article>
-      </section>
-      <section className="enterprise-governance" aria-labelledby="enterprise-governance-title">
-        <div>
-          <p className="section-index">企业治理与交付</p>
-          <h2 id="enterprise-governance-title">从配置到运行，企业始终掌握边界。</h2>
+      <section className="enterprise-hero" aria-labelledby="enterprise-title">
+        <div className="enterprise-hero-glow" aria-hidden="true" />
+        <div className="enterprise-hero-inner">
+          <div className="enterprise-hero-brandline">
+            <img src="/zhiyuan-logo.svg" alt="知远" />
+            <span>企业版 · 面向企业办公环境的 AI Agent</span>
+          </div>
+          <h1 id="enterprise-title">让 Agent 真正进入<br /><span>企业</span>的真实工作</h1>
+          <p className="enterprise-hero-lead">为企业提供稳定、受控、持续运行的智能体软件能力。让员工在桌面工作空间中直接工作，企业统一管理模型、知识、工具与数据范围。</p>
+          <div className="enterprise-hero-traits" aria-label="企业版产品特点"><span>独立部署</span><i /><span>统一治理</span><i /><span>持续交付</span></div>
+          <div className="enterprise-hero-actions">
+            <a className="button button-primary" href="#enterprise-contact">合作咨询</a>
+          </div>
+          <p className="enterprise-hero-note">支持企业模型、知识库、办公连接与项目制交付</p>
         </div>
-        <p>
-          企业增强版 Server 统一管理身份、共享资源、权限、运行记录与平台状态；项目实施覆盖部署、初始化、连接联调、培训、验收与版本更新。
-        </p>
-        <dl>
-          <div><dt>权限与审计</dt><dd>按组织、角色、工作空间与资源范围执行。</dd></div>
-          <div><dt>资源可追溯</dt><dd>知识、模型、连接与成果保留来源、版本和状态。</dd></div>
-          <div><dt>项目制交付</dt><dd>以部署、验收和运维支持保障持续运行。</dd></div>
-        </dl>
+      </section>
+
+      <section className="enterprise-product-preview" aria-label="企业版工作空间预览">
+        <div className="enterprise-product-placeholder">
+          <img src="/product/zhiyuan-workspace.png" alt="知远企业版工作空间界面预览" onLoad={(event) => { event.currentTarget.parentElement?.classList.add("has-image"); }} onError={(event) => { event.currentTarget.style.display = "none"; }} />
+        </div>
+      </section>
+
+      <section className="enterprise-section" aria-labelledby="comparison-title">
+        <div className="enterprise-section-heading"><p className="section-index">01 / 产品能力</p><h2 id="comparison-title">开源版的能力，企业版的秩序。</h2><p>在熟悉的智能体工作流之上，增加企业级身份、治理、模型和交付能力。</p></div>
+        <div className="enterprise-comparison" role="table" aria-label="企业版与开源版功能对比">
+          <div className="comparison-row comparison-head" role="row"><span role="columnheader">能力维度</span><span role="columnheader">开源版</span><span className="comparison-enterprise" role="columnheader">企业版</span></div>
+          {[
+            ["工作空间", "个人使用", "企业共享空间、模板与成员管理"],
+            ["模型与工具", "按个人配置", "统一网关、策略、额度与连接治理"],
+            ["数据与权限", "本地优先", "组织权限、审计与生命周期管理"],
+            ["部署与服务", "社区自助", "独立部署、项目交付与持续运维"],
+          ].map(([name, open, enterprise]) => <div className="comparison-row" role="row" key={name}><strong role="rowheader">{name}</strong><span role="cell">{open}</span><span className="comparison-enterprise" role="cell">{enterprise}</span></div>)}
+        </div>
+      </section>
+
+      <section className="enterprise-section architecture-section" aria-labelledby="architecture-title">
+        <div className="enterprise-section-heading"><p className="section-index">02 / 技术架构</p><h2 id="architecture-title">桌面工作入口，Server 统一治理。</h2><p>企业版桌面端承接员工工作，企业增强版 Server 连接模型、知识与业务系统，并保留清晰的权限边界。</p></div>
+        <div className="architecture-map" aria-label="企业版技术架构">
+          <div className="architecture-column"><p>工作入口</p><div className="architecture-node primary"><b>企业版桌面端</b><span>工作空间 · 本地资料 · 智能体运行 · 成果编辑</span></div><div className="architecture-node"><b>企业受控模块</b><span>绑定 · 同步 · 路由 · 策略 · 状态</span></div></div>
+          <div className="architecture-column server-column"><p>企业增强版 Server</p><div className="architecture-node primary"><b>企业控制中心</b><span>身份 · 权限 · 工作空间 · 审计 · 运维</span></div><div className="architecture-node"><b>共享能力与计划运行</b><span>知识 · Skill · MCP · 连接目录 · 后台任务</span></div><div className="architecture-node accent"><b>企业大模型网关</b><span>模型登记 · 路由 · 额度 · 状态处置</span></div></div>
+          <div className="architecture-column"><p>受控资源</p><div className="architecture-node accent"><b>客户内部模型</b><span>项目指定的计算、存储与网络环境</span></div><div className="architecture-node"><b>企业系统连接</b><span>企业微信 · 飞书 · OA · 审批</span></div><div className="architecture-node"><b>外部模型服务</b><span>由管理员按数据策略显式启用</span></div></div>
+        </div>
+      </section>
+
+      <section className="enterprise-section delivery-section" aria-labelledby="delivery-title">
+        <div className="enterprise-section-heading"><p className="section-index">03 / 定制交付</p><h2 id="delivery-title">从需求到上线，每一步都有交付物。</h2><p>项目团队与客户共同完成环境准备、能力配置、系统联调和验收。</p></div>
+        <ol className="delivery-steps"><li><span>01</span><div><b>需求与方案</b><p>明确组织、岗位、数据策略、模型范围与连接目标。</p></div></li><li><span>02</span><div><b>部署与初始化</b><p>完成软件节点、企业身份、工作空间与共享资源配置。</p></div></li><li><span>03</span><div><b>联调与培训</b><p>接入企业系统，验证权限边界，并培训管理员与员工。</p></div></li><li><span>04</span><div><b>试运行与验收</b><p>按平台、数据、权限、模型和连接标准完成验收。</p></div></li></ol>
+      </section>
+
+      <section className="enterprise-contact" id="enterprise-contact" aria-labelledby="contact-title">
+        <div><p className="section-index">04 / 联系我们</p><h2 id="contact-title">一起把智能体带进真实工作。</h2><p>欢迎交流企业部署、定制开发与项目合作。</p><a href="mailto:likeran@rongxinzy.com">likeran@rongxinzy.com</a></div>
+        <div className="enterprise-qr-grid"><div className="enterprise-qr"><img src="/zhiyuan-community-qr.png" alt="扫码加入知远智能体交流群" /><b>扫码加入交流群</b></div><div className="enterprise-qr"><img src="/zhiyuan-official-qr.png" alt="微信扫描二维码关注知远公众号" /><b>关注知远公众号</b></div></div>
       </section>
     </main>
   );
@@ -497,8 +513,12 @@ function Community() {
           </a>
         </article>
         <aside className="community-qr" aria-label="知远智能体交流群二维码">
-          <img src="/zhiyuan-community-qr.jpg" alt="扫码加入知远智能体交流群" />
+          <img src="/zhiyuan-community-qr.png" alt="扫码加入知远智能体交流群" />
           <p>扫码加入知远智能体交流群</p>
+        </aside>
+        <aside className="community-qr" aria-label="知远公众号二维码">
+          <img src="/zhiyuan-official-qr.png" alt="微信扫描二维码关注知远公众号" />
+          <p>微信扫码关注公众号</p>
         </aside>
       </div>
     </section>
@@ -508,7 +528,7 @@ function Community() {
 function App() {
   const [page, setPage] = useState<Page>(() => {
     if (window.location.hash === "#docs") return "docs";
-    if (window.location.hash === "#enterprise") return "enterprise";
+    if (window.location.hash === "#enterprise" || window.location.hash === "#enterprise-contact") return "enterprise";
     return "home";
   });
   const [preferredPlatform, setPreferredPlatform] = useState<Platform>("windows");
@@ -519,7 +539,7 @@ function App() {
     function syncPage() {
       if (window.location.hash === "#docs") {
         setPage("docs");
-      } else if (window.location.hash === "#enterprise") {
+      } else if (window.location.hash === "#enterprise" || window.location.hash === "#enterprise-contact") {
         setPage("enterprise");
       } else {
         setPage("home");
@@ -531,10 +551,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (page !== "home") return;
+    if (page !== "home" && page !== "enterprise") return;
 
     const targetId = window.location.hash.slice(1);
-    if (!targetId) return;
+    if (!targetId || targetId === "enterprise") return;
 
     requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView());
   }, [page]);
