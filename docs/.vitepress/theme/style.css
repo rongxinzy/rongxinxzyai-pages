@@ -19,7 +19,7 @@
   inset: 0 0 auto;
   z-index: 50;
   display: grid;
-  grid-template-columns: 1fr auto auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
   align-items: center;
   height: 76px;
   padding: 0 max(28px, calc((100vw - 1180px) / 2));
@@ -57,12 +57,21 @@
 }
 
 .zy-doc-header nav {
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
   display: flex;
   align-items: center;
   gap: 34px;
+  padding-inline: 28px;
   color: #344054;
   font-size: 14px;
   font-weight: 500;
+  white-space: nowrap;
+}
+
+.zy-doc-header nav::-webkit-scrollbar {
+  display: none;
 }
 
 .zy-doc-header nav a::after {
@@ -133,16 +142,6 @@
   transform: scale(0.96);
 }
 
-@media (max-width: 960px) {
-  .zy-doc-header {
-    grid-template-columns: 1fr auto auto;
-  }
-
-  .zy-doc-header nav {
-    display: none;
-  }
-}
-
 @media (max-width: 640px) {
   :root {
     --vp-layout-top-height: 66px;
@@ -151,6 +150,12 @@
   .zy-doc-header {
     height: 66px;
     padding: 0 18px;
+  }
+
+  .zy-doc-header nav {
+    gap: 20px;
+    padding-inline: 16px;
+    font-size: 13px;
   }
 
   .zy-doc-brand img {
