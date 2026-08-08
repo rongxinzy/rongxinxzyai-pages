@@ -18,7 +18,7 @@
 
 ## 代码签名
 
-知远正在申请 SignPath Foundation 的开源代码签名服务。获批并启用后，代码签名只用于由 RongxinAI 公开仓库的受控 GitHub Actions 发布流程构建的项目自身二进制文件。签名策略、角色和发布条件见[官网的 Code signing policy](/#code-signing-policy)。
+知远正在申请 SignPath Foundation 的开源代码签名服务。获批并启用后，代码签名只用于由 RongxinAI 公开仓库的受控 GitHub Actions 发布流程构建的项目自身二进制文件。签名策略、角色和发布条件见[官网的 Code signing policy](https://www.rongxzyai.com/#code-signing-policy)。
 
 ## 联系方式与权利
 
