@@ -848,6 +848,37 @@ function App() {
             </a>
           </p>
         </section>
+
+        <section className="code-signing-policy section" id="code-signing-policy">
+          <div className="section-heading">
+            <p className="section-index">发布与信任</p>
+            <h2>Code signing policy</h2>
+            <p>
+              知远的公开发布只能由项目仓库中的 GitHub Actions 构建；签名请求将绑定到可验证的源码、提交与发布工作流。
+            </p>
+          </div>
+          <div className="policy-card">
+            <p className="policy-status">SignPath Foundation 申请中</p>
+            <p>
+              生效后的声明：<strong>Free code signing provided by SignPath.io, certificate by SignPath Foundation.</strong>
+              在证书获批并启用前，现有安装包不会据此声明已获得 SignPath Foundation 签名。
+            </p>
+            <dl>
+              <div>
+                <dt>提交者与审核者</dt>
+                <dd>RongxinAI 仓库中具有维护权限的项目成员；非维护者提出的代码变更须经项目维护成员审查后才能合并。</dd>
+              </div>
+              <div>
+                <dt>签名审批人</dt>
+                <dd>Keran Li。每次正式发布在签名前均需由指定审批人确认。</dd>
+              </div>
+              <div>
+                <dt>隐私与数据</dt>
+                <dd><a href="/docs/faq/privacy">查看数据与隐私政策</a>；软件仅在用户配置或明确发起操作时连接第三方模型、工具或消息服务。</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
       </main>
 
       <footer className="site-footer">
@@ -860,6 +891,8 @@ function App() {
           <a href="#product">产品</a>
           <a href="#community">社区</a>
           <a href="#download">下载</a>
+          <a href="#code-signing-policy">签名政策</a>
+          <a href="/docs/faq/privacy">隐私政策</a>
           <a href={GITHUB_URL} target="_blank" rel="noreferrer">
             GitHub <ArrowUpRight />
           </a>

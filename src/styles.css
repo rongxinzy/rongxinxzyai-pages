@@ -1580,6 +1580,74 @@ svg {
   text-underline-offset: 3px;
 }
 
+.code-signing-policy {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: 72px;
+  align-items: start;
+  border-top: 1px solid var(--line);
+}
+
+.policy-card {
+  padding: 32px;
+  border: 1px solid rgba(152, 184, 238, 0.5);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(241, 247, 255, 0.9), rgba(255, 255, 255, 0.92));
+  box-shadow: 0 18px 45px rgba(50, 91, 160, 0.1);
+}
+
+.policy-card > p:not(.policy-status) {
+  margin: 0;
+  color: #4b5568;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.policy-status {
+  width: fit-content;
+  margin: 0 0 18px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #315e9e;
+  background: #e6f0ff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.policy-card dl {
+  display: grid;
+  gap: 18px;
+  margin: 28px 0 0;
+}
+
+.policy-card dl > div {
+  padding-top: 18px;
+  border-top: 1px solid rgba(187, 204, 230, 0.7);
+}
+
+.policy-card dt {
+  color: #172033;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.policy-card dd {
+  margin: 7px 0 0;
+  color: #69758a;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.policy-card a {
+  color: #315e9e;
+  font-weight: 600;
+}
+
+.policy-card a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .site-footer {
   display: grid;
   grid-template-columns: 1.2fr 1fr auto;
@@ -2063,6 +2131,11 @@ svg {
 
   .download-options {
     grid-template-columns: 1fr;
+  }
+
+  .code-signing-policy {
+    grid-template-columns: 1fr;
+    gap: 34px;
   }
 
   .site-footer {
