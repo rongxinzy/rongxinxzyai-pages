@@ -807,7 +807,7 @@ function App() {
             <article>
               <div className="download-platform">
                 <WindowsIcon />
-                <div><strong>Windows</strong><span>x64 · Lite</span></div>
+                <div><strong>Windows</strong><span>x64 · 离线安装包</span></div>
               </div>
               <p>适用于 Windows 10/11 64 位系统</p>
               <div className="download-meta">
@@ -854,9 +854,11 @@ function App() {
             </article>
           </div>
           <p className="download-footnote">
-            安装包由官方发布流程构建，并通过签名清单与 SHA-256 校验保护升级过程。
+            Windows 离线安装包不含本地推理组件。Microsoft Defender 排除项仅适用于离线运行环境目录，由安装向导单独征求授权。
+            <br />
+            安装包由公开发布流程构建；升级清单附带签名与 SHA-256。
             <a href={RELEASE_WORKFLOW_URL} target="_blank" rel="noreferrer">
-              想了解构建和升级校验，回 GitHub 查看发布流程。
+              查看发布流程。
             </a>
           </p>
         </section>
