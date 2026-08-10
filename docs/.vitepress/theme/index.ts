@@ -1,6 +1,7 @@
 import DefaultTheme from "vitepress/theme";
 import { h } from "vue";
 import SiteHeader from "./SiteHeader.vue";
+import "../../../src/shared/site-header.css";
 import "./style.css";
 
 export default {
