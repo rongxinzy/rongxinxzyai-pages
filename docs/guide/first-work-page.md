@@ -1,12 +1,12 @@
 # 创建第一个工作页面
 
-完成[快速开始](/guide/quick-start)并配置好模型后，就可以创建第一个工作页面。
+完成[快速开始](./quick-start.md)并配置好模型后，就可以创建第一个工作页面。
 
 ## 认识工作页面
 
 工作页面是知远开始工作的地方。页面中间是任务输入区，底部可以选择模型和请求权限，下面还可以进入项目工作。
 
-![知远工作页面](/images/guide/quick-start/work-page.png)
+![知远工作页面](../assets/guide/quick-start/work-page.png)
 
 ## 开始第一个任务
 
@@ -28,10 +28,10 @@
 
 例如，你可以输入季度工作总结、项目汇报、课程讲解或行业分析等内容，再选择对应模板开始制作。
 
-![使用模板生成 PPT](/images/guide/quick-start/ppt-template.png)
+![使用模板生成 PPT](../assets/guide/quick-start/ppt-template.png)
 
 ## 在项目中工作
 
 如果任务属于某个项目，可以从工作页面进入项目工作，让相关任务和资料保持在同一处。项目名称和具体内容以你当前使用的版本为准。
 
-完成第一次任务后，可以继续阅读[创建和执行任务](/guide/tasks)和[添加文件与上下文](/guide/context)。
+完成第一次任务后，可以继续阅读[创建和执行任务](./tasks.md)和[添加文件与上下文](./context.md)。

@@ -28,6 +28,7 @@ export default defineConfig({
               { text: "使用本地模型", link: "/guide/model/local" },
             ],
           },
+          { text: "本地推理", link: "/guide/local-inference" },
           { text: "工作页面", link: "/guide/work-page" },
           { text: "创建和执行任务", link: "/guide/tasks" },
           { text: "添加文件与上下文", link: "/guide/context" },

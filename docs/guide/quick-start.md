@@ -13,7 +13,7 @@
 
 下载区显示的版本号、文件大小和下载地址会随当前稳定版本自动更新。
 
-![知远下载页面](/images/guide/quick-start/download-options.png)
+![知远下载页面](../assets/guide/quick-start/download-options.png)
 
 ## 安装
 
@@ -24,24 +24,24 @@
 ## 第一次启动
 安装页面如图所示，没有特殊需求点击下一步完成安装即可。
 
-![知远安装选项](/images/guide/quick-start/installer-options.png)
+![知远安装选项](../assets/guide/quick-start/installer-options.png)
 
 安装大约需要两到三分钟。
-![知远安装进度](/images/guide/quick-start/install-progress.png)
+![知远安装进度](../assets/guide/quick-start/install-progress.png)
 
 首次启动后，你会看到知远的工作页面。它包含任务输入区、模型选择、权限设置和项目入口，可以从这里开始分配任务。
 
-![知远工作页面](/images/guide/quick-start/work-page.png)
+![知远工作页面](../assets/guide/quick-start/work-page.png)
 
 
 安装完成后启动知远智能体。建议按下面的顺序完成准备：
 
 1. 打开知远智能体。
 2. 完成模型配置，选择云端模型或本地模型。可以使用 [DeepSeek](https://platform.deepseek.com/) 做为比较有性价比的选择。
-3. 创建一个[工作页面](/guide/first-work-page)。
+3. 创建一个[工作页面](./first-work-page.md)。
 4. 用一个简单任务确认模型可以正常响应。
 
-完成这些步骤后，就可以继续尝试[创建和执行任务](/guide/tasks)。
+完成这些步骤后，就可以继续尝试[创建和执行任务](./tasks.md)。
 
 ## 开始前的准备
 
@@ -51,4 +51,4 @@
 
 ## 遇到问题
 
-如果无法安装或启动，请先查看[安装与更新](/faq/install)。如果应用可以打开但模型无法工作，请查看[模型连接](/faq/model)。
+如果无法安装或启动，请先查看[安装与更新](../faq/install.md)。如果应用可以打开但模型无法工作，请查看[模型连接](../faq/model.md)。
