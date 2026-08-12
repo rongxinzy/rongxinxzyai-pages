@@ -550,11 +550,13 @@ svg {
 }
 
 .hero-actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: fit-content;
+  max-width: 100%;
   align-items: center;
-  justify-content: center;
   gap: 12px;
-  margin-top: 32px;
+  margin: 32px auto 0;
 }
 
 .button {
@@ -1821,11 +1823,9 @@ svg {
   }
 
   .hero-actions {
-    display: grid;
     grid-template-columns: 1fr;
+    width: 100%;
     max-width: 320px;
-    margin-right: auto;
-    margin-left: auto;
   }
 
   .hero-product-wrap {
