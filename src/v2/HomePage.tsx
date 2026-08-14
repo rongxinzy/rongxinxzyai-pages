@@ -3,6 +3,7 @@ import type { V2Copy } from "./copy";
 import { GITHUB_URL } from "./copy";
 import type { V2Locale, V2Release, V2ReleaseStatus, V2Platform } from "./types";
 import { HeroDemo } from "./HeroDemo";
+import { HeroAtmosphere } from "./HeroAtmosphere";
 import { AmbientProductDemo, type ProductDemoVariant } from "./AmbientProductDemo";
 import { V2DownloadSection, V2HeroDownload } from "./DownloadSection";
 import {
@@ -191,6 +192,7 @@ export function V2HomePage({ locale, copy, release, releaseStatus, preferredPlat
   return (
     <main>
       <section className="v2-hero" aria-labelledby="v2-hero-title">
+        <HeroAtmosphere />
         <div className="v2-container v2-hero-layout">
           <div className="v2-hero-copy">
             <h1 id="v2-hero-title">{copy.home.heroTitle}</h1>

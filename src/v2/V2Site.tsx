@@ -15,7 +15,7 @@ export function V2Site({
   const copy = V2_COPY[locale];
 
   return (
-    <div className="v2-site" data-locale={locale}>
+    <div className="v2-site" data-locale={locale} data-page={page}>
       <V2Header locale={locale} page={page} copy={copy} />
       {page === "enterprise" ? (
         <V2EnterprisePage locale={locale} copy={copy} />

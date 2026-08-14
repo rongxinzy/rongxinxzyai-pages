@@ -81,6 +81,12 @@ function renderPage(page) {
   const canonical = absoluteUrl(page.path);
   const alternate = absoluteUrl(page.alternatePath);
   const isEnglish = page.lang === "en";
+  const isHome = page.page === "home";
+  const staticBackground = isHome ? "#050812" : "#ffffff";
+  const staticText = isHome ? "#f8faff" : "#121724";
+  const staticMuted = isHome ? "#b7c0cf" : "#667085";
+  const staticButtonBorder = isHome ? "#587ed1" : "#171c27";
+  const staticButtonBackground = isHome ? "#0e1728" : "#151b26";
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": page.page === "enterprise" ? "WebPage" : "SoftwareApplication",
@@ -106,7 +112,7 @@ function renderPage(page) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="${staticBackground}" />
     <meta name="description" content="${page.description}" />
     <link rel="canonical" href="${canonical}" />
     <link rel="alternate" hreflang="zh-CN" href="${isEnglish ? alternate : canonical}" />
@@ -129,10 +135,11 @@ function renderPage(page) {
     <title>${page.title}</title>
     <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
     <style>
-      .marketing-static-shell { max-width: 1180px; margin: 0 auto; padding: 96px 24px; color: #121724; font: 16px/1.6 Inter, "PingFang SC", "Microsoft YaHei", sans-serif; }
+      html, body { margin: 0; background: ${staticBackground}; }
+      .marketing-static-shell { min-height: 100vh; max-width: 1180px; margin: 0 auto; padding: 96px 24px; box-sizing: border-box; color: ${staticText}; font: 16px/1.6 Inter, "PingFang SC", "Microsoft YaHei", sans-serif; }
       .marketing-static-shell h1 { max-width: 12ch; margin: 0 0 20px; font-size: clamp(40px, 6vw, 72px); letter-spacing: -.04em; line-height: 1.06; }
-      .marketing-static-shell p { max-width: 680px; color: #667085; font-size: 18px; }
-      .marketing-static-shell a { display: inline-block; padding: 13px 20px; border: 1px solid #171c27; border-radius: 11px; background: #151b26; color: #fff; font: inherit; text-decoration: none; }
+      .marketing-static-shell p { max-width: 680px; color: ${staticMuted}; font-size: 18px; }
+      .marketing-static-shell a { display: inline-block; padding: 13px 20px; border: 1px solid ${staticButtonBorder}; border-radius: 11px; background: ${staticButtonBackground}; color: #fff; font: inherit; text-decoration: none; }
     </style>
   </head>
   <body>
