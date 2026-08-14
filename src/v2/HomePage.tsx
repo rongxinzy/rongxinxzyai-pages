@@ -203,9 +203,19 @@ export function V2HomePage({ locale, copy, release, releaseStatus, preferredPlat
                 preferredPlatform={preferredPlatform}
               />
             </div>
-            <a className="v2-source-link" href={GITHUB_URL} target="_blank" rel="noreferrer">
-              {copy.actions.source}<ArrowUpRightIcon />
-            </a>
+            <div className="v2-hero-meta">
+              <span className={`v2-hero-release ${release ? "is-ready" : ""}`} aria-live="polite">
+                <i aria-hidden="true" />
+                {release
+                  ? `${copy.release.versionLabel} · ${release.version}`
+                  : releaseStatus === "loading"
+                    ? copy.release.loading
+                    : copy.release.unavailable}
+              </span>
+              <a className="v2-source-link" href={GITHUB_URL} target="_blank" rel="noreferrer">
+                {copy.actions.source}<ArrowUpRightIcon />
+              </a>
+            </div>
           </div>
           <div className="v2-hero-demo">
             <HeroDemo copy={copy} />

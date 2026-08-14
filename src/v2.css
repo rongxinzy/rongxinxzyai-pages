@@ -72,7 +72,11 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 .v2-hero-download-icon svg { width: 16px; height: 16px; }
 .v2-hero-download:hover .v2-hero-download-icon { color: #171c27; background: #fff; transform: translateY(1px); }
 .v2-source-link, .v2-text-action { display: inline-flex; align-items: center; gap: 6px; color: var(--v2-blue-deep); font-size: 14px; font-weight: 600; }
-.v2-source-link { margin-top: 22px; }
+.v2-hero-meta { margin-top: 18px; display: flex; align-items: center; flex-wrap: wrap; gap: 12px 20px; }
+.v2-hero-release { display: inline-flex; align-items: center; gap: 7px; color: #737b8c; font: 11px/1.4 "SFMono-Regular", Consolas, monospace; }
+.v2-hero-release i { width: 6px; height: 6px; border-radius: 50%; background: #aeb3bd; }
+.v2-hero-release.is-ready i { background: var(--v2-green); box-shadow: 0 0 0 4px rgb(32 164 100 / .10); }
+.v2-source-link { padding-left: 20px; border-left: 1px solid var(--v2-line); font-size: 13px; }
 .v2-source-link svg, .v2-text-action svg { width: 16px; height: 16px; transition: transform 160ms ease; }
 .v2-source-link:hover svg, .v2-text-action:hover svg { transform: translate(2px, -1px); }
 .v2-hero-demo { min-width: 0; }
@@ -440,7 +444,8 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
   .v2-hero-copy > p { margin-top: 24px; font-size: 16px; line-height: 1.7; }
   .v2-hero-actions { display: grid; grid-template-columns: 1fr; }
   .v2-hero-actions .v2-button { width: 100%; min-height: 48px; }
-  .v2-source-link { margin-top: 18px; }
+  .v2-hero-meta { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .v2-source-link { padding-left: 0; border-left: 0; }
   .v2-demo-frame { height: 660px; grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) 38px; border-radius: 14px; }
   .v2-demo-sidebar { display: none; }
   .v2-demo-main { grid-column: 1; }
@@ -479,8 +484,11 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
   .v2-schedule-row { grid-template-columns: auto 1fr auto; }
   .v2-schedule-row strong { grid-column: 2; }
   .v2-platform-row { padding: 16px 0; grid-template-columns: 28px 1fr auto; gap: 12px; }
-  .v2-platform-meta { display: none; }
-  .v2-platform-download, .v2-platform-unavailable { max-width: 120px; text-align: right; }
+  .v2-platform-row { grid-template-rows: auto auto; }
+  .v2-platform-row > span:first-child { grid-column: 1; grid-row: 1 / span 2; }
+  .v2-platform-name { grid-column: 2; grid-row: 1; }
+  .v2-platform-meta { grid-column: 2; grid-row: 2; display: flex; gap: 8px; }
+  .v2-platform-download, .v2-platform-unavailable { grid-column: 3; grid-row: 1 / span 2; max-width: 120px; text-align: right; }
   .v2-enterprise-cta-inner { align-items: flex-start; flex-direction: column; }
   .v2-enterprise-hero-layout { padding: 58px 0 72px; gap: 48px; }
   .v2-enterprise-hero-copy h1 { font-size: 44px; }
