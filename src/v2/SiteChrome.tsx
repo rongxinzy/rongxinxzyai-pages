@@ -74,7 +74,7 @@ export function V2Header({ locale, page, copy }: ChromeProps) {
   );
 }
 
-export function V2Footer({ locale, copy }: Omit<ChromeProps, "page">) {
+export function V2Footer({ locale, page, copy }: ChromeProps) {
   const home = localeRoot(locale);
   const enterprise = enterpriseRoot(locale);
   const docsHref = locale === "en" ? `${GITHUB_URL}#readme` : "/docs/";
@@ -83,7 +83,10 @@ export function V2Footer({ locale, copy }: Omit<ChromeProps, "page">) {
     <footer className="v2-footer">
       <div className="v2-container v2-footer-inner">
         <a className="v2-brand" href={home} aria-label="ZhiYuan">
-          <img src="/zhiyuan-logo.svg" alt="ZhiYuan" />
+          <img
+            src={page === "enterprise" ? "/zhiyuan-logo-on-dark.svg" : "/zhiyuan-logo.svg"}
+            alt="ZhiYuan"
+          />
         </a>
         <nav aria-label={copy.navigation.aria}>
           <a href={GITHUB_URL} target="_blank" rel="noreferrer">{copy.footer.source}<ArrowUpRightIcon /></a>

@@ -28,7 +28,7 @@ export function V2Site({
           preferredPlatform={preferredPlatform}
         />
       )}
-      <V2Footer locale={locale} copy={copy} />
+      <V2Footer locale={locale} page={page} copy={copy} />
     </div>
   );
 }

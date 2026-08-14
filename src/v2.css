@@ -16,6 +16,15 @@
   --v2-app-raised: #f5f5f4;
   --v2-app-line: #e7e5e4;
   --v2-container: 1320px;
+  --v2-story-cool: #f7f9fc;
+  --v2-story-blueprint: #f3f6fb;
+  --v2-story-blue-wash: #eef4ff;
+  --v2-story-stage: #0b101a;
+  --v2-story-stage-muted: #a8b2c2;
+  --v2-story-grid: rgb(57 123 255 / .052);
+  --v2-story-grid-major: rgb(57 123 255 / .082);
+  --v2-story-trace: rgb(57 123 255 / .13);
+  --v2-story-stage-line: rgb(255 255 255 / .1);
 }
 
 * { box-sizing: border-box; }
@@ -32,6 +41,7 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 .v2-site { min-height: 100vh; overflow: clip; background: #fff; }
 .v2-container { width: min(calc(100% - 48px), var(--v2-container)); margin-inline: auto; }
 .v2-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.v2-site a:focus-visible, .v2-site button:focus-visible { outline: 2px solid var(--v2-blue); outline-offset: 3px; }
 
 .v2-header { position: relative; z-index: 50; height: 72px; border-bottom: 1px solid var(--v2-line); background: rgb(255 255 255 / .94); }
 .v2-header-inner { width: min(calc(100% - 48px), 1360px); height: 100%; margin-inline: auto; display: flex; align-items: center; gap: 44px; }
@@ -289,6 +299,109 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 .v2-section h2, .v2-enterprise-cta h2 { margin: 0; color: var(--v2-ink); font-size: clamp(34px, 4vw, 52px); font-weight: 620; letter-spacing: -.045em; line-height: 1.12; text-wrap: balance; }
 .v2-section-heading > p, .v2-section-copy > p, .v2-local-copy > p, .v2-enterprise-cta p { max-width: 680px; margin: 18px 0 0; color: var(--v2-muted); font-size: 17px; line-height: 1.75; }
 
+/* Downstream story surfaces: paper, blueprint, graphite. */
+.v2-local-models, .v2-automation, .v2-product, .v2-enterprise-cta,
+.v2-enterprise-hero, .v2-enterprise-architecture, .v2-enterprise-contact {
+  position: relative;
+  isolation: isolate;
+}
+.v2-local-models > .v2-container, .v2-automation > .v2-container,
+.v2-product > .v2-container, .v2-enterprise-cta > .v2-container,
+.v2-enterprise-hero > .v2-container, .v2-enterprise-architecture > .v2-container,
+.v2-enterprise-contact > .v2-container {
+  position: relative;
+  z-index: 1;
+}
+.v2-workflow { border-top: 0; background: #fff; }
+.v2-local-models { border-top-color: transparent; background: var(--v2-story-blueprint); }
+.v2-local-models::before, .v2-enterprise-hero::before, .v2-enterprise-architecture::before {
+  position: absolute;
+  z-index: 0;
+  content: "";
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--v2-story-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--v2-story-grid) 1px, transparent 1px),
+    linear-gradient(var(--v2-story-grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--v2-story-grid-major) 1px, transparent 1px);
+  background-size: 28px 28px, 28px 28px, 112px 112px, 112px 112px;
+}
+.v2-local-models::before {
+  inset: 0 auto 0 0;
+  width: min(68%, 1040px);
+  -webkit-mask-image: radial-gradient(ellipse at 38% 52%, #000 0 34%, transparent 74%);
+  mask-image: radial-gradient(ellipse at 38% 52%, #000 0 34%, transparent 74%);
+}
+.v2-skills, .v2-trust, .v2-enterprise-comparison, .v2-enterprise-delivery { background: #fff; }
+.v2-automation { border-top-color: rgb(18 23 36 / .07); background: var(--v2-story-cool); }
+.v2-automation::before {
+  position: absolute;
+  right: 4%;
+  bottom: 12%;
+  z-index: 0;
+  width: min(48%, 700px);
+  height: 48%;
+  border-top: 1px solid var(--v2-story-trace);
+  border-right: 1px solid var(--v2-story-trace);
+  border-radius: 0 48px 0 0;
+  content: "";
+  pointer-events: none;
+  opacity: .56;
+}
+.v2-product { border-top-color: var(--v2-story-stage-line); color: #f8faff; background: var(--v2-story-stage); }
+.v2-product h2 { color: #f8faff; }
+.v2-product .v2-section-number { color: #78a1ff; }
+.v2-product .v2-section-heading > p { color: var(--v2-story-stage-muted); }
+.v2-product .v2-product-tabs { border-bottom-color: var(--v2-story-stage-line); }
+.v2-product .v2-product-tabs button { color: #8994a6; }
+.v2-product .v2-product-tabs button[aria-selected="true"] { color: #8eb0ff; }
+.v2-product .v2-ambient-shell { border-color: rgb(255 255 255 / .16); box-shadow: 0 24px 58px rgb(0 0 0 / .28); }
+.v2-product a:focus-visible, .v2-product button:focus-visible,
+.v2-enterprise-contact a:focus-visible, .v2-enterprise-contact button:focus-visible,
+.v2-site[data-page="enterprise"] .v2-footer a:focus-visible { outline-color: #8eb0ff; }
+.v2-trust { border-top-color: transparent; }
+.v2-download-section { background: #f7f8fa; }
+.v2-enterprise-cta { border-top-color: rgb(57 123 255 / .12); background: var(--v2-story-blue-wash); }
+.v2-enterprise-cta::before {
+  position: absolute;
+  top: 24%;
+  right: 8%;
+  bottom: 20%;
+  z-index: 0;
+  width: min(34%, 480px);
+  border-left: 1px dashed rgb(57 123 255 / .18);
+  content: "";
+  pointer-events: none;
+  transform: skewX(-15deg);
+}
+.v2-site[data-page="home"] .v2-footer { border-top-color: rgb(57 123 255 / .1); background: #f6f9ff; }
+
+.v2-enterprise-hero { background: #fff; }
+.v2-enterprise-hero::before {
+  inset: 0 0 0 auto;
+  width: 56%;
+  -webkit-mask-image: radial-gradient(ellipse at 72% 48%, #000 0 28%, transparent 72%);
+  mask-image: radial-gradient(ellipse at 72% 48%, #000 0 28%, transparent 72%);
+}
+.v2-enterprise-architecture { border-top-color: transparent; background: var(--v2-story-blueprint); }
+.v2-enterprise-architecture::before {
+  inset: 0 0 0 auto;
+  width: 62%;
+  -webkit-mask-image: radial-gradient(ellipse at 62% 50%, #000 0 34%, transparent 74%);
+  mask-image: radial-gradient(ellipse at 62% 50%, #000 0 34%, transparent 74%);
+}
+.v2-enterprise-contact { border-top-color: var(--v2-story-stage-line); color: #f8faff; background: var(--v2-story-stage); }
+.v2-enterprise-contact h2 { color: #f8faff; }
+.v2-enterprise-contact .v2-section-number { color: #78a1ff; }
+.v2-enterprise-contact .v2-section-copy > p, .v2-enterprise-contact .v2-contact-email { color: var(--v2-story-stage-muted); }
+.v2-enterprise-contact .v2-button-secondary { border-color: rgb(255 255 255 / .24); color: #fff; background: transparent; }
+.v2-enterprise-contact .v2-button-secondary:hover { border-color: rgb(255 255 255 / .42); background: rgb(255 255 255 / .06); }
+.v2-enterprise-contact .v2-contact-qr-list figure { border-color: rgb(255 255 255 / .16); background: #fff; }
+.v2-enterprise-contact .v2-contact-qr-list figcaption { color: var(--v2-muted); }
+.v2-site[data-page="enterprise"] .v2-footer { border-top-color: var(--v2-story-stage-line); color: #f8faff; background: var(--v2-story-stage); }
+.v2-site[data-page="enterprise"] .v2-footer nav a,
+.v2-site[data-page="enterprise"] .v2-footer p { color: var(--v2-story-stage-muted); }
+
 .v2-workflow-rail { margin: 62px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); list-style: none; }
 .v2-workflow-rail li { position: relative; min-width: 0; }
 .v2-workflow-rail li:not(:last-child)::after { position: absolute; top: 15px; right: 12px; left: 43px; height: 1px; content: ""; background: var(--v2-line); }
@@ -455,6 +568,7 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
   .v2-platform-row { grid-template-columns: 34px minmax(150px, 1fr) minmax(110px, .7fr) auto; }
   .v2-enterprise-hero-layout { min-height: auto; grid-template-columns: 1fr; }
   .v2-enterprise-diagram { max-width: 650px; }
+  .v2-enterprise-hero::before, .v2-enterprise-architecture::before { top: 42%; width: 100%; }
   .v2-contact-qr-list { justify-content: start; }
   .v2-footer-inner { grid-template-columns: 1fr; justify-items: center; gap: 20px; }
 }
@@ -503,6 +617,9 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
   .v2-workspace-canvas { padding: 16px 14px; }
   .v2-ambient-artifact { right: 14px; bottom: 14px; width: 54%; }
   .v2-section { padding: 76px 0; }
+  .v2-local-models::before { width: 100%; height: 42%; opacity: .52; }
+  .v2-automation::before, .v2-enterprise-cta::before { display: none; }
+  .v2-enterprise-hero::before, .v2-enterprise-architecture::before { top: 48%; opacity: .48; }
   .v2-section h2, .v2-enterprise-cta h2 { font-size: 34px; }
   .v2-section-heading > p, .v2-section-copy > p, .v2-local-copy > p, .v2-enterprise-cta p { font-size: 15px; }
   .v2-workflow-rail { margin-top: 40px; grid-template-columns: 1fr; }
