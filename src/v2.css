@@ -644,6 +644,26 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 .v2-workflow-marker { position: relative; z-index: 1; width: 31px; height: 31px; display: grid; place-items: center; border: 1px solid var(--v2-line); border-radius: 50%; color: var(--v2-muted); background: #fff; font-size: 11px; }
 .v2-workflow-marker svg { width: 14px; height: 14px; }
 .v2-workflow-rail li.is-approval .v2-workflow-marker { color: var(--v2-blue); border-color: #a9c4ff; }
+.v2-workflow-signal { position: absolute; top: 13px; left: 43px; z-index: 2; width: 38px; height: 5px; border-radius: 999px; opacity: 0; pointer-events: none; background: linear-gradient(90deg, transparent, #a9c4ff 22%, var(--v2-blue) 52%, #d7e4ff 80%, transparent); box-shadow: 0 0 12px rgb(57 123 255 / .42); animation: v2-workflow-signal 8s cubic-bezier(.22, .61, .36, 1) infinite; will-change: transform, opacity; }
+.v2-workflow-rail li.is-flow-1 .v2-workflow-signal { animation-delay: 0s; }
+.v2-workflow-rail li.is-flow-2 .v2-workflow-signal { animation-delay: -2s; }
+.v2-workflow-rail li.is-flow-3 .v2-workflow-signal { animation-delay: -4s; }
+.v2-workflow-rail li.is-flow-4 .v2-workflow-signal { animation-delay: -6s; }
+.v2-workflow-rail li.is-flow-step .v2-workflow-marker { animation: v2-workflow-marker 8s ease-in-out infinite; }
+.v2-workflow-rail li.is-flow-1 .v2-workflow-marker { animation-delay: 0s; }
+.v2-workflow-rail li.is-flow-2 .v2-workflow-marker { animation-delay: -2s; }
+.v2-workflow-rail li.is-flow-3 .v2-workflow-marker { animation-delay: -4s; }
+.v2-workflow-rail li.is-flow-4 .v2-workflow-marker { animation-delay: -6s; }
+@keyframes v2-workflow-signal {
+  0%, 6% { opacity: 0; transform: translateX(-22px); }
+  9%, 26% { opacity: 1; }
+  32%, 100% { opacity: 0; transform: translateX(clamp(132px, 14vw, 218px)); }
+}
+@keyframes v2-workflow-marker {
+  0%, 6%, 100% { border-color: var(--v2-line); color: var(--v2-muted); box-shadow: none; }
+  10%, 25% { border-color: #8eb0ff; color: var(--v2-blue); box-shadow: 0 0 0 5px rgb(57 123 255 / .075); }
+}
+.v2-workflow-rail li.is-approval .v2-workflow-marker { color: var(--v2-blue); border-color: #a9c4ff; }
 .v2-workflow-rail li > div { padding: 20px 26px 0 0; }
 .v2-workflow-rail strong { display: block; font-size: 15px; font-weight: 600; }
 .v2-workflow-rail p { margin: 7px 0 0; color: var(--v2-muted); font-size: 13px; line-height: 1.55; }
@@ -995,6 +1015,12 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
   .v2-workflow-rail { margin-top: 40px; grid-template-columns: 1fr; }
   .v2-workflow-rail li { min-height: 84px; display: grid; grid-template-columns: 34px 1fr; gap: 12px; }
   .v2-workflow-rail li:not(:last-child)::after { top: 34px; right: auto; bottom: 0; left: 15px; width: 1px; height: auto; }
+  .v2-workflow-signal { top: 38px; left: 13px; width: 5px; height: 34px; background: linear-gradient(180deg, transparent, #a9c4ff 22%, var(--v2-blue) 52%, #d7e4ff 80%, transparent); }
+  @keyframes v2-workflow-signal {
+    0%, 6% { opacity: 0; transform: translateY(-18px); }
+    9%, 26% { opacity: 1; }
+    32%, 100% { opacity: 0; transform: translateY(54px); }
+  }
   .v2-workflow-rail li > div { padding: 2px 0 22px; }
   .v2-local-layout, .v2-skills-layout, .v2-automation-layout { gap: 36px; }
   .v2-delivery-list { grid-template-columns: 1fr; }
@@ -1027,4 +1053,5 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .v2-workflow-signal, .v2-workflow-rail li.is-flow-step .v2-workflow-marker { animation: none !important; }
 }

@@ -40,10 +40,17 @@ function WorkflowSection({ copy }: { copy: V2Copy }) {
         </div>
         <ol className="v2-workflow-rail">
           {copy.home.workflowSteps.map((step, index) => (
-            <li key={step.title} className={index === 3 ? "is-approval" : ""}>
+            <li
+              key={step.title}
+              className={[
+                index < 4 ? `is-flow-step is-flow-${index + 1}` : "",
+                index === 3 ? "is-approval" : "",
+              ].filter(Boolean).join(" ")}
+            >
               <span className="v2-workflow-marker">
                 {index === 3 ? <ShieldIcon /> : index === 4 ? <CheckIcon /> : index + 1}
               </span>
+              {index < 4 ? <span className="v2-workflow-signal" aria-hidden="true" /> : null}
               <div><strong>{step.title}</strong><p>{step.body}</p></div>
             </li>
           ))}
