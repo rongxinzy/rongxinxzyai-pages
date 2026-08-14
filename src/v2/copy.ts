@@ -195,8 +195,8 @@ const ZH_COPY: V2Copy = {
     automationSchedule: "每周一 09:00",
     automationTask: "整理项目周报",
     automationDestinations: ["知远工作区", "消息连接", "邮件连接"],
-    productTitle: "这就是知远现在的界面。",
-    productBody: "工作台、模型市场和技能中心都来自当前版本。",
+    productTitle: "工作、模型和技能，在同一个桌面里。",
+    productBody: "切换查看工作台、模型市场和技能中心。",
     productTabs: [
       { id: "workspace", label: "工作台", alt: "知远当前版本工作台界面" },
       { id: "models", label: "模型市场", alt: "知远当前版本模型市场界面" },
@@ -389,8 +389,8 @@ const EN_COPY: V2Copy = {
     automationSchedule: "Monday · 09:00",
     automationTask: "Draft the project update",
     automationDestinations: ["ZhiYuan workspace", "Messaging connection", "Email connection"],
-    productTitle: "This is ZhiYuan as it is today.",
-    productBody: "The workbench, model marketplace, and skills center are part of the current desktop app.",
+    productTitle: "Work, models, and skills in one desktop app.",
+    productBody: "Switch between the workspace, model marketplace, and skills center.",
     productTabs: [
       { id: "workspace", label: "Workbench", alt: "Current ZhiYuan workbench interface" },
       { id: "models", label: "Model marketplace", alt: "Current ZhiYuan model marketplace interface" },

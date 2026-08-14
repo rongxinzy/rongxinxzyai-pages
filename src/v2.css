@@ -163,9 +163,8 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 .v2-ambient-demo { min-width: 0; }
 .v2-ambient-shell { width: 100%; aspect-ratio: 16 / 9.6; display: grid; grid-template-columns: 18.5% 1fr; overflow: hidden; border: 1px solid #d9dadd; border-radius: 12px; color: var(--v2-app-text); background: #fff; box-shadow: 0 16px 42px rgb(18 23 36 / .09); font-size: clamp(9px, .78vw, 12px); }
 .v2-ambient-sidebar { position: relative; min-width: 0; padding: 14px 11px 40px; border-right: 1px solid var(--v2-app-line); background: #f4f4f3; }
-.v2-ambient-brand { height: 28px; display: flex; align-items: center; gap: 7px; font-size: 10px; font-weight: 650; }
-.v2-ambient-brand img { width: 52px; }
-.v2-ambient-brand span { opacity: .55; }
+.v2-ambient-brand { height: 28px; display: flex; align-items: center; }
+.v2-ambient-brand img { width: 64px; height: 18px; object-fit: contain; object-position: left center; }
 .v2-ambient-sidebar nav { margin-top: 12px; display: grid; gap: 3px; }
 .v2-ambient-sidebar nav span, .v2-ambient-project, .v2-ambient-settings { min-height: 28px; padding: 0 8px; display: flex; align-items: center; gap: 7px; overflow: hidden; border-radius: 7px; white-space: nowrap; color: #6f706f; }
 .v2-ambient-sidebar nav span.is-active { color: #343638; background: #e6e6e4; font-weight: 600; }
@@ -186,9 +185,10 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 .v2-workspace-canvas { position: relative; height: calc(100% - 44px); padding: 22px 24px; overflow: hidden; }
 .v2-ambient-task { width: min(78%, 480px); margin-left: auto; padding: 10px 13px; border: 1px solid var(--v2-app-line); border-radius: 12px 12px 4px 12px; background: #f7f7f6; line-height: 1.5; animation: v2-demo-rise .5s ease both; }
 .v2-ambient-agent-row { margin: 20px 0 8px; display: flex; align-items: center; gap: 8px; }
-.v2-ambient-agent-row img { width: 54px; }
-.v2-ambient-agent-row span { width: 42px; height: 6px; overflow: hidden; border-radius: 999px; background: #eee; }
-.v2-ambient-agent-row span::after { display: block; width: 55%; height: 100%; content: ""; background: #b8b9b8; animation: v2-scan 1.4s ease-in-out infinite alternate; }
+.v2-ambient-agent-mark { width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid #dededb; border-radius: 8px; color: #55585d; background: #f7f7f6; }
+.v2-ambient-agent-mark svg { width: 14px; height: 14px; }
+.v2-ambient-agent-loading { width: 42px; height: 6px; overflow: hidden; border-radius: 999px; background: #eee; }
+.v2-ambient-agent-loading::after { display: block; width: 55%; height: 100%; content: ""; background: #b8b9b8; animation: v2-scan 1.4s ease-in-out infinite alternate; }
 .v2-ambient-steps { width: min(82%, 520px); margin: 0; padding: 0; list-style: none; }
 .v2-ambient-steps li { position: relative; min-height: 39px; display: grid; grid-template-columns: 18px minmax(0, auto) 1fr; align-items: center; gap: 9px; color: #aaa8a3; transition: color .35s ease; }
 .v2-ambient-steps li:not(:last-child)::after { position: absolute; top: 28px; bottom: -4px; left: 8px; width: 1px; content: ""; background: #e3e2df; }

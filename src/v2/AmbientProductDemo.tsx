@@ -129,7 +129,7 @@ function DemoShell({
   return (
     <div className={`v2-ambient-shell is-${variant}`} data-phase={phase} role="img" aria-label={copy.aria[variant]}>
       <aside className="v2-ambient-sidebar" aria-hidden="true">
-        <div className="v2-ambient-brand"><img src="/zhiyuan-logo.svg" alt="" /><span>知远</span></div>
+        <div className="v2-ambient-brand"><img src="/zhiyuan-logo.svg" alt="" /></div>
         <nav>
           {copy.nav.map((item, index) => (
             <span key={item} className={index === (variant === "workspace" ? 0 : variant === "models" ? 2 : 4) ? "is-active" : ""}>
@@ -153,7 +153,7 @@ function WorkspaceDemo({ locale, phase }: { locale: V2Locale; phase: number }) {
       <header className="v2-ambient-topbar"><strong>{copy.title}</strong><span className={phase === 3 ? "is-done" : ""}><i />{copy.status[phase]}</span></header>
       <div className="v2-workspace-canvas">
         <div className="v2-ambient-task">{copy.task}</div>
-        <div className="v2-ambient-agent-row"><img src="/zhiyuan-logo.svg" alt="" /><span /></div>
+        <div className="v2-ambient-agent-row"><span className="v2-ambient-agent-mark"><SparkIcon /></span><span className="v2-ambient-agent-loading" /></div>
         <ol className="v2-ambient-steps">
           {copy.steps.map((step, index) => (
             <li key={step} className={index < phase ? "is-complete" : index === phase ? "is-running" : ""}>
