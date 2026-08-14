@@ -184,18 +184,29 @@ function ProductSection({ locale, copy }: { locale: V2Locale; copy: V2Copy }) {
 function TrustSection({ copy }: { copy: V2Copy }) {
   return (
     <section className="v2-section v2-trust" aria-labelledby="v2-trust-title">
-      <div className="v2-container">
-        <div className="v2-section-heading">
+      <div className="v2-container v2-trust-layout">
+        <div className="v2-section-heading v2-trust-heading">
           <span className="v2-section-number" aria-hidden="true">06</span>
           <h2 id="v2-trust-title">{copy.home.trustTitle}</h2>
           <p>{copy.home.trustBody}</p>
         </div>
         <div className="v2-trust-rows">
           {copy.home.trustRows.map((row, index) => (
-            <a key={row.title} href={row.href} target="_blank" rel="noreferrer">
-              <span>{index === 0 ? <GithubIcon /> : index === 1 ? <ShieldIcon /> : <CheckIcon />}</span>
-              <div><strong>{row.title}</strong><p>{row.body}</p></div>
-              <ArrowUpRightIcon />
+            <a className="v2-trust-row" key={row.title} href={row.href} target="_blank" rel="noreferrer">
+              <span className="v2-trust-node" aria-hidden="true">
+                {index === 0 ? <GithubIcon /> : index === 1 ? <ShieldIcon /> : <CheckIcon />}
+              </span>
+              <div className="v2-trust-copy">
+                <span className="v2-trust-index" aria-hidden="true">0{index + 1}</span>
+                <strong>{row.title}</strong>
+                <p>{row.body}</p>
+              </div>
+              <div className="v2-trust-proof">
+                {row.stages.map((stage, stageIndex) => (
+                  <span key={stage}><i aria-hidden="true">{stageIndex + 1}</i>{stage}</span>
+                ))}
+              </div>
+              <ArrowUpRightIcon className="v2-trust-link-icon" aria-hidden="true" />
             </a>
           ))}
         </div>

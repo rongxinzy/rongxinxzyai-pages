@@ -48,7 +48,7 @@ export type V2Copy = {
     productTabs: Array<{ id: "workspace" | "models" | "skills"; label: string; alt: string }>;
     trustTitle: string;
     trustBody: string;
-    trustRows: Array<{ title: string; body: string; href: string }>;
+    trustRows: Array<{ title: string; body: string; href: string; stages: [string, string, string] }>;
     downloadTitle: string;
     downloadBody: string;
     windowsNote: string;
@@ -206,12 +206,23 @@ const ZH_COPY: V2Copy = {
     trustBody:
       "知远以开源方式发布。敏感操作经过权限流程，安装包和升级清单由公开发布流程生成。",
     trustRows: [
-      { title: "源代码", body: "AGPL-3.0 · GitHub", href: GITHUB_URL },
-      { title: "权限流程", body: "敏感操作需要确认", href: `${GITHUB_URL}/tree/main/src` },
+      {
+        title: "源代码",
+        body: "AGPL-3.0 · GitHub",
+        href: GITHUB_URL,
+        stages: ["公开仓库", "AGPL-3.0", "可审阅"],
+      },
+      {
+        title: "权限流程",
+        body: "敏感操作需要确认",
+        href: `${GITHUB_URL}/tree/main/src`,
+        stages: ["操作请求", "影响说明", "你的确认"],
+      },
       {
         title: "发布清单",
         body: "签名 · SHA-256",
         href: `${GITHUB_URL}/blob/main/.github/workflows/online-update-release.yml`,
+        stages: ["版本产物", "发布清单", "完整性校验"],
       },
     ],
     downloadTitle: "把知远装进你的电脑。",
@@ -400,12 +411,23 @@ const EN_COPY: V2Copy = {
     trustBody:
       "ZhiYuan is released in the open. Sensitive actions go through an approval flow; installers and update manifests are produced by a public release workflow.",
     trustRows: [
-      { title: "Source code", body: "AGPL-3.0 · GitHub", href: GITHUB_URL },
-      { title: "Approval flow", body: "Sensitive actions require approval", href: `${GITHUB_URL}/tree/main/src` },
+      {
+        title: "Source code",
+        body: "AGPL-3.0 · GitHub",
+        href: GITHUB_URL,
+        stages: ["Public repository", "AGPL-3.0", "Reviewable"],
+      },
+      {
+        title: "Approval flow",
+        body: "Sensitive actions require approval",
+        href: `${GITHUB_URL}/tree/main/src`,
+        stages: ["Operation request", "Impact summary", "Your approval"],
+      },
       {
         title: "Release manifests",
         body: "Signature · SHA-256",
         href: `${GITHUB_URL}/blob/main/.github/workflows/online-update-release.yml`,
+        stages: ["Release asset", "Update manifest", "Integrity check"],
       },
     ],
     downloadTitle: "Install ZhiYuan on your computer.",
