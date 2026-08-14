@@ -620,7 +620,7 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 .v2-product-tabs button[aria-selected="true"] { color: var(--v2-blue-deep); }
 .v2-product-tabs button[aria-selected="true"]::after { position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; content: ""; background: var(--v2-blue); }
 .v2-product-gallery { margin-top: 18px; }
-.v2-product-gallery img { aspect-ratio: 1352 / 897; object-fit: cover; object-position: bottom center; }
+.v2-product-gallery > img { aspect-ratio: 1352 / 897; object-fit: cover; object-position: bottom center; }
 
 .v2-trust-rows { margin-top: 46px; border-top: 1px solid var(--v2-line); }
 .v2-trust-rows > a { min-height: 96px; display: grid; grid-template-columns: 42px 1fr auto; align-items: center; gap: 18px; border-bottom: 1px solid var(--v2-line); }
