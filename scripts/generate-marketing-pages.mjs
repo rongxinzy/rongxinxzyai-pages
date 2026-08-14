@@ -132,7 +132,7 @@ function renderPage(page) {
       .marketing-static-shell { max-width: 1180px; margin: 0 auto; padding: 96px 24px; color: #121724; font: 16px/1.6 Inter, "PingFang SC", "Microsoft YaHei", sans-serif; }
       .marketing-static-shell h1 { max-width: 12ch; margin: 0 0 20px; font-size: clamp(40px, 6vw, 72px); letter-spacing: -.04em; line-height: 1.06; }
       .marketing-static-shell p { max-width: 680px; color: #667085; font-size: 18px; }
-      .marketing-static-shell a { display: inline-block; padding: 12px 18px; border-radius: 8px; background: #397bff; color: #fff; font: inherit; text-decoration: none; }
+      .marketing-static-shell a { display: inline-block; padding: 13px 20px; border: 1px solid #171c27; border-radius: 11px; background: #151b26; color: #fff; font: inherit; text-decoration: none; }
     </style>
   </head>
   <body>

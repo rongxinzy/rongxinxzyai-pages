@@ -61,12 +61,12 @@ export function V2HeroDownload({ copy, release, releaseStatus, preferredPlatform
   const artifact = release?.artifacts[selected];
 
   return artifact ? (
-    <a className="v2-button v2-button-secondary" href={artifact.url}>
-      {copy.actions.download}<DownloadIcon />
+    <a className="v2-button v2-hero-download" href={artifact.url}>
+      <span>{copy.actions.download}</span><span className="v2-hero-download-icon"><DownloadIcon /></span>
     </a>
   ) : (
-    <a className="v2-button v2-button-secondary" href="#download" aria-describedby="v2-release-status">
-      {copy.actions.download}<DownloadIcon />
+    <a className="v2-button v2-hero-download" href="#download" aria-describedby="v2-release-status">
+      <span>{copy.actions.download}</span><span className="v2-hero-download-icon"><DownloadIcon /></span>
     </a>
   );
 }
