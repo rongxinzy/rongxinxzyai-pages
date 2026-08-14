@@ -3,6 +3,7 @@ import type { V2Copy } from "./copy";
 import { GITHUB_URL } from "./copy";
 import type { V2Locale, V2Release, V2ReleaseStatus, V2Platform } from "./types";
 import { HeroDemo } from "./HeroDemo";
+import { AmbientProductDemo, type ProductDemoVariant } from "./AmbientProductDemo";
 import { V2DownloadSection, V2HeroDownload } from "./DownloadSection";
 import {
   ArrowIcon,
@@ -26,12 +27,6 @@ type HomePageProps = {
   releaseStatus: V2ReleaseStatus;
   preferredPlatform?: Exclude<V2Platform, "linuxAppImage">;
 };
-
-const PRODUCT_IMAGES = {
-  workspace: "/product/zhiyuan-workspace.png",
-  models: "/product/zhiyuan-model-market.png",
-  skills: "/product/zhiyuan-skills.png",
-} as const;
 
 function WorkflowSection({ copy }: { copy: V2Copy }) {
   return (
@@ -57,13 +52,11 @@ function WorkflowSection({ copy }: { copy: V2Copy }) {
   );
 }
 
-function LocalModelsSection({ copy }: { copy: V2Copy }) {
+function LocalModelsSection({ locale, copy }: { locale: V2Locale; copy: V2Copy }) {
   return (
     <section className="v2-section v2-local-models" id="local-models" aria-labelledby="v2-local-title">
       <div className="v2-container v2-local-layout">
-        <div className="v2-product-image-frame v2-local-image">
-          <img src="/product/zhiyuan-model-market.png" alt={copy.home.productTabs[1].alt} loading="lazy" />
-        </div>
+        <AmbientProductDemo locale={locale} variant="models" className="v2-local-image" />
         <div className="v2-local-copy">
           <span className="v2-section-number" aria-hidden="true">02</span>
           <h2 id="v2-local-title">{copy.home.localTitle}</h2>
@@ -129,7 +122,7 @@ function AutomationSection({ copy }: { copy: V2Copy }) {
   );
 }
 
-function ProductSection({ copy }: { copy: V2Copy }) {
+function ProductSection({ locale, copy }: { locale: V2Locale; copy: V2Copy }) {
   const [activeTab, setActiveTab] = useState<(typeof copy.home.productTabs)[number]["id"]>("workspace");
   const active = copy.home.productTabs.find(tab => tab.id === activeTab) ?? copy.home.productTabs[0];
 
@@ -157,12 +150,12 @@ function ProductSection({ copy }: { copy: V2Copy }) {
           ))}
         </div>
         <div
-          className="v2-product-image-frame v2-product-gallery"
+          className="v2-product-gallery"
           id="v2-product-panel"
           role="tabpanel"
           aria-labelledby={`v2-product-tab-${active.id}`}
         >
-          <img key={active.id} src={PRODUCT_IMAGES[active.id]} alt={active.alt} loading="lazy" />
+          <AmbientProductDemo key={active.id} locale={locale} variant={active.id as ProductDemoVariant} />
         </div>
       </div>
     </section>
@@ -221,10 +214,10 @@ export function V2HomePage({ locale, copy, release, releaseStatus, preferredPlat
       </section>
 
       <WorkflowSection copy={copy} />
-      <LocalModelsSection copy={copy} />
+      <LocalModelsSection locale={locale} copy={copy} />
       <SkillsSection copy={copy} />
       <AutomationSection copy={copy} />
-      <ProductSection copy={copy} />
+      <ProductSection locale={locale} copy={copy} />
       <TrustSection copy={copy} />
       <V2DownloadSection copy={copy} release={release} releaseStatus={releaseStatus} preferredPlatform={preferredPlatform} />
 
