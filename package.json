@@ -4,8 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "npm run typecheck:functions && tsc && vite build && npm run docs:build",
+    "dev": "npm run generate:marketing && vite",
+    "generate:marketing": "node scripts/generate-marketing-pages.mjs",
+    "build": "npm run generate:marketing && npm run typecheck:functions && tsc && vite build && npm run docs:build",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "typecheck:functions": "tsc --project tsconfig.functions.json",
