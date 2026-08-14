@@ -4,7 +4,7 @@
 
 以 DeepSeek 为例，你可以在[DeepSeek 开放平台](https://platform.deepseek.com/api_keys)申请 API Key。创建后请立即复制并妥善保存，API Key 通常只会在创建时完整显示。
 
-![DeepSeek API Key 页面](/images/guide/model/deepseek-api-key.png)
+![DeepSeek API Key 页面](../../assets/guide/model/deepseek-api-key.png)
 
 配置完成后，先用一个简单任务确认模型可以正常响应，再开始处理复杂任务。
 

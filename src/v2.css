@@ -67,12 +67,11 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 .v2-hero-actions .v2-button { min-height: 52px; min-width: 152px; font-size: 15px; }
 .v2-hero-actions .v2-button-secondary { border-color: var(--v2-blue); color: #fff; background: var(--v2-blue); }
 .v2-hero-actions .v2-button-secondary:hover { border-color: var(--v2-blue-deep); background: var(--v2-blue-deep); }
-.v2-source-link, .v2-real-product-link, .v2-text-action { display: inline-flex; align-items: center; gap: 6px; color: var(--v2-blue-deep); font-size: 14px; font-weight: 600; }
+.v2-source-link, .v2-text-action { display: inline-flex; align-items: center; gap: 6px; color: var(--v2-blue-deep); font-size: 14px; font-weight: 600; }
 .v2-source-link { margin-top: 22px; }
-.v2-source-link svg, .v2-real-product-link svg, .v2-text-action svg { width: 16px; height: 16px; transition: transform 160ms ease; }
-.v2-source-link:hover svg, .v2-real-product-link:hover svg, .v2-text-action:hover svg { transform: translate(2px, -1px); }
+.v2-source-link svg, .v2-text-action svg { width: 16px; height: 16px; transition: transform 160ms ease; }
+.v2-source-link:hover svg, .v2-text-action:hover svg { transform: translate(2px, -1px); }
 .v2-hero-demo { min-width: 0; }
-.v2-real-product-link { margin-top: 13px; margin-left: 2px; color: #586174; font-weight: 500; }
 
 .v2-demo-frame { height: 570px; display: grid; grid-template-columns: 21.5% 1fr; grid-template-rows: minmax(0, 1fr) 34px; overflow: hidden; border: 1px solid #d8dadd; border-radius: 14px; background: #fff; box-shadow: 0 12px 36px rgb(18 23 36 / .10); color: var(--v2-app-text); font-size: 12px; }
 .v2-demo-sidebar { position: relative; grid-row: 1; padding: 14px 12px 42px; border-right: 1px solid var(--v2-app-line); background: var(--v2-app-raised); }

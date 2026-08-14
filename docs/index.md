@@ -24,16 +24,16 @@ features:
 
 ## 从这里开始
 
-如果你是第一次使用知远智能体，可以先阅读[快速开始](/guide/quick-start)，然后了解[模型配置](/guide/model)和[工作页面](/guide/work-page)。
+如果你是第一次使用知远智能体，可以先阅读[快速开始](./guide/quick-start.md)，然后了解[模型配置](./guide/model.md)和[工作页面](./guide/work-page.md)。
 
 ## 实战指南
 
-- [搜索与研究](/capabilities/research)
-- [写作、改写与翻译](/capabilities/writing)
-- [文档与办公文件](/capabilities/documents)
-- [数据分析](/capabilities/data)
-- [邮件与会议](/capabilities/communication)
-- [营销与内容](/capabilities/marketing)
-- [编程与技术任务](/capabilities/coding)
+- [搜索与研究](./capabilities/research.md)
+- [写作、改写与翻译](./capabilities/writing.md)
+- [文档与办公文件](./capabilities/documents.md)
+- [数据分析](./capabilities/data.md)
+- [邮件与会议](./capabilities/communication.md)
+- [营销与内容](./capabilities/marketing.md)
+- [编程与技术任务](./capabilities/coding.md)
 
-如果你遇到了问题，可以先查看[常见问题](/faq/)。
+如果你遇到了问题，可以先查看[常见问题](./faq/index.md)。

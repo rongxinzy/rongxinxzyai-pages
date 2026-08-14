@@ -216,7 +216,6 @@ export function V2HomePage({ locale, copy, release, releaseStatus, preferredPlat
           </div>
           <div className="v2-hero-demo">
             <HeroDemo copy={copy} />
-            <a className="v2-real-product-link" href="#product">{copy.actions.viewProduct}<ArrowIcon /></a>
           </div>
         </div>
       </section>

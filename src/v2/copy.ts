@@ -22,7 +22,6 @@ export type V2Copy = {
     download: string;
     source: string;
     replay: string;
-    viewProduct: string;
     learnEnterprise: string;
     contactEnterprise: string;
   };
@@ -162,7 +161,6 @@ const ZH_COPY: V2Copy = {
     download: "下载知远",
     source: "查看源码",
     replay: "重新演示",
-    viewProduct: "查看真实产品界面",
     learnEnterprise: "了解企业版",
     contactEnterprise: "联系企业团队",
   },
@@ -356,7 +354,6 @@ const EN_COPY: V2Copy = {
     download: "Download ZhiYuan",
     source: "View source",
     replay: "Replay",
-    viewProduct: "View the real product interface",
     learnEnterprise: "Explore Enterprise",
     contactEnterprise: "Contact enterprise team",
   },

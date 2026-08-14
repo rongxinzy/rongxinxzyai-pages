@@ -4,10 +4,10 @@
 
 ## 建议阅读顺序
 
-1. 阅读[知远是什么](/guide/what-is-zhiyuan)，了解基本概念。
-2. 按照[快速开始](/guide/quick-start)准备环境。
-3. 完成[模型配置](/guide/model)。
-4. 创建一个[工作页面](/guide/first-work-page)，开始执行任务。
+1. 阅读[知远是什么](./what-is-zhiyuan.md)，了解基本概念。
+2. 按照[快速开始](./quick-start.md)准备环境。
+3. 完成[模型配置](./model.md)。
+4. 创建一个[工作页面](./first-work-page.md)，开始执行任务。
 
 ## 你可以先做什么
 
