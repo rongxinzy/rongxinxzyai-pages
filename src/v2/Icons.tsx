@@ -34,6 +34,51 @@ export function CheckIcon(props: IconProps) {
   );
 }
 
+export function ActivityIcon(props: IconProps) {
+  return (
+    <IconShell {...props}>
+      <path d="M3 12h4l2.2-6 4 12 2.2-6H21" />
+    </IconShell>
+  );
+}
+
+export function ChartIcon(props: IconProps) {
+  return (
+    <IconShell {...props}>
+      <path d="M4 19V5M4 19h16" />
+      <path d="m7 15 3-3 3 2 5-6" />
+    </IconShell>
+  );
+}
+
+export function GridIcon(props: IconProps) {
+  return (
+    <IconShell {...props}>
+      <rect x="3" y="3" width="7" height="7" rx="1" />
+      <rect x="14" y="3" width="7" height="7" rx="1" />
+      <rect x="3" y="14" width="7" height="7" rx="1" />
+      <rect x="14" y="14" width="7" height="7" rx="1" />
+    </IconShell>
+  );
+}
+
+export function PackageIcon(props: IconProps) {
+  return (
+    <IconShell {...props}>
+      <path d="m4 7 8-4 8 4-8 4zM4 7v10l8 4 8-4V7M12 11v10" />
+    </IconShell>
+  );
+}
+
+export function TableIcon(props: IconProps) {
+  return (
+    <IconShell {...props}>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M3 9h18M9 9v11M15 9v11" />
+    </IconShell>
+  );
+}
+
 export function ChevronDownIcon(props: IconProps) {
   return (
     <IconShell {...props}>

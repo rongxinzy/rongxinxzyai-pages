@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type KeyboardEvent } from "react";
 import type { V2Copy } from "./copy";
 import { GITHUB_URL } from "./copy";
 import type { V2Locale, V2Release, V2ReleaseStatus, V2Platform } from "./types";
@@ -126,6 +126,22 @@ function AutomationSection({ copy }: { copy: V2Copy }) {
 function ProductSection({ locale, copy }: { locale: V2Locale; copy: V2Copy }) {
   const [activeTab, setActiveTab] = useState<(typeof copy.home.productTabs)[number]["id"]>("workspace");
   const active = copy.home.productTabs.find(tab => tab.id === activeTab) ?? copy.home.productTabs[0];
+  const selectTabFromKeyboard = (event: KeyboardEvent<HTMLButtonElement>) => {
+    const tabs = copy.home.productTabs;
+    const currentIndex = tabs.findIndex(tab => tab.id === activeTab);
+    let nextIndex = currentIndex;
+
+    if (event.key === "ArrowRight") nextIndex = (currentIndex + 1) % tabs.length;
+    else if (event.key === "ArrowLeft") nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    else if (event.key === "Home") nextIndex = 0;
+    else if (event.key === "End") nextIndex = tabs.length - 1;
+    else return;
+
+    event.preventDefault();
+    const nextTab = tabs[nextIndex];
+    setActiveTab(nextTab.id);
+    window.requestAnimationFrame(() => document.getElementById(`v2-product-tab-${nextTab.id}`)?.focus());
+  };
 
   return (
     <section className="v2-section v2-product" id="product" aria-labelledby="v2-product-title">
@@ -144,7 +160,9 @@ function ProductSection({ locale, copy }: { locale: V2Locale; copy: V2Copy }) {
               id={`v2-product-tab-${tab.id}`}
               aria-selected={activeTab === tab.id}
               aria-controls="v2-product-panel"
+              tabIndex={activeTab === tab.id ? 0 : -1}
               onClick={() => setActiveTab(tab.id)}
+              onKeyDown={selectTabFromKeyboard}
             >
               {tab.label}
             </button>

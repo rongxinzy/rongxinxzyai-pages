@@ -3,6 +3,7 @@ import type { V2Locale, V2Platform } from "./types";
 const GITHUB_URL = "https://github.com/rongxinzy/RongxinAI";
 
 export type V2Copy = {
+  locale: V2Locale;
   localeName: string;
   languageSwitch: string;
   navigation: {
@@ -18,7 +19,6 @@ export type V2Copy = {
     github: string;
   };
   actions: {
-    tryDemo: string;
     download: string;
     source: string;
     replay: string;
@@ -142,6 +142,7 @@ export type V2Copy = {
 };
 
 const ZH_COPY: V2Copy = {
+  locale: "zh-CN",
   localeName: "中文",
   languageSwitch: "EN",
   navigation: {
@@ -157,7 +158,6 @@ const ZH_COPY: V2Copy = {
     github: "GitHub",
   },
   actions: {
-    tryDemo: "体验一次",
     download: "下载知远",
     source: "查看源码",
     replay: "重新演示",
@@ -244,7 +244,7 @@ const ZH_COPY: V2Copy = {
     artifactMeta: "Markdown · 12 KB",
     openArtifact: "打开产物",
     denialResult: "工具请求已拒绝。任务和已读取的材料仍保留在当前工作区。",
-    model: "DeepSeek V4 Pro",
+    model: "本地 GGUF 模型",
     placeholder: "分配一个任务或提问任何问题",
     permissions: "请求权限",
     milestones: {
@@ -335,6 +335,7 @@ const ZH_COPY: V2Copy = {
 };
 
 const EN_COPY: V2Copy = {
+  locale: "en",
   localeName: "EN",
   languageSwitch: "中文",
   navigation: {
@@ -350,7 +351,6 @@ const EN_COPY: V2Copy = {
     github: "GitHub",
   },
   actions: {
-    tryDemo: "Try the demo",
     download: "Download ZhiYuan",
     source: "View source",
     replay: "Replay",
@@ -440,7 +440,7 @@ const EN_COPY: V2Copy = {
     artifactMeta: "Markdown · 12 KB",
     openArtifact: "Open artifact",
     denialResult: "The tool request was denied. The task and material already read remain in this workspace.",
-    model: "DeepSeek V4 Pro",
+    model: "Local GGUF model",
     placeholder: "Assign a task or ask a question",
     permissions: "Ask permission",
     milestones: {

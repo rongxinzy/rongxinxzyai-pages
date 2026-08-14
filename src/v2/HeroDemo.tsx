@@ -1,273 +1,195 @@
-import { useCallback, useEffect, useState } from "react";
 import type { V2Copy } from "./copy";
-import type { V2DemoState } from "./types";
+import { DEMO_FIXTURES } from "./demoFixtures";
+import {
+  DemoComposer,
+  DemoDisclosure,
+  DemoFileChip,
+  DemoMiniChart,
+  DemoSidebar,
+  DemoStepRail,
+  DemoTaskBanner,
+  DemoTopbar,
+  getStepStates,
+  heroFixtureFromCopy,
+  toolIcon,
+} from "./DemoPrimitives";
 import {
   CheckIcon,
-  ChevronDownIcon,
-  ClockIcon,
   CopyIcon,
   FileIcon,
-  FolderIcon,
-  PlusIcon,
-  SearchIcon,
-  SendIcon,
-  SettingsIcon,
+  MoreIcon,
   ShieldIcon,
-  SparkIcon,
   TerminalIcon,
-  WindowIcon,
 } from "./Icons";
+import type { V2DemoState } from "./types";
+import { useDemoTimeline } from "./useDemoTimeline";
 
 type HeroDemoProps = {
   copy: V2Copy;
-  onStateChange?: (state: V2DemoState) => void;
 };
 
-function useReducedMotion() {
-  const [reduced, setReduced] = useState(() =>
-    typeof window === "undefined" ? false : window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-  );
-
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduced(media.matches);
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
-
-  return reduced;
-}
-
-function stateProgress(state: V2DemoState) {
-  switch (state) {
-    case "idle":
-    case "typing":
-      return 0;
-    case "planning":
-      return 2;
-    case "approval":
-      return 2;
-    case "working":
-      return 3;
-    case "complete":
-      return 4;
-  }
-}
-
-function DemoSidebar({ copy }: Pick<HeroDemoProps, "copy">) {
-  const labels = copy.demo.sidebar;
-  return (
-    <aside className="v2-demo-sidebar" aria-hidden="true">
-      <div className="v2-demo-brand">
-        <img src="/zhiyuan-logo.svg" alt="" />
-        <WindowIcon />
-      </div>
-      <div className="v2-demo-mode">
-        <span className="is-selected">{labels.work}</span>
-        <span>{labels.chat}</span>
-      </div>
-      <div className="v2-demo-nav-list">
-        <span><SparkIcon />{labels.newTask}</span>
-        <span><SettingsIcon />{labels.local}</span>
-        <span><ClockIcon />{labels.automation}</span>
-        <span><SparkIcon />{labels.experts}</span>
-        <span className="v2-demo-nav-gap"><SearchIcon />{labels.search}</span>
-      </div>
-      <p className="v2-demo-sidebar-label">{labels.project}</p>
-      <span className="v2-demo-project"><FolderIcon />project</span>
-      <p className="v2-demo-sidebar-label">{labels.conversation}</p>
-      <span className="v2-demo-conversation is-selected">{copy.demo.title}</span>
-      <span className="v2-demo-settings"><SettingsIcon />{labels.settings}</span>
-    </aside>
-  );
-}
+const HERO_DURATIONS = [2400, 2600, 2300, 3600] as const;
+const HERO_STATES: V2DemoState[] = ["planning", "approval", "working", "complete"];
 
 function PermissionCard({ copy }: Pick<HeroDemoProps, "copy">) {
   return (
-    <section className="v2-permission-card" aria-label={copy.demo.permissionAnnouncement}>
-      <div className="v2-permission-tool"><span><TerminalIcon /></span>{copy.demo.tool}</div>
-      <div className="v2-permission-command">
+    <section className="v2-command-permission" aria-label={copy.demo.permissionAnnouncement}>
+      <div className="v2-command-permission-head">
+        <span><TerminalIcon /></span>
+        <div><strong>{copy.demo.permissionAnnouncement}</strong><small>{copy.demo.tool}</small></div>
+        <em><ShieldIcon /></em>
+      </div>
+      <div className="v2-command-permission-code">
         <code>{copy.demo.command}</code>
         <CopyIcon />
       </div>
-      <div className="v2-permission-actions">
-        <span className="v2-demo-button v2-demo-button-ghost">
-          {copy.demo.deny}
-        </span>
-        <span className="v2-demo-button v2-demo-button-dark is-preview-active">
-          {copy.demo.approve}
-        </span>
+      <div className="v2-command-permission-actions" aria-hidden="true">
+        <span>{copy.demo.deny}</span>
+        <span className="is-active">{copy.demo.approve}</span>
       </div>
     </section>
   );
 }
 
-export function HeroDemo({ copy, onStateChange }: HeroDemoProps) {
-  const [state, setState] = useState<V2DemoState>("idle");
-  const [typedLength, setTypedLength] = useState(0);
-  const reducedMotion = useReducedMotion();
-  const progress = stateProgress(state);
+function HeroWorkPanel({ phase, copy }: { phase: number; copy: V2Copy }) {
+  const fixture = DEMO_FIXTURES[copy.locale].workspace;
 
-  const transition = useCallback((next: V2DemoState) => {
-    setState(next);
-    onStateChange?.(next);
-  }, [onStateChange]);
+  if (phase === 1) return <PermissionCard copy={copy} />;
 
-  const start = useCallback(() => {
-    setTypedLength(0);
-    transition(reducedMotion ? "complete" : "typing");
-  }, [reducedMotion, transition]);
-
-  const replay = useCallback(() => {
-    setTypedLength(0);
-    transition("idle");
-  }, [transition]);
-
-  useEffect(() => {
-    if (state !== "idle") return;
-    const timer = window.setTimeout(start, 700);
-    return () => window.clearTimeout(timer);
-  }, [start, state]);
-
-  useEffect(() => {
-    if (state !== "typing") return;
-    if (typedLength >= copy.demo.sampleTask.length) {
-      const timer = window.setTimeout(() => transition("planning"), 360);
-      return () => window.clearTimeout(timer);
-    }
-    const timer = window.setTimeout(
-      () => setTypedLength(length => Math.min(length + 1, copy.demo.sampleTask.length)),
-      24,
+  if (phase === 2) {
+    return (
+      <section className="v2-command-work-panel is-working">
+        <div className="v2-command-work-head">
+          <span><TerminalIcon /></span>
+          <div><strong>{copy.demo.working}</strong><small>{copy.demo.command}</small></div>
+          <i />
+        </div>
+        <div className="v2-command-live-row"><span /><b>{fixture.steps[2].detail}</b><em /></div>
+        <div className="v2-command-live-row"><span /><b>{fixture.steps[3].detail}</b><em /></div>
+      </section>
     );
-    return () => window.clearTimeout(timer);
-  }, [copy.demo.sampleTask.length, state, transition, typedLength]);
+  }
 
-  useEffect(() => {
-    if (state !== "planning") return;
-    const timer = window.setTimeout(() => transition("approval"), 2200);
-    return () => window.clearTimeout(timer);
-  }, [state, transition]);
-
-  useEffect(() => {
-    if (state !== "approval") return;
-    const timer = window.setTimeout(() => transition("working"), 1600);
-    return () => window.clearTimeout(timer);
-  }, [state, transition]);
-
-  useEffect(() => {
-    if (state !== "working") return;
-    const timer = window.setTimeout(() => transition("complete"), 1900);
-    return () => window.clearTimeout(timer);
-  }, [state, transition]);
-
-  useEffect(() => {
-    if (state !== "complete" || reducedMotion) return;
-    const timer = window.setTimeout(replay, 3600);
-    return () => window.clearTimeout(timer);
-  }, [reducedMotion, replay, state]);
-
-  const announcement =
-    state === "planning"
-      ? copy.demo.milestones.planning
-      : state === "approval"
-        ? copy.demo.milestones.approval
-        : state === "complete"
-          ? copy.demo.milestones.complete
-          : "";
-
-  const topStatus =
-    state === "idle" || state === "typing"
-      ? copy.demo.waiting
-      : state === "complete"
-        ? copy.demo.completed
-        : copy.demo.inProgress;
+  if (phase === 3) {
+    return (
+      <article className="v2-command-artifact-card is-complete">
+        <header>
+          <span><FileIcon /></span>
+          <div><strong>{copy.demo.artifact}</strong><small>{copy.demo.artifactMeta}</small></div>
+          <CheckIcon />
+        </header>
+        <div className="v2-command-artifact-body">
+          <div>
+            <b>{fixture.summaryTitle}</b>
+            <p>{copy.demo.result}</p>
+          </div>
+          <DemoMiniChart />
+        </div>
+        <footer><span>{copy.demo.confirmationCount}</span><MoreIcon /></footer>
+      </article>
+    );
+  }
 
   return (
-    <div className={`v2-demo-frame is-${state}`} data-state={state}>
-      <p className="v2-sr-only" aria-live="polite" aria-atomic="true">{announcement}</p>
-      <DemoSidebar copy={copy} />
-      <div className="v2-demo-main">
-        <header className="v2-demo-topbar">
-          <WindowIcon />
-          <strong>{copy.demo.title}</strong>
-          <span className={state === "complete" ? "is-complete" : ""}>
-            {state === "complete" ? <i /> : null}{topStatus}
-          </span>
-          <span className="v2-demo-window-controls" aria-hidden="true"><i /><b /><em>×</em></span>
-        </header>
-
-        <div className="v2-demo-conversation-rail">
-          {state === "idle" ? (
-            <div className="v2-demo-empty">
-              <img src="/zhiyuan-logo.svg" alt="" />
-              <p>{copy.demo.sampleTask}</p>
-            </div>
-          ) : null}
-
-          {state !== "idle" ? (
-            <div className="v2-demo-user-message">
-              {state === "typing" ? copy.demo.sampleTask.slice(0, typedLength) : copy.demo.sampleTask}
-              {state === "typing" ? <span className="v2-demo-caret" aria-hidden="true" /> : null}
-            </div>
-          ) : null}
-
-          {progress >= 2 || state === "planning" ? (
-            <div className="v2-demo-assistant">
-              <p>{copy.demo.assistantIntro}</p>
-              <ol className="v2-demo-tool-chain">
-                {copy.demo.steps.map((step, index) => {
-                  const completed = index < progress - 1 || state === "approval" || state === "complete";
-                  const current = (state === "planning" && index === 2) || (state === "working" && index === 2);
-                  return (
-                    <li key={step} className={completed ? "is-complete" : current ? "is-current" : ""}>
-                      <span>{completed ? <CheckIcon /> : current ? <i /> : null}</span>
-                      {index === 2 && state === "working" ? copy.demo.working : step}
-                    </li>
-                  );
-                })}
-              </ol>
-            </div>
-          ) : null}
-
-          {state === "approval" ? <PermissionCard copy={copy} /> : null}
-
-          {state === "working" ? <p className="v2-demo-working-note"><span />{copy.demo.added}</p> : null}
-
-          {state === "complete" ? (
-            <div className="v2-demo-result">
-              <p>{copy.demo.result}</p>
-                <article className="v2-demo-artifact">
-                  <div className="v2-demo-artifact-title">
-                    <FileIcon />
-                    <div><strong>{copy.demo.artifact}</strong><span>{copy.demo.artifactMeta}</span></div>
-                  </div>
-                  <div className="v2-demo-chart" aria-hidden="true">
-                    <svg viewBox="0 0 170 72">
-                      <path className="grid" d="M0 12h170M0 36h170M0 60h170" />
-                      <path className="line" d="m4 58 28-18 25 7 25-24 27 17 27-30 30 8" />
-                    </svg>
-                    <span>{copy.demo.confirmationCount}</span>
-                  </div>
-                </article>
-            </div>
-          ) : null}
-        </div>
-
-        <div className="v2-demo-input-wrap">
-          <div className="v2-demo-input">
-            <span>{state === "typing" ? copy.demo.sampleTask.slice(0, typedLength) : copy.demo.placeholder}</span>
-            <div>
-              <span><PlusIcon />{copy.demo.permissions}<ChevronDownIcon /></span>
-              <span className="v2-demo-model">{copy.demo.model}<ChevronDownIcon /></span>
-              <span className="v2-demo-send" aria-hidden="true"><SendIcon /></span>
-            </div>
-          </div>
-        </div>
+    <section className="v2-command-work-panel is-sources">
+      <div className="v2-command-work-head">
+        <span><FileIcon /></span>
+        <div><strong>{fixture.sourcesTitle}</strong><small>{fixture.steps[0].detail}</small></div>
+        <CheckIcon />
       </div>
-      <div className="v2-demo-disclosure">
-        <ShieldIcon />
-        <span>{copy.home.demoDisclosure}</span>
+      <div className="v2-command-file-chips">
+        {fixture.sources.map(source => <DemoFileChip key={source.name} name={source.name} />)}
       </div>
+    </section>
+  );
+}
+
+function HeroInspector({ phase, copy }: { phase: number; copy: V2Copy }) {
+  const fixture = DEMO_FIXTURES[copy.locale];
+  const visibleTools = Math.min(phase + 2, fixture.workspace.toolNames.length);
+
+  return (
+    <aside className="v2-command-inspector v2-hero-inspector" aria-hidden="true">
+      <div className="v2-command-inspector-tabs">
+        <span className="is-active">{fixture.shared.context}</span>
+        <span>{fixture.shared.tools}</span>
+        <span>{fixture.shared.artifacts}</span>
+      </div>
+      <section>
+        <h3>{fixture.workspace.sourcesTitle}</h3>
+        <div className="v2-command-inspector-list">
+          {fixture.workspace.sources.map(source => (
+            <span key={source.name}><FileIcon /><b>{source.name}</b><CheckIcon /></span>
+          ))}
+        </div>
+      </section>
+      <section>
+        <h3>{fixture.workspace.toolActivity}</h3>
+        <div className="v2-command-tool-list">
+          {fixture.workspace.toolNames.map((tool, index) => {
+            const complete = index < visibleTools || phase === 3;
+            const active = index === visibleTools && phase < 3;
+            return (
+              <span key={tool} className={active ? "is-active" : complete ? "is-complete" : ""}>
+                <i>{toolIcon(index)}</i><b>{tool}</b><em>{complete ? <CheckIcon /> : active ? <span /> : null}</em>
+              </span>
+            );
+          })}
+        </div>
+      </section>
+      <section className="v2-command-inspector-artifact">
+        <h3>{fixture.shared.artifacts}</h3>
+        <span className={phase === 3 ? "is-selected" : ""}>
+          <FileIcon /><b>{fixture.workspace.artifactTitle}</b><small>{phase === 3 ? fixture.shared.complete : fixture.shared.pending}</small>
+        </span>
+      </section>
+    </aside>
+  );
+}
+
+export function HeroDemo({ copy }: HeroDemoProps) {
+  const fixture = DEMO_FIXTURES[copy.locale];
+  const heroCopy = heroFixtureFromCopy(copy);
+  const { rootRef, phase } = useDemoTimeline({
+    phaseCount: HERO_STATES.length,
+    durations: HERO_DURATIONS,
+  });
+  const state = HERO_STATES[phase];
+  const topStatus = state === "complete" ? copy.demo.completed : copy.demo.inProgress;
+
+  return (
+    <div
+      ref={rootRef}
+      className={`v2-demo-frame v2-command-shell is-${state}`}
+      data-phase={phase}
+      data-state={state}
+      role="img"
+      aria-label={`${fixture.aria.workspace}. ${fixture.shared.sampleDisclosure}`}
+    >
+      <DemoSidebar fixture={fixture} active="workspace" />
+      <DemoTopbar
+        title={copy.demo.title}
+        status={topStatus}
+        tone={state === "complete" ? "complete" : state === "approval" ? "permission" : "active"}
+      />
+
+      <div className="v2-command-main v2-hero-command-main">
+        <DemoTaskBanner>{copy.demo.sampleTask}</DemoTaskBanner>
+        <div className="v2-command-progress-label">
+          <strong>{fixture.workspace.toolActivity}</strong>
+          <span>{phase + 1} / {HERO_STATES.length}</span>
+        </div>
+        <DemoStepRail steps={fixture.workspace.steps} states={getStepStates(phase)} />
+        <HeroWorkPanel phase={phase} copy={copy} />
+        <DemoComposer
+          placeholder={heroCopy.placeholder}
+          model={heroCopy.model}
+          permissions={heroCopy.permissions}
+        />
+      </div>
+
+      <HeroInspector phase={phase} copy={copy} />
+      <DemoDisclosure text={copy.home.demoDisclosure} />
     </div>
   );
 }

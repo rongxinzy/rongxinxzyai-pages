@@ -1,17 +1,31 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import type { V2Locale } from "./types";
+import type { ReactNode } from "react";
+import { DEMO_FIXTURES, type DemoFixture, type DemoVariant } from "./demoFixtures";
+import {
+  DemoComposer,
+  DemoDisclosure,
+  DemoFileChip,
+  DemoMiniChart,
+  DemoSidebar,
+  DemoTaskBanner,
+  DemoTopbar,
+  toolIcon,
+} from "./DemoPrimitives";
 import {
   CheckIcon,
-  ClockIcon,
+  ChevronDownIcon,
   FileIcon,
-  FolderIcon,
+  GridIcon,
+  MoreIcon,
+  PackageIcon,
   SearchIcon,
-  SettingsIcon,
+  ShieldIcon,
   SparkIcon,
   TerminalIcon,
 } from "./Icons";
+import type { V2Locale } from "./types";
+import { useDemoTimeline } from "./useDemoTimeline";
 
-export type ProductDemoVariant = "workspace" | "models" | "skills";
+export type ProductDemoVariant = DemoVariant;
 
 type AmbientProductDemoProps = {
   locale: V2Locale;
@@ -19,212 +33,313 @@ type AmbientProductDemoProps = {
   className?: string;
 };
 
-const COPY = {
-  "zh-CN": {
-    aria: {
-      workspace: "自动演示：知远读取材料并生成项目周报",
-      models: "自动演示：知远下载并加载本地模型",
-      skills: "自动演示：知远安装并启用技能",
-    },
-    nav: ["工作", "对话", "本地推理", "自动化", "专家"],
-    project: "项目",
-    settings: "设置",
-    workspace: {
-      title: "整理项目周报",
-      task: "读取会议纪要和进度表，整理本周汇报。",
-      steps: ["读取 3 份材料", "整理项目时间线", "生成进展图表"],
-      result: "本周汇报.md",
-      meta: "Markdown · 已保存到工作区",
-      status: ["正在读取材料", "正在整理", "正在生成", "已完成"],
-    },
-    models: {
-      title: "本地模型",
-      search: "搜索 GGUF 模型",
-      models: ["Qwen3 8B", "DeepSeek R1 7B", "Llama 3.2 3B"],
-      detail: "Qwen3 8B · Q4_K_M",
-      size: "5.2 GB",
-      speed: ["准备下载", "18.6 MB/s", "21.3 MB/s", "校验文件"],
-      ready: "已就绪 · 可用于 Agent",
-    },
-    skills: {
-      title: "技能中心",
-      search: "搜索技能",
-      rows: ["网页调研", "文档整理", "项目周报", "浏览器操作"],
-      selected: "项目周报",
-      body: "读取项目材料，整理进展与待确认事项。",
-      steps: ["检查依赖", "写入技能目录", "载入工作空间"],
-      enabled: "已启用",
-    },
-  },
-  en: {
-    aria: {
-      workspace: "Automatic preview: ZhiYuan reads project files and creates a weekly update",
-      models: "Automatic preview: ZhiYuan downloads and loads a local model",
-      skills: "Automatic preview: ZhiYuan installs and enables a skill",
-    },
-    nav: ["Work", "Chat", "Local models", "Automation", "Experts"],
-    project: "Project",
-    settings: "Settings",
-    workspace: {
-      title: "Project weekly update",
-      task: "Read the meeting notes and progress sheet, then draft this week's update.",
-      steps: ["Read 3 project files", "Build the project timeline", "Generate the progress chart"],
-      result: "weekly-update.md",
-      meta: "Markdown · Saved to workspace",
-      status: ["Reading files", "Organizing", "Generating", "Complete"],
-    },
-    models: {
-      title: "Local models",
-      search: "Search GGUF models",
-      models: ["Qwen3 8B", "DeepSeek R1 7B", "Llama 3.2 3B"],
-      detail: "Qwen3 8B · Q4_K_M",
-      size: "5.2 GB",
-      speed: ["Preparing", "18.6 MB/s", "21.3 MB/s", "Verifying files"],
-      ready: "Ready · Available to Agent",
-    },
-    skills: {
-      title: "Skills",
-      search: "Search skills",
-      rows: ["Web research", "Document review", "Weekly update", "Browser control"],
-      selected: "Weekly update",
-      body: "Read project material and summarize progress and open questions.",
-      steps: ["Check dependencies", "Write skill files", "Load into workspace"],
-      enabled: "Enabled",
-    },
-  },
-} as const;
-
-function useAmbientPhase(phaseCount: number, delay = 1500) {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  const [phase, setPhase] = useState(0);
-
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
-      { rootMargin: "100px", threshold: 0.18 },
-    );
-    observer.observe(root);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!visible || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => setPhase(current => (current + 1) % phaseCount), delay);
-    return () => window.clearInterval(timer);
-  }, [delay, phaseCount, visible]);
-
-  return { rootRef, phase };
-}
+const AMBIENT_DURATIONS = [2100, 1900, 2100, 3300] as const;
 
 function DemoShell({
-  locale,
+  fixture,
   variant,
+  title,
+  status,
   phase,
   children,
-}: AmbientProductDemoProps & { phase: number; children: ReactNode }) {
-  const copy = COPY[locale];
+}: {
+  fixture: DemoFixture;
+  variant: ProductDemoVariant;
+  title: string;
+  status: string;
+  phase: number;
+  children: ReactNode;
+}) {
   return (
-    <div className={`v2-ambient-shell is-${variant}`} data-phase={phase} role="img" aria-label={copy.aria[variant]}>
-      <aside className="v2-ambient-sidebar" aria-hidden="true">
-        <div className="v2-ambient-brand"><img src="/zhiyuan-logo.svg" alt="" /></div>
-        <nav>
-          {copy.nav.map((item, index) => (
-            <span key={item} className={index === (variant === "workspace" ? 0 : variant === "models" ? 2 : 4) ? "is-active" : ""}>
-              {index === 2 ? <TerminalIcon /> : index === 3 ? <ClockIcon /> : <SparkIcon />}{item}
-            </span>
-          ))}
-        </nav>
-        <p>{copy.project}</p>
-        <span className="v2-ambient-project"><FolderIcon />project</span>
-        <span className="v2-ambient-settings"><SettingsIcon />{copy.settings}</span>
-      </aside>
-      <div className="v2-ambient-main">{children}</div>
+    <div
+      className={`v2-ambient-shell v2-command-shell is-${variant}`}
+      data-phase={phase}
+      role="img"
+      aria-label={`${fixture.aria[variant]}. ${fixture.shared.sampleDisclosure}`}
+    >
+      <DemoSidebar fixture={fixture} active={variant} />
+      <DemoTopbar title={title} status={status} tone={phase === 3 ? "complete" : "active"} />
+      {children}
+      <DemoDisclosure text={fixture.shared.sampleDisclosure} />
     </div>
   );
 }
 
-function WorkspaceDemo({ locale, phase }: { locale: V2Locale; phase: number }) {
-  const copy = COPY[locale].workspace;
+function WorkspaceDemo({ fixture, phase }: { fixture: DemoFixture; phase: number }) {
+  const copy = fixture.workspace;
+  const completeCount = phase === 3 ? copy.steps.length : Math.min(phase + 1, copy.steps.length - 1);
   return (
-    <DemoShell locale={locale} variant="workspace" phase={phase}>
-      <header className="v2-ambient-topbar"><strong>{copy.title}</strong><span className={phase === 3 ? "is-done" : ""}><i />{copy.status[phase]}</span></header>
-      <div className="v2-workspace-canvas">
-        <div className="v2-ambient-task">{copy.task}</div>
-        <div className="v2-ambient-agent-row"><span className="v2-ambient-agent-mark"><SparkIcon /></span><span className="v2-ambient-agent-loading" /></div>
-        <ol className="v2-ambient-steps">
-          {copy.steps.map((step, index) => (
-            <li key={step} className={index < phase ? "is-complete" : index === phase ? "is-running" : ""}>
-              <span>{index < phase || phase === 3 ? <CheckIcon /> : <i />}</span><strong>{step}</strong><em />
-            </li>
+    <DemoShell
+      fixture={fixture}
+      variant="workspace"
+      title={copy.title}
+      status={phase === 3 ? fixture.shared.complete : fixture.shared.running}
+      phase={phase}
+    >
+      <div className="v2-command-main v2-workspace-main">
+        <div className="v2-workspace-source-panel">
+          <header><strong>{copy.sourcesTitle}</strong><span>{copy.sources.length}</span></header>
+          {copy.sources.map(source => (
+            <div key={source.name} className="v2-workspace-source-row">
+              <span><FileIcon /></span>
+              <div><b>{source.name}</b><small>{source.kind}</small></div>
+              <CheckIcon />
+            </div>
           ))}
-        </ol>
-        <article className={`v2-ambient-artifact ${phase === 3 ? "is-visible" : ""}`}>
-          <FileIcon /><div><strong>{copy.result}</strong><span>{copy.meta}</span></div><CheckIcon />
-        </article>
+          <section className="v2-workspace-process">
+            <strong>{copy.toolActivity}</strong>
+            {copy.steps.map((step, index) => (
+              <span key={step.title} className={index < completeCount ? "is-complete" : index === completeCount ? "is-active" : ""}>
+                <i>{index < completeCount || phase === 3 ? <CheckIcon /> : null}</i>
+                <b>{step.title}</b>
+              </span>
+            ))}
+          </section>
+        </div>
+
+        <section className="v2-workspace-document">
+          <div className="v2-workspace-progress-strip">
+            {copy.steps.map((step, index) => (
+              <span key={step.title} className={index < completeCount ? "is-complete" : index === completeCount ? "is-active" : ""}>
+                <i>{index < completeCount || phase === 3 ? <CheckIcon /> : index + 1}</i>
+                <b>{step.title}</b>
+              </span>
+            ))}
+          </div>
+          <article className="v2-workspace-paper">
+            <header>
+              <div><FileIcon /><strong>{copy.documentTitle}</strong></div>
+              <span>{phase === 3 ? fixture.shared.complete : copy.openItems}</span>
+            </header>
+            <h3>{copy.summaryTitle}</h3>
+            <p>{copy.summary}</p>
+            <div className="v2-workspace-document-points">
+              {copy.steps.slice(0, 3).map((step, index) => (
+                <span key={step.title} className={index < completeCount || phase === 3 ? "is-complete" : index === completeCount ? "is-active" : ""}>
+                  <i>{index < completeCount || phase === 3 ? <CheckIcon /> : null}</i>
+                  <b>{step.title}</b>
+                  <small>{step.detail}</small>
+                </span>
+              ))}
+            </div>
+            <h3>{copy.progressTitle}</h3>
+            <DemoMiniChart active={phase >= 1} />
+            <div className="v2-workspace-open-items">
+              <strong>{copy.openItems}</strong>
+              <span /><span /><span />
+            </div>
+          </article>
+          <DemoComposer
+            placeholder={fixture.shared.inputPlaceholder}
+            model={fixture.models.selected}
+            permissions={fixture.shared.context}
+          />
+        </section>
       </div>
+
+      <aside className="v2-command-inspector v2-workspace-inspector" aria-hidden="true">
+        <div className="v2-command-inspector-tabs">
+          <span className="is-active">{fixture.shared.context}</span>
+          <span>{fixture.shared.tools}</span>
+          <span>{fixture.shared.artifacts}</span>
+        </div>
+        <section>
+          <h3>{fixture.shared.currentTask}</h3>
+          <p>{copy.task}</p>
+        </section>
+        <section>
+          <h3>{copy.toolActivity}</h3>
+          <div className="v2-command-tool-list">
+            {copy.toolNames.map((tool, index) => (
+              <span key={tool} className={index < completeCount || phase === 3 ? "is-complete" : index === completeCount ? "is-active" : ""}>
+                <i>{toolIcon(index)}</i><b>{tool}</b><em>{index < completeCount || phase === 3 ? <CheckIcon /> : null}</em>
+              </span>
+            ))}
+          </div>
+        </section>
+        <section className="v2-command-inspector-artifact">
+          <h3>{fixture.shared.artifacts}</h3>
+          <span className={phase >= 2 ? "is-selected" : ""}>
+            <FileIcon /><b>{copy.artifactTitle}</b><small>{phase === 3 ? fixture.shared.complete : fixture.shared.running}</small>
+          </span>
+        </section>
+      </aside>
     </DemoShell>
   );
 }
 
-function ModelDemo({ locale, phase }: { locale: V2Locale; phase: number }) {
-  const copy = COPY[locale].models;
-  const progress = [8, 38, 76, 100][phase];
+function ModelsDemo({ fixture, phase }: { fixture: DemoFixture; phase: number }) {
+  const copy = fixture.models;
+  const progress = [24, 61, 86, 100][phase];
+
   return (
-    <DemoShell locale={locale} variant="models" phase={phase}>
-      <header className="v2-ambient-topbar"><strong>{copy.title}</strong><span><i />{phase === 3 ? copy.ready : copy.speed[phase]}</span></header>
-      <div className="v2-model-market-canvas">
-        <div className="v2-ambient-search"><SearchIcon />{copy.search}</div>
-        <div className="v2-model-layout">
-          <div className="v2-model-list">
-            {copy.models.map((model, index) => <span key={model} className={index === 0 ? "is-active" : ""}><i>{model.slice(0, 1)}</i><strong>{model}</strong><em /></span>)}
+    <DemoShell
+      fixture={fixture}
+      variant="models"
+      title={copy.title}
+      status={phase === 3 ? copy.stages[3] : copy.stages[phase]}
+      phase={phase}
+    >
+      <div className="v2-command-main v2-models-main">
+        <div className="v2-command-view-tabs"><span className="is-active">{copy.marketplace}</span><span>{copy.installed}</span></div>
+        <div className="v2-command-search"><SearchIcon /><span>{copy.search}</span><b>{copy.format}</b><ChevronDownIcon /></div>
+        <div className="v2-models-list">
+          {copy.entries.map((entry, index) => (
+            <article key={`${entry.name}-${entry.variant}`} className={index === 0 ? "is-selected" : ""}>
+              <span className="v2-models-file"><PackageIcon /></span>
+              <div>
+                <strong>{entry.name} · {entry.variant}</strong>
+                <small>{copy.format} · {entry.variant}</small>
+                {index === 0 ? <div className="v2-models-inline-progress"><i style={{ width: `${progress}%` }} /></div> : null}
+              </div>
+              <em className={index === 0 && phase === 3 ? "is-complete" : ""}>
+                {index === 0 ? (phase === 3 ? copy.stages[3] : copy.stages[phase]) : entry.state}
+              </em>
+            </article>
+          ))}
+        </div>
+        <section className="v2-models-lifecycle" aria-hidden="true">
+          <h3>{copy.runtimeLog}</h3>
+          <div>
+            {copy.stages.map((stage, index) => (
+              <span key={stage} className={index < phase || phase === 3 ? "is-complete" : index === phase ? "is-active" : ""}>
+                <i>{index < phase || phase === 3 ? <CheckIcon /> : index + 1}</i>
+                <b>{stage}</b>
+                <small>{copy.logs[index]}</small>
+              </span>
+            ))}
           </div>
-          <section className="v2-model-detail">
-            <div className="v2-model-orbit"><span>Q</span><i /><i /><i /></div>
-            <h3>{copy.detail}</h3><p>{copy.size}</p>
-            <div className="v2-model-progress"><span style={{ width: `${progress}%` }} /></div>
-            <div className="v2-model-progress-meta"><strong>{phase === 3 ? copy.ready : `${progress}%`}</strong><span>{phase === 3 ? <CheckIcon /> : copy.speed[phase]}</span></div>
-          </section>
+        </section>
+        <div className="v2-models-mobile-status">
+          <strong>{copy.stages[phase]}</strong><span>{copy.selected} · {copy.variant}</span>
+          <div><i style={{ width: `${progress}%` }} /></div>
         </div>
       </div>
+
+      <aside className="v2-command-inspector v2-models-inspector" aria-hidden="true">
+        <header className="v2-models-detail-head">
+          <span><PackageIcon /></span>
+          <div><strong>{copy.selected}</strong><small>{copy.format} · {copy.variant}</small></div>
+          <em className={phase === 3 ? "is-complete" : ""}>{phase === 3 ? copy.agentReady : copy.stages[phase]}</em>
+        </header>
+        <div className="v2-models-tags"><span>{copy.format}</span><span>{copy.variant}</span><span>{copy.agentReady}</span></div>
+        <div className="v2-models-pipeline">
+          {copy.stages.map((stage, index) => (
+            <span key={stage} className={index < phase || phase === 3 ? "is-complete" : index === phase ? "is-active" : ""}>
+              <i>{index < phase || phase === 3 ? <CheckIcon /> : index + 1}</i><b>{stage}</b>
+            </span>
+          ))}
+        </div>
+        <section className="v2-models-config">
+          <h3>{copy.configuration}</h3>
+          <div>
+            {copy.configurationRows.map(([label, value]) => <span key={label}><small>{label}</small><b>{value}</b></span>)}
+            <span><small>{copy.toolCalling}</small><b>{copy.available}</b></span>
+          </div>
+        </section>
+        <section className="v2-models-log">
+          <h3>{copy.runtimeLog}</h3>
+          {copy.logs.map((log, index) => (
+            <span key={log} className={index <= phase ? "is-visible" : ""}><i />{log}<em>{index < phase || phase === 3 ? <CheckIcon /> : null}</em></span>
+          ))}
+        </section>
+      </aside>
     </DemoShell>
   );
 }
 
-function SkillsDemo({ locale, phase }: { locale: V2Locale; phase: number }) {
-  const copy = COPY[locale].skills;
+function SkillsDemo({ fixture, phase }: { fixture: DemoFixture; phase: number }) {
+  const copy = fixture.skills;
+  const checked = phase === 3 ? copy.checkRows.length : phase;
+
   return (
-    <DemoShell locale={locale} variant="skills" phase={phase}>
-      <header className="v2-ambient-topbar"><strong>{copy.title}</strong><span className={phase === 3 ? "is-done" : ""}><i />{phase === 3 ? copy.enabled : copy.steps[Math.min(phase, 2)]}</span></header>
-      <div className="v2-skills-canvas">
-        <div className="v2-ambient-search"><SearchIcon />{copy.search}</div>
-        <div className="v2-skills-layout-inner">
-          <div className="v2-skill-library">
-            {copy.rows.map((skill, index) => <span key={skill} className={index === 2 ? "is-active" : ""}><SparkIcon /><strong>{skill}</strong><i className={index === 2 && phase === 3 ? "is-on" : ""} /></span>)}
+    <DemoShell
+      fixture={fixture}
+      variant="skills"
+      title={copy.title}
+      status={phase === 3 ? copy.enabled : copy.checkRows[Math.min(phase, copy.checkRows.length - 1)]}
+      phase={phase}
+    >
+      <div className="v2-command-main v2-skills-main">
+        <section className="v2-skills-library">
+          <div className="v2-command-search"><SearchIcon /><span>{copy.search}</span></div>
+          <header><strong>{copy.library}</strong><GridIcon /></header>
+          {copy.entries.map((entry, index) => (
+            <article key={entry.name} className={index === 2 ? "is-selected" : ""}>
+              <span><SparkIcon /></span>
+              <div><strong>{entry.name}</strong><small>{entry.detail}</small></div>
+              <i className={index === 2 && phase === 3 ? "is-on" : ""} />
+            </article>
+          ))}
+        </section>
+        <section className="v2-skill-workspace">
+          <header>
+            <span><SparkIcon /></span>
+            <div><strong>{copy.selected}</strong><small>{copy.description}</small></div>
+            <em className={phase === 3 ? "is-complete" : ""}>{phase === 3 ? copy.enabled : fixture.shared.running}</em>
+            <MoreIcon />
+          </header>
+          <nav><span className="is-active">{copy.workflow}</span><span>{copy.capabilities}</span><span>{copy.boundary}</span></nav>
+          <h3>{copy.workflow}</h3>
+          <div className="v2-skill-flow">
+            {copy.workflowSteps.map((step, index) => (
+              <span key={step} className={index <= phase ? "is-complete" : ""}>
+                <i>{index <= phase ? <CheckIcon /> : index + 1}</i><b>{step}</b>
+              </span>
+            ))}
           </div>
-          <section className="v2-skill-detail">
-            <div className="v2-skill-mark"><SparkIcon /><i /></div>
-            <h3>{copy.selected}</h3><p>{copy.body}</p>
-            <ol>
-              {copy.steps.map((step, index) => <li key={step} className={index < phase || phase === 3 ? "is-complete" : index === phase ? "is-running" : ""}><span>{index < phase || phase === 3 ? <CheckIcon /> : <i />}</span>{step}</li>)}
-            </ol>
-            <div className={`v2-skill-enable ${phase === 3 ? "is-enabled" : ""}`}><span /><strong>{phase === 3 ? copy.enabled : "…"}</strong></div>
+          <div className="v2-skill-detail-grid">
+            <section><h3>{copy.capabilities}</h3>{copy.capabilityRows.map(row => <span key={row}><CheckIcon />{row}</span>)}</section>
+            <section><h3>{copy.checks}</h3>{copy.checkRows.map((row, index) => <span key={row} className={index < checked ? "is-complete" : index === checked ? "is-active" : ""}><i>{index < checked || phase === 3 ? <CheckIcon /> : null}</i>{row}</span>)}</section>
+          </div>
+          <section className="v2-skill-activity" aria-hidden="true">
+            <h3>{copy.boundary}</h3>
+            <div>
+              {copy.boundaryRows.map((row, index) => (
+                <span key={row} className={index < phase || phase === 3 ? "is-complete" : index === phase ? "is-active" : ""}>
+                  <ShieldIcon /><b>{row}</b>
+                  <em>{index < phase || phase === 3 ? <CheckIcon /> : index === phase ? fixture.shared.running : fixture.shared.pending}</em>
+                </span>
+              ))}
+            </div>
           </section>
-        </div>
+          <div className="v2-skill-mobile-checks">
+            {copy.checkRows.map((row, index) => <span key={row} className={index < checked || phase === 3 ? "is-complete" : ""}><CheckIcon />{row}</span>)}
+          </div>
+        </section>
       </div>
+
+      <aside className="v2-command-inspector v2-skills-inspector" aria-hidden="true">
+        <section className="v2-skill-status-card">
+          <h3>{copy.status}</h3>
+          <strong><i />{phase === 3 ? copy.enabled : fixture.shared.running}</strong>
+          <span><TerminalIcon />{copy.selected}</span>
+        </section>
+        <section>
+          <h3>{copy.files}</h3>
+          <div className="v2-command-inspector-list">
+            {copy.fileRows.map(file => <span key={file}><FileIcon /><b>{file}</b>{phase >= 1 ? <CheckIcon /> : null}</span>)}
+          </div>
+        </section>
+        <section>
+          <h3>{copy.boundary}</h3>
+          <div className="v2-skill-boundary-list">
+            {copy.boundaryRows.map((row, index) => <span key={row}><ShieldIcon /><b>{row}</b><em className={index === 1 ? "is-permission" : ""}>{index === 1 ? fixture.shared.pending : <CheckIcon />}</em></span>)}
+          </div>
+        </section>
+      </aside>
     </DemoShell>
   );
 }
 
 export function AmbientProductDemo({ locale, variant, className = "" }: AmbientProductDemoProps) {
-  const { rootRef, phase } = useAmbientPhase(4, variant === "models" ? 1350 : 1550);
+  const fixture = DEMO_FIXTURES[locale];
+  const { rootRef, phase } = useDemoTimeline({ phaseCount: 4, durations: AMBIENT_DURATIONS });
   return (
     <div ref={rootRef} className={`v2-ambient-demo ${className}`}>
-      {variant === "workspace" ? <WorkspaceDemo locale={locale} phase={phase} /> : null}
-      {variant === "models" ? <ModelDemo locale={locale} phase={phase} /> : null}
-      {variant === "skills" ? <SkillsDemo locale={locale} phase={phase} /> : null}
+      {variant === "workspace" ? <WorkspaceDemo fixture={fixture} phase={phase} /> : null}
+      {variant === "models" ? <ModelsDemo fixture={fixture} phase={phase} /> : null}
+      {variant === "skills" ? <SkillsDemo fixture={fixture} phase={phase} /> : null}
     </div>
   );
 }
