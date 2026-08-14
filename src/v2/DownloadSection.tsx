@@ -1,6 +1,6 @@
 import type { V2Copy } from "./copy";
 import type { V2Platform, V2Release, V2ReleaseArtifact, V2ReleaseStatus } from "./types";
-import { AppleIcon, DownloadIcon, LinuxIcon } from "./Icons";
+import { AppleIcon, CheckIcon, DownloadIcon, LinuxIcon } from "./Icons";
 
 type DownloadProps = {
   copy: V2Copy;
@@ -33,22 +33,24 @@ function PlatformRow({
   status: V2ReleaseStatus;
 }) {
   return (
-    <div className={`v2-platform-row is-${platform}`}>
-      <PlatformMark platform={platform} />
-      <div className="v2-platform-name">
+    <div className={`v2-installer-row is-${platform}`}>
+      <div className="v2-installer-platform"><PlatformMark platform={platform} /></div>
+      <div className="v2-installer-name">
         <strong>{copy.release.platformLabels[platform]}</strong>
         <span>{copy.release.platformDetails[platform]}</span>
       </div>
-      <div className="v2-platform-meta">
-        <span>{artifact && version ? version : status === "loading" ? "—" : copy.release.unavailable}</span>
-        <span>{artifact ? formatSize(artifact.size) : "—"}</span>
-      </div>
       {artifact ? (
-        <a href={artifact.url} className="v2-platform-download">
+        <div className="v2-installer-meta">
+          <span>{version}</span>
+          <span>{formatSize(artifact.size)}</span>
+        </div>
+      ) : null}
+      {artifact ? (
+        <a href={artifact.url} className="v2-installer-action">
           {copy.release.downloadLabels[platform]}<DownloadIcon />
         </a>
       ) : (
-        <span className="v2-platform-unavailable">
+        <span className="v2-installer-unavailable">
           {platform === "linux" || platform === "linuxAppImage" ? copy.release.linuxUnavailable : copy.release.unavailable}
         </span>
       )}
@@ -79,13 +81,10 @@ export function V2DownloadSection({ copy, release, releaseStatus }: DownloadProp
           <span className="v2-section-number" aria-hidden="true">07</span>
           <h2 id="v2-download-title">{copy.home.downloadTitle}</h2>
           <p>{copy.home.downloadBody}</p>
-          <p id="v2-release-status" className="v2-release-status" aria-live="polite">
-            {release
-              ? `${copy.release.versionLabel} · ${release.version}`
-              : releaseStatus === "loading"
-                ? copy.release.loading
-                : copy.release.unavailable}
-          </p>
+          <div className="v2-stable-release" id="v2-release-status" aria-live="polite">
+            <span>{copy.release.versionLabel}</span>
+            <strong>{release ? release.version : releaseStatus === "loading" ? "—" : copy.release.unavailable}</strong>
+          </div>
         </div>
         <div className="v2-platform-list">
           <PlatformRow platform="windows" artifact={release?.artifacts.windows} version={release?.version} copy={copy} status={releaseStatus} />
@@ -101,8 +100,8 @@ export function V2DownloadSection({ copy, release, releaseStatus }: DownloadProp
         </div>
       </div>
       <div className="v2-container v2-download-notes">
-        <p>{copy.home.windowsNote}</p>
-        <p>{copy.home.signingNote}</p>
+        <p><span aria-hidden="true"><CheckIcon /></span>{copy.home.windowsNote}</p>
+        <p><span className="v2-hash-mark" aria-hidden="true">#</span>{copy.home.signingNote}</p>
       </div>
     </section>
   );
