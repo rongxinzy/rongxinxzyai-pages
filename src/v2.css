@@ -167,8 +167,8 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 .v2-ambient-demo { min-width: 0; }
 .v2-ambient-shell { width: 100%; aspect-ratio: 16 / 9.6; display: grid; grid-template-columns: 18.5% 1fr; overflow: hidden; border: 1px solid #d9dadd; border-radius: 12px; color: var(--v2-app-text); background: #fff; box-shadow: 0 16px 42px rgb(18 23 36 / .09); font-size: clamp(9px, .78vw, 12px); }
 .v2-ambient-sidebar { position: relative; min-width: 0; padding: 14px 11px 40px; border-right: 1px solid var(--v2-app-line); background: #f4f4f3; }
-.v2-ambient-brand { height: 28px; display: flex; align-items: center; }
-.v2-ambient-brand img { width: 64px; height: 18px; object-fit: contain; object-position: left center; }
+.v2-ambient-brand { height: 28px; display: flex; align-items: flex-start; }
+.v2-ambient-brand img { width: auto; height: 18px; flex: none; }
 .v2-ambient-sidebar nav { margin-top: 12px; display: grid; gap: 3px; }
 .v2-ambient-sidebar nav span, .v2-ambient-project, .v2-ambient-settings { min-height: 28px; padding: 0 8px; display: flex; align-items: center; gap: 7px; overflow: hidden; border-radius: 7px; white-space: nowrap; color: #6f706f; }
 .v2-ambient-sidebar nav span.is-active { color: #343638; background: #e6e6e4; font-weight: 600; }
