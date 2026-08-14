@@ -33,7 +33,10 @@ export function V2Header({ locale, page, copy }: ChromeProps) {
     <header className="v2-header">
       <div className="v2-header-inner">
         <a className="v2-brand" href={home} aria-label="ZhiYuan">
-          <img src="/zhiyuan-logo.svg" alt="ZhiYuan" />
+          <img
+            src={page === "home" ? "/zhiyuan-logo-on-dark.svg" : "/zhiyuan-logo.svg"}
+            alt="ZhiYuan"
+          />
         </a>
         <nav className={menuOpen ? "is-open" : ""} aria-label={copy.navigation.aria}>
           <a href={`${home}#product`} onClick={closeMenu}>{copy.navigation.product}</a>

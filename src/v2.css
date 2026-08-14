@@ -63,9 +63,6 @@ svg { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: 
 .v2-site[data-page="home"] .v2-header nav a:hover, .v2-site[data-page="home"] .v2-language:hover { color: #fff; }
 .v2-site[data-page="home"] .v2-header-github { color: #f5f7fb; }
 .v2-site[data-page="home"] .v2-header-github:hover { background: rgb(255 255 255 / .08); }
-.v2-site[data-page="home"] .v2-brand { position: relative; }
-.v2-site[data-page="home"] .v2-header .v2-brand img { filter: brightness(0) invert(1); }
-.v2-site[data-page="home"] .v2-header .v2-brand::after { position: absolute; top: 0; right: 1px; width: 7px; height: 7px; content: ""; border-radius: 50%; background: #397bff; }
 .v2-site[data-page="home"] .v2-menu-button { color: #fff; }
 
 .v2-hero { position: relative; isolation: isolate; overflow: hidden; border-bottom: 0; color: #fff; background: #050812; }
