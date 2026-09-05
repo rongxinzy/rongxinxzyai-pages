@@ -27,15 +27,7 @@ export function Downloads({
     { id: "windows", label: "Windows", detail: "x64" },
     { id: "macos", label: "macOS", detail: "Apple silicon" },
     { id: "linux", label: "Linux", detail: "Ubuntu · x64" },
-    ...(release?.artifacts.linuxAppImage
-      ? [
-          {
-            id: "linuxAppImage" as const,
-            label: "Linux",
-            detail: "AppImage",
-          },
-        ]
-      : []),
+    { id: "linuxAppImage", label: "Linux", detail: "AppImage" },
   ];
   return (
     <section
@@ -61,7 +53,7 @@ export function Downloads({
                 : copy.unavailable}
           </p>
         </div>
-        <div className="download-rows">
+        <div className="download-rows" aria-busy={status === "loading"}>
           {platforms.map((platform) => {
             const artifact = release?.artifacts[platform.id];
             return (
@@ -77,9 +69,11 @@ export function Downloads({
                   <h3>{platform.label}</h3>
                   <span>
                     {platform.detail}
-                    {artifact
-                      ? ` · ${(artifact.size / 1_000_000).toFixed(0)} MB`
-                      : ""}
+                    <span className="platform-size">
+                      {artifact
+                        ? `${(artifact.size / 1_000_000).toFixed(0)} MB`
+                        : ""}
+                    </span>
                   </span>
                 </div>
                 {artifact ? (
@@ -92,7 +86,9 @@ export function Downloads({
                     <Arrow />
                   </a>
                 ) : status === "loading" ? (
-                  <span className="download-pending">—</span>
+                  <span className="download-pending" aria-hidden="true">
+                    —
+                  </span>
                 ) : (
                   <a
                     className="text-link download-fallback"

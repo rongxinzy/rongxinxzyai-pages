@@ -1,3 +1,4 @@
+import { ControlIcon } from "./Icon";
 import type { SiteLocale } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
 import { GITHUB } from "./copy";
@@ -55,6 +56,9 @@ export function Inference({
               loading="lazy"
               alt={copy.inferenceCaption}
             />
+            <span className="inference-expand">
+              <ControlIcon name="expand" />
+            </span>
           </a>
           <figcaption>{copy.inferenceCaption}</figcaption>
         </figure>

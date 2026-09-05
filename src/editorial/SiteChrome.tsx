@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { ControlIcon } from "./Icon";
 import type { SiteLocale, SitePage } from "../shared/site-types";
 import { GITHUB, isEnglish, type EditorialCopy } from "./copy";
 
@@ -154,7 +155,7 @@ export function Header({
           aria-label={open ? copy.close : copy.menu}
           onClick={() => setOpen((value) => !value)}
         >
-          <span aria-hidden="true">{open ? "×" : "☰"}</span>
+          <ControlIcon name={open ? "close" : "menu"} />
         </button>
       </div>
     </header>

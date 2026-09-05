@@ -299,7 +299,9 @@ function Workbench({
             </>
           ) : (
             <div className="result-empty">
-              <span aria-hidden="true">↳</span>
+              <span aria-hidden="true">
+                <Icon name="file" />
+              </span>
               <h3>{copy.preview}</h3>
               <p>{copy.waiting}</p>
               <div className="paper-lines" aria-hidden="true">

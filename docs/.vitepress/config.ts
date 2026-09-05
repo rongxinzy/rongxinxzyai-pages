@@ -7,8 +7,13 @@ export default defineConfig({
   description: "知远智能体的安装、使用与开发说明。",
   base: "/docs/",
   outDir: fileURLToPath(new URL("../../dist/docs", import.meta.url)),
-  head: [["link", { rel: "icon", href: "/favicon.png" }]],
+  head: [["link", { rel: "icon", href: "/favicon-light.svg" }]],
   themeConfig: {
+    sidebarMenuLabel: "文档目录",
+    outlineTitle: "本页内容",
+    returnToTopLabel: "返回顶部",
+    skipToContentLabel: "跳到正文",
+    docFooter: { prev: "上一篇", next: "下一篇" },
     sidebar: [
       {
         text: "开始使用",

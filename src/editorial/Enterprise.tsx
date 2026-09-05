@@ -1,3 +1,4 @@
+import { ControlIcon } from "./Icon";
 import type { SiteLocale } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
 import { Arrow, TitleLines } from "./SiteChrome";
@@ -34,11 +35,21 @@ export function Enterprise({
                 <p>{row.items.join(" / ")}</p>
               </div>
               <div className="architecture-nodes" aria-hidden="true">
-                {["○", "◇", "⊞"].map((symbol, node) => (
-                  <span key={node}>
-                    {index === 0 ? "○" : index === 1 ? "◇" : symbol}
-                  </span>
-                ))}
+                {(["circle", "diamond", "grid"] as const).map(
+                  (symbol, node) => (
+                    <span key={node}>
+                      <ControlIcon
+                        name={
+                          index === 0
+                            ? "circle"
+                            : index === 1
+                              ? "diamond"
+                              : symbol
+                        }
+                      />
+                    </span>
+                  ),
+                )}
               </div>
             </div>
           ))}

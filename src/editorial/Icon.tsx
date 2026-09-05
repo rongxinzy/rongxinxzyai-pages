@@ -51,3 +51,36 @@ export function Icon({ name }: { name: IconName }) {
     </svg>
   );
 }
+
+export function ControlIcon({
+  name,
+}: {
+  name: "menu" | "close" | "circle" | "diamond" | "grid" | "expand";
+}) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {name === "circle" ? (
+        <circle cx="12" cy="12" r="5" />
+      ) : name === "diamond" ? (
+        <path d="m12 5 7 7-7 7-7-7Z" />
+      ) : name === "grid" ? (
+        <path d="M5 5h14v14H5zM12 5v14M5 12h14" />
+      ) : name === "menu" ? (
+        <path d="M4 6h16M4 12h16M4 18h16" />
+      ) : name === "close" ? (
+        <path d="m6 6 12 12M6 18 18 6" />
+      ) : (
+        <path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5" />
+      )}
+    </svg>
+  );
+}
