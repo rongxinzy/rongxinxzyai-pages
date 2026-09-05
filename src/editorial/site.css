@@ -1576,7 +1576,7 @@ p {
     letter-spacing: -0.055em;
     max-width: 92%;
   }
-  [data-locale="en"] .hero h1 span {
+  [data-locale="en"] .hero h1 > span {
     display: block;
   }
   [data-locale="en"] .hero-star {
@@ -1931,4 +1931,15 @@ p {
     font-size: 11px;
     margin-top: 28px;
   }
+}
+
+/* Optical alignment for Latin capitals beside the Chinese display face. */
+h1 .title-latin {
+  display: inline;
+}
+[data-locale="zh-CN"] h1 .title-latin {
+  position: relative;
+  top: 0.065em;
+  font-size: 1.14em;
+  line-height: 0;
 }

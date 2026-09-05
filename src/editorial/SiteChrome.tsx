@@ -22,6 +22,18 @@ export function Arrow({ down = false }: { down?: boolean }) {
   );
 }
 
+export function TitleText({ text }: { text: string }) {
+  return text.split(/\b(AI)\b/).map((part, index) =>
+    part === "AI" ? (
+      <span className="title-latin" key={index}>
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  );
+}
+
 export function Brand({ home }: { home: string }) {
   return (
     <a className="brand" href={home} aria-label="知远 ZhiYuan">
