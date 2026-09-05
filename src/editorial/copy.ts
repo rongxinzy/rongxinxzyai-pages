@@ -113,6 +113,7 @@ export const COPY = {
       },
     ],
     comparisonTitle: "版本与服务",
+    comparisonHint: "左右滑动查看对比",
     headers: ["项目", "开源桌面版", "企业项目方案"],
     comparison: [
       ["工作空间", "个人使用", "项目空间、任务模板、成员管理"],
@@ -266,6 +267,7 @@ export const COPY = {
       },
     ],
     comparisonTitle: "Editions and services",
+    comparisonHint: "Scroll to compare editions",
     headers: ["Scope", "Open-source desktop", "Enterprise project"],
     comparison: [
       ["Workspace", "Personal use", "Shared spaces, templates and members"],

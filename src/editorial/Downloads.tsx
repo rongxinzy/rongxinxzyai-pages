@@ -96,13 +96,9 @@ export function Downloads({
                 ) : (
                   <a
                     className="text-link download-fallback"
-                    href={
-                      platform.id === "linux"
-                        ? `${GITHUB}#quick-start-for-developers`
-                        : `${GITHUB}/releases`
-                    }
+                    href={`${GITHUB}/releases`}
                   >
-                    {platform.id === "linux" ? copy.install : copy.releases}
+                    {copy.releases}
                     <Arrow />
                   </a>
                 )}

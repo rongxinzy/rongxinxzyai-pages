@@ -10,7 +10,7 @@ export function Enterprise({
   locale: SiteLocale;
 }) {
   return (
-    <main id="main" className="enterprise-page">
+    <main id="main" tabIndex={-1} className="enterprise-page">
       <section
         className="enterprise-hero wrap"
         aria-labelledby="enterprise-title"
@@ -62,6 +62,7 @@ export function Enterprise({
       <section className="comparison wrap" aria-labelledby="comparison-title">
         <h2 id="comparison-title">{copy.comparisonTitle}</h2>
         <p className="scope-note">{copy.scope}</p>
+        <p className="comparison-hint">{copy.comparisonHint}</p>
         <div
           className="comparison-scroll"
           tabIndex={0}

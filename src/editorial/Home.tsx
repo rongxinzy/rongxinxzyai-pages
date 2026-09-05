@@ -12,7 +12,7 @@ export function Home({
   releaseStatus,
 }: SiteSiteProps & { copy: EditorialCopy }) {
   return (
-    <main id="main">
+    <main id="main" tabIndex={-1}>
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-composition wrap">
           <h1 id="hero-title">

@@ -49,7 +49,8 @@ button:focus-visible,
   outline: 2px solid var(--accent);
   outline-offset: 5px;
 }
-button:disabled {
+button:disabled,
+button[aria-disabled="true"] {
   cursor: wait;
   opacity: 0.65;
 }
@@ -135,7 +136,7 @@ p {
   line-height: 1.3;
   transition: background 0.2s;
 }
-.button:hover {
+.button:hover:not([aria-disabled="true"]) {
   background: #a53c27;
 }
 .button-small {
@@ -1955,4 +1956,71 @@ h1 .title-latin {
 .platform-name > span,
 .index-number {
   font-variant-numeric: tabular-nums;
+}
+
+/* Interaction geometry and focus remain consistent across pointer and keyboard use. */
+main:focus {
+  outline: none;
+}
+.site-nav a,
+.language-link,
+.header-download,
+.menu-toggle,
+.site-footer nav a,
+.text-link,
+.plain-button {
+  min-height: 44px;
+}
+.site-nav a,
+.language-link,
+.header-download,
+.site-footer nav a {
+  display: inline-flex;
+  align-items: center;
+}
+.menu-toggle {
+  min-width: 44px;
+}
+.button:hover:not([aria-disabled="true"]) .arrow-down,
+.text-link:hover .arrow-down,
+.button:focus-visible:not([aria-disabled="true"]) .arrow-down,
+.text-link:focus-visible .arrow-down {
+  transform: translateY(2px);
+}
+.button[aria-disabled="true"] .arrow {
+  transform: none;
+}
+.text-link:focus-visible,
+.plain-button:focus-visible {
+  outline-offset: 4px;
+}
+.comparison-hint {
+  display: none;
+}
+.comparison tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--paper);
+}
+.comparison thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+@media (max-width: 700px) {
+  .comparison-hint {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+}
+@media (max-width: 600px) {
+  .site-header .header-actions {
+    gap: 10px;
+  }
+  .download-row > .button {
+    min-height: 44px;
+  }
 }

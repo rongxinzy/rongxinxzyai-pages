@@ -5,7 +5,7 @@ import { GITHUB, isEnglish, type EditorialCopy } from "./copy";
 export function Arrow({ down = false }: { down?: boolean }) {
   return (
     <svg
-      className="arrow"
+      className={down ? "arrow arrow-down" : "arrow"}
       width="16"
       height="16"
       viewBox="0 0 16 16"
@@ -69,6 +69,7 @@ export function Header({
 }) {
   const [open, setOpen] = useState(false);
   const toggle = useRef<HTMLButtonElement>(null);
+  const header = useRef<HTMLElement>(null);
   const en = isEnglish(locale);
   const home = en ? "/en/" : "/";
   const enterprise = `${home}enterprise/`;
@@ -81,11 +82,38 @@ export function Header({
         toggle.current?.focus();
       }
     };
+    const outside = (event: PointerEvent) => {
+      if (
+        event.target instanceof Node &&
+        !header.current?.contains(event.target)
+      )
+        setOpen(false);
+    };
+    const desktop = window.matchMedia("(min-width: 601px)");
+    const resized = () => {
+      if (desktop.matches) setOpen(false);
+    };
     window.addEventListener("keydown", close);
-    return () => window.removeEventListener("keydown", close);
+    window.addEventListener("pointerdown", outside);
+    desktop.addEventListener("change", resized);
+    return () => {
+      window.removeEventListener("keydown", close);
+      window.removeEventListener("pointerdown", outside);
+      desktop.removeEventListener("change", resized);
+    };
   }, [open]);
   return (
-    <header className="site-header wrap">
+    <header
+      ref={header}
+      className="site-header wrap"
+      onBlur={(event) => {
+        if (
+          event.relatedTarget instanceof Node &&
+          !event.currentTarget.contains(event.relatedTarget)
+        )
+          setOpen(false);
+      }}
+    >
       <Brand home={home} />
       <nav
         id="site-navigation"

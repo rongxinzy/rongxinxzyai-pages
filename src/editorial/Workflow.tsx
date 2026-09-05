@@ -145,10 +145,31 @@ function Workbench({
   copy: EditorialCopy;
 }) {
   const [stage, setStage] = useState<Stage>("idle");
+  const workbench = useRef<HTMLDivElement>(null);
+  const action = useRef<HTMLButtonElement>(null);
+  const approval = useRef<HTMLButtonElement>(null);
+  const result = useRef<HTMLAnchorElement>(null);
+  const moveFocus = useRef(false);
+  function advance(next: Stage) {
+    moveFocus.current =
+      workbench.current?.contains(document.activeElement) ?? false;
+    setStage(next);
+  }
+  useEffect(() => {
+    if (!moveFocus.current) return;
+    moveFocus.current = false;
+    const target =
+      stage === "approval"
+        ? approval.current
+        : stage === "complete"
+          ? result.current
+          : action.current;
+    target?.focus({ preventScroll: true });
+  }, [stage]);
   useEffect(() => {
     if (stage !== "reading" && stage !== "writing") return;
     const timer = window.setTimeout(
-      () => setStage(stage === "reading" ? "approval" : "complete"),
+      () => advance(stage === "reading" ? "approval" : "complete"),
       900,
     );
     return () => window.clearTimeout(timer);
@@ -172,7 +193,7 @@ function Workbench({
         ? 1
         : 2;
   return (
-    <div className="workbench">
+    <div className="workbench" ref={workbench}>
       <div className="workbench-bar">
         <span>
           {copy.sampleLabel} / {scenario.label}
@@ -206,19 +227,24 @@ function Workbench({
             {status}
           </div>
           {stage === "approval" ? (
-            <div className="approval-box">
+            <div
+              className="approval-box"
+              role="group"
+              aria-label={copy.approval}
+            >
               <p>{copy.approvalBody}</p>
               <div>
                 <button
                   className="button button-small"
-                  onClick={() => setStage("writing")}
+                  ref={approval}
+                  onClick={() => advance("writing")}
                 >
                   {copy.allow}
                   <Arrow />
                 </button>
                 <button
                   className="plain-button"
-                  onClick={() => setStage("stopped")}
+                  onClick={() => advance("stopped")}
                 >
                   {copy.deny}
                 </button>
@@ -228,8 +254,11 @@ function Workbench({
             <div className="run-action">
               <button
                 className="button button-small"
-                disabled={busy}
-                onClick={() => setStage("reading")}
+                ref={action}
+                aria-disabled={busy}
+                onClick={() => {
+                  if (!busy) advance("reading");
+                }}
               >
                 {busy
                   ? copy.running
@@ -257,6 +286,7 @@ function Workbench({
               ))}
               <a
                 className="result-download"
+                ref={result}
                 download={scenario.filename}
                 href={`data:text/${scenario.filename.endsWith("csv") ? "csv" : "markdown"};charset=utf-8,${encodeURIComponent("\uFEFF" + scenario.content)}`}
               >
