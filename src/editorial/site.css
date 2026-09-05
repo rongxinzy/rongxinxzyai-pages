@@ -110,9 +110,10 @@ p {
 }
 .arrow {
   display: inline-block;
-  font-family: Arial, sans-serif;
-  font-size: 1.2em;
-  line-height: 1;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 1em;
+  vertical-align: middle;
   transition: transform 0.2s;
 }
 .button:hover .arrow,
