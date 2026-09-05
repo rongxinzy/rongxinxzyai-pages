@@ -18,4 +18,4 @@
 
 这些页面会随着产品能力和实际使用经验持续补充。
 
-你可以在官网的[社区](/#community)页面扫码加入交流群，也可以通过 GitHub 提交问题与建议。
+通过 [GitHub Issues](https://github.com/rongxinzy/RongxinAI/issues) 提交问题与建议。

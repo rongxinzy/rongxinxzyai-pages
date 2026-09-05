@@ -1,20 +1,24 @@
+import { ControlIcon } from "./Icon";
+import type { SiteLocale } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
-import { Arrow, TitleText } from "./SiteChrome";
+import { Arrow, TitleLines } from "./SiteChrome";
 
-export function Enterprise({ copy }: { copy: EditorialCopy }) {
+export function Enterprise({
+  copy,
+  locale,
+}: {
+  copy: EditorialCopy;
+  locale: SiteLocale;
+}) {
   return (
-    <main id="main" className="enterprise-page">
+    <main id="main" tabIndex={-1} className="enterprise-page">
       <section
         className="enterprise-hero wrap"
         aria-labelledby="enterprise-title"
       >
         <div>
           <h1 id="enterprise-title">
-            {copy.enterpriseTitle.map((line) => (
-              <span key={line}>
-                <TitleText text={line} />
-              </span>
-            ))}
+            <TitleLines lines={copy.enterpriseTitle} spaced={locale === "en"} />
           </h1>
           <p className="section-lead">{copy.enterpriseLead}</p>
           <a className="button" href="#contact">
@@ -31,11 +35,21 @@ export function Enterprise({ copy }: { copy: EditorialCopy }) {
                 <p>{row.items.join(" / ")}</p>
               </div>
               <div className="architecture-nodes" aria-hidden="true">
-                {["○", "◇", "⊞"].map((symbol, node) => (
-                  <span key={node}>
-                    {index === 0 ? "○" : index === 1 ? "◇" : symbol}
-                  </span>
-                ))}
+                {(["circle", "diamond", "grid"] as const).map(
+                  (symbol, node) => (
+                    <span key={node}>
+                      <ControlIcon
+                        name={
+                          index === 0
+                            ? "circle"
+                            : index === 1
+                              ? "diamond"
+                              : symbol
+                        }
+                      />
+                    </span>
+                  ),
+                )}
               </div>
             </div>
           ))}
@@ -59,6 +73,7 @@ export function Enterprise({ copy }: { copy: EditorialCopy }) {
       <section className="comparison wrap" aria-labelledby="comparison-title">
         <h2 id="comparison-title">{copy.comparisonTitle}</h2>
         <p className="scope-note">{copy.scope}</p>
+        <p className="comparison-hint">{copy.comparisonHint}</p>
         <div
           className="comparison-scroll"
           tabIndex={0}

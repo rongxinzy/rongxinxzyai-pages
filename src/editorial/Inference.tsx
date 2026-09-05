@@ -1,7 +1,8 @@
+import { ControlIcon } from "./Icon";
 import type { SiteLocale } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
 import { GITHUB } from "./copy";
-import { Arrow } from "./SiteChrome";
+import { Arrow, TitleLines } from "./SiteChrome";
 
 export function Inference({
   copy,
@@ -22,9 +23,7 @@ export function Inference({
             {copy.inferenceLabel} <span>/ 02</span>
           </p>
           <h2 id="inference-title">
-            {copy.inferenceTitle.map((line) => (
-              <span key={line}>{line}</span>
-            ))}
+            <TitleLines lines={copy.inferenceTitle} spaced={locale === "en"} />
           </h2>
           <p className="section-lead">
             {copy.inferenceLead.map((line) => (
@@ -57,6 +56,9 @@ export function Inference({
               loading="lazy"
               alt={copy.inferenceCaption}
             />
+            <span className="inference-expand">
+              <ControlIcon name="expand" />
+            </span>
           </a>
           <figcaption>{copy.inferenceCaption}</figcaption>
         </figure>

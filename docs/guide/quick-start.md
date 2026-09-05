@@ -4,7 +4,7 @@
 
 ## 下载
 
-请从[官网首页的下载区域](/#download)选择与你的系统相匹配的安装包。当前下载区会读取最新的稳定版本，并提供：
+请从[官网首页的下载区域](https://www.rongxzyai.com/#download)选择与你的系统相匹配的安装包。当前下载区会读取最新的稳定版本，并提供：
 
 - Windows x64 安装包。
 - macOS Apple Silicon 安装包。
@@ -12,8 +12,6 @@
 - 面向其他 Linux 发行版的 x64 AppImage。
 
 下载区显示的版本号、文件大小和下载地址会随当前稳定版本自动更新。
-
-![知远下载页面](../assets/guide/quick-start/download-options.png)
 
 ## 安装
 

@@ -2,29 +2,34 @@
 layout: home
 
 hero:
-  name: 知远智能体
-  text: 开源、本地优先的桌面 AI Agent
-  tagline: 在自己的工作页面里调用模型、工具与技能，把想法推进到结果。
+  name: 知远使用文档
+  tagline: 安装知远、配置模型、创建任务。
   actions:
     - theme: brand
-      text: 开始使用
-      link: /guide/
+      text: 安装与入门
+      link: /guide/quick-start
     - theme: alt
-      text: 查看 GitHub
-      link: https://github.com/rongxinzy/rongxinxzyai-pages
+      text: 使用本地推理
+      link: /guide/local-inference
 
 features:
-  - title: 本地优先
-    details: 在桌面工作页面中处理资料、上下文与任务，数据边界由你掌握。
-  - title: 技能可扩展
-    details: 使用内置技能，也可以把团队方法沉淀为可重复的工作流。
-  - title: 开源共建
-    details: 欢迎提出问题、分享需求，或通过代码参与知远智能体的持续迭代。
+  - title: 配置模型
+    details: 连接云端模型，或运行本地模型。
+    link: /guide/model
+    linkText: 查看模型配置
+  - title: 创建任务
+    details: 添加文件与上下文，提交任务，查看结果。
+    link: /guide/tasks
+    linkText: 查看任务指南
+  - title: 排查问题
+    details: 查阅安装、模型连接与文件处理中的常见问题。
+    link: /faq/
+    linkText: 查看常见问题
 ---
 
 ## 从这里开始
 
-如果你是第一次使用知远智能体，可以先阅读[快速开始](./guide/quick-start.md)，然后了解[模型配置](./guide/model.md)和[工作页面](./guide/work-page.md)。
+阅读[快速开始](./guide/quick-start.md)，然后[创建第一个工作页面](./guide/first-work-page.md)。
 
 ## 实战指南
 
@@ -35,5 +40,3 @@ features:
 - [邮件与会议](./capabilities/communication.md)
 - [营销与内容](./capabilities/marketing.md)
 - [编程与技术任务](./capabilities/coding.md)
-
-如果你遇到了问题，可以先查看[常见问题](./faq/index.md)。

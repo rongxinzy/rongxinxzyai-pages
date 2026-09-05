@@ -63,6 +63,10 @@ export default function App() {
 
   useEffect(() => {
     const controller = new AbortController();
+    const timeout = window.setTimeout(() => {
+      setReleaseStatus("unavailable");
+      controller.abort();
+    }, 12_000);
 
     async function loadRelease() {
       try {
@@ -85,11 +89,16 @@ export default function App() {
         setReleaseStatus("ready");
       } catch {
         if (!controller.signal.aborted) setReleaseStatus("unavailable");
+      } finally {
+        window.clearTimeout(timeout);
       }
     }
 
     void loadRelease();
-    return () => controller.abort();
+    return () => {
+      window.clearTimeout(timeout);
+      controller.abort();
+    };
   }, []);
 
   return (
