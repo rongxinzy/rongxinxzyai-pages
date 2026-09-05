@@ -1,0 +1,96 @@
+import type { SiteSiteProps } from "../shared/site-types";
+import type { EditorialCopy } from "./copy";
+import { Arrow } from "./SiteChrome";
+import { Workflow } from "./Workflow";
+import { Downloads } from "./Downloads";
+
+export function Home({
+  copy,
+  locale,
+  release,
+  releaseStatus,
+}: SiteSiteProps & { copy: EditorialCopy }) {
+  return (
+    <main id="main">
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="hero-heading wrap">
+          <h1 id="hero-title">
+            {copy.headline.map((line) => (
+              <span key={line}>{line}</span>
+            ))}
+          </h1>
+          <span className="hero-star" aria-hidden="true">
+            ✦
+          </span>
+        </div>
+        <div className="hero-photograph">
+          <img
+            src="/editorial/work-bridge.jpg"
+            width="2127"
+            height="739"
+            alt={
+              locale === "en"
+                ? "A folded paper bridge connects archival documents to a metal block in afternoon light."
+                : "午后光线中，一座折纸桥连接着档案文件与金属方块。"
+            }
+            fetchPriority="high"
+          />
+        </div>
+        <div className="hero-intro wrap">
+          <p>
+            {copy.lead}
+            <br />
+            {copy.intro}
+          </p>
+          <div className="hero-actions">
+            <a className="button" href="#download">
+              {copy.download}
+              <Arrow />
+            </a>
+            <a className="text-link" href="#workflow">
+              {copy.how}
+              <Arrow down />
+            </a>
+          </div>
+        </div>
+        <div className="hero-colophon wrap">
+          <span>
+            Windows <i>/</i> macOS <i>/</i> Linux
+          </span>
+          <span>{copy.local}</span>
+        </div>
+      </section>
+      <Workflow locale={locale} copy={copy} />
+      <section
+        className="boundary-band"
+        id="local-models"
+        aria-labelledby="boundary-title"
+      >
+        <div className="wrap boundary-layout">
+          <h2 id="boundary-title">
+            {copy.boundaries.map((line) => (
+              <span key={line}>{line}</span>
+            ))}
+          </h2>
+          <div className="boundary-rows">
+            {copy.boundaryRows.map((row, index) => (
+              <article key={row.title}>
+                <span className="index-number">0{index + 1}</span>
+                <div>
+                  <h3>{row.title}</h3>
+                  <p>{row.body}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <Downloads
+        locale={locale}
+        copy={copy}
+        release={release}
+        status={releaseStatus}
+      />
+    </main>
+  );
+}

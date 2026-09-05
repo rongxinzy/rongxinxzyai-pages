@@ -15,9 +15,11 @@ const pages = [
     path: "/",
     alternatePath: "/en/",
     title: "知远智能体 — 开源、本地优先的桌面 Agent",
-    description: "知远是一款开源、本地优先的桌面 Agent。它会读取材料、调用工具，并在敏感操作前等待确认。",
-    heroTitle: "把一项工作交给知远。",
-    heroLead: "知远是一款开源、本地优先的桌面 Agent。它会读取材料、调用工具，并把结果留在工作区。敏感操作由你确认。",
+    description:
+      "知远是一款开源、本地优先的桌面 Agent。它会读取材料、调用工具，并在敏感操作前等待确认。",
+    heroTitle: "把工作交给知远，把时间留给自己。",
+    heroLead:
+      "知远是一款开源、本地优先的桌面 Agent。它会读取材料、调用工具，并把结果留在工作区。敏感操作由你确认。",
     staticAction: "下载知远",
     staticHref: "/#download",
     imageAlt: "知远智能体真实桌面工作台界面",
@@ -31,9 +33,11 @@ const pages = [
     path: "/en/",
     alternatePath: "/",
     title: "ZhiYuan — Open-source, local-first desktop agent",
-    description: "ZhiYuan is an open-source, local-first desktop agent that works through your files and tools and pauses before sensitive actions.",
-    heroTitle: "Give ZhiYuan a task.",
-    heroLead: "ZhiYuan is an open-source, local-first desktop agent. It works through your files and tools, returns the result to your workspace, and pauses before sensitive actions.",
+    description:
+      "ZhiYuan is an open-source, local-first desktop agent that works through your files and tools and pauses before sensitive actions.",
+    heroTitle: "Give your work to ZhiYuan. Keep your time for yourself.",
+    heroLead:
+      "ZhiYuan is an open-source, local-first desktop agent. It works through your files and tools, returns the result to your workspace, and pauses before sensitive actions.",
     staticAction: "Download ZhiYuan",
     staticHref: "/en/#download",
     imageAlt: "The ZhiYuan desktop workspace",
@@ -47,9 +51,11 @@ const pages = [
     path: "/enterprise/",
     alternatePath: "/en/enterprise/",
     title: "知远企业版 — 受控的企业 Agent 工作环境",
-    description: "知远企业版以独立部署、统一治理和项目交付，将身份、模型、知识、工具和数据范围纳入企业工作环境。",
-    heroTitle: "让 Agent 进入受控的企业工作环境。",
-    heroLead: "桌面端承接员工工作，企业服务统一管理身份、模型、知识、工具和数据范围。",
+    description:
+      "知远企业版以独立部署、统一治理和项目交付，将身份、模型、知识、工具和数据范围纳入企业工作环境。",
+    heroTitle: "把知远带进团队的工作现场。",
+    heroLead:
+      "围绕企业的数据、工具与权限，确定部署和接入范围。项目方案，能力范围以项目合同为准。",
     staticAction: "联系企业团队",
     staticHref: "/enterprise/#contact",
     imageAlt: "知远企业版桌面工作空间界面",
@@ -63,9 +69,11 @@ const pages = [
     path: "/en/enterprise/",
     alternatePath: "/enterprise/",
     title: "ZhiYuan Enterprise — Governed agent work for organizations",
-    description: "ZhiYuan Enterprise brings identity, models, knowledge, tools, and data boundaries into a governed work environment.",
-    heroTitle: "Bring agent workflows into a governed work environment.",
-    heroLead: "The desktop app is where employees work. Enterprise services govern identity, models, knowledge, tools, and data boundaries.",
+    description:
+      "ZhiYuan Enterprise brings identity, models, knowledge, tools, and data boundaries into a governed work environment.",
+    heroTitle: "Bring ZhiYuan into your team’s work.",
+    heroLead:
+      "Define deployment and integrations around your organization’s data, tools and permissions. Capabilities are governed by the delivery contract.",
     staticAction: "Contact enterprise team",
     staticHref: "/en/enterprise/#contact",
     imageAlt: "The ZhiYuan Enterprise desktop workspace",
@@ -82,11 +90,11 @@ function renderPage(page) {
   const alternate = absoluteUrl(page.alternatePath);
   const isEnglish = page.lang === "en";
   const isHome = page.page === "home";
-  const staticBackground = isHome ? "#050812" : "#ffffff";
-  const staticText = isHome ? "#f8faff" : "#121724";
-  const staticMuted = isHome ? "#b7c0cf" : "#667085";
-  const staticButtonBorder = isHome ? "#587ed1" : "#171c27";
-  const staticButtonBackground = isHome ? "#0e1728" : "#151b26";
+  const staticBackground = "#f7f6f2";
+  const staticText = "#252821";
+  const staticMuted = "#66685e";
+  const staticButtonBorder = "#c34b32";
+  const staticButtonBackground = "#c34b32";
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": page.page === "enterprise" ? "WebPage" : "SoftwareApplication",
@@ -133,13 +141,14 @@ function renderPage(page) {
     <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
     <title>${page.title}</title>
+${isHome ? '    <link rel="preload" as="image" href="/editorial/work-bridge.jpg" fetchpriority="high" />' : ""}
     <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
     <style>
       html, body { margin: 0; background: ${staticBackground}; }
       .marketing-static-shell { min-height: 100vh; max-width: 1180px; margin: 0 auto; padding: 96px 24px; box-sizing: border-box; color: ${staticText}; font: 16px/1.6 Inter, "PingFang SC", "Microsoft YaHei", sans-serif; }
-      .marketing-static-shell h1 { max-width: 12ch; margin: 0 0 20px; font-size: clamp(40px, 6vw, 72px); letter-spacing: -.04em; line-height: 1.06; }
+      .marketing-static-shell h1 { max-width: 20ch; margin: 0 0 20px; font-family: "Songti SC", Georgia, serif; font-size: clamp(36px, 6vw, 88px); letter-spacing: -.04em; line-height: 1.3; }
       .marketing-static-shell p { max-width: 680px; color: ${staticMuted}; font-size: 18px; }
-      .marketing-static-shell a { display: inline-block; padding: 13px 20px; border: 1px solid ${staticButtonBorder}; border-radius: 11px; background: ${staticButtonBackground}; color: #fff; font: inherit; text-decoration: none; }
+      .marketing-static-shell a { display: inline-block; padding: 13px 20px; border: 1px solid ${staticButtonBorder}; background: ${staticButtonBackground}; color: #fff; font: inherit; text-decoration: none; }
     </style>
   </head>
   <body>
