@@ -1679,3 +1679,255 @@ p {
     transition: none !important;
   }
 }
+
+/* AI studio: the offer and the action share the opening spread. */
+.hero-composition {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  align-items: end;
+  gap: 5%;
+  padding-block: 48px 56px;
+}
+.hero-composition h1,
+[data-locale="en"] .hero-composition h1 {
+  font-size: clamp(48px, 6.5vw, 100px);
+  line-height: 1.34;
+  max-width: none;
+  letter-spacing: -0.045em;
+}
+.hero-composition h1 em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: inherit;
+}
+.hero-summary {
+  padding-bottom: 12px;
+}
+.hero-summary p {
+  font-size: clamp(14px, 1.25vw, 19px);
+  line-height: 1.95;
+}
+.hero-summary .hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.hero-summary .button {
+  font-size: 16px;
+  padding: 17px 24px;
+  min-height: 52px;
+}
+.hero-summary .text-link {
+  font-size: 15px;
+}
+.workflow-intro {
+  color: var(--muted);
+  font-size: 17px;
+  margin: -10px 0 34px;
+  max-width: 42em;
+}
+.inference {
+  padding-block: 64px;
+  border-top: 1px solid var(--line);
+}
+.inference-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.4fr;
+  align-items: start;
+  gap: 7%;
+}
+.inference-label {
+  color: var(--accent);
+  font-size: 16px;
+  margin-bottom: 32px;
+}
+.inference-label span {
+  margin-left: 8px;
+  font-family: Georgia, serif;
+}
+.inference-label::after {
+  content: "";
+  display: block;
+  width: 46px;
+  border-top: 1px solid var(--accent);
+  margin-top: 10px;
+}
+.inference h2 {
+  font-size: clamp(44px, 5.3vw, 84px);
+  line-height: 1.35;
+}
+.inference .section-lead {
+  margin-block: 32px;
+  font-size: 20px;
+  color: var(--ink);
+}
+.inference .section-lead span {
+  display: block;
+}
+.inference .text-link {
+  color: var(--accent);
+  font-size: 16px;
+}
+.inference-product img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  transition: border-color 0.2s;
+}
+.inference-product a:hover img {
+  border-color: var(--accent);
+}
+.inference-product figcaption {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 15px;
+}
+.inference-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6%;
+  margin-top: 64px;
+}
+.inference-benefits article::before {
+  content: "";
+  display: block;
+  width: 34%;
+  border-top: 1px solid var(--accent);
+  margin-bottom: 22px;
+}
+.inference-benefits h3 {
+  font-family: var(--display);
+  font-size: 32px;
+}
+.inference-benefits p {
+  font-size: 17px;
+  margin-top: 14px;
+  color: var(--muted);
+}
+.inference-note {
+  border-top: 1px solid var(--line);
+  margin-top: 42px;
+  padding-top: 18px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.enterprise-page h1 span:last-child {
+  color: var(--accent);
+}
+@media (max-width: 980px) {
+  .site-header {
+    gap: 22px;
+  }
+  .site-nav {
+    gap: 17px;
+    font-size: 13px;
+  }
+  .header-actions {
+    gap: 18px;
+  }
+  .hero-composition {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-block: 40px;
+  }
+  .hero-composition h1,
+  [data-locale="en"] .hero-composition h1 {
+    font-size: clamp(44px, 7.6vw, 72px);
+  }
+  .hero-summary p {
+    font-size: 18px;
+  }
+  .hero-summary .hero-actions {
+    margin-top: 22px;
+  }
+  .inference-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .inference h2 span {
+    display: inline;
+  }
+  .inference .section-lead {
+    margin-block: 24px;
+  }
+  .inference-product {
+    max-width: 760px;
+  }
+}
+@media (max-width: 600px) {
+  .hero-composition {
+    padding-block: 25px 30px;
+    gap: 22px;
+  }
+  .hero-composition h1,
+  [data-locale="en"] .hero-composition h1 {
+    font-size: 8.6vw;
+    line-height: 1.42;
+    letter-spacing: -0.06em;
+  }
+  .hero-summary {
+    padding: 0;
+  }
+  .hero-summary p,
+  [data-locale="en"] .hero-summary p {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+  .hero-summary .hero-actions {
+    gap: 20px;
+    margin-top: 22px;
+  }
+  .hero-summary .button {
+    min-height: 48px;
+    font-size: 14px;
+    padding: 14px 18px;
+  }
+  .hero-summary .text-link {
+    font-size: 13px;
+  }
+  .workflow-intro {
+    font-size: 14px;
+    margin-top: -12px;
+    margin-bottom: 28px;
+  }
+  .inference h2 {
+    font-size: 39px;
+  }
+  .inference-label {
+    font-size: 14px;
+    margin-bottom: 22px;
+  }
+  .inference .section-lead {
+    font-size: 15px;
+  }
+  .inference .text-link {
+    font-size: 14px;
+  }
+  .inference-product figcaption {
+    font-size: 11px;
+  }
+  .inference-benefits {
+    grid-template-columns: 1fr;
+    margin-top: 34px;
+    gap: 25px;
+  }
+  .inference-benefits article::before {
+    width: 55px;
+    margin-bottom: 14px;
+  }
+  .inference-benefits h3 {
+    font-size: 24px;
+  }
+  .inference-benefits p {
+    font-size: 14px;
+    margin-top: 7px;
+  }
+  .inference-note {
+    font-size: 11px;
+    margin-top: 28px;
+  }
+}

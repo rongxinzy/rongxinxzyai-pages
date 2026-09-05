@@ -7,7 +7,7 @@ import { Icon } from "./Icon";
 const SCENARIOS = {
   "zh-CN": [
     {
-      label: "整理资料",
+      label: "会议纪要",
       prompt: "汇总会议决议，列出待办事项和来源文件。",
       tasks: ["读取项目文件", "提取要点与来源", "生成项目摘要.md"],
       title: "项目摘要",
@@ -24,7 +24,7 @@ const SCENARIOS = {
       ],
     },
     {
-      label: "处理表格",
+      label: "费用汇总",
       prompt: "汇总费用类别，标出缺失金额。",
       tasks: ["读取示例费用表", "核对分类与缺失值", "生成费用汇总.csv"],
       title: "费用汇总",
@@ -41,7 +41,7 @@ const SCENARIOS = {
       ],
     },
     {
-      label: "研究代码",
+      label: "代码导读",
       prompt: "查找项目入口，生成模块说明。",
       tasks: ["读取示例目录", "梳理模块与调用关系", "生成代码导读.md"],
       title: "代码导读",
@@ -57,7 +57,7 @@ const SCENARIOS = {
   ],
   en: [
     {
-      label: "Organize research",
+      label: "Meeting notes",
       prompt: "Summarize meeting decisions, tasks and source files.",
       tasks: [
         "Read project files",
@@ -84,7 +84,7 @@ const SCENARIOS = {
       ],
     },
     {
-      label: "Work with tables",
+      label: "Expense summary",
       prompt: "Group expenses by category and flag missing values.",
       tasks: [
         "Read sample expenses",
@@ -105,7 +105,7 @@ const SCENARIOS = {
       ],
     },
     {
-      label: "Explore code",
+      label: "Code guide",
       prompt: "Find the entry point and document the modules.",
       tasks: [
         "Read the sample directory",
@@ -323,6 +323,7 @@ export function Workflow({
           {copy.workflowLabel} <i>/ 01</i>
         </span>
       </div>
+      <p className="workflow-intro">{copy.workflowIntro}</p>
       <div
         className="scenario-tabs"
         role="tablist"

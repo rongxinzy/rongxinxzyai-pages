@@ -56,6 +56,9 @@ export function Header({
         <a href={`${home}#workflow`} onClick={() => setOpen(false)}>
           {copy.nav[0]}
         </a>
+        <a href={`${home}#inference`} onClick={() => setOpen(false)}>
+          {copy.inferenceNav}
+        </a>
         <a
           href={enterprise}
           aria-current={page === "enterprise" ? "page" : undefined}
