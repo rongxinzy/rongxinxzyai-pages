@@ -4,9 +4,21 @@ import { GITHUB, isEnglish, type EditorialCopy } from "./copy";
 
 export function Arrow({ down = false }: { down?: boolean }) {
   return (
-    <span className="arrow" aria-hidden="true">
-      {down ? "↓" : "↗"}
-    </span>
+    <svg
+      className="arrow"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d={down ? "M8 3v10m-4-4 4 4 4-4" : "M4 12 12 4M5 4h7v7"} />
+    </svg>
   );
 }
 
