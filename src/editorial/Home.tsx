@@ -30,8 +30,8 @@ export function Home({
             height="739"
             alt={
               locale === "en"
-                ? "A folded paper bridge connects archival documents to a metal block in afternoon light."
-                : "午后光线中，一座折纸桥连接着档案文件与金属方块。"
+                ? "A paper bridge, documents and a metal block."
+                : "折纸桥、档案文件与金属方块。"
             }
             fetchPriority="high"
           />
