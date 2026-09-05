@@ -1,6 +1,6 @@
 import type { SiteSiteProps } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
-import { Arrow } from "./SiteChrome";
+import { Arrow, TitleText } from "./SiteChrome";
 import { Workflow } from "./Workflow";
 import { Inference } from "./Inference";
 import { Downloads } from "./Downloads";
@@ -18,7 +18,10 @@ export function Home({
           <h1 id="hero-title">
             <span>{copy.headline[0]}</span>
             <span>
-              {copy.headline[1]} <em>{copy.headlineAccent}</em>
+              {copy.headline[1]}{" "}
+              <em>
+                <TitleText text={copy.headlineAccent} />
+              </em>
               {copy.headlineEnd}
             </span>
           </h1>

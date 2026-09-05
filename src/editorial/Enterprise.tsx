@@ -1,5 +1,5 @@
 import type { EditorialCopy } from "./copy";
-import { Arrow } from "./SiteChrome";
+import { Arrow, TitleText } from "./SiteChrome";
 
 export function Enterprise({ copy }: { copy: EditorialCopy }) {
   return (
@@ -11,7 +11,9 @@ export function Enterprise({ copy }: { copy: EditorialCopy }) {
         <div>
           <h1 id="enterprise-title">
             {copy.enterpriseTitle.map((line) => (
-              <span key={line}>{line}</span>
+              <span key={line}>
+                <TitleText text={line} />
+              </span>
             ))}
           </h1>
           <p className="section-lead">{copy.enterpriseLead}</p>
