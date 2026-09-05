@@ -2,6 +2,7 @@ import type { SiteSiteProps } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
 import { Arrow } from "./SiteChrome";
 import { Workflow } from "./Workflow";
+import { Inference } from "./Inference";
 import { Downloads } from "./Downloads";
 
 export function Home({
@@ -13,15 +14,31 @@ export function Home({
   return (
     <main id="main">
       <section className="hero" aria-labelledby="hero-title">
-        <div className="hero-heading wrap">
+        <div className="hero-composition wrap">
           <h1 id="hero-title">
-            {copy.headline.map((line) => (
-              <span key={line}>{line}</span>
-            ))}
+            <span>{copy.headline[0]}</span>
+            <span>
+              {copy.headline[1]} <em>{copy.headlineAccent}</em>
+              {copy.headlineEnd}
+            </span>
           </h1>
-          <span className="hero-star" aria-hidden="true">
-            ✦
-          </span>
+          <div className="hero-summary">
+            <p>
+              {copy.lead}
+              <br />
+              {copy.intro}
+            </p>
+            <div className="hero-actions">
+              <a className="button" href="#download">
+                {copy.download}
+                <Arrow />
+              </a>
+              <a className="text-link" href="#workflow">
+                {copy.how}
+                <Arrow down />
+              </a>
+            </div>
+          </div>
         </div>
         <div className="hero-photograph">
           <img
@@ -36,23 +53,6 @@ export function Home({
             fetchPriority="high"
           />
         </div>
-        <div className="hero-intro wrap">
-          <p>
-            {copy.lead}
-            <br />
-            {copy.intro}
-          </p>
-          <div className="hero-actions">
-            <a className="button" href="#download">
-              {copy.download}
-              <Arrow />
-            </a>
-            <a className="text-link" href="#workflow">
-              {copy.how}
-              <Arrow down />
-            </a>
-          </div>
-        </div>
         <div className="hero-colophon wrap">
           <span>
             Windows <i>/</i> macOS <i>/</i> Linux
@@ -61,6 +61,7 @@ export function Home({
         </div>
       </section>
       <Workflow locale={locale} copy={copy} />
+      <Inference locale={locale} copy={copy} />
       <section
         className="boundary-band"
         id="local-models"

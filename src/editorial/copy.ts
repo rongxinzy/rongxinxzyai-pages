@@ -5,18 +5,38 @@ export const isEnglish = (locale: SiteLocale) => locale === "en";
 
 export const COPY = {
   "zh-CN": {
-    nav: ["任务示例", "企业服务", "使用文档"],
+    nav: ["作品与任务", "企业服务", "使用文档"],
+    inferenceNav: "本地推理",
+    inferenceLabel: "内置推理引擎",
+    inferenceTitle: ["模型，", "装进电脑。"],
+    inferenceLead: [
+      "搜索、安装、启动 GGUF 模型。",
+      "知远管理推理服务，电脑提供算力。",
+    ],
+    inferenceGuide: "查看本地模型指南",
+    inferenceCaption: "知远桌面端 · 模型市场",
+    inferenceImage: "查看模型市场原图",
+    inferenceSteps: [
+      { title: "选模型", body: "搜索模型，查看规格，下载到电脑。" },
+      { title: "用算力", body: "调整上下文、GPU 分配和线程数。" },
+      { title: "做任务", body: "接入支持工具调用的模型，处理文件与代码。" },
+    ],
+    inferenceNote: "模型大小和速度取决于设备。Windows 安装包不含本地推理组件。",
+
     download: "下载知远",
     menu: "导航菜单",
     close: "关闭菜单",
     skip: "跳到正文",
-    headline: ["处理文档与表格，", "编写和修改代码。"],
-    lead: "知远是一款桌面 AI 智能体。",
-    intro: "读取文件、操作浏览器、运行命令，生成文档和代码。",
+    headline: ["你的电脑，", "你的"],
+    headlineAccent: "AI 工作室",
+    headlineEnd: "。",
+    lead: "知远，把资料、模型与工具放进一个工作台。",
+    intro: "写报告、做表格、改代码，从任务到文件。",
     how: "查看任务示例",
     local: "开源 · AGPL-3.0",
-    workflow: "任务示例",
-    workflowLabel: "任务示例",
+    workflow: "从任务，到作品。",
+    workflowIntro: "会议纪要、费用汇总、代码导读。查看任务过程，下载结果文件。",
+    workflowLabel: "作品与任务",
     demoLabel: "操作演示",
     sampleLabel: "任务示例",
     demoNote: "网页演示使用样例文件。桌面应用处理用户文件。",
@@ -38,23 +58,23 @@ export const COPY = {
     preview: "文件预览",
     waiting: "等待生成文件。",
     downloadSample: "下载示例文件",
-    boundaries: ["模型与权限"],
+    boundaries: ["你的模型，", "你的选择。"],
     boundaryRows: [
       {
         title: "文件与会话",
-        body: "电脑保存会话和配置。文件访问需要授权。",
+        body: "会话和配置保存在电脑。选择工作目录，授权文件访问。",
       },
       {
         title: "模型选择",
-        body: "支持本地模型和云端模型。云端模型与联网工具接收任务内容。",
+        body: "选择本地模型，或接入云端模型。云端模型与联网工具接收任务内容。",
       },
       {
         title: "工具权限",
-        body: "敏感操作需要确认。技能提供操作步骤，MCP 连接外部工具。",
+        body: "查看操作请求，决定是否执行。技能提供操作步骤，MCP 连接外部工具。",
       },
     ],
     downloadTitle: ["下载知远"],
-    downloadBody: "选择操作系统对应的安装包。",
+    downloadBody: "安装桌面端，选择模型，创建任务。",
     source: "查看源代码",
     loading: "读取版本信息…",
     unavailable: "版本信息读取失败。",
@@ -67,8 +87,9 @@ export const COPY = {
     signingNote: "升级清单包含签名和 SHA-256 校验值。平台签名状态见版本说明。",
     footer: ["文档", "企业服务", "GitHub", "开源许可"],
     copyright: "© 2026 北京容芯致远",
-    enterpriseTitle: ["企业部署", "与系统接入"],
-    enterpriseLead: "部署知远，接入企业模型、知识库和业务系统。",
+    enterpriseTitle: ["团队的", "AI 工作室。"],
+    enterpriseLead:
+      "连接团队的模型、知识库与业务系统。让 AI 参与项目，交付文档、数据和代码。",
     contactAction: "联系企业服务",
     scope: "功能、部署范围和交付内容以合同约定为准。",
     architecture: [
@@ -76,7 +97,7 @@ export const COPY = {
       { title: "模型与知识库", items: ["模型接入", "共享知识"] },
       { title: "系统与权限", items: ["业务系统", "访问策略"] },
     ],
-    deliveryTitle: "项目交付",
+    deliveryTitle: "从一个任务，开始合作。",
     delivery: [
       {
         title: "确认需求",
@@ -99,24 +120,56 @@ export const COPY = {
       ["数据与权限", "本机存储", "成员权限、操作记录、数据管理"],
       ["部署与服务", "文档与社区", "部署、培训、运维"],
     ],
-    contactTitle: "联系企业服务",
-    contactBody: "提供员工人数、部署环境、接入系统和任务需求。",
+    contactTitle: "谈谈团队的工作。",
+    contactBody:
+      "告诉我们要完成的任务、使用人数和接入系统。我们确定部署方案与交付范围。",
     qr: ["用户社区", "官方公众号"],
   },
   en: {
-    nav: ["Task examples", "For teams", "Documentation"],
+    nav: ["Work & tasks", "For teams", "Documentation"],
+    inferenceNav: "Local models",
+    inferenceLabel: "Built-in inference engine",
+    inferenceTitle: ["A model", "on your computer."],
+    inferenceLead: [
+      "Find, install and run GGUF models.",
+      "ZhiYuan manages inference. Your computer provides the compute.",
+    ],
+    inferenceGuide: "Local model guide",
+    inferenceCaption: "ZhiYuan desktop · Model marketplace · Chinese UI",
+    inferenceImage: "View the model marketplace image",
+    inferenceSteps: [
+      {
+        title: "Choose a model",
+        body: "Search models, review specifications and download to your computer.",
+      },
+      {
+        title: "Use your hardware",
+        body: "Set context size, GPU allocation and thread count.",
+      },
+      {
+        title: "Put it to work",
+        body: "Connect a model with tool support to work on files and code.",
+      },
+    ],
+    inferenceNote:
+      "Model size and speed depend on your hardware. The Windows installer excludes local inference components.",
+
     download: "Download ZhiYuan",
     menu: "Navigation menu",
     close: "Close menu",
     skip: "Skip to content",
-    headline: ["Work with documents.", "Write and edit code."],
-    lead: "ZhiYuan is a desktop AI agent.",
+    headline: ["Your computer.", "Your"],
+    headlineAccent: "AI studio",
+    headlineEnd: ".",
+    lead: "ZhiYuan brings your files, models and tools to one workbench.",
     intro:
-      "It reads files, uses a browser, runs commands and creates documents and code.",
+      "Write reports, build spreadsheets and edit code. Turn tasks into files.",
     how: "View examples",
     local: "Open source · AGPL-3.0",
-    workflow: "Task examples",
-    workflowLabel: "Task examples",
+    workflow: "From task to finished work.",
+    workflowIntro:
+      "Meeting notes, expense summaries and code guides. Follow the task and download the result.",
+    workflowLabel: "Work & tasks",
     demoLabel: "Interactive demo",
     sampleLabel: "Sample task",
     demoNote:
@@ -148,7 +201,7 @@ export const COPY = {
     preview: "File preview",
     waiting: "Waiting for a file.",
     downloadSample: "Download sample file",
-    boundaries: ["Models and permissions"],
+    boundaries: ["Your models.", "Your choice."],
     boundaryRows: [
       {
         title: "Files and sessions",
@@ -164,7 +217,7 @@ export const COPY = {
       },
     ],
     downloadTitle: ["Download ZhiYuan"],
-    downloadBody: "Choose the installer for your operating system.",
+    downloadBody: "Install the app, choose a model and start a task.",
     source: "View source code",
     loading: "Loading the stable release…",
     unavailable: "Release information could not be loaded.",
@@ -178,9 +231,9 @@ export const COPY = {
       "Update manifests include signatures and SHA-256 hashes. See release notes for platform code-signing status.",
     footer: ["Docs", "For teams", "GitHub", "License"],
     copyright: "© 2026 Beijing Rongxin Zhiyuan",
-    enterpriseTitle: ["Enterprise deployment", "and integrations"],
+    enterpriseTitle: ["Your team’s", "AI studio."],
     enterpriseLead:
-      "Deploy ZhiYuan and connect company models, knowledge bases and business systems.",
+      "Connect your team’s models, knowledge bases and business systems. Bring AI into projects to create documents, data and code.",
     contactAction: "Contact enterprise sales",
     scope: "The contract defines features, deployment scope and deliverables.",
     architecture: [
@@ -197,7 +250,7 @@ export const COPY = {
         items: ["Business systems", "Access policies"],
       },
     ],
-    deliveryTitle: "Project delivery",
+    deliveryTitle: "Start with a task.",
     delivery: [
       {
         title: "Define requirements",
@@ -232,9 +285,9 @@ export const COPY = {
         "Deployment, training and operations",
       ],
     ],
-    contactTitle: "Contact enterprise sales",
+    contactTitle: "Let’s talk about your work.",
     contactBody:
-      "Provide team size, deployment environment, systems and task requirements.",
+      "Tell us about the task, your team and the systems to connect. We will define deployment and deliverables.",
     qr: ["User community", "Official account"],
   },
 };
