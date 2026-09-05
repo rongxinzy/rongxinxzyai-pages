@@ -34,6 +34,21 @@ export function TitleText({ text }: { text: string }) {
   );
 }
 
+export function TitleLines({
+  lines,
+  spaced = false,
+}: {
+  lines: string[];
+  spaced?: boolean;
+}) {
+  return lines.map((line, index) => (
+    <span key={line}>
+      <TitleText text={line} />
+      {spaced && index < lines.length - 1 ? " " : ""}
+    </span>
+  ));
+}
+
 export function Brand({ home }: { home: string }) {
   return (
     <a className="brand" href={home} aria-label="知远 ZhiYuan">

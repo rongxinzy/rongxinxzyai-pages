@@ -1,6 +1,6 @@
 import type { SiteSiteProps } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
-import { Arrow, TitleText } from "./SiteChrome";
+import { Arrow, TitleText, TitleLines } from "./SiteChrome";
 import { Workflow } from "./Workflow";
 import { Inference } from "./Inference";
 import { Downloads } from "./Downloads";
@@ -16,7 +16,10 @@ export function Home({
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-composition wrap">
           <h1 id="hero-title">
-            <span>{copy.headline[0]}</span>
+            <span>
+              {copy.headline[0]}
+              {locale === "en" ? " " : ""}
+            </span>
             <span>
               {copy.headline[1]}{" "}
               <em>
@@ -72,9 +75,7 @@ export function Home({
       >
         <div className="wrap boundary-layout">
           <h2 id="boundary-title">
-            {copy.boundaries.map((line) => (
-              <span key={line}>{line}</span>
-            ))}
+            <TitleLines lines={copy.boundaries} spaced={locale === "en"} />
           </h2>
           <div className="boundary-rows">
             {copy.boundaryRows.map((row, index) => (

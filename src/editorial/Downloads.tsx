@@ -5,7 +5,7 @@ import type {
   SiteReleaseStatus,
 } from "../shared/site-types";
 import { GITHUB, type EditorialCopy } from "./copy";
-import { Arrow } from "./SiteChrome";
+import { Arrow, TitleLines } from "./SiteChrome";
 import { Icon } from "./Icon";
 
 export function Downloads({
@@ -46,9 +46,7 @@ export function Downloads({
       <div className="download-layout">
         <div>
           <h2 id="download-title">
-            {copy.downloadTitle.map((line) => (
-              <span key={line}>{line}</span>
-            ))}
+            <TitleLines lines={copy.downloadTitle} spaced={locale === "en"} />
           </h2>
           <p className="section-lead">{copy.downloadBody}</p>
           <a className="text-link" href={GITHUB}>

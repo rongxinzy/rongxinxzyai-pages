@@ -1,7 +1,14 @@
+import type { SiteLocale } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
-import { Arrow, TitleText } from "./SiteChrome";
+import { Arrow, TitleLines } from "./SiteChrome";
 
-export function Enterprise({ copy }: { copy: EditorialCopy }) {
+export function Enterprise({
+  copy,
+  locale,
+}: {
+  copy: EditorialCopy;
+  locale: SiteLocale;
+}) {
   return (
     <main id="main" className="enterprise-page">
       <section
@@ -10,11 +17,7 @@ export function Enterprise({ copy }: { copy: EditorialCopy }) {
       >
         <div>
           <h1 id="enterprise-title">
-            {copy.enterpriseTitle.map((line) => (
-              <span key={line}>
-                <TitleText text={line} />
-              </span>
-            ))}
+            <TitleLines lines={copy.enterpriseTitle} spaced={locale === "en"} />
           </h1>
           <p className="section-lead">{copy.enterpriseLead}</p>
           <a className="button" href="#contact">

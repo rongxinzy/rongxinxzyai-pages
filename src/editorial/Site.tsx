@@ -16,7 +16,7 @@ export function EditorialSite(props: SiteSiteProps) {
       {props.page === "home" ? (
         <Home {...props} copy={copy} />
       ) : (
-        <Enterprise copy={copy} />
+        <Enterprise copy={copy} locale={props.locale} />
       )}
       <Footer locale={props.locale} copy={copy} />
     </div>
