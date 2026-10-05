@@ -74,7 +74,9 @@ export function Header({
       )
         setOpen(false);
     };
-    const desktop = window.matchMedia("(min-width: 768px)");
+    const desktop = window.matchMedia(
+      en ? "(min-width: 1280px)" : "(min-width: 768px)",
+    );
     const resized = () => {
       if (desktop.matches) setOpen(false);
     };
@@ -87,7 +89,7 @@ export function Header({
       window.removeEventListener("pointerdown", outside);
       desktop.removeEventListener("change", resized);
     };
-  }, [open]);
+  }, [open, en]);
 
   const nav = [
     { label: copy.navWorkflow, href: `${home}#workbench` },
@@ -98,10 +100,11 @@ export function Header({
       current: page === "enterprise",
     },
     { label: copy.navDocs, href: en ? `${GITHUB}#readme` : "/docs/" },
+    { label: copy.navBlog, href: "/blog/" },
   ];
 
   const downloadClass =
-    "inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-2 text-sm font-medium text-white transition-transform duration-200 hover:-translate-y-0.5";
+    "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-accent px-4 py-2 text-sm font-medium text-white transition-transform duration-200 hover:-translate-y-0.5";
 
   return (
     <header
@@ -129,14 +132,18 @@ export function Header({
             {copy.brandSub}
           </span>
         </div>
-        <nav className="hidden items-center gap-1 md:flex" aria-label={copy.menu}>
+        {/* 英文导航标签更宽，桌面导航到 xl 才展开，以下走汉堡菜单。 */}
+        <nav
+          className={cn("hidden items-center gap-1", en ? "xl:flex" : "md:flex")}
+          aria-label={copy.menu}
+        >
           {nav.map((item) => (
             <a
               key={item.label}
               href={item.href}
               aria-current={item.current ? "page" : undefined}
               className={cn(
-                "rounded-full px-3.5 py-1.5 text-sm text-muted transition-colors duration-200 hover:bg-mist hover:text-ink",
+                "whitespace-nowrap rounded-full px-3 py-1.5 text-sm text-muted transition-colors duration-200 hover:bg-mist hover:text-ink lg:px-3.5",
                 item.current && "bg-mist text-ink",
               )}
             >
@@ -154,7 +161,7 @@ export function Header({
             <span>{copy.star}</span>
           </a>
           <a
-            className="hidden text-[13px] text-muted transition-colors duration-200 hover:text-ink sm:block"
+            className="hidden whitespace-nowrap text-[13px] text-muted transition-colors duration-200 hover:text-ink sm:block"
             href={alternate}
             lang={en ? "zh-CN" : "en"}
           >
@@ -166,7 +173,10 @@ export function Header({
           </a>
           <button
             ref={toggle}
-            className="inline-flex items-center justify-center rounded-full p-2 text-ink transition-colors duration-200 hover:bg-mist md:hidden"
+            className={cn(
+              "inline-flex items-center justify-center rounded-full p-2 text-ink transition-colors duration-200 hover:bg-mist",
+              en ? "xl:hidden" : "md:hidden",
+            )}
             aria-expanded={open}
             aria-controls="site-navigation"
             aria-label={open ? copy.close : copy.menu}
@@ -179,7 +189,10 @@ export function Header({
       {open ? (
         <div
           id="site-navigation"
-          className="fixed inset-0 -z-10 flex flex-col bg-ground px-6 pb-8 pt-24 md:hidden"
+          className={cn(
+            "fixed inset-0 -z-10 flex flex-col bg-ground px-6 pb-8 pt-24",
+            en ? "xl:hidden" : "md:hidden",
+          )}
         >
           <nav aria-label={copy.menu} className="flex flex-col">
             {nav.map((item) => (

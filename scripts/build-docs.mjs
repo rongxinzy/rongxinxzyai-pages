@@ -4,13 +4,7 @@ import { cp, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, posix, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import matter from "gray-matter";
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkGfm from "remark-gfm";
-import remarkRehype from "remark-rehype";
-import rehypeSlug from "rehype-slug";
-import rehypeShiki from "@shikijs/rehype";
-import rehypeStringify from "rehype-stringify";
+import { renderMarkdown, textOf, walk } from "./lib/markdown-pipeline.mjs";
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const docsDir = join(projectRoot, "docs");
@@ -36,16 +30,6 @@ async function listMarkdown(dir) {
 function routeOf(file) {
   const rel = posix.normalize(file.slice(docsDir.length + 1)).replace(/\.md$/, "");
   return rel === "index" ? "" : rel.replace(/(^|\/)index$/, "");
-}
-
-function textOf(node) {
-  if (node.type === "text") return node.value;
-  return (node.children ?? []).map(textOf).join("");
-}
-
-function walk(node, visit) {
-  visit(node);
-  for (const child of node.children ?? []) walk(child, visit);
 }
 
 // 解析文内相对链接为 /docs/<route>/ 干净路径；锚点保留。
@@ -83,21 +67,6 @@ function rewriteImageSrc(src) {
   return match ? `${ASSETS_BASE}${match[1]}` : src;
 }
 
-// 去掉 shiki 写在 pre 上的内联背景色，让 CSS 里的 mist 底生效。
-function stripShikiPreBackground(node) {
-  walk(node, (element) => {
-    if (element.type !== "element" || element.tagName !== "pre") return;
-    const style = element.properties?.style;
-    if (typeof style !== "string") return;
-    const kept = style
-      .split(";")
-      .filter((part) => !part.trim().startsWith("background-color"))
-      .join(";");
-    if (kept.trim()) element.properties.style = kept;
-    else delete element.properties.style;
-  });
-}
-
 async function main() {
   const files = (await listMarkdown(docsDir)).filter(
     (file) => file !== join(docsDir, "index.md"),
@@ -105,40 +74,16 @@ async function main() {
   const routes = new Map();
   for (const file of files) routes.set(routeOf(file), file);
 
-  const processor = unified()
-    .use(remarkParse)
-    .use(remarkGfm)
-    .use(remarkRehype)
-    .use(rehypeSlug)
-    .use(rehypeShiki, { theme: "github-light" })
-    .use(rehypeStringify);
-
   const content = {};
   for (const [route, file] of routes) {
     const raw = await readFile(file, "utf8");
     const { data, content: body } = matter(raw);
     const fromDir = posix.dirname(posix.normalize(file.slice(docsDir.length + 1)));
 
-    const tree = processor.parse(body);
-    const hast = await processor.run(tree);
-
-    const headings = [];
-    walk(hast, (node) => {
-      if (node.type !== "element") return;
-      if (node.tagName === "h2" || node.tagName === "h3") {
-        const id = node.properties?.id;
-        if (typeof id === "string") {
-          headings.push({ id, text: textOf(node), depth: Number(node.tagName[1]) });
-        }
-      }
-      if (node.tagName === "a" && typeof node.properties?.href === "string") {
-        node.properties.href = rewriteHref(node.properties.href, fromDir, new Set(routes.keys()));
-      }
-      if (node.tagName === "img" && typeof node.properties?.src === "string") {
-        node.properties.src = rewriteImageSrc(node.properties.src);
-      }
+    const { html, headings, hast } = await renderMarkdown(body, {
+      rewriteHref: (href) => rewriteHref(href, fromDir, new Set(routes.keys())),
+      rewriteImageSrc,
     });
-    stripShikiPreBackground(hast);
 
     let title = typeof data.title === "string" ? data.title : "";
     if (!title) {
@@ -148,12 +93,11 @@ async function main() {
         }
       });
     }
-    if (!title) title = route.split("/").pop() || "知远智能体文档";
 
     content[route] = {
-      title,
+      title: title || route.split("/").pop() || "知远智能体文档",
       description: typeof data.description === "string" ? data.description : "",
-      html: processor.stringify(hast),
+      html,
       headings,
     };
   }

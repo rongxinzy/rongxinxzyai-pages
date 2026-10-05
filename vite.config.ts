@@ -3,15 +3,21 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from "node:url";
 
-// dev 下把 /docs/* 请求交给 docs.html（文档静态资源在 /docs-assets，不受影响）。
-function docsDevRewrite(): Plugin {
+// dev 下把 /docs/*、/blog/* 请求分别交给 docs.html、blog.html
+//（文档静态资源在 /docs-assets，不受影响）。
+function spaDevRewrite(): Plugin {
   return {
-    name: "docs-dev-rewrite",
+    name: "spa-dev-rewrite",
     configureServer(server) {
       server.middlewares.use((req, _res, next) => {
         const path = (req.url ?? "").split(/[?#]/, 1)[0];
         if (path === "/docs" || (path.startsWith("/docs/") && path !== "/docs.html")) {
           req.url = "/docs.html";
+        } else if (
+          path === "/blog" ||
+          (path.startsWith("/blog/") && path !== "/blog.html")
+        ) {
+          req.url = "/blog.html";
         }
         next();
       });
@@ -20,7 +26,7 @@ function docsDevRewrite(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), docsDevRewrite()],
+  plugins: [react(), tailwindcss(), spaDevRewrite()],
   appType: "mpa",
   server: {
     proxy: {
@@ -42,6 +48,7 @@ export default defineConfig({
           new URL("./en/enterprise/index.html", import.meta.url),
         ),
         docs: fileURLToPath(new URL("./docs.html", import.meta.url)),
+        blog: fileURLToPath(new URL("./blog.html", import.meta.url)),
       },
     },
   },

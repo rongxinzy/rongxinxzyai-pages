@@ -8,4 +8,5 @@ docs/.vitepress/cache
 .impeccable/config.local.json
 .impeccable/hook.cache.json
 src/docs/generated/
+src/blog/generated/
 public/docs-assets/

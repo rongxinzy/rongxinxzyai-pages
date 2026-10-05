@@ -40,6 +40,7 @@ export type EditorialCopy = {
   navInference: string;
   navEnterprise: string;
   navDocs: string;
+  navBlog: string;
   headerDownload: string;
   star: string;
   releaseStable: string;
@@ -160,6 +161,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     navInference: "本地推理引擎",
     navEnterprise: "企业服务",
     navDocs: "文档",
+    navBlog: "博客",
     headerDownload: "免费下载",
     star: "Star",
     releaseStable: "稳定版发布",
@@ -391,6 +393,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
           { label: "桌面工作台", href: "/#download" },
           { label: "工作台演示", href: "/#workbench" },
           { label: "企业服务", href: "/enterprise/" },
+          { label: "博客", href: "/blog/" },
           { label: "更新日志", href: `${GITHUB}/releases` },
         ],
       },
@@ -469,6 +472,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     navInference: "Local inference",
     navEnterprise: "For teams",
     navDocs: "Docs",
+    navBlog: "Blog",
     headerDownload: "Download",
     star: "Star",
     releaseStable: "stable release",
@@ -723,6 +727,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
           { label: "Desktop workbench", href: "/en/#download" },
           { label: "Workbench demo", href: "/en/#workbench" },
           { label: "For teams", href: "/en/enterprise/" },
+          { label: "Blog", href: "/blog/" },
           { label: "Release notes", href: `${GITHUB}/releases` },
         ],
       },

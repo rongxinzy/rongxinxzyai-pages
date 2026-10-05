@@ -4,11 +4,13 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm run generate:marketing && npm run docs:content && vite",
+    "dev": "npm run generate:marketing && npm run docs:content && npm run blog:content && vite",
     "generate:marketing": "node scripts/generate-marketing-pages.mjs",
     "docs:content": "node scripts/build-docs.mjs",
     "docs:emit": "node scripts/emit-docs-pages.mjs",
-    "build": "npm run generate:marketing && npm run docs:content && npm run typecheck:functions && tsc && vite build && npm run docs:emit",
+    "blog:content": "node scripts/build-blog.mjs",
+    "blog:emit": "node scripts/emit-blog-pages.mjs",
+    "build": "npm run generate:marketing && npm run docs:content && npm run blog:content && npm run typecheck:functions && tsc && vite build && npm run docs:emit && npm run blog:emit",
     "typecheck:functions": "tsc --project tsconfig.functions.json",
     "preview": "vite preview --host 127.0.0.1",
     "deploy": "npm run build && wrangler pages deploy dist --project-name rongxzyai-pages --branch main"
