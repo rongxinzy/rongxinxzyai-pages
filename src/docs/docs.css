@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Markdown 正文排版：颜色与线宽全部走 site.css 的 token。 */
+.docs-prose {
+  --tw-prose-body: var(--color-ink);
+  --tw-prose-headings: var(--color-ink);
+  --tw-prose-lead: var(--color-muted);
+  --tw-prose-links: var(--color-accent);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-counters: var(--color-muted);
+  --tw-prose-bullets: rgb(12 18 34 / 0.28);
+  --tw-prose-hr: var(--color-hairline);
+  --tw-prose-quotes: var(--color-ink);
+  --tw-prose-quote-borders: rgb(12 18 34 / 0.16);
+  --tw-prose-captions: var(--color-muted);
+  --tw-prose-kbd: var(--color-ink);
+  --tw-prose-kbd-shadows: rgb(12 18 34 / 0.1);
+  --tw-prose-code: var(--color-ink);
+  --tw-prose-pre-code: inherit;
+  --tw-prose-pre-bg: var(--color-mist);
+  --tw-prose-th-borders: rgb(12 18 34 / 0.16);
+  --tw-prose-td-borders: var(--color-hairline);
+}
+
+.docs-prose :where(h2, h3, h4) {
+  scroll-margin-top: 6.5rem;
+}
+
+.docs-prose :where(a) {
+  font-weight: 450;
+  text-decoration: none;
+}
+
+.docs-prose :where(a):hover {
+  text-decoration: underline;
+}
+
+.docs-prose :where(code):not(pre code) {
+  background-color: var(--color-mist);
+  border-radius: 6px;
+  padding: 0.15em 0.35em;
+  font-size: 0.875em;
+  font-weight: 500;
+}
+
+.docs-prose :where(code):not(pre code)::before,
+.docs-prose :where(code):not(pre code)::after {
+  content: none;
+}
+
+.docs-prose :where(pre) {
+  border: 1px solid var(--color-hairline);
+  border-radius: 12px;
+  font-weight: 450;
+}
+
+.docs-prose :where(img) {
+  border: 1px solid var(--color-hairline);
+  border-radius: 12px;
+}
+
+.docs-prose :where(table) {
+  font-variant-numeric: tabular-nums;
+}
+
+.docs-prose :where(blockquote) {
+  font-style: normal;
+  font-weight: 400;
+}
+
+@media (max-resolution: 1.2dppx) {
+  .docs-prose :where(pre) {
+    border-color: rgb(12 18 34 / 0.14);
+  }
+}

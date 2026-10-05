@@ -7,3 +7,5 @@ design/swarmmind-*.png
 docs/.vitepress/cache
 .impeccable/config.local.json
 .impeccable/hook.cache.json
+src/docs/generated/
+public/docs-assets/
