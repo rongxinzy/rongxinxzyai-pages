@@ -53,6 +53,22 @@
   --wrap: 80rem;
   --gutter: 1rem;
   --gutter-desktop: 2rem;
+
+  --fs-micro: 11px;
+}
+
+/* 1x displays: the micro type tier and hairlines sit on the pixel floor.
+   Give glyphs one more pixel row and borders enough alpha to survive. */
+@media (max-resolution: 1.2dppx) {
+  :root {
+    --fs-micro: 12px;
+    --hairline: rgba(9, 9, 11, 0.1);
+    --hairline-strong: rgba(9, 9, 11, 0.12);
+  }
+
+  body {
+    -webkit-font-smoothing: auto;
+  }
 }
 
 *,
@@ -196,14 +212,14 @@ li {
 
 .t-code-sm {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.02em;
 }
 
 .t-label {
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.04em;
@@ -265,7 +281,7 @@ li {
   background: var(--on-surface);
   color: var(--on-primary);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), var(--shadow-sm);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.04em;
@@ -293,7 +309,7 @@ li {
   background: var(--primary);
   color: var(--on-primary);
   box-shadow: var(--shadow-accent);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.04em;
@@ -315,7 +331,7 @@ li {
   background: var(--surface-lowest);
   color: var(--on-surface);
   box-shadow: var(--shadow-sm);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.04em;
@@ -331,7 +347,7 @@ li {
   text-transform: none;
   letter-spacing: 0.02em;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   line-height: 16px;
 }
@@ -342,7 +358,7 @@ li {
   gap: 4px;
   color: var(--primary);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.02em;
@@ -363,7 +379,7 @@ li {
   padding-inline: 8px;
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.02em;
@@ -411,7 +427,7 @@ li {
   border-radius: var(--radius-sm);
   background: var(--surface-container);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.02em;
@@ -437,7 +453,7 @@ li {
   align-items: center;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.08em;
@@ -503,7 +519,7 @@ li {
 .brand-sub {
   margin-top: 3px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--on-surface-variant);
@@ -546,7 +562,7 @@ li {
   border: 1px solid rgba(199, 196, 216, 0.4);
   background: var(--surface-low);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--on-surface-variant);
@@ -684,7 +700,7 @@ li {
   backdrop-filter: blur(12px);
   box-shadow: var(--shadow-sm);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.02em;
@@ -760,7 +776,7 @@ li {
   justify-content: center;
   gap: 24px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.02em;
@@ -863,7 +879,7 @@ li {
   align-items: center;
   gap: 4px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--on-surface-variant);
@@ -900,7 +916,7 @@ li {
   gap: 4px;
   padding: 2px 12px;
   border-radius: var(--radius-sm);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.04em;
@@ -940,7 +956,7 @@ li {
   background: rgba(0, 110, 75, 0.1);
   color: var(--tertiary);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
 }
@@ -984,7 +1000,7 @@ li {
 }
 
 .side-header .side-title {
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.08em;
@@ -994,7 +1010,7 @@ li {
 
 .side-header .side-state {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--primary);
@@ -1037,7 +1053,7 @@ li {
   background: rgba(53, 37, 205, 0.1);
   color: var(--primary);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
 }
 
@@ -1089,7 +1105,7 @@ li {
   border-radius: var(--radius-sm);
   background: var(--surface-highest);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.02em;
@@ -1141,7 +1157,7 @@ li {
 .canvas-doc-head .doc-overline {
   display: block;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1211,7 +1227,7 @@ li {
   padding: 4px 12px;
   background: var(--surface-low);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--on-surface-variant);
@@ -1228,7 +1244,7 @@ li {
 }
 
 .doc-table td.t-mono {
-  font-size: 11px;
+  font-size: var(--fs-micro);
   letter-spacing: 0.02em;
 }
 
@@ -1272,7 +1288,7 @@ li {
 .doc-task .task-assignee {
   display: block;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--on-surface-variant);
@@ -1391,7 +1407,7 @@ li {
 .module-monitor .monitor-value {
   display: block;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.02em;
@@ -1415,7 +1431,7 @@ li {
 
 .monitor-state {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--tertiary);
@@ -1467,7 +1483,7 @@ li {
   align-items: center;
   gap: 4px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -1512,7 +1528,7 @@ li {
   border-radius: var(--radius-sm);
   background: var(--surface-low);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.02em;
@@ -1551,7 +1567,7 @@ li {
 .bench-label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--on-surface-variant);
@@ -1576,7 +1592,7 @@ li {
   justify-content: space-between;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--on-surface);
@@ -1612,7 +1628,7 @@ li {
   background: var(--surface-lowest);
   box-shadow: var(--shadow-sm);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--on-surface);
@@ -1705,7 +1721,7 @@ li {
 .pillar-index {
   display: block;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--outline);
@@ -1727,7 +1743,7 @@ li {
   align-items: center;
   gap: 4px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
 }
@@ -1780,7 +1796,7 @@ li {
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--on-surface-variant);
@@ -1840,7 +1856,7 @@ li {
   gap: 2px;
   margin-top: 12px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.02em;
@@ -1856,7 +1872,7 @@ li {
   width: 100%;
   padding: 8px 12px;
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.04em;
@@ -1914,7 +1930,7 @@ li {
   gap: 8px;
   margin-bottom: 16px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--on-surface-variant);
@@ -1971,7 +1987,7 @@ li {
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.08em;
   color: var(--tertiary-fixed-dim);
@@ -2045,7 +2061,7 @@ li {
   border-radius: var(--radius-sm);
   background: var(--surface);
   color: var(--on-surface);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 600;
   letter-spacing: 0.04em;
   white-space: nowrap;
@@ -2119,7 +2135,7 @@ li {
 }
 
 .footer-col h3 {
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.08em;
@@ -2154,7 +2170,7 @@ li {
   justify-content: center;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--on-surface-variant);
@@ -2315,7 +2331,7 @@ li {
 
 .architecture-row p {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--on-surface-variant);
@@ -2355,7 +2371,7 @@ li {
   background: rgba(53, 37, 205, 0.1);
   color: var(--primary);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
 }
@@ -2412,7 +2428,7 @@ li {
 
 .comparison-table thead th {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2505,7 +2521,7 @@ li {
 
 .contact-qr figcaption {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--outline-variant);
@@ -2580,7 +2596,7 @@ li {
 .approval-denied {
   margin-top: 12px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--secondary-container);
