@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "world": "cloud-sea white workstation",
+  "mode": "persuade",
+  "colors": {
+    "ground": "#ffffff",
+    "mist": "#f6f8fb",
+    "ink": "#0c1222",
+    "muted": "#5b6478",
+    "accent": "#4f46e5",
+    "accent-2": "#0ea5e9",
+    "hairline": "rgb(12 18 34 / 0.08)"
+  },
+  "fonts": {
+    "sans": "Geist Variable",
+    "mono": "JetBrains Mono Variable"
+  },
+  "tokens": {
+    "fs-micro": "11px (12px @1x)",
+    "radius-card": "12-16px",
+    "shadow-card": "0 20px 60px rgb(12 18 34 / 0.10)"
+  },
+  "signature": "src/effects/CloudShader.tsx",
+  "effects": "src/effects/",
+  "brief": ".impeccable/surfaces/src-editorial-site-tsx.md"
+}

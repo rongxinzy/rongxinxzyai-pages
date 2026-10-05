@@ -25,7 +25,10 @@ export function EditorialSite(props: SiteSiteProps) {
   }, [props.page, props.locale]);
   return (
     <div className="editorial-site" data-locale={props.locale}>
-      <a className="skip-link" href="#main">
+      <a
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-5 focus:py-2 focus:text-sm focus:font-medium focus:text-white"
+        href="#main"
+      >
         {copy.skip}
       </a>
       <Header locale={props.locale} page={props.page} copy={copy} />

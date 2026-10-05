@@ -623,7 +623,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
       {
         chip: "Qwen 2.5 8B / 14B",
         status: "installed",
-        statusText: "已安装",
+        statusText: "Installed",
         title: "Dialogue and deep reasoning",
         desc: "General-purpose benchmark model. Chinese documents, structured table extraction and long-text summaries.",
         specs: [
@@ -635,7 +635,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
       {
         chip: "DeepSeek Coder 7B / 33B",
         status: "fetch",
-        statusText: "一键拉取",
+        statusText: "One-click install",
         title: "Code analysis and refactoring",
         desc: "Tuned for architecture and script review. Reads local repositories and produces function-level guides.",
         specs: [
@@ -647,7 +647,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
       {
         chip: "Llama 3.2 3B / 8B",
         status: "light",
-        statusText: "轻巧低耗",
+        statusText: "Lightweight",
         title: "Lightweight edge inference",
         desc: "Low resource use with streaming responses on entry-level hardware. Suited to background assist and quick classification.",
         specs: [

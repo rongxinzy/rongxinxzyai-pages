@@ -1,5 +1,5 @@
 /* Docs site header — aligned with the main site's design system
-   (tokens from zhiyuan_precision_workstation/DESIGN.md) */
+   (tokens from src/editorial/site.css) */
 
 .zy-site-header {
   position: fixed;
@@ -11,9 +11,9 @@
   gap: 16px;
   height: 64px;
   padding-inline: max(1rem, calc((100vw - 80rem) / 2 + 1rem));
-  border-bottom: 1px solid rgba(199, 196, 216, 0.3);
+  border-bottom: 1px solid rgb(12 18 34 / var(--hairline-alpha, 0.08));
   background: #ffffff;
-  color: #1c1b1d;
+  color: #0c1222;
   color-scheme: light;
   font-family: "Geist Variable", "Geist", "PingFang SC", -apple-system,
     "SF Pro SC", "Microsoft YaHei", sans-serif;
@@ -21,9 +21,9 @@
 }
 @supports (backdrop-filter: blur(1px)) {
   .zy-site-header {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 }
 .zy-site-brand {
@@ -47,13 +47,13 @@
   letter-spacing: -0.005em;
 }
 .zy-site-nav a {
-  color: #464555;
+  color: #5b6478;
   text-decoration: none;
   transition: color 0.15s ease;
 }
 .zy-site-nav a:hover,
 .zy-site-nav a[aria-current] {
-  color: #1c1b1d;
+  color: #0c1222;
 }
 .zy-site-nav a[aria-current] {
   font-weight: 600;
@@ -69,11 +69,11 @@
   justify-content: center;
   gap: 6px;
   padding: 8px 12px;
-  border-radius: 4px;
-  background: #3525cd;
+  border-radius: 9999px;
+  background: #4f46e5;
   color: #ffffff;
   box-shadow: 0 1px 2px rgba(79, 70, 229, 0.25);
-  font-size: 11px;
+  font-size: var(--fs-micro, 11px);
   font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.04em;
@@ -82,7 +82,7 @@
   transition: background 0.15s ease;
 }
 .zy-site-download:hover {
-  background: #4f46e5;
+  background: #4338ca;
 }
 .zy-site-download svg {
   width: 14px;
@@ -94,8 +94,8 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  border: 1px solid rgba(9, 9, 11, 0.08);
-  border-radius: 4px;
+  border: 1px solid rgb(12 18 34 / var(--hairline-alpha, 0.08));
+  border-radius: 9999px;
   background: #ffffff;
   color: inherit;
   cursor: pointer;
@@ -124,11 +124,11 @@
     inset-inline: 0;
     padding: 8px 16px 16px;
     background: #ffffff;
-    border-bottom: 1px solid rgba(199, 196, 216, 0.3);
+    border-bottom: 1px solid rgb(12 18 34 / var(--hairline-alpha, 0.08));
     box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.02),
-      0 8px 24px rgba(0, 0, 0, 0.04),
-      0 20px 48px -12px rgba(0, 0, 0, 0.03);
+      0 2px 4px rgba(12, 18, 34, 0.02),
+      0 8px 24px rgba(12, 18, 34, 0.04),
+      0 20px 48px -12px rgba(12, 18, 34, 0.03);
     margin: 0;
     font-size: 16px;
   }
@@ -140,7 +140,7 @@
   }
   .zy-site-nav a {
     padding: 12px 4px;
-    border-bottom: 1px solid rgba(9, 9, 11, 0.06);
+    border-bottom: 1px solid rgb(12 18 34 / var(--hairline-alpha, 0.08));
   }
   .zy-site-nav a:last-child {
     border-bottom: 0;

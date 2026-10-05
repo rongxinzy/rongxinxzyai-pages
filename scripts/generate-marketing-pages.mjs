@@ -90,10 +90,10 @@ function renderPage(page) {
   const alternate = absoluteUrl(page.alternatePath);
   const isEnglish = page.lang === "en";
   const isHome = page.page === "home";
-  const staticBackground = "#fcf8fb";
-  const staticText = "#1c1b1d";
-  const staticMuted = "#464555";
-  const staticButtonBackground = "#3525cd";
+  const staticBackground = "#ffffff";
+  const staticText = "#0c1222";
+  const staticMuted = "#5b6478";
+  const staticButtonBackground = "#4f46e5";
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": page.page === "enterprise" ? "WebPage" : "SoftwareApplication",
@@ -146,7 +146,7 @@ function renderPage(page) {
       .marketing-static-shell { min-height: 100vh; max-width: 1180px; margin: 0 auto; padding: 96px 24px; box-sizing: border-box; color: ${staticText}; font: 16px/1.6 "Geist Variable", "PingFang SC", "Microsoft YaHei", sans-serif; }
       .marketing-static-shell h1 { max-width: 20ch; margin: 0 0 20px; font-size: clamp(34px, 6vw, 64px); letter-spacing: -.03em; line-height: 1.15; font-weight: 600; }
       .marketing-static-shell p { max-width: 680px; color: ${staticMuted}; font-size: 18px; line-height: 1.6; }
-      .marketing-static-shell a { display: inline-block; margin-top: 12px; padding: 13px 24px; border-radius: 4px; background: ${staticButtonBackground}; color: #fff; font: inherit; font-size: 13px; font-weight: 600; letter-spacing: .04em; text-decoration: none; }
+      .marketing-static-shell a { display: inline-block; margin-top: 12px; padding: 13px 24px; border-radius: 9999px; background: ${staticButtonBackground}; color: #fff; font: inherit; font-size: 13px; font-weight: 600; letter-spacing: .04em; text-decoration: none; }
     </style>
   </head>
   <body>
