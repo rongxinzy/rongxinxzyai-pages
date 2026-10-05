@@ -28,6 +28,9 @@ jobs:
       - name: Use latest stable npm
         run: npm install -g npm@12
 
+      - name: Normalize lockfile registry URLs
+        run: sed -i 's|https://registry.npmmirror.com/|https://registry.npmjs.org/|g' package-lock.json
+
       - name: Install dependencies
         run: npm ci
 
