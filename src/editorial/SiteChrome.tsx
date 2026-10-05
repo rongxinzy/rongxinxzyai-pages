@@ -1,60 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-import { ControlIcon } from "./Icon";
-import type { SiteLocale, SitePage } from "../shared/site-types";
+import type { SiteLocale, SitePage, SiteRelease } from "../shared/site-types";
 import { GITHUB, isEnglish, type EditorialCopy } from "./copy";
+import { Icon } from "./icons";
 
-export function Arrow({ down = false }: { down?: boolean }) {
+export function Brand({ home, small = false }: { home: string; small?: boolean }) {
   return (
-    <svg
-      className={down ? "arrow arrow-down" : "arrow"}
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path d={down ? "M8 3v10m-4-4 4 4 4-4" : "M4 12 12 4M5 4h7v7"} />
-    </svg>
-  );
-}
-
-export function TitleText({ text }: { text: string }) {
-  return text.split(/\b(AI)\b/).map((part, index) =>
-    part === "AI" ? (
-      <span className="title-latin" key={index}>
-        {part}
-      </span>
-    ) : (
-      part
-    ),
-  );
-}
-
-export function TitleLines({
-  lines,
-  spaced = false,
-}: {
-  lines: string[];
-  spaced?: boolean;
-}) {
-  return lines.map((line, index) => (
-    <span key={line}>
-      <TitleText text={line} />
-      {spaced && index < lines.length - 1 ? " " : ""}
-    </span>
-  ));
-}
-
-export function Brand({ home }: { home: string }) {
-  return (
-    <a className="brand" href={home} aria-label="知远 ZhiYuan">
-      <span>知远</span>
-      <small>ZHIYUAN</small>
+    <a className="brand" href={home} aria-label="知远 Zhiyuan AI">
+      <img
+        src="/zhiyuan-logo.svg"
+        width={small ? 100 : 132}
+        height={24}
+        alt=""
+      />
     </a>
   );
 }
@@ -90,7 +47,7 @@ export function Header({
       )
         setOpen(false);
     };
-    const desktop = window.matchMedia("(min-width: 601px)");
+    const desktop = window.matchMedia("(min-width: 1024px)");
     const resized = () => {
       if (desktop.matches) setOpen(false);
     };
@@ -103,10 +60,20 @@ export function Header({
       desktop.removeEventListener("change", resized);
     };
   }, [open]);
+  const nav = [
+    { label: copy.navWorkflow, href: `${home}#workbench` },
+    { label: copy.navInference, href: `${home}#models` },
+    {
+      label: copy.navEnterprise,
+      href: enterprise,
+      current: page === "enterprise",
+    },
+    { label: copy.navDocs, href: en ? `${GITHUB}#readme` : "/docs/" },
+  ];
   return (
     <header
       ref={header}
-      className="site-header wrap"
+      className="site-header"
       onBlur={(event) => {
         if (
           event.relatedTarget instanceof Node &&
@@ -115,48 +82,55 @@ export function Header({
           setOpen(false);
       }}
     >
-      <Brand home={home} />
-      <nav
-        id="site-navigation"
-        className={open ? "site-nav is-open" : "site-nav"}
-        aria-label={copy.menu}
-      >
-        <a href={`${home}#workflow`} onClick={() => setOpen(false)}>
-          {copy.nav[0]}
-        </a>
-        <a href={`${home}#inference`} onClick={() => setOpen(false)}>
-          {copy.inferenceNav}
-        </a>
-        <a
-          href={enterprise}
-          aria-current={page === "enterprise" ? "page" : undefined}
+      <div className="site-header-inner wrap">
+        <Brand home={home} />
+        <nav
+          id="site-navigation"
+          className={open ? "site-nav is-open" : "site-nav"}
+          aria-label={copy.menu}
         >
-          {copy.nav[1]}
-        </a>
-        <a href={en ? `${GITHUB}#readme` : "/docs/"}>{copy.nav[2]}</a>
-      </nav>
-      <div className="header-actions">
-        <a
-          href={alternate}
-          lang={en ? "zh-CN" : "en"}
-          className="language-link"
-        >
-          {en ? "中文" : "EN"}
-        </a>
-        <a className="header-download" href={`${home}#download`}>
-          {en ? "Download" : "下载"}
-          <Arrow />
-        </a>
-        <button
-          ref={toggle}
-          className="menu-toggle"
-          aria-expanded={open}
-          aria-controls="site-navigation"
-          aria-label={open ? copy.close : copy.menu}
-          onClick={() => setOpen((value) => !value)}
-        >
-          <ControlIcon name={open ? "close" : "menu"} />
-        </button>
+          {nav.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              aria-current={item.current ? "page" : undefined}
+              onClick={() => setOpen(false)}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        <div className="header-actions">
+          <a
+            className="header-chip header-lang"
+            href={alternate}
+            lang={en ? "zh-CN" : "en"}
+          >
+            {en ? "中文" : "EN"}
+          </a>
+          <a
+            className="header-chip"
+            href={GITHUB}
+            aria-label={copy.star}
+          >
+            <Icon name="star" size={14} />
+            <span>{copy.star}</span>
+          </a>
+          <a className="btn-accent" href={`${home}#download`}>
+            <Icon name="download" size={16} />
+            <span>{copy.headerDownload}</span>
+          </a>
+          <button
+            ref={toggle}
+            className="menu-toggle"
+            aria-expanded={open}
+            aria-controls="site-navigation"
+            aria-label={open ? copy.close : copy.menu}
+            onClick={() => setOpen((value) => !value)}
+          >
+            <Icon name={open ? "close" : "menu"} size={18} />
+          </button>
+        </div>
       </div>
     </header>
   );
@@ -165,29 +139,60 @@ export function Header({
 export function Footer({
   locale,
   copy,
+  release,
+  releaseStatus,
 }: {
   locale: SiteLocale;
   copy: EditorialCopy;
+  release: SiteRelease | null;
+  releaseStatus: string;
 }) {
-  const en = isEnglish(locale),
-    home = en ? "/en/" : "/";
-  const links = [
-    en ? `${GITHUB}#readme` : "/docs/",
-    `${home}enterprise/`,
-    GITHUB,
+  const en = isEnglish(locale);
+  const home = en ? "/en/" : "/";
+  const legalLinks = [
     `${GITHUB}/blob/main/LICENSE`,
+    `${GITHUB}/releases`,
+    `${home}#local-models`,
   ];
   return (
-    <footer className="site-footer wrap">
-      <Brand home={home} />
-      <nav aria-label={en ? "Footer" : "页脚导航"}>
-        {copy.footer.map((label, index) => (
-          <a key={label} href={links[index]}>
-            {label}
-          </a>
-        ))}
-      </nav>
-      <small>{copy.copyright}</small>
+    <footer className="site-footer">
+      <div className="site-footer-inner wrap">
+        <div className="footer-grid">
+          <div className="footer-brand">
+            <Brand home={home} small />
+            <p>{copy.footerBrand}</p>
+            <span className="pill pill-live">
+              <span className="pill-dot" />
+              {release
+                ? `v${release.version} ${copy.footerRelease} · ${copy.footerPlatforms}`
+                : releaseStatus === "loading"
+                  ? copy.loading
+                  : `${copy.releaseFallback} · ${copy.footerPlatforms}`}
+            </span>
+          </div>
+          {copy.footerColumns.map((column) => (
+            <nav className="footer-col" key={column.title} aria-label={column.title}>
+              <h3>{column.title}</h3>
+              {column.links.map((link) => (
+                <a key={link.label} href={link.href}>
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          ))}
+        </div>
+        <div className="footer-bottom">
+          <div className="footer-legal">
+            {copy.footerLegal.map((label, index) => (
+              <span key={label} className="legal-item">
+                {index > 0 ? <span className="sep">·</span> : null}
+                <a href={legalLinks[index]}>{label}</a>
+              </span>
+            ))}
+          </div>
+          <p className="footer-copy">{copy.copyright}</p>
+        </div>
+      </div>
     </footer>
   );
 }

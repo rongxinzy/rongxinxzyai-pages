@@ -34,7 +34,12 @@ export function EditorialSite(props: SiteSiteProps) {
       ) : (
         <Enterprise copy={copy} locale={props.locale} />
       )}
-      <Footer locale={props.locale} copy={copy} />
+      <Footer
+        locale={props.locale}
+        copy={copy}
+        release={props.release}
+        releaseStatus={props.releaseStatus}
+      />
     </div>
   );
 }

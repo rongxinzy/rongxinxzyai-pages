@@ -1,100 +1,78 @@
 import type { SiteSiteProps } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
-import { Arrow, TitleText, TitleLines } from "./SiteChrome";
-import { Workflow } from "./Workflow";
-import { Inference } from "./Inference";
+import { Icon } from "./icons";
+import { Workbench } from "./Workbench";
+import { Models } from "./Models";
+import { Pillars } from "./Pillars";
 import { Downloads } from "./Downloads";
+
+const PLATFORM_ICONS = ["laptop", "monitor", "terminal"] as const;
 
 export function Home({
   copy,
   locale,
   release,
   releaseStatus,
+  preferredPlatform,
 }: SiteSiteProps & { copy: EditorialCopy }) {
   return (
-    <main id="main" tabIndex={-1}>
-      <section className="hero" aria-labelledby="hero-title">
-        <div className="hero-composition wrap">
-          <h1 id="hero-title">
+    <main id="main" className="site-main" tabIndex={-1}>
+      <div className="hero">
+        <div className="hero-glow" aria-hidden="true" />
+        <section className="hero-inner wrap" aria-labelledby="hero-title">
+          <div className="release-badge">
+            <span className="badge-dot" aria-hidden="true" />
             <span>
-              {copy.headline[0]}
-              {locale === "en" ? " " : ""}
+              {release ? `v${release.version}` : copy.releaseFallback}{" "}
+              {copy.releaseStable}
             </span>
-            <span>
-              {copy.headline[1]}{" "}
-              <em>
-                <TitleText text={copy.headlineAccent} />
-              </em>
-              {copy.headlineEnd}
+            <span className="badge-sep" aria-hidden="true">
+              ·
             </span>
-          </h1>
-          <div className="hero-summary">
-            <p>
-              {copy.lead}
-              <br />
-              {copy.intro}
-            </p>
-            <div className="hero-actions">
-              <a className="button" href="#download">
-                {copy.download}
-                <Arrow />
-              </a>
-              <a className="text-link" href="#workflow">
-                {copy.how}
-                <Arrow down />
-              </a>
-            </div>
+            <span className="badge-sub">{copy.heroBadgeSub}</span>
+            <Icon name="arrow-forward" size={14} />
           </div>
-        </div>
-        <div className="hero-photograph">
-          <img
-            src="/editorial/work-bridge.jpg"
-            width="2127"
-            height="739"
-            alt={
-              locale === "en"
-                ? "A paper bridge, documents and a metal block."
-                : "折纸桥、档案文件与金属方块。"
-            }
-            fetchPriority="high"
-          />
-        </div>
-        <div className="hero-colophon wrap">
-          <span>
-            Windows <i>/</i> macOS <i>/</i> Linux
-          </span>
-          <span>{copy.local}</span>
-        </div>
-      </section>
-      <Workflow locale={locale} copy={copy} />
-      <Inference locale={locale} copy={copy} />
-      <section
-        className="boundary-band"
-        id="local-models"
-        aria-labelledby="boundary-title"
-      >
-        <div className="wrap boundary-layout">
-          <h2 id="boundary-title">
-            <TitleLines lines={copy.boundaries} spaced={locale === "en"} />
-          </h2>
-          <div className="boundary-rows">
-            {copy.boundaryRows.map((row, index) => (
-              <article key={row.title}>
-                <span className="index-number">0{index + 1}</span>
-                <div>
-                  <h3>{row.title}</h3>
-                  <p>{row.body}</p>
-                </div>
-              </article>
+          <h1 id="hero-title" className="t-display">
+            {copy.headlineTop}
+            <br />
+            <span className="gradient">{copy.headlineAccent}</span>
+          </h1>
+          <p className="hero-lead t-body-lg">{copy.heroLead}</p>
+          <div className="hero-actions">
+            <a className="btn" href="#download">
+              <Icon name="download" size={18} />
+              <span>{copy.heroCtaPrimary}</span>
+              <span className="chip">{copy.agplChip}</span>
+            </a>
+            <a className="btn-ghost" href="#workbench">
+              <Icon name="play" size={18} />
+              <span>{copy.heroCtaSecondary}</span>
+            </a>
+          </div>
+          <div className="hero-platforms">
+            {copy.platforms.map((platform, index) => (
+              <span key={platform} className="platform-item">
+                {index > 0 ? (
+                  <span className="platform-sep" aria-hidden="true">
+                    /
+                  </span>
+                ) : null}
+                <Icon name={PLATFORM_ICONS[index]} size={15} />
+                {platform}
+              </span>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
+      <Workbench copy={copy} />
+      <Models copy={copy} />
+      <Pillars copy={copy} />
       <Downloads
         locale={locale}
         copy={copy}
         release={release}
         status={releaseStatus}
+        preferredPlatform={preferredPlatform}
       />
     </main>
   );

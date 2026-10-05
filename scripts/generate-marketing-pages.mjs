@@ -90,11 +90,10 @@ function renderPage(page) {
   const alternate = absoluteUrl(page.alternatePath);
   const isEnglish = page.lang === "en";
   const isHome = page.page === "home";
-  const staticBackground = "#f7f6f2";
-  const staticText = "#252821";
-  const staticMuted = "#66685e";
-  const staticButtonBorder = "#c34b32";
-  const staticButtonBackground = "#c34b32";
+  const staticBackground = "#fcf8fb";
+  const staticText = "#1c1b1d";
+  const staticMuted = "#464555";
+  const staticButtonBackground = "#3525cd";
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": page.page === "enterprise" ? "WebPage" : "SoftwareApplication",
@@ -141,14 +140,13 @@ function renderPage(page) {
     <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
     <title>${page.title}</title>
-${isHome ? '    <link rel="preload" as="image" href="/editorial/work-bridge.jpg" fetchpriority="high" />' : ""}
     <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
     <style>
       html, body { margin: 0; background: ${staticBackground}; }
-      .marketing-static-shell { min-height: 100vh; max-width: 1180px; margin: 0 auto; padding: 96px 24px; box-sizing: border-box; color: ${staticText}; font: 16px/1.6 Inter, "PingFang SC", "Microsoft YaHei", sans-serif; }
-      .marketing-static-shell h1 { max-width: 20ch; margin: 0 0 20px; font-family: "Songti SC", Georgia, serif; font-size: clamp(36px, 6vw, 88px); letter-spacing: -.04em; line-height: 1.3; }
-      .marketing-static-shell p { max-width: 680px; color: ${staticMuted}; font-size: 18px; }
-      .marketing-static-shell a { display: inline-block; padding: 13px 20px; border: 1px solid ${staticButtonBorder}; background: ${staticButtonBackground}; color: #fff; font: inherit; text-decoration: none; }
+      .marketing-static-shell { min-height: 100vh; max-width: 1180px; margin: 0 auto; padding: 96px 24px; box-sizing: border-box; color: ${staticText}; font: 16px/1.6 "Geist Variable", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .marketing-static-shell h1 { max-width: 20ch; margin: 0 0 20px; font-size: clamp(34px, 6vw, 64px); letter-spacing: -.03em; line-height: 1.15; font-weight: 600; }
+      .marketing-static-shell p { max-width: 680px; color: ${staticMuted}; font-size: 18px; line-height: 1.6; }
+      .marketing-static-shell a { display: inline-block; margin-top: 12px; padding: 13px 24px; border-radius: 4px; background: ${staticButtonBackground}; color: #fff; font: inherit; font-size: 13px; font-weight: 600; letter-spacing: .04em; text-decoration: none; }
     </style>
   </head>
   <body>

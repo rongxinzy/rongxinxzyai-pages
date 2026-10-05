@@ -1,7 +1,6 @@
-import { ControlIcon } from "./Icon";
 import type { SiteLocale } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
-import { Arrow, TitleLines } from "./SiteChrome";
+import { Icon } from "./icons";
 
 export function Enterprise({
   copy,
@@ -10,77 +9,72 @@ export function Enterprise({
   copy: EditorialCopy;
   locale: SiteLocale;
 }) {
+  const en = locale === "en";
   return (
-    <main id="main" tabIndex={-1} className="enterprise-page">
-      <section
-        className="enterprise-hero wrap"
-        aria-labelledby="enterprise-title"
-      >
+    <main id="main" className="site-main" tabIndex={-1}>
+      <section className="enterprise-hero wrap" aria-labelledby="enterprise-title">
         <div>
-          <h1 id="enterprise-title">
-            <TitleLines lines={copy.enterpriseTitle} spaced={locale === "en"} />
+          <span className="overline">ENTERPRISE / TEAMS</span>
+          <h1 id="enterprise-title" className="t-display">
+            {copy.enterpriseTitle[0]}
+            <br />
+            <span className="gradient">{copy.enterpriseTitle[1]}</span>
           </h1>
-          <p className="section-lead">{copy.enterpriseLead}</p>
-          <a className="button" href="#contact">
+          <p className="module-lead t-body-lg">{copy.enterpriseLead}</p>
+          <a className="btn" href="#contact">
             {copy.contactAction}
-            <Arrow />
+            <Icon name="arrow-forward" size={16} />
           </a>
           <p className="scope-note">{copy.scope}</p>
         </div>
-        <div className="architecture">
+        <div className="architecture-panel" aria-label={copy.architectureTitle}>
           {copy.architecture.map((row, index) => (
             <div className="architecture-row" key={row.title}>
               <div>
                 <h3>{row.title}</h3>
-                <p>{row.items.join(" / ")}</p>
+                <p>{row.items}</p>
               </div>
               <div className="architecture-nodes" aria-hidden="true">
-                {(["circle", "diamond", "grid"] as const).map(
-                  (symbol, node) => (
-                    <span key={node}>
-                      <ControlIcon
-                        name={
-                          index === 0
-                            ? "circle"
-                            : index === 1
-                              ? "diamond"
-                              : symbol
-                        }
-                      />
-                    </span>
-                  ),
-                )}
+                <Icon name={index === 0 ? "person" : index === 1 ? "dataset" : "shield"} size={20} />
               </div>
             </div>
           ))}
         </div>
       </section>
       <section
-        className="enterprise-delivery wrap section-space"
+        className="wrap section-space"
         aria-labelledby="delivery-title"
       >
-        <h2 id="delivery-title">{copy.deliveryTitle}</h2>
-        <ol>
+        <span className="overline">{copy.deliveryOverline}</span>
+        <h2 id="delivery-title" className="t-headline-lg">
+          {copy.deliveryTitle}
+        </h2>
+        <ol className="delivery-steps">
           {copy.delivery.map((step, index) => (
             <li key={step.title}>
-              <span className="index-number">0{index + 1}</span>
+              <span className="index-number" aria-hidden="true">
+                0{index + 1}
+              </span>
               <h3>{step.title}</h3>
               <p>{step.body}</p>
             </li>
           ))}
         </ol>
       </section>
-      <section className="comparison wrap" aria-labelledby="comparison-title">
-        <h2 id="comparison-title">{copy.comparisonTitle}</h2>
+      <section className="wrap section-space" aria-labelledby="comparison-title">
+        <span className="overline">{copy.comparisonOverline}</span>
+        <h2 id="comparison-title" className="t-headline-lg">
+          {copy.comparisonTitle}
+        </h2>
         <p className="scope-note">{copy.scope}</p>
-        <p className="comparison-hint">{copy.comparisonHint}</p>
+        <p className="scope-note">{copy.comparisonHint}</p>
         <div
           className="comparison-scroll"
           tabIndex={0}
           role="region"
           aria-label={copy.comparisonTitle}
         >
-          <table>
+          <table className="comparison-table">
             <thead>
               <tr>
                 {copy.headers.map((label) => (
@@ -102,23 +96,28 @@ export function Enterprise({
           </table>
         </div>
       </section>
-      <section
-        className="contact-band"
-        id="contact"
-        aria-labelledby="contact-title"
-      >
-        <div className="wrap contact-layout">
-          <div>
-            <h2 id="contact-title">{copy.contactTitle}</h2>
-            <p>{copy.contactBody}</p>
-            <a className="contact-email" href="mailto:likeran@rongxinzy.com">
-              likeran@rongxinzy.com
-              <Arrow />
-            </a>
-          </div>
-          <div className="contact-qr">
-            {["/zhiyuan-community-qr.png", "/zhiyuan-official-qr.png"].map(
-              (src, index) => (
+      <section className="wrap" id="contact" aria-labelledby="contact-title">
+        <div className="contact-panel">
+          <div className="contact-layout">
+            <div>
+              <span className="oss-overline">
+                <span className="pill-dot" />
+                {copy.contactOverline}
+              </span>
+              <h2 id="contact-title" className="t-headline-lg">
+                {copy.contactTitle}
+              </h2>
+              <p className="contact-body">{copy.contactBody}</p>
+              <a className="contact-email" href="mailto:likeran@rongxinzy.com">
+                likeran@rongxinzy.com
+                <Icon name="arrow-forward" size={14} />
+              </a>
+            </div>
+            <div className="contact-qr">
+              {[
+                en ? "/zhiyuan-community-qr.png" : "/zhiyuan-community-qr.png",
+                "/zhiyuan-official-qr.png",
+              ].map((src, index) => (
                 <figure key={src}>
                   <img
                     src={src}
@@ -129,8 +128,8 @@ export function Enterprise({
                   />
                   <figcaption>{copy.qr[index]}</figcaption>
                 </figure>
-              ),
-            )}
+              ))}
+            </div>
           </div>
         </div>
       </section>
