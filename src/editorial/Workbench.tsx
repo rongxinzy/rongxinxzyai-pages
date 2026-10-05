@@ -14,7 +14,7 @@ type Stage =
 
 export function Workbench({ copy }: { copy: EditorialCopy }) {
   const [selected, setSelected] = useState(0);
-  const [stage, setStage] = useState<Stage>("idle");
+  const [stage, setStage] = useState<Stage>("complete");
   const tabs = useRef<Array<HTMLButtonElement | null>>([]);
   const runButton = useRef<HTMLButtonElement>(null);
   const allowButton = useRef<HTMLButtonElement>(null);
@@ -48,15 +48,20 @@ export function Workbench({ copy }: { copy: EditorialCopy }) {
     return () => window.clearTimeout(timer);
   }, [stage]);
 
+  const previousStage = useRef<Stage | null>(null);
   useEffect(() => {
+    const previous = previousStage.current;
+    previousStage.current = stage;
+    if (previous === null || previous === stage) return;
     if (stage === "approval") allowButton.current?.focus({ preventScroll: true });
     if (stage === "complete") runButton.current?.focus({ preventScroll: true });
   }, [stage]);
 
-  const busy = stage === "reading" || stage === "writing";
+  const busy =
+    stage === "reading" || stage === "approval" || stage === "writing";
   const complete = stage === "complete";
   const activeStep =
-    stage === "reading" ? 0 : stage === "writing" ? 2 : -1;
+    stage === "reading" ? 0 : stage === "writing" || complete ? 2 : -1;
   const completeSteps =
     stage === "idle" ? 0 : stage === "reading" ? 0 : stage === "stopped" ? 2 : 2;
   const sideState = complete
@@ -158,7 +163,17 @@ export function Workbench({ copy }: { copy: EditorialCopy }) {
                       <div className="step-body">
                         <div className="step-title-row">
                           <h3>{step.title}</h3>
-                          <span className="chip">{step.badge}</span>
+                          <span
+                            className={
+                              complete && index === 1
+                                ? "chip chip-pass"
+                                : complete && index === 2
+                                  ? "chip chip-done"
+                                  : "chip"
+                            }
+                          >
+                            {step.badge}
+                          </span>
                         </div>
                         <p className="step-desc">{step.desc}</p>
                       </div>
@@ -249,14 +264,37 @@ export function Workbench({ copy }: { copy: EditorialCopy }) {
                           </tr>
                         </thead>
                         <tbody>
-                          {scenario.table.rows.map((row) => (
+                          {scenario.table.rows.map((row, rowIndex) => (
                             <tr key={row[0]}>
-                              <td>{row[0]}</td>
-                              <td className="t-mono">{row[1]}</td>
-                              <td className="t-mono text-tertiary">{row[2]}</td>
-                              <td>
-                                <span className="chip pill-fixed-green">{row[3]}</span>
-                              </td>
+                              {row.map((cell, cellIndex) =>
+                                cellIndex === row.length - 1 ? (
+                                  <td key={cellIndex}>
+                                    <span
+                                      className={
+                                        scenario.table?.tones?.[rowIndex] ===
+                                        "primary"
+                                          ? "chip pill-fixed"
+                                          : "chip pill-fixed-green"
+                                      }
+                                    >
+                                      {cell}
+                                    </span>
+                                  </td>
+                                ) : (
+                                  <td
+                                    key={cellIndex}
+                                    className={
+                                      cellIndex === 0
+                                        ? undefined
+                                        : cellIndex === 2
+                                          ? "t-mono text-tertiary"
+                                          : "t-mono"
+                                    }
+                                  >
+                                    {cell}
+                                  </td>
+                                ),
+                              )}
                             </tr>
                           ))}
                         </tbody>

@@ -67,7 +67,7 @@ export function Enterprise({
           {copy.comparisonTitle}
         </h2>
         <p className="scope-note">{copy.scope}</p>
-        <p className="scope-note">{copy.comparisonHint}</p>
+        <p className="scope-note comparison-hint">{copy.comparisonHint}</p>
         <div
           className="comparison-scroll"
           tabIndex={0}

@@ -1,3 +1,6 @@
+/* Docs site header — aligned with the main site's design system
+   (tokens from zhiyuan_precision_workstation/DESIGN.md) */
+
 .zy-site-header {
   position: fixed;
   inset: 0 0 auto;
@@ -5,70 +8,81 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 30px;
-  height: 88px;
-  padding-inline: max(4.5vw, calc((100vw - 1400px) / 2));
-  border-bottom: 1px solid #d3d3c9;
-  background: #f7f6f2;
-  color: #252821;
+  gap: 16px;
+  height: 64px;
+  padding-inline: max(1rem, calc((100vw - 80rem) / 2 + 1rem));
+  border-bottom: 1px solid rgba(199, 196, 216, 0.3);
+  background: #ffffff;
+  color: #1c1b1d;
   color-scheme: light;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-    "Microsoft YaHei", sans-serif;
+  font-family: "Geist Variable", "Geist", "PingFang SC", -apple-system,
+    "SF Pro SC", "Microsoft YaHei", sans-serif;
   line-height: 1.5;
+}
+@supports (backdrop-filter: blur(1px)) {
+  .zy-site-header {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
 }
 .zy-site-brand {
   display: inline-flex;
-  flex-direction: column;
   align-items: center;
-  color: inherit;
   text-decoration: none;
-  line-height: 1;
   flex-shrink: 0;
 }
-.zy-site-brand > span {
-  font-family: "Songti SC", "STSong", Georgia, serif;
-  font-size: 35px;
-  font-weight: 600;
-  letter-spacing: 0.025em;
-}
-.zy-site-brand small {
-  font-family: Georgia, serif;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  margin-top: 7px;
+.zy-site-brand img {
+  display: block;
+  height: 32px;
+  width: auto;
 }
 .zy-site-nav {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 24px;
   margin-left: auto;
   font-size: 14px;
+  line-height: 22px;
+  letter-spacing: -0.005em;
 }
-.zy-site-nav a,
-.zy-site-download {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
+.zy-site-nav a {
+  color: #464555;
   text-decoration: none;
+  transition: color 0.15s ease;
 }
 .zy-site-nav a:hover,
 .zy-site-nav a[aria-current] {
-  color: #bb432d;
+  color: #1c1b1d;
 }
 .zy-site-nav a[aria-current] {
-  text-decoration: underline;
-  text-underline-offset: 7px;
+  font-weight: 600;
 }
 .zy-header-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 .zy-site-download {
-  color: #bb432d;
-  font-size: 14px;
-  gap: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: #3525cd;
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(79, 70, 229, 0.25);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+.zy-site-download:hover {
+  background: #4f46e5;
 }
 .zy-site-download svg {
   width: 14px;
@@ -76,44 +90,45 @@
 }
 .zy-menu-toggle {
   display: none;
-  border: 0;
-  background: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(9, 9, 11, 0.08);
+  border-radius: 4px;
+  background: #ffffff;
   color: inherit;
-  padding: 10px;
-  min-width: 44px;
-  min-height: 44px;
   cursor: pointer;
 }
 .zy-menu-toggle svg {
   display: block;
-  width: 21px;
-  height: 21px;
+  width: 18px;
+  height: 18px;
+}
+@media (min-width: 768px) {
+  .zy-site-header {
+    padding-inline: max(2rem, calc((100vw - 80rem) / 2 + 2rem));
+  }
 }
 .zy-site-header a:focus-visible,
 .zy-site-header button:focus-visible {
-  outline: 2px solid #bb432d;
-  outline-offset: 4px;
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 @media (max-width: 700px) {
-  .zy-site-header {
-    height: 78px;
-    padding-inline: 5.5%;
-    gap: 20px;
-  }
-  .zy-site-brand > span {
-    font-size: 30px;
-  }
-  .zy-site-brand small {
-    font-size: 9px;
-  }
   .zy-site-nav {
     display: none;
     position: absolute;
-    top: 100%;
+    top: 64px;
     inset-inline: 0;
-    padding: 14px 5.5% 24px;
-    background: #f7f6f2;
-    border-bottom: 1px solid #d3d3c9;
+    padding: 8px 16px 16px;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(199, 196, 216, 0.3);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.02),
+      0 8px 24px rgba(0, 0, 0, 0.04),
+      0 20px 48px -12px rgba(0, 0, 0, 0.03);
     margin: 0;
     font-size: 16px;
   }
@@ -121,12 +136,16 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 4px;
+    gap: 0;
   }
   .zy-site-nav a {
-    padding-block: 10px;
+    padding: 12px 4px;
+    border-bottom: 1px solid rgba(9, 9, 11, 0.06);
+  }
+  .zy-site-nav a:last-child {
+    border-bottom: 0;
   }
   .zy-menu-toggle {
-    display: block;
+    display: inline-flex;
   }
 }

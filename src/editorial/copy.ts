@@ -6,7 +6,11 @@ export const isEnglish = (locale: SiteLocale) => locale === "en";
 type ScenarioDoc = {
   label: string;
   summary: string;
-  table?: { headers: string[]; rows: string[][] };
+  table?: {
+    headers: string[];
+    rows: string[][];
+    tones?: Array<"green" | "primary">;
+  };
   items: Array<{ title: string; meta: string }>;
   filename: string;
   content: string;
@@ -226,6 +230,20 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
         label: "会议纪要与决议",
         summary:
           "本次管理层确认向全栈私有化推理架构迁移。Q3 预算缩减云 API 支出 68%，全面采用本地统一算力集群进行代码审查与合同分析。",
+        table: {
+          headers: [
+            "项目条目",
+            "此前云端月均开销",
+            "知远本地化后预估",
+            "算力延迟 (P95)",
+            "状态",
+          ],
+          rows: [
+            ["代码生成与安全扫描", "¥ 38,400 / 月", "¥ 1,200 (电费)", "18 ms", "已切入"],
+            ["研报与合同深度解析", "¥ 52,000 / 月", "¥ 0 (端侧无上限)", "45 ms", "配置完成"],
+          ],
+          tones: ["green", "primary"],
+        },
         items: [
           { title: "工程部：部署 GGUF 14B Coder", meta: "指派给：架构组 · 截止本周五" },
           { title: "法务合规：审查端侧模型授权", meta: "指派给：审计室 · 隔离网闸运行" },
@@ -522,6 +540,20 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
         label: "Meeting notes & decisions",
         summary:
           "Management confirmed the migration to a fully private inference architecture. The Q3 budget cuts cloud API spending by 68%; code review and contract analysis move to the local compute cluster.",
+        table: {
+          headers: [
+            "Line item",
+            "Previous cloud monthly",
+            "Local estimate",
+            "Latency (P95)",
+            "Status",
+          ],
+          rows: [
+            ["Code generation & security scan", "$5,400 / mo", "$170 (electricity)", "18 ms", "Switched"],
+            ["Research & contract analysis", "$7,300 / mo", "$0 (no local cap)", "45 ms", "Configured"],
+          ],
+          tones: ["green", "primary"],
+        },
         items: [
           {
             title: "Engineering: deploy the GGUF 14B Coder",

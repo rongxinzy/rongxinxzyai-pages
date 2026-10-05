@@ -1,7 +1,7 @@
 <template>
   <header ref="header" class="zy-site-header" @keydown.esc="closeMenu">
     <a class="zy-site-brand" :href="SITE_HOME_URL" target="_self" aria-label="知远首页">
-      <span>知远</span><small>ZHIYUAN</small>
+      <img :src="withBase('/zhiyuan-logo.svg')" width="132" height="24" alt="" />
     </a>
     <nav
       id="docs-site-navigation"
@@ -62,6 +62,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
+import { withBase } from "vitepress";
 import {
   SITE_HOME_URL,
   SITE_NAVIGATION,

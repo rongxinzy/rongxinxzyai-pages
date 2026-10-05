@@ -4,3 +4,4 @@ dist
 *.local
 .wrangler
 design/swarmmind-*.png
+docs/.vitepress/cache
