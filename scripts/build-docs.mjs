@@ -16,8 +16,8 @@ const assetsTo = join(projectRoot, "public/docs-assets");
 const ASSETS_BASE = "/docs-assets/";
 
 const LOCALES = [
-  { id: "zh", srcDir: docsDir, outFile: "content.json", base: "/docs/" },
-  { id: "en", srcDir: join(docsDir, "en"), outFile: "content-en.json", base: "/en/docs/" },
+  { id: "zh", srcDir: docsDir, outFile: "content.json", base: "/docs/", assetsBase: ASSETS_BASE },
+  { id: "en", srcDir: join(docsDir, "en"), outFile: "content-en.json", base: "/en/docs/", assetsBase: `${ASSETS_BASE}en/` },
 ];
 
 async function listMarkdown(dir) {
@@ -67,12 +67,12 @@ function rewriteHref(href, fromDir, routes, base) {
   return href;
 }
 
-function rewriteImageSrc(src) {
+function rewriteImageSrc(src, assetsBase) {
   const match = src.replace(/^\.\//, "").match(/^(?:\.\.\/)*assets\/(.+)$/);
-  return match ? `${ASSETS_BASE}${match[1]}` : src;
+  return match ? `${assetsBase}${match[1]}` : src;
 }
 
-async function buildLocale({ srcDir, outFile, base }) {
+async function buildLocale({ srcDir, outFile, base, assetsBase }) {
   let files;
   try {
     files = await listMarkdown(srcDir);
@@ -100,7 +100,7 @@ async function buildLocale({ srcDir, outFile, base }) {
 
     const { html, headings, hast } = await renderMarkdown(body, {
       rewriteHref: (href) => rewriteHref(href, fromDir, new Set(routes.keys()), base),
-      rewriteImageSrc,
+      rewriteImageSrc: (src) => rewriteImageSrc(src, assetsBase),
     });
 
     let title = typeof data.title === "string" ? data.title : "";
@@ -132,6 +132,12 @@ async function main() {
     console.log(`docs(${locale.id}): ${total} routes -> ${join(generatedDir, locale.outFile)}`);
   }
   await cp(assetsFrom, assetsTo, { recursive: true });
+  // 英文文档的截图单独命名空间 /docs-assets/en/，与中文版本互不覆盖。
+  await cp(join(docsDir, "en", "assets"), join(assetsTo, "en"), { recursive: true }).catch(
+    (error) => {
+      if (error.code !== "ENOENT") throw error;
+    },
+  );
 }
 
 main().catch((error) => {

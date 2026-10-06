@@ -17,9 +17,9 @@ Local Inference only means model inference happens on your machine. If a task al
 
 ### 1. Select and Install a Model
 
-Go to Model Marketplace under Local Inference, select a GGUF model suitable for your device, and install it. Models in the Model Marketplace and their related files are provided by third-party model distribution channels such as [ModelScope](https://modelscope.cn/).
+Go to Model Marketplace under Local Inference, select a GGUF model suitable for your device, and install it. Models in the Model Marketplace and their related files are provided by [ModelScope](https://modelscope.cn/).
 
-The ZhiYuan agent shows compatibility suggestions based on detected device resources such as memory and GPU, but these suggestions are for reference only. Before installing, you can also check the model publisher, file size, and quantization version. If this is your first time, it is recommended to choose a recommended version or a model with a smaller parameter size.
+The Model Marketplace supports filtering by task type (chat, reasoning, code, vision, and more) and by device compatibility. The ZhiYuan agent shows compatibility suggestions based on detected device resources such as memory and GPU, but these suggestions are for reference only. Before installing, you can also check the model publisher, file size, and quantization version. If this is your first time, it is recommended to choose a recommended version or a model with a smaller parameter size. File integrity is verified during installation, and a model becomes usable only after the check passes.
 
 ![ZhiYuan agent Local Inference Model Marketplace](../assets/guide/local-inference/model-marketplace.png)
 

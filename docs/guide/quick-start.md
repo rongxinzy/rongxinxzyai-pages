@@ -24,10 +24,9 @@
 
 ![知远安装选项](../assets/guide/quick-start/installer-options.png)
 
-安装大约需要两到三分钟。
 ![知远安装进度](../assets/guide/quick-start/install-progress.png)
 
-首次启动后，你会看到知远的工作页面。它包含任务输入区、模型选择、权限设置和项目入口，可以从这里开始分配任务。
+首次启动后，你会看到知远的工作页面。页面顶部可以切换「工作」和「对话」两种模式：工作模式用于分配多步骤任务，对话模式用于日常问答。工作页面包含任务输入区、模型选择、权限设置和项目入口，可以从这里开始分配任务。
 
 ![知远工作页面](../assets/guide/quick-start/work-page.png)
 
@@ -35,7 +34,7 @@
 安装完成后启动知远智能体。建议按下面的顺序完成准备：
 
 1. 打开知远智能体。
-2. 完成模型配置，选择云端模型或本地模型。可以使用 [DeepSeek](https://platform.deepseek.com/) 做为比较有性价比的选择。
+2. 配置模型。知远内置免费模型，联网即可直接使用，无需 API Key；也可以在设置中接入 [DeepSeek](https://platform.deepseek.com/) 等云端模型，或[使用本地模型](./model/local.md)。
 3. 创建一个[工作页面](./first-work-page.md)。
 4. 用一个简单任务确认模型可以正常响应。
 

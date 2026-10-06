@@ -36,9 +36,9 @@ A task usually goes through the following process:
 
 ## Basic Concepts
 
-- **Work Page**: the main working area that holds tasks, materials, context, and results.
-- **Model**: the model responsible for understanding tasks and generating results. You can configure cloud models or local models.
-- **Skills**: reusable capabilities for specific types of work. ZhiYuan provides more than 40 built-in Skills and also supports creating custom Skills.
+- **Work Page**: the main working area that holds tasks, materials, context, and results. ZhiYuan offers Work and Chat modes: Work mode handles multi-step tasks, and Chat mode handles everyday Q&A.
+- **Model**: the model responsible for understanding tasks and generating results. ZhiYuan ships with a free built-in model, and you can also configure cloud models or local models.
+- **Skills**: reusable capabilities for specific types of work. ZhiYuan ships with dozens of built-in Skills covering office work, research, writing, marketing, data, and coding, and also supports creating custom Skills.
 - **Tools**: capabilities that help ZhiYuan search, process files, operate the browser, or complete other work.
 - **MCP**: an extension mechanism for connecting external tool services or internal services.
 

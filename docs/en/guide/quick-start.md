@@ -24,10 +24,9 @@ The installation page is shown below. Without special requirements, click Next t
 
 ![ZhiYuan installation options](../assets/guide/quick-start/installer-options.png)
 
-Installation takes about two to three minutes.
 ![ZhiYuan installation progress](../assets/guide/quick-start/install-progress.png)
 
-On first launch, you will see the ZhiYuan Work Page. It includes the task input area, model selection, permission settings, and the Projects entry. You can start assigning tasks from here.
+On first launch, you will see the ZhiYuan Work Page. The mode switch at the top toggles between Work and Chat: Work mode is for multi-step tasks, Chat mode is for everyday Q&A. The Work Page includes the task input area, model selection, permission settings, and the Projects entry. You can start assigning tasks from here.
 
 ![ZhiYuan Work Page](../assets/guide/quick-start/work-page.png)
 
@@ -35,7 +34,7 @@ On first launch, you will see the ZhiYuan Work Page. It includes the task input 
 After installation, launch the ZhiYuan agent. It is recommended to complete the setup in the following order:
 
 1. Open the ZhiYuan agent.
-2. Complete model configuration and choose a cloud model or a local model. [DeepSeek](https://platform.deepseek.com/) can be a cost-effective choice.
+2. Set up a model. ZhiYuan ships with a free built-in model that works online without an API Key; you can also connect a cloud provider such as [DeepSeek](https://platform.deepseek.com/) in Settings, or [use a local model](./model/local.md).
 3. Create a [Work Page](./first-work-page.md).
 4. Confirm the model responds normally with a simple task.
 

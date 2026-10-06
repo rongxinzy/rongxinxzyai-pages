@@ -4,7 +4,7 @@ After completing the [Quick Start](./quick-start.md) and configuring a model, yo
 
 ## Understanding the Work Page
 
-The Work Page is where ZhiYuan starts working. The center of the page is the task input area. At the bottom you can select a model and request permissions, and below that you can enter Projects.
+The Work Page is where ZhiYuan starts working. The center of the page is the task input area, where you can select a model, set the permission scope (Ask for permission or Allow all), and choose the project the task belongs to.
 
 ![ZhiYuan Work Page](../assets/guide/quick-start/work-page.png)
 
@@ -17,18 +17,16 @@ The Work Page is where ZhiYuan starts working. The center of the page is the tas
 
 For example, you can start with a clear small goal: organizing a file, summarizing a set of materials, or generating a first draft from existing content.
 
-## Generating a PPT
+## Using Quick Skills
 
-You can select a PPT template directly on the Work Page and have ZhiYuan generate a presentation from your content.
+Below the task input area, the Work Page offers quick skill entries such as Create Slides, Data Analysis, Create Website, Deep Research, Academic Research, and Documents.
 
-1. Select a suitable PPT template at the bottom of the page.
-2. Add the content you want to present in the task input area, and adjust the theme, structure, or other parameters as needed.
-3. Submit the task and wait for ZhiYuan to generate the PPT.
+1. Click a quick skill, for example "Create Slides".
+2. Describe the content you want to present in the task input area, such as a quarterly work summary, a project report, or a course lecture.
+3. Submit the task and wait for ZhiYuan to generate the result.
 4. Review the result and continue requesting revisions until it meets your expectations.
 
-For example, you can enter content such as a quarterly work summary, a project report, a course lecture, or an industry analysis, then select the corresponding template to start.
-
-![Generating a PPT with a template](../assets/guide/quick-start/ppt-template.png)
+![Quick skills on the Work Page](../assets/guide/quick-start/chat-shortcuts.png)
 
 ## Working in Projects
 
