@@ -110,7 +110,7 @@ export function Home({
         </div>
       </section>
 
-      <Showcase copy={copy} />
+      <Showcase copy={copy} locale={locale} />
 
       <div className="bg-mist">
         <div className={sectionPad}>

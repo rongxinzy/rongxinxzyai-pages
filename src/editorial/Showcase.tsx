@@ -9,6 +9,7 @@ import {
   type MotionValue,
 } from "motion/react";
 import { cn } from "../lib/utils";
+import type { SiteLocale } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
 
 const EASE = cubicBezier(0.22, 1, 0.36, 1);
@@ -21,37 +22,65 @@ function srcSet(name: string, widths: number[]) {
   return widths.map((w) => `/product/${name}-${w}.webp ${w}w`).join(", ");
 }
 
-const MAIN_SHOT = {
-  srcSet: srcSet("zhiyuan-model-market", [976, 1464, 1952, 2440]),
-  fallback: "/product/zhiyuan-model-market-1464.webp",
-  width: 1464,
-  height: 915,
-};
-const SECONDARY_SHOTS = [
-  {
-    srcSet: srcSet("zhiyuan-workspace", [640, 1184, 1352]),
-    fallback: "/product/zhiyuan-workspace-1184.webp",
-    width: 1184,
-    height: 786,
-  },
-  {
-    srcSet: srcSet("zhiyuan-skills", [640, 1184, 1776, 2440]),
-    fallback: "/product/zhiyuan-skills-1184.webp",
-    width: 1184,
-    height: 740,
-  },
-];
+// 英文页使用英文界面截图（-en 后缀），其余与中文版同规格。
+function shots(locale: SiteLocale) {
+  const en = locale === "en" ? "-en" : "";
+  return {
+    main: {
+      srcSet: srcSet(`zhiyuan-model-market${en}`, [976, 1464, 1952, 2440]),
+      fallback: `/product/zhiyuan-model-market${en}-1464.webp`,
+      width: 1464,
+      height: 915,
+    },
+    secondary: locale === "en"
+      ? [
+          {
+            srcSet: srcSet("zhiyuan-workspace-en", [640, 1184, 1776, 2440]),
+            fallback: "/product/zhiyuan-workspace-en-1184.webp",
+            width: 1184,
+            height: 740,
+          },
+          {
+            srcSet: srcSet("zhiyuan-skills-en", [640, 1184, 1776, 2440]),
+            fallback: "/product/zhiyuan-skills-en-1184.webp",
+            width: 1184,
+            height: 740,
+          },
+        ]
+      : [
+          {
+            srcSet: srcSet("zhiyuan-workspace", [640, 1184, 1352]),
+            fallback: "/product/zhiyuan-workspace-1184.webp",
+            width: 1184,
+            height: 786,
+          },
+          {
+            srcSet: srcSet("zhiyuan-skills", [640, 1184, 1776, 2440]),
+            fallback: "/product/zhiyuan-skills-1184.webp",
+            width: 1184,
+            height: 740,
+          },
+        ],
+  };
+}
 
 const CARD_CLASS =
   "showcase-card overflow-hidden rounded-2xl border border-hairline bg-white shadow-[0_20px_60px_rgb(12_18_34/0.10)] will-change-transform";
 
-export function Showcase({ copy }: { copy: EditorialCopy }) {
+export function Showcase({
+  copy,
+  locale,
+}: {
+  copy: EditorialCopy;
+  locale: SiteLocale;
+}) {
   const reduce = useReducedMotion();
   const track = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: track,
     offset: ["start start", "end end"],
   });
+  const assets = shots(locale);
 
   // 支持 animation-timeline 时由 CSS 滚动时间线在合成器线程驱动（见 site.css），
   // useScroll 只作为 Firefox 等尚不支持浏览器的 JS 回退。
@@ -104,12 +133,12 @@ export function Showcase({ copy }: { copy: EditorialCopy }) {
               className={CARD_CLASS}
             >
               <img
-                src={MAIN_SHOT.fallback}
-                srcSet={MAIN_SHOT.srcSet}
+                src={assets.main.fallback}
+                srcSet={assets.main.srcSet}
                 sizes={MAIN_SIZES}
                 alt={copy.showcaseAltMain}
-                width={MAIN_SHOT.width}
-                height={MAIN_SHOT.height}
+                width={assets.main.width}
+                height={assets.main.height}
                 loading="lazy"
                 decoding="async"
                 className="h-auto w-full"
@@ -133,7 +162,7 @@ export function Showcase({ copy }: { copy: EditorialCopy }) {
       </div>
 
       <div className="mx-auto grid max-w-7xl gap-6 px-6 pb-24 md:grid-cols-2 md:pb-32">
-        {SECONDARY_SHOTS.map((shot, index) => (
+        {assets.secondary.map((shot, index) => (
           <motion.figure
             key={shot.fallback}
             initial={reduce ? false : { opacity: 0, y: 24 }}
