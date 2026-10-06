@@ -1,6 +1,8 @@
 import { useLayoutEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
 import { useReducedMotion } from "motion/react";
 import type { SiteLocale } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
@@ -42,20 +44,21 @@ function shots(locale: SiteLocale): Shot[] {
 
 // 轨道停点：滚动进度（时间轴单位 0–100）→ 牌堆进度 ff。
 // ff = k 时第 k 张牌转正展示；ff 起始于 -0.35，首张牌以轻微扇形姿态入场。
-const STOPS = [0, 8, 20, 30, 42, 50, 62, 70, 82, 100];
-const FF = [-0.35, -0.35, 0, 0, 1, 1, 2, 2, 3, 3];
+// 停驻段刻意压短（6 单位）：钉住期间画面静止的滚动太长会读成卡顿。
+const STOPS = [0, 4, 20, 26, 42, 48, 64, 70, 86, 92, 100];
+const FF = [-0.35, -0.35, 0, 0, 1, 1, 2, 2, 3, 3, 3];
 
 // 透明度停点在每段转场的中点（ff = k + 0.5）处插入：退场牌在转场前半段
 // 内完全淡出，避免半透明残影盖住下一张。
-const O_STOPS = [0, 8, 20, 30, 36, 42, 50, 56, 62, 70, 76, 82, 100];
+const O_STOPS = [0, 4, 20, 26, 34, 42, 48, 56, 64, 70, 78, 86, 100];
 const O_FF = [-0.35, -0.35, 0, 0, 0.5, 1, 1, 1.5, 2, 2, 2.5, 3, 3];
 
 // 转场段（ff 发生变化的区间），供说明文字与进度点定位。
 const SEGMENTS = [
-  [8, 20],
-  [30, 42],
-  [50, 62],
-  [70, 82],
+  [4, 20],
+  [26, 42],
+  [48, 64],
+  [70, 86],
 ] as const;
 
 const clamp = (value: number, min: number, max: number) =>
@@ -96,13 +99,22 @@ export function Showcase({
 
   useLayoutEffect(() => {
     if (reduce) return;
+    // Lenis 把滚轮的阶梯式输入插值成连续滚动，scrub 动画才能拿到平滑进度；
+    // 由 gsap.ticker 驱动并与 ScrollTrigger 同步。scrub 只留 0.3 追帧，
+    // 避免与 Lenis 的惯性叠加成双重迟滞。
+    const lenis = new Lenis({ lerp: 0.11 });
+    lenis.on("scroll", ScrollTrigger.update);
+    const raf = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(raf);
+    gsap.ticker.lagSmoothing(0);
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".deck-track",
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.5,
+          scrub: 0.3,
         },
       });
 
@@ -141,14 +153,14 @@ export function Showcase({
           tl.fromTo(
             el,
             { autoAlpha: 0, y: 10 },
-            { autoAlpha: 1, y: 0, duration: 4.8, ease: "power2.out" },
-            start + 7.2,
+            { autoAlpha: 1, y: 0, duration: 6.4, ease: "power2.out" },
+            start + 9.6,
           );
         }
         if (i < SEGMENTS.length - 1) {
           tl.to(
             el,
-            { autoAlpha: 0, y: -14, duration: 4, ease: "power2.in" },
+            { autoAlpha: 0, y: -14, duration: 5.3, ease: "power2.in" },
             SEGMENTS[i + 1][0],
           );
         }
@@ -174,7 +186,11 @@ export function Showcase({
         }
       });
     }, section);
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      gsap.ticker.remove(raf);
+      lenis.destroy();
+    };
   }, [reduce, locale]);
 
   return (
@@ -228,7 +244,7 @@ export function Showcase({
           ))}
         </div>
       ) : (
-        <div className="deck-track relative mt-8 h-[380vh] md:mt-12">
+        <div className="deck-track relative mt-8 h-[330vh] md:mt-12">
           <div className="sticky top-0 flex h-svh flex-col items-center justify-center gap-5 px-6 md:gap-7">
             <div className="pointer-events-none relative aspect-[8/5] h-[min(56svh,calc((100vw-3rem)*0.625))]">
               {assets.map((shot, index) => (
