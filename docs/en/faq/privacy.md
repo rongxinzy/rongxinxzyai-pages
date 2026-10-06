@@ -1,6 +1,6 @@
 # Data and Privacy Policy
 
-Last updated: 2026-08-08. Operator: Beijing Rongxin Zhiyuan Technology Co., Ltd.
+Last updated: 2026-10-06. Operator: Beijing Rongxin Zhiyuan Technology Co., Ltd.
 
 ## Product Data
 
@@ -18,7 +18,7 @@ The official website is hosted on Cloudflare Pages. The network service may proc
 
 ## Code Signing
 
-ZhiYuan is applying for the SignPath Foundation's open source code signing service. Once approved and enabled, code signing will only be used for the project's own binaries built by the controlled GitHub Actions release pipeline from the RongxinAI public repository. See the [Code signing policy on the official website](https://www.rongxzyai.com/#code-signing-policy) for the signing policy, roles, and release conditions.
+The current installers are not code-signed; Windows and macOS may warn that the publisher is unverified. Verify installer integrity against the SHA-256 checksums published on the release page.
 
 ## Contact and Rights
 
