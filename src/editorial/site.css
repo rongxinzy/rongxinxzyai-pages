@@ -157,3 +157,55 @@
     }
   }
 }
+
+/* 第二屏 Showcase：CSS scroll-driven 动画，滚动进度与 transform/opacity 的映射在
+   合成器线程完成，主线程上的 React 渲染、图片解码都不会造成掉帧。
+   进度口径：轨道高度大于视口时，view-timeline 的 contain 段正好覆盖
+   「轨道顶对齐视口顶 → 轨道底对齐视口底」，与 JS 回退的
+   offset ["start start","end end"] 进度 1:1 对应，无需按断点换算。 */
+.showcase-track {
+  view-timeline: --showcase block;
+}
+
+@keyframes showcase-settle {
+  from {
+    transform: translateY(32px) scale(0.94) rotateX(16deg);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes showcase-caption-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  .showcase-card {
+    animation: showcase-settle cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-timeline: --showcase;
+    animation-range: contain 0% contain 38%;
+  }
+
+  .showcase-caption {
+    animation: showcase-caption-in ease-out both;
+    animation-timeline: --showcase;
+    animation-range:
+      contain calc(var(--at) * 100%)
+      contain calc((var(--at) + 0.06) * 100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .showcase-card,
+    .showcase-caption {
+      animation: none;
+    }
+  }
+}

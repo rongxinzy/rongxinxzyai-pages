@@ -3,7 +3,7 @@ import type { SiteSiteProps } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
 import { GITHUB } from "./copy";
 import { Icon } from "./icons";
-import { Workbench } from "./Workbench";
+import { Showcase } from "./Showcase";
 import { Models } from "./Models";
 import { Pillars } from "./Pillars";
 import { Downloads } from "./Downloads";
@@ -11,7 +11,6 @@ import { CloudShader } from "../effects/CloudShader";
 import { TextGenerateEffect } from "../effects/TextGenerateEffect";
 import { MovingBorderButton } from "../effects/MovingBorder";
 import { BackgroundBeams } from "../effects/BackgroundBeams";
-import { ContainerScroll } from "../effects/ContainerScroll";
 
 const PLATFORM_ICONS = ["laptop", "monitor", "terminal"] as const;
 
@@ -111,25 +110,7 @@ export function Home({
         </div>
       </section>
 
-      <section aria-labelledby="workbench-title" className="relative -mt-[8vh] bg-ground">
-        <ContainerScroll
-          titleComponent={
-            <div className="px-6">
-              <h2
-                id="workbench-title"
-                className="text-3xl font-semibold tracking-[-0.02em] text-ink md:text-4xl"
-              >
-                {copy.heroCtaSecondary}
-              </h2>
-              <p className="mx-auto mt-3 max-w-xl text-sm text-muted">
-                {copy.demoNote}
-              </p>
-            </div>
-          }
-        >
-          <Workbench copy={copy} />
-        </ContainerScroll>
-      </section>
+      <Showcase copy={copy} />
 
       <div className="bg-mist">
         <div className={sectionPad}>

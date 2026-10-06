@@ -3,19 +3,6 @@ import type { SiteLocale } from "../shared/site-types";
 export const GITHUB = "https://github.com/rongxinzy/RongxinAI";
 export const isEnglish = (locale: SiteLocale) => locale === "en";
 
-type ScenarioDoc = {
-  label: string;
-  summary: string;
-  table?: {
-    headers: string[];
-    rows: string[][];
-    tones?: Array<"green" | "primary">;
-  };
-  items: Array<{ title: string; meta: string }>;
-  filename: string;
-  content: string;
-};
-
 type ModelCard = {
   chip: string;
   status: "installed" | "fetch" | "light";
@@ -53,36 +40,12 @@ export type EditorialCopy = {
   agplChip: string;
   heroCtaSecondary: string;
   platforms: string[];
-  workbenchPath: string;
-  enginePill: string;
-  sideTitle: string;
-  sideStateIdle: string;
-  sideStateRunning: string;
-  sideStateDone: string;
-  flowSteps: Array<{ title: string; desc: string; badge: string }>;
-  logTitle: string;
-  logPid: string;
-  logLines: string[];
-  docOverline: string;
-  copyMarkdown: string;
-  exportReport: string;
-  summaryLabel: string;
-  actionTitle: string;
-  composerHint: string;
-  run: string;
-  running: string;
-  replay: string;
-  ready: string;
-  done: string;
-  approval: string;
-  approvalBody: string;
-  allow: string;
-  deny: string;
-  denied: string;
-  waiting: string;
-  downloadSample: string;
-  demoNote: string;
-  scenarios: ScenarioDoc[];
+  showcaseOverline: string;
+  showcaseTitle: string;
+  showcaseLead: string;
+  showcaseAltMain: string;
+  showcaseCaptions: Array<{ title: string; desc: string }>;
+  showcaseShots: Array<{ label: string; alt: string }>;
   modelsOverline: string;
   modelsTitle: string;
   modelsLead: string;
@@ -173,117 +136,39 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
       "知远把资料、模型与工具放进一个工作台。写报告、做表格、改代码；内置高性能推理引擎直接管理与调用 GGUF 离线权重。数据留在本机，算力直接可用。",
     heroCtaPrimary: "免费下载客户端",
     agplChip: "AGPL-3.0",
-    heroCtaSecondary: "探索工作台交互演示",
+    heroCtaSecondary: "查看产品界面",
     platforms: [
       "macOS (Apple Silicon / Intel)",
       "Windows (x64)",
       "Linux (deb / AppImage)",
     ],
-    workbenchPath: "/Project_Zhiyuan_Q3/Market_Strategy.zy",
-    enginePill: "Local Inference · 42.8 t/s",
-    sideTitle: "执行工作流流水线",
-    sideStateIdle: "STATE: 00/03 IDLE",
-    sideStateRunning: "STATE: RUNNING",
-    sideStateDone: "STATE: 03/03 DONE",
-    flowSteps: [
+    showcaseOverline: "DESKTOP WORKBENCH",
+    showcaseTitle: "任务、模型与工具，一个工作台。",
+    showcaseLead:
+      "左侧进入本地推理、自动化与专家；模型市场搜索、安装、启动 GGUF 离线模型。",
+    showcaseAltMain: "知远桌面客户端的模型市场，列出可安装的离线模型",
+    showcaseCaptions: [
       {
-        title: "读取材料",
-        desc: "挂载本地目录授权，语义切片与向量索引。",
-        badge: "2 份文件",
+        title: "模型市场",
+        desc: "搜索、安装、启动离线模型，推理服务由工作台在后台管理。",
       },
       {
-        title: "调用工具链",
-        desc: "本地沙箱解析财务公式，浏览器插件抓取行情基准。",
-        badge: "PASS 100%",
+        title: "专家与技能",
+        desc: "预封装的最佳实践与工具，按任务调用。",
       },
       {
-        title: "生成交付作品",
-        desc: "生成带财务校验的执行备忘录与责任追踪清单。",
-        badge: "已导出",
+        title: "本机工作区",
+        desc: "任务在授权文件夹中执行，输出写回同一位置。",
       },
     ],
-    logTitle: "LOCAL_RUNNER_LOG",
-    logPid: "PID: 88412",
-    logLines: [
-      "> inference: Qwen2.5-14B-Instruct-Q4_K_M.gguf",
-      "> prompt_tokens: 3,412 | completion: 618 (0.84s)",
-    ],
-    docOverline: "ZHIYUAN WORKBENCH OUTPUT",
-    copyMarkdown: "复制 Markdown",
-    exportReport: "导出报告",
-    summaryLabel: "AI 核心提炼与决议",
-    actionTitle: "下阶段行动项 (Action Items)",
-    composerHint: "追问细节，或输入「/」调取本地工具集…",
-    run: "执行",
-    running: "处理中",
-    replay: "重播演示",
-    ready: "等待运行",
-    done: "完成",
-    approval: "文件生成请求",
-    approvalBody: "生成输出文件需要确认。",
-    allow: "允许生成",
-    deny: "停止任务",
-    denied: "文件生成取消。",
-    waiting: "运行演示后，输出文件在这里生成。",
-    downloadSample: "下载示例文件",
-    demoNote: "网页演示使用样例文件。桌面应用处理用户文件。",
-    scenarios: [
+    showcaseShots: [
       {
-        label: "会议纪要与决议",
-        summary:
-          "本次管理层确认向全栈私有化推理架构迁移。Q3 预算缩减云 API 支出 68%，全面采用本地统一算力集群进行代码审查与合同分析。",
-        table: {
-          headers: [
-            "项目条目",
-            "此前云端月均开销",
-            "知远本地化后预估",
-            "算力延迟 (P95)",
-            "状态",
-          ],
-          rows: [
-            ["代码生成与安全扫描", "¥ 38,400 / 月", "¥ 1,200 (电费)", "18 ms", "已切入"],
-            ["研报与合同深度解析", "¥ 52,000 / 月", "¥ 0 (端侧无上限)", "45 ms", "配置完成"],
-          ],
-          tones: ["green", "primary"],
-        },
-        items: [
-          { title: "工程部：部署 GGUF 14B Coder", meta: "指派给：架构组 · 截止本周五" },
-          { title: "法务合规：审查端侧模型授权", meta: "指派给：审计室 · 隔离网闸运行" },
-        ],
-        filename: "项目摘要.md",
-        content:
-          "# 项目摘要\n\n> 知远官网演示 · 以下为示例数据\n\n## 本周进展\n需求范围：登录页、费用表导出。\n\n## 下一步\n测试登录流程和 CSV 导出，记录错误。\n\n## 待确认\n待确认：测试日期、参与人员。\n\n## 来源\n- 示例会议纪要.md\n- 示例项目进度表.csv",
+        label: "主界面：一个输入框分配任务",
+        alt: "知远桌面客户端主界面，中间是任务输入框",
       },
       {
-        label: "费用汇总与审计",
-        summary:
-          "完成三季度费用归集，核对分类与缺失金额。餐饮类目存在原始记录缺项，已列入待确认清单，不计入本次合计。",
-        table: {
-          headers: ["项目条目", "此前云端月均", "本地化后预估", "状态"],
-          rows: [
-            ["代码生成与安全扫描", "¥ 38,400 / 月", "¥ 1,200 (电费)", "已切入"],
-            ["研报与合同深度解析", "¥ 52,000 / 月", "¥ 0 (端侧无上限)", "配置完成"],
-          ],
-        },
-        items: [
-          { title: "财务：补齐餐饮原始凭证", meta: "指派给：财务室 · 本周内" },
-          { title: "审计：复核云端支出下降口径", meta: "指派给：审计室 · 季度报告引用" },
-        ],
-        filename: "费用汇总.csv",
-        content:
-          "类别,金额,备注\n办公用品,320,示例数据\n交通,180,示例数据\n餐饮,待确认,原始记录缺少金额\n",
-      },
-      {
-        label: "代码导读与重构",
-        summary:
-          "梳理示例仓库的模块关系与调用链，入口至组件分层清晰。测试尚未执行，导读结论以源码静态分析为准。",
-        items: [
-          { title: "工程部：补全入口单元测试", meta: "指派给：架构组 · 下周前" },
-          { title: "文档：同步导读至团队知识库", meta: "指派给：项目组 · 随版本发布" },
-        ],
-        filename: "代码导读.md",
-        content:
-          "# 代码导读\n\n> 知远官网演示 · 虚构示例项目\n\n## 入口\nsrc/main.tsx 挂载应用。\n\n## 模块关系\nApp 组合页面，components 存放界面组件。\n\n## 阅读顺序\n1. main.tsx\n2. App.tsx\n3. components/\n\n测试状态：未执行。",
+        label: "专家：技能按任务安装调用",
+        alt: "知远桌面客户端的专家页，列出已安装技能",
       },
     ],
     modelsOverline: "MODULE 02 // NATIVE INFERENCE ENGINE",
@@ -391,7 +276,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
         title: "产品",
         links: [
           { label: "桌面工作台", href: "/#download" },
-          { label: "工作台演示", href: "/#workbench" },
+          { label: "产品界面", href: "/#workbench" },
           { label: "企业服务", href: "/enterprise/" },
           { label: "博客", href: "/blog/" },
           { label: "更新日志", href: `${GITHUB}/releases` },
@@ -484,136 +369,40 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
       "ZhiYuan brings your files, models and tools to one workbench. Write reports, build spreadsheets and edit code. A built-in inference engine manages and runs GGUF offline weights. Data stays on your machine.",
     heroCtaPrimary: "Download the desktop app",
     agplChip: "AGPL-3.0",
-    heroCtaSecondary: "Explore the workbench demo",
+    heroCtaSecondary: "See the product",
     platforms: [
       "macOS (Apple Silicon / Intel)",
       "Windows (x64)",
       "Linux (deb / AppImage)",
     ],
-    workbenchPath: "/Project_Zhiyuan_Q3/Market_Strategy.zy",
-    enginePill: "Local Inference · 42.8 t/s",
-    sideTitle: "Execution pipeline",
-    sideStateIdle: "STATE: 00/03 IDLE",
-    sideStateRunning: "STATE: RUNNING",
-    sideStateDone: "STATE: 03/03 DONE",
-    flowSteps: [
+    showcaseOverline: "DESKTOP WORKBENCH",
+    showcaseTitle: "Tasks, models and tools. One workbench.",
+    showcaseLead:
+      "Local inference, automation and experts in the sidebar; the built-in market installs and runs GGUF offline models.",
+    showcaseAltMain:
+      "The ZhiYuan desktop client's model market, listing installable offline models",
+    showcaseCaptions: [
       {
-        title: "Read the material",
-        desc: "Mount authorized local directories. Semantic chunking and vector indexing.",
-        badge: "2 files",
+        title: "Model market",
+        desc: "Find, install and run offline models; the workbench manages the inference service in the background.",
       },
       {
-        title: "Invoke the tool chain",
-        desc: "A local sandbox parses formulas; a browser plugin fetches benchmarks.",
-        badge: "PASS 100%",
+        title: "Experts & skills",
+        desc: "Prepackaged practices and tools, called per task.",
       },
       {
-        title: "Deliver the output",
-        desc: "Generate an execution memo with financial checks and an owner list.",
-        badge: "Exported",
+        title: "Local workspace",
+        desc: "Tasks run inside authorized folders; output is written back to the same place.",
       },
     ],
-    logTitle: "LOCAL_RUNNER_LOG",
-    logPid: "PID: 88412",
-    logLines: [
-      "> inference: Qwen2.5-14B-Instruct-Q4_K_M.gguf",
-      "> prompt_tokens: 3,412 | completion: 618 (0.84s)",
-    ],
-    docOverline: "ZHIYUAN WORKBENCH OUTPUT",
-    copyMarkdown: "Copy Markdown",
-    exportReport: "Export report",
-    summaryLabel: "AI summary and decisions",
-    actionTitle: "Action items",
-    composerHint: "Follow up, or type “/” to call local tools…",
-    run: "Run",
-    running: "Working",
-    replay: "Run again",
-    ready: "Ready to run",
-    done: "Complete",
-    approval: "File creation request",
-    approvalBody: "File creation requires approval.",
-    allow: "Allow creation",
-    deny: "Stop task",
-    denied: "File creation cancelled.",
-    waiting: "Run the demo and the output file appears here.",
-    downloadSample: "Download sample file",
-    demoNote:
-      "The web demo uses sample files. The desktop app processes user files.",
-    scenarios: [
+    showcaseShots: [
       {
-        label: "Meeting notes & decisions",
-        summary:
-          "Management confirmed the migration to a fully private inference architecture. The Q3 budget cuts cloud API spending by 68%; code review and contract analysis move to the local compute cluster.",
-        table: {
-          headers: [
-            "Line item",
-            "Previous cloud monthly",
-            "Local estimate",
-            "Latency (P95)",
-            "Status",
-          ],
-          rows: [
-            ["Code generation & security scan", "$5,400 / mo", "$170 (electricity)", "18 ms", "Switched"],
-            ["Research & contract analysis", "$7,300 / mo", "$0 (no local cap)", "45 ms", "Configured"],
-          ],
-          tones: ["green", "primary"],
-        },
-        items: [
-          {
-            title: "Engineering: deploy the GGUF 14B Coder",
-            meta: "Assigned to: Architecture · due Friday",
-          },
-          {
-            title: "Legal: review on-device model licensing",
-            meta: "Assigned to: Audit · air-gapped environment",
-          },
-        ],
-        filename: "project-summary.md",
-        content:
-          "# Project summary\n\n> ZhiYuan website demo — sample data\n\n## Progress\nScope: login page and expense export.\n\n## Next steps\nTest login and CSV export. Record errors.\n\n## Open questions\nTo confirm: test dates and participants.\n\n## Sources\n- sample-meeting-notes.md\n- sample-progress.csv",
+        label: "Home: assign a task from one input box",
+        alt: "ZhiYuan desktop client home with the task input box",
       },
       {
-        label: "Expense summary & audit",
-        summary:
-          "Q3 expenses grouped and cross-checked. The meals category has entries with missing amounts; they are listed for confirmation and excluded from the total.",
-        table: {
-          headers: ["Line item", "Previous cloud monthly", "Local estimate", "Status"],
-          rows: [
-            ["Code generation & security scan", "$5,400 / mo", "$170 (electricity)", "Switched"],
-            ["Research & contract analysis", "$7,300 / mo", "$0 (no local cap)", "Configured"],
-          ],
-        },
-        items: [
-          {
-            title: "Finance: complete meal receipts",
-            meta: "Assigned to: Finance · this week",
-          },
-          {
-            title: "Audit: verify the cloud spend reduction",
-            meta: "Assigned to: Audit · quoted in the quarterly report",
-          },
-        ],
-        filename: "expenses.csv",
-        content:
-          "Category,Amount,Note\nOffice supplies,320,Sample data\nTravel,180,Sample data\nMeals,Unconfirmed,Missing amount in source\n",
-      },
-      {
-        label: "Code guide & refactoring",
-        summary:
-          "Module relationships and call chains mapped for the sample repository. Tests have not run; the guide reflects static source analysis.",
-        items: [
-          {
-            title: "Engineering: add unit tests for the entry point",
-            meta: "Assigned to: Architecture · next week",
-          },
-          {
-            title: "Docs: publish the guide to the team knowledge base",
-            meta: "Assigned to: Project team · with the release",
-          },
-        ],
-        filename: "code-guide.md",
-        content:
-          "# Code guide\n\n> ZhiYuan website demo — fictional project\n\n## Entry point\nsrc/main.tsx mounts the application.\n\n## Modules\nApp composes pages; components contains UI components.\n\n## Reading order\n1. main.tsx\n2. App.tsx\n3. components/\n\nTest status: not executed.",
+        label: "Experts: skills installed and called per task",
+        alt: "ZhiYuan desktop client experts page listing installed skills",
       },
     ],
     modelsOverline: "MODULE 02 // NATIVE INFERENCE ENGINE",
@@ -725,7 +514,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
         title: "Product",
         links: [
           { label: "Desktop workbench", href: "/en/#download" },
-          { label: "Workbench demo", href: "/en/#workbench" },
+          { label: "Product interface", href: "/en/#workbench" },
           { label: "For teams", href: "/en/enterprise/" },
           { label: "Blog", href: "/blog/" },
           { label: "Release notes", href: `${GITHUB}/releases` },
