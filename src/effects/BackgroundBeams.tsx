@@ -1,4 +1,5 @@
-import { motion } from "motion/react";
+import { motion, useInView } from "motion/react";
+import { useRef } from "react";
 import { cn } from "../lib/utils";
 
 const PATHS = [
@@ -17,8 +18,14 @@ const PATHS = [
 ];
 
 export function BackgroundBeams({ className }: { className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  // Animated beams unmount offscreen; the static base paths stay, so the
+  // visible result is identical while the gradient repaint loop only runs
+  // near the viewport.
+  const inView = useInView(ref, { margin: "240px" });
   return (
     <div
+      ref={ref}
       className={cn(
         "pointer-events-none absolute inset-0 h-full w-full overflow-hidden",
         className,
@@ -41,41 +48,43 @@ export function BackgroundBeams({ className }: { className?: string }) {
             strokeWidth="0.6"
           />
         ))}
-        {PATHS.map((d, index) => (
-          <motion.path
-            key={`beam-${index}`}
-            d={d}
-            stroke={`url(#beam-gradient-${index})`}
-            strokeOpacity="0.5"
-            strokeWidth="0.6"
-          />
-        ))}
-        <defs>
-          {PATHS.map((_, index) => (
-            <motion.linearGradient
-              key={`gradient-${index}`}
-              id={`beam-gradient-${index}`}
-              gradientUnits="userSpaceOnUse"
-              initial={{ x1: "0%", x2: "0%", y1: "100%", y2: "100%" }}
-              animate={{
-                x1: ["0%", "100%"],
-                x2: ["0%", "95%"],
-                y1: ["100%", "0%"],
-                y2: ["100%", `${5 + ((index * 3) % 10)}%`],
-              }}
-              transition={{
-                duration: 10 + ((index * 1.7) % 8),
-                ease: "easeInOut",
-                repeat: Infinity,
-                delay: (index * 2.3) % 8,
-              }}
-            >
-              <stop stopColor="#4f46e5" stopOpacity="0" />
-              <stop stopColor="#4f46e5" stopOpacity="0.6" />
-              <stop offset="32.5%" stopColor="#0ea5e9" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0" />
-            </motion.linearGradient>
+        {inView &&
+          PATHS.map((d, index) => (
+            <motion.path
+              key={`beam-${index}`}
+              d={d}
+              stroke={`url(#beam-gradient-${index})`}
+              strokeOpacity="0.5"
+              strokeWidth="0.6"
+            />
           ))}
+        <defs>
+          {inView &&
+            PATHS.map((_, index) => (
+              <motion.linearGradient
+                key={`gradient-${index}`}
+                id={`beam-gradient-${index}`}
+                gradientUnits="userSpaceOnUse"
+                initial={{ x1: "0%", x2: "0%", y1: "100%", y2: "100%" }}
+                animate={{
+                  x1: ["0%", "100%"],
+                  x2: ["0%", "95%"],
+                  y1: ["100%", "0%"],
+                  y2: ["100%", `${5 + ((index * 3) % 10)}%`],
+                }}
+                transition={{
+                  duration: 10 + ((index * 1.7) % 8),
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                  delay: (index * 2.3) % 8,
+                }}
+              >
+                <stop stopColor="#4f46e5" stopOpacity="0" />
+                <stop stopColor="#4f46e5" stopOpacity="0.6" />
+                <stop offset="32.5%" stopColor="#0ea5e9" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0" />
+              </motion.linearGradient>
+            ))}
         </defs>
       </svg>
     </div>

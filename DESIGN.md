@@ -4,7 +4,7 @@
 
 ## 签名元素
 
-CloudShader（`src/effects/CloudShader.tsx`）：零依赖原生 WebGL 云层 shader，铺满首页与企业页首屏。白云慢速漂移，底部渐隐入纯白。DPR ≤2，尊重 prefers-reduced-motion。
+CloudShader（`src/effects/CloudShader.tsx`）：零依赖原生 WebGL 云层 shader，铺满首页与企业页首屏。白云慢速漂移，底部渐隐入纯白。DPR ≤2，渲染缓冲上限 1920×1080（低频内容放大不可辨）；滚出视口或切后台即暂停，prefers-reduced-motion 只画一帧静态。
 
 ## Token（`src/editorial/site.css` `@theme`）
 

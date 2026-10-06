@@ -211,6 +211,17 @@ function parseHex(color: string): [number, number, number] {
   return [0.95, 0.95, 0.95];
 }
 
+const colorCache = new Map<string, [number, number, number]>();
+
+function parseHexCached(color: string): [number, number, number] {
+  let parsed = colorCache.get(color);
+  if (!parsed) {
+    parsed = parseHex(color);
+    colorCache.set(color, parsed);
+  }
+  return parsed;
+}
+
 function compile(gl: WebGLRenderingContext, type: number, source: string) {
   const shader = gl.createShader(type);
   if (!shader) return null;
@@ -294,36 +305,41 @@ export const CloudShader = ({
 
     let frame = 0;
     let running = true;
+    let inView = false;
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+
+    // Clouds are low-frequency; beyond 1080p of backing pixels the extra
+    // resolution is invisible after upscaling, so cap the renderbuffer.
+    const MAX_BACKING_PIXELS = 1920 * 1080;
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
-      const w = Math.max(1, Math.floor(width * dpr));
-      const h = Math.max(1, Math.floor(height * dpr));
+      const scale = Math.min(
+        1,
+        Math.sqrt(MAX_BACKING_PIXELS / Math.max(1, width * height * dpr * dpr)),
+      );
+      const w = Math.max(1, Math.floor(width * dpr * scale));
+      const h = Math.max(1, Math.floor(height * dpr * scale));
       if (canvas.width !== w || canvas.height !== h) {
         canvas.width = w;
         canvas.height = h;
       }
       gl.viewport(0, 0, w, h);
       gl.uniform2f(loc.res, w, h);
+      if (reduceMotion) renderFrame(performance.now());
     };
 
-    const observer = new ResizeObserver(resize);
-    observer.observe(canvas);
-    resize();
-
     const start = performance.now();
-    const draw = (now: number) => {
-      if (!running) return;
+    const renderFrame = (now: number) => {
       const p = paramsRef.current;
       const elapsed = reduceMotion ? 0 : ((now - start) / 1000) * p.speed;
-      const cloud = parseHex(p.cloudColor);
-      const skyTop = parseHex(p.skyTopColor);
-      const skyBottom = parseHex(p.skyBottomColor);
+      const cloud = parseHexCached(p.cloudColor);
+      const skyTop = parseHexCached(p.skyTopColor);
+      const skyBottom = parseHexCached(p.skyBottomColor);
 
       gl.uniform1f(loc.time, elapsed);
       gl.uniform1f(loc.count, Math.min(6, Math.max(1, p.count)));
@@ -331,15 +347,49 @@ export const CloudShader = ({
       gl.uniform3f(loc.skyTop, skyTop[0], skyTop[1], skyTop[2]);
       gl.uniform3f(loc.skyBottom, skyBottom[0], skyBottom[1], skyBottom[2]);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
-      frame = requestAnimationFrame(draw);
     };
 
-    frame = requestAnimationFrame(draw);
+    const play = () => {
+      if (frame || !running || reduceMotion || !inView || document.hidden)
+        return;
+      frame = requestAnimationFrame(tick);
+    };
+    const tick = (now: number) => {
+      frame = 0;
+      renderFrame(now);
+      play();
+    };
+    const pause = () => {
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+    };
+
+    const observer = new ResizeObserver(resize);
+    observer.observe(canvas);
+
+    const visibility = new IntersectionObserver((entries) => {
+      inView = entries[0]?.isIntersecting ?? false;
+      if (inView) play();
+      else pause();
+    });
+    visibility.observe(canvas);
+
+    const onVisibilityChange = () => {
+      if (document.hidden) pause();
+      else play();
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
+    resize();
+    if (reduceMotion) renderFrame(performance.now());
+    else play();
 
     return () => {
       running = false;
-      cancelAnimationFrame(frame);
+      pause();
       observer.disconnect();
+      visibility.disconnect();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       gl.deleteBuffer(buffer);
       gl.deleteProgram(program);
       gl.deleteShader(vert);

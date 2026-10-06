@@ -1,10 +1,13 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import type { SiteSiteProps } from "../shared/site-types";
 import { COPY } from "./copy";
 import { Header, Footer } from "./SiteChrome";
 import { Home } from "./Home";
-import { Enterprise } from "./Enterprise";
 import "./site.css";
+
+const Enterprise = lazy(() =>
+  import("./Enterprise").then((m) => ({ default: m.Enterprise })),
+);
 
 export function EditorialSite(props: SiteSiteProps) {
   const copy = COPY[props.locale];
@@ -35,7 +38,9 @@ export function EditorialSite(props: SiteSiteProps) {
       {props.page === "home" ? (
         <Home {...props} copy={copy} />
       ) : (
-        <Enterprise copy={copy} locale={props.locale} />
+        <Suspense fallback={null}>
+          <Enterprise copy={copy} locale={props.locale} />
+        </Suspense>
       )}
       <Footer
         locale={props.locale}
