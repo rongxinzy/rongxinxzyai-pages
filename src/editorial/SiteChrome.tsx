@@ -101,7 +101,7 @@ export function Header({
       href: enterprise,
       current: page === "enterprise",
     },
-    { label: copy.navDocs, href: "/docs/" },
+    { label: copy.navDocs, href: en ? "/en/docs/" : "/docs/" },
     { label: copy.navBlog, href: "/blog/" },
   ];
 

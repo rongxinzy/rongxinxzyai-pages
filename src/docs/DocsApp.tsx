@@ -2,18 +2,86 @@ import { useEffect, useMemo, useState } from "react";
 import { Header, Footer } from "../editorial/SiteChrome";
 import { COPY } from "../editorial/copy";
 import { cn } from "../lib/utils";
-import { DOCS_NAV, DOCS_SEQUENCE, docsHref, type DocsNavItem } from "./nav";
+import {
+  DOCS_NAV,
+  DOCS_NAV_EN,
+  DOCS_SEQUENCE,
+  DOCS_SEQUENCE_EN,
+  docsHref,
+  type DocsLocale,
+  type DocsNavGroup,
+  type DocsNavItem,
+  type DocsNavLink,
+} from "./nav";
 import type { DocsHeading, DocsPage } from "./types";
 import rawContent from "./generated/content.json";
+import rawContentEn from "./generated/content-en.json";
 
-const CONTENT = rawContent as unknown as Record<string, DocsPage>;
-const copy = COPY["zh-CN"];
+const CONTENT: Record<DocsLocale, Record<string, DocsPage>> = {
+  zh: rawContent as unknown as Record<string, DocsPage>,
+  en: rawContentEn as unknown as Record<string, DocsPage>,
+};
 
-function currentRoute(): string {
-  return window.location.pathname.replace(/^\/docs\/?/, "").replace(/\/+$/, "");
+const UI = {
+  zh: {
+    outline: "本页内容",
+    menu: "文档目录",
+    menuClose: "关闭目录",
+    home: "文档首页",
+    prev: "上一篇",
+    next: "下一篇",
+    prevNext: "上一篇和下一篇",
+    titleSuffix: "知远智能体文档",
+    homeTitle: "知远智能体文档",
+    homeLead: "安装知远、配置模型、创建任务。",
+    homeTailPre: "从",
+    homeTailLink: "快速开始",
+    homeTailPost: "读起，或在左侧目录中选择一篇。",
+  },
+  en: {
+    outline: "On this page",
+    menu: "Docs menu",
+    menuClose: "Close menu",
+    home: "Docs home",
+    prev: "Previous",
+    next: "Next",
+    prevNext: "Previous and next pages",
+    titleSuffix: "ZhiYuan Docs",
+    homeTitle: "ZhiYuan Docs",
+    homeLead: "Install ZhiYuan, set up models, and create tasks.",
+    homeTailPre: "Start with ",
+    homeTailLink: "Quick start",
+    homeTailPost: ", or pick a page from the sidebar.",
+  },
+} as const;
+
+type Ui = (typeof UI)[DocsLocale];
+
+const NAV: Record<DocsLocale, DocsNavGroup[]> = { zh: DOCS_NAV, en: DOCS_NAV_EN };
+const SEQUENCE: Record<DocsLocale, DocsNavLink[]> = {
+  zh: DOCS_SEQUENCE,
+  en: DOCS_SEQUENCE_EN,
+};
+
+function detectLocale(): DocsLocale {
+  return window.location.pathname.startsWith("/en/docs") ? "en" : "zh";
 }
 
-function SidebarItems({ route, onNavigate }: { route: string; onNavigate?: () => void }) {
+function currentRoute(locale: DocsLocale): string {
+  return window.location.pathname
+    .replace(locale === "en" ? /^\/en\/docs\/?/ : /^\/docs\/?/, "")
+    .replace(/\/+$/, "");
+}
+
+function SidebarItems({
+  route,
+  locale,
+  onNavigate,
+}: {
+  route: string;
+  locale: DocsLocale;
+  onNavigate?: () => void;
+}) {
   const renderItem = (item: DocsNavItem, nested = false) => {
     if (item.items) {
       return (
@@ -29,7 +97,7 @@ function SidebarItems({ route, onNavigate }: { route: string; onNavigate?: () =>
     return (
       <li key={item.route}>
         <a
-          href={docsHref(item.route!)}
+          href={docsHref(item.route!, locale)}
           aria-current={active ? "page" : undefined}
           onClick={onNavigate}
           className={cn(
@@ -47,7 +115,7 @@ function SidebarItems({ route, onNavigate }: { route: string; onNavigate?: () =>
   };
   return (
     <>
-      {DOCS_NAV.map((group) => (
+      {NAV[locale].map((group) => (
         <section key={group.text} className="mb-6">
           <h2 className="mb-1.5 px-3 text-[13px] font-medium text-ink">
             {group.text}
@@ -61,7 +129,7 @@ function SidebarItems({ route, onNavigate }: { route: string; onNavigate?: () =>
   );
 }
 
-function Outline({ headings }: { headings: DocsHeading[] }) {
+function Outline({ headings, ui }: { headings: DocsHeading[]; ui: Ui }) {
   const [active, setActive] = useState<string>("");
 
   useEffect(() => {
@@ -84,8 +152,8 @@ function Outline({ headings }: { headings: DocsHeading[] }) {
 
   if (headings.length === 0) return null;
   return (
-    <nav aria-label="本页内容" className="flex flex-col gap-0.5">
-      <p className="mb-1.5 text-[13px] font-medium text-ink">本页内容</p>
+    <nav aria-label={ui.outline} className="flex flex-col gap-0.5">
+      <p className="mb-1.5 text-[13px] font-medium text-ink">{ui.outline}</p>
       {headings.map((heading) => (
         <a
           key={heading.id}
@@ -105,19 +173,20 @@ function Outline({ headings }: { headings: DocsHeading[] }) {
   );
 }
 
-function PrevNext({ route }: { route: string }) {
-  const index = DOCS_SEQUENCE.findIndex((link) => link.route === route);
+function PrevNext({ route, locale, ui }: { route: string; locale: DocsLocale; ui: Ui }) {
+  const sequence = SEQUENCE[locale];
+  const index = sequence.findIndex((link) => link.route === route);
   if (index === -1) return null;
-  const prev = DOCS_SEQUENCE[index - 1];
-  const next = DOCS_SEQUENCE[index + 1];
+  const prev = sequence[index - 1];
+  const next = sequence[index + 1];
   if (!prev && !next) return null;
   const card =
     "group flex flex-col gap-1 rounded-xl border border-hairline bg-ground px-4 py-3 transition-colors duration-200 hover:bg-mist";
   return (
-    <nav aria-label="上一篇和下一篇" className="mt-14 grid gap-3 sm:grid-cols-2">
+    <nav aria-label={ui.prevNext} className="mt-14 grid gap-3 sm:grid-cols-2">
       {prev ? (
-        <a href={docsHref(prev.route)} className={card}>
-          <span className="text-[13px] text-muted">上一篇</span>
+        <a href={docsHref(prev.route, locale)} className={card}>
+          <span className="text-[13px] text-muted">{ui.prev}</span>
           <span className="text-sm font-medium text-ink group-hover:text-accent">
             {prev.text}
           </span>
@@ -126,8 +195,8 @@ function PrevNext({ route }: { route: string }) {
         <span />
       )}
       {next ? (
-        <a href={docsHref(next.route)} className={cn(card, "sm:text-right")}>
-          <span className="text-[13px] text-muted">下一篇</span>
+        <a href={docsHref(next.route, locale)} className={cn(card, "sm:text-right")}>
+          <span className="text-[13px] text-muted">{ui.next}</span>
           <span className="text-sm font-medium text-ink group-hover:text-accent">
             {next.text}
           </span>
@@ -137,48 +206,78 @@ function PrevNext({ route }: { route: string }) {
   );
 }
 
-const HOME_GROUPS: Array<{ text: string; route: string; description: string }> = [
-  {
-    text: "开始使用",
-    route: "guide/quick-start",
-    description: "下载安装知远，配置模型，创建第一个工作页面。",
-  },
-  {
-    text: "功能介绍",
-    route: "guide/work-page",
-    description: "工作页面、任务、上下文、技能与模型配置的说明。",
-  },
-  {
-    text: "实战指南",
-    route: "capabilities/research",
-    description: "按场景组织的使用示例：研究、写作、数据、编程等。",
-  },
-  {
-    text: "常见问题",
-    route: "faq",
-    description: "安装、模型连接与文件处理中的问题排查。",
-  },
-  {
-    text: "开发者",
-    route: "developer",
-    description: "开发环境、Skill 开发与项目结构。",
-  },
-];
+const HOME_GROUPS: Record<
+  DocsLocale,
+  Array<{ text: string; route: string; description: string }>
+> = {
+  zh: [
+    {
+      text: "开始使用",
+      route: "guide/quick-start",
+      description: "下载安装知远，配置模型，创建第一个工作页面。",
+    },
+    {
+      text: "功能介绍",
+      route: "guide/work-page",
+      description: "工作页面、任务、上下文、技能与模型配置的说明。",
+    },
+    {
+      text: "实战指南",
+      route: "capabilities/research",
+      description: "按场景组织的使用示例：研究、写作、数据、编程等。",
+    },
+    {
+      text: "常见问题",
+      route: "faq",
+      description: "安装、模型连接与文件处理中的问题排查。",
+    },
+    {
+      text: "开发者",
+      route: "developer",
+      description: "开发环境、Skill 开发与项目结构。",
+    },
+  ],
+  en: [
+    {
+      text: "Getting started",
+      route: "guide/quick-start",
+      description: "Download and install ZhiYuan, set up a model, and create your first work page.",
+    },
+    {
+      text: "Features",
+      route: "guide/work-page",
+      description: "Work pages, tasks, context, skills, and model configuration.",
+    },
+    {
+      text: "Guides",
+      route: "capabilities/research",
+      description: "Scenario-based walkthroughs: research, writing, data, coding, and more.",
+    },
+    {
+      text: "FAQ",
+      route: "faq",
+      description: "Troubleshooting for installation, model connections, and file handling.",
+    },
+    {
+      text: "Developers",
+      route: "developer",
+      description: "Dev environment, skill development, and project structure.",
+    },
+  ],
+};
 
-function DocsHome() {
+function DocsHome({ locale, ui }: { locale: DocsLocale; ui: Ui }) {
   return (
     <div>
       <h1 className="text-3xl font-semibold tracking-tight text-ink">
-        知远智能体文档
+        {ui.homeTitle}
       </h1>
-      <p className="mt-3 text-base leading-7 text-muted">
-        安装知远、配置模型、创建任务。
-      </p>
+      <p className="mt-3 text-base leading-7 text-muted">{ui.homeLead}</p>
       <div className="mt-10 grid gap-3 sm:grid-cols-2">
-        {HOME_GROUPS.map((group) => (
+        {HOME_GROUPS[locale].map((group) => (
           <a
             key={group.text}
-            href={docsHref(group.route)}
+            href={docsHref(group.route, locale)}
             className="group flex flex-col gap-2 rounded-xl border border-hairline bg-ground p-5 transition-colors duration-200 hover:bg-mist"
           >
             <span className="text-base font-medium text-ink group-hover:text-accent">
@@ -191,30 +290,33 @@ function DocsHome() {
         ))}
       </div>
       <p className="mt-10 text-sm leading-6 text-muted">
-        从<CopyLink route="guide/quick-start" text="快速开始" />
-        读起，或在左侧目录中选择一篇。
+        {ui.homeTailPre}
+        <a href={docsHref("guide/quick-start", locale)} className="text-accent hover:underline">
+          {ui.homeTailLink}
+        </a>
+        {ui.homeTailPost}
       </p>
     </div>
   );
 }
 
-function CopyLink({ route, text }: { route: string; text: string }) {
-  return (
-    <a href={docsHref(route)} className="text-accent hover:underline">
-      {text}
-    </a>
-  );
-}
-
 export function DocsApp() {
-  const route = useMemo(currentRoute, []);
-  const page = CONTENT[route];
+  const locale = useMemo(detectLocale, []);
+  const ui = UI[locale];
+  const siteLocale = locale === "en" ? "en" : "zh-CN";
+  const copy = COPY[siteLocale];
+  const route = useMemo(() => currentRoute(locale), [locale]);
+  const page = CONTENT[locale][route];
   const isHome = route === "" || !page;
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (!isHome && page) document.title = `${page.title} · 知远智能体文档`;
-  }, [isHome, page]);
+    document.documentElement.lang = locale === "en" ? "en" : "zh-CN";
+  }, [locale]);
+
+  useEffect(() => {
+    if (!isHome && page) document.title = `${page.title} · ${ui.titleSuffix}`;
+  }, [isHome, page, ui]);
 
   useEffect(() => {
     if (!window.location.hash) return;
@@ -239,7 +341,7 @@ export function DocsApp() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header locale="zh-CN" page="home" copy={copy} />
+      <Header locale={siteLocale} page="home" copy={copy} />
       <div className="mx-auto w-full max-w-7xl flex-1 px-5 pb-20 pt-24">
         <div className="mb-6 lg:hidden">
           <button
@@ -261,47 +363,47 @@ export function DocsApp() {
             >
               <path d="M4 6h16M4 12h16M4 18h10" />
             </svg>
-            文档目录
+            {ui.menu}
           </button>
         </div>
         <div className="lg:grid lg:grid-cols-[232px_minmax(0,1fr)] lg:gap-12 xl:grid-cols-[232px_minmax(0,1fr)_184px]">
           <aside className="hidden lg:block">
             <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pb-8 pr-2">
               <a
-                href={docsHref("")}
+                href={docsHref("", locale)}
                 className={cn(
                   "mb-4 block px-3 text-sm font-medium",
                   isHome ? "text-accent" : "text-ink hover:text-accent",
                 )}
               >
-                文档首页
+                {ui.home}
               </a>
-              <SidebarItems route={route} />
+              <SidebarItems route={route} locale={locale} />
             </div>
           </aside>
           <main className="min-w-0">
             {isHome ? (
-              <DocsHome />
+              <DocsHome locale={locale} ui={ui} />
             ) : (
               <>
                 <article
                   className="docs-prose prose max-w-none"
                   dangerouslySetInnerHTML={{ __html: page.html }}
                 />
-                <PrevNext route={route} />
+                <PrevNext route={route} locale={locale} ui={ui} />
               </>
             )}
           </main>
           <aside className="hidden xl:block">
             {!isHome && (
               <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pb-8">
-                <Outline headings={page.headings} />
+                <Outline headings={page.headings} ui={ui} />
               </div>
             )}
           </aside>
         </div>
       </div>
-      <Footer locale="zh-CN" copy={copy} release={null} releaseStatus="unavailable" />
+      <Footer locale={siteLocale} copy={copy} release={null} releaseStatus="unavailable" />
       {menuOpen ? (
         <div className="fixed inset-0 z-[60] lg:hidden">
           <div
@@ -312,14 +414,14 @@ export function DocsApp() {
           <div
             id="docs-sidebar"
             role="dialog"
-            aria-label="文档目录"
+            aria-label={ui.menu}
             className="absolute inset-y-0 left-0 w-72 overflow-y-auto bg-ground p-5 shadow-[0_8px_30px_rgb(12_18_34/0.12)]"
           >
             <div className="mb-4 flex items-center justify-between">
-              <p className="text-sm font-medium text-ink">文档目录</p>
+              <p className="text-sm font-medium text-ink">{ui.menu}</p>
               <button
                 type="button"
-                aria-label="关闭目录"
+                aria-label={ui.menuClose}
                 onClick={() => setMenuOpen(false)}
                 className="rounded-full p-1.5 text-muted transition-colors duration-200 hover:bg-mist hover:text-ink"
               >
@@ -338,13 +440,13 @@ export function DocsApp() {
               </button>
             </div>
             <a
-              href={docsHref("")}
+              href={docsHref("", locale)}
               onClick={() => setMenuOpen(false)}
               className="mb-4 block px-3 text-sm font-medium text-ink"
             >
-              文档首页
+              {ui.home}
             </a>
-            <SidebarItems route={route} onNavigate={() => setMenuOpen(false)} />
+            <SidebarItems route={route} locale={locale} onNavigate={() => setMenuOpen(false)} />
           </div>
         </div>
       ) : null}

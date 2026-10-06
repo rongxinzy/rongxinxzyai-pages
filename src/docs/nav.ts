@@ -85,4 +85,75 @@ export const DOCS_SEQUENCE: DocsNavLink[] = (() => {
   return out;
 })();
 
-export const docsHref = (route: string) => `/docs/${route ? `${route}/` : ""}`;
+// 英文导航与中文版路由一一对应，只翻译显示文案。
+export const DOCS_NAV_EN: DocsNavGroup[] = [
+  {
+    text: "Getting started",
+    items: [
+      { text: "What is ZhiYuan", route: "guide/what-is-zhiyuan" },
+      { text: "Quick start", route: "guide/quick-start" },
+      { text: "Your first work page", route: "guide/first-work-page" },
+    ],
+  },
+  {
+    text: "Features",
+    items: [
+      {
+        text: "Model setup",
+        items: [
+          { text: "Cloud models", route: "guide/model/cloud" },
+          { text: "Local models", route: "guide/model/local" },
+        ],
+      },
+      { text: "Local inference", route: "guide/local-inference" },
+      { text: "Work pages", route: "guide/work-page" },
+      { text: "Create and run tasks", route: "guide/tasks" },
+      { text: "Files and context", route: "guide/context" },
+      { text: "Use and manage skills", route: "guide/skills" },
+    ],
+  },
+  {
+    text: "Guides",
+    items: [
+      { text: "Search and research", route: "capabilities/research" },
+      { text: "Writing and translation", route: "capabilities/writing" },
+      { text: "Documents and office files", route: "capabilities/documents" },
+      { text: "Data analysis", route: "capabilities/data" },
+      { text: "Email and meetings", route: "capabilities/communication" },
+      { text: "Marketing and content", route: "capabilities/marketing" },
+      { text: "Coding and technical tasks", route: "capabilities/coding" },
+    ],
+  },
+  {
+    text: "FAQ",
+    items: [
+      { text: "Troubleshooting", route: "faq" },
+      { text: "Install and update", route: "faq/install" },
+      { text: "Model connections", route: "faq/model" },
+      { text: "Skills", route: "faq/skills" },
+      { text: "File handling", route: "faq/files" },
+      { text: "Data and privacy", route: "faq/privacy" },
+    ],
+  },
+  {
+    text: "Developers",
+    items: [
+      { text: "Overview", route: "developer" },
+      { text: "Dev environment", route: "developer/setup" },
+      { text: "Skill development", route: "developer/skills" },
+      { text: "Project structure", route: "developer/architecture" },
+      { text: "Contributing", route: "developer/contributing" },
+    ],
+  },
+];
+
+export const DOCS_SEQUENCE_EN: DocsNavLink[] = (() => {
+  const out: DocsNavLink[] = [];
+  for (const group of DOCS_NAV_EN) flatten(group.items, out);
+  return out;
+})();
+
+export type DocsLocale = "zh" | "en";
+
+export const docsHref = (route: string, locale: DocsLocale = "zh") =>
+  `${locale === "en" ? "/en" : ""}/docs/${route ? `${route}/` : ""}`;
