@@ -52,7 +52,9 @@ export function Header({
   const alternate = `${en ? "/" : "/en/"}${page === "enterprise" ? "enterprise/" : ""}`;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    // 迟滞阈值，避免滚动位置在临界点来回抖动触发状态闪烁。
+    const onScroll = () =>
+      setScrolled((value) => (value ? window.scrollY > 8 : window.scrollY > 32));
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -104,7 +106,7 @@ export function Header({
   ];
 
   const downloadClass =
-    "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-accent px-4 py-2 text-sm font-medium text-white transition-transform duration-200 hover:-translate-y-0.5";
+    "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-accent px-4 py-2 text-sm font-medium text-white shadow-[0_1px_2px_rgb(79_70_229/0.24)] transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgb(79_70_229/0.30)] active:translate-y-0 active:scale-[0.97] motion-reduce:transition-none motion-reduce:hover:translate-y-0";
 
   return (
     <header
@@ -118,72 +120,79 @@ export function Header({
           setOpen(false);
       }}
     >
-      <div
-        className={cn(
-          "mx-auto flex items-center justify-between gap-4 transition-all duration-250",
-          scrolled
-            ? "glass-chip mx-4 mt-3 max-w-5xl rounded-full border border-hairline px-4 py-2 shadow-[0_8px_30px_rgb(12_18_34/0.06)] sm:mx-auto"
-            : "max-w-7xl px-5 py-5",
-        )}
-      >
-        <div className="flex items-center gap-3">
-          <Brand home={home} small />
-          <span className="hidden text-[13px] text-muted lg:block">
-            {copy.brandSub}
-          </span>
-        </div>
-        {/* 英文导航标签更宽，桌面导航到 xl 才展开，以下走汉堡菜单。 */}
-        <nav
-          className={cn("hidden items-center gap-1", en ? "xl:flex" : "md:flex")}
-          aria-label={copy.menu}
-        >
-          {nav.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              aria-current={item.current ? "page" : undefined}
-              className={cn(
-                "whitespace-nowrap rounded-full px-3 py-1.5 text-sm text-muted transition-colors duration-200 hover:bg-mist hover:text-ink lg:px-3.5",
-                item.current && "bg-mist text-ink",
-              )}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-        <div className="flex items-center gap-2">
-          <a
-            className="hidden items-center gap-1.5 rounded-full px-3 py-1.5 text-sm text-muted transition-colors duration-200 hover:bg-mist hover:text-ink sm:inline-flex"
-            href={GITHUB}
-            aria-label={copy.star}
-          >
-            <GitHubIcon />
-            <span>{copy.star}</span>
-          </a>
-          <a
-            className="hidden whitespace-nowrap text-[13px] text-muted transition-colors duration-200 hover:text-ink sm:block"
-            href={alternate}
-            lang={en ? "zh-CN" : "en"}
-          >
-            {en ? "中文" : "EN"}
-          </a>
-          <a className={downloadClass} href={`${home}#download`}>
-            <Icon name="download" size={15} />
-            <span>{copy.headerDownload}</span>
-          </a>
-          <button
-            ref={toggle}
+      {/* 栏体布局在两个滚动状态下保持恒定；滚动态的悬浮玻璃 pill 作为背景层
+          只做 opacity/transform 合成器动画，避免布局属性过渡带来的横向滑动与边框闪现。 */}
+      <div className="mx-auto max-w-7xl px-3 pt-3 sm:px-4">
+        <div className="relative flex items-center justify-between gap-4 rounded-full px-2 py-2 sm:px-3">
+          <span
+            aria-hidden="true"
             className={cn(
-              "inline-flex items-center justify-center rounded-full p-2 text-ink transition-colors duration-200 hover:bg-mist",
-              en ? "xl:hidden" : "md:hidden",
+              "glass-chip absolute inset-0 -z-10 rounded-full border border-hairline shadow-[0_8px_30px_rgb(12_18_34/0.06)]",
+              "motion-safe:transition-[opacity,transform] motion-safe:duration-300 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+              scrolled
+                ? "translate-y-0 opacity-100"
+                : "pointer-events-none -translate-y-1 scale-[0.99] opacity-0",
             )}
-            aria-expanded={open}
-            aria-controls="site-navigation"
-            aria-label={open ? copy.close : copy.menu}
-            onClick={() => setOpen((value) => !value)}
+          />
+          <div className="flex items-center gap-3">
+            <Brand home={home} small />
+            <span className="hidden text-[13px] text-muted lg:block">
+              {copy.brandSub}
+            </span>
+          </div>
+          {/* 英文导航标签更宽，桌面导航到 xl 才展开，以下走汉堡菜单。 */}
+          <nav
+            className={cn("hidden items-center gap-1", en ? "xl:flex" : "md:flex")}
+            aria-label={copy.menu}
           >
-            <Icon name={open ? "close" : "menu"} size={20} />
-          </button>
+            {nav.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                aria-current={item.current ? "page" : undefined}
+                className={cn(
+                  "whitespace-nowrap rounded-full px-3 py-1.5 text-sm text-muted transition-colors duration-200 ease-out hover:bg-mist hover:text-ink lg:px-3.5",
+                  item.current && "bg-mist text-ink",
+                )}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+          <div className="flex items-center gap-2">
+            <a
+              className="hidden items-center gap-1.5 rounded-full px-3 py-1.5 text-sm text-muted transition-colors duration-200 ease-out hover:bg-mist hover:text-ink sm:inline-flex"
+              href={GITHUB}
+              aria-label={copy.star}
+            >
+              <GitHubIcon />
+              <span>{copy.star}</span>
+            </a>
+            <a
+              className="hidden whitespace-nowrap text-[13px] text-muted transition-colors duration-200 ease-out hover:text-ink sm:block"
+              href={alternate}
+              lang={en ? "zh-CN" : "en"}
+            >
+              {en ? "中文" : "EN"}
+            </a>
+            <a className={downloadClass} href={`${home}#download`}>
+              <Icon name="download" size={15} />
+              <span>{copy.headerDownload}</span>
+            </a>
+            <button
+              ref={toggle}
+              className={cn(
+                "inline-flex items-center justify-center rounded-full p-2 text-ink transition-[color,background-color,transform] duration-200 ease-out hover:bg-mist active:scale-95 motion-reduce:transition-none",
+                en ? "xl:hidden" : "md:hidden",
+              )}
+              aria-expanded={open}
+              aria-controls="site-navigation"
+              aria-label={open ? copy.close : copy.menu}
+              onClick={() => setOpen((value) => !value)}
+            >
+              <Icon name={open ? "close" : "menu"} size={20} />
+            </button>
+          </div>
         </div>
       </div>
       {open ? (
