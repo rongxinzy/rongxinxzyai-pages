@@ -1,13 +1,11 @@
-import { useMemo, useRef } from "react";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-  type MotionValue,
-} from "motion/react";
+import { useLayoutEffect, useMemo, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useReducedMotion } from "motion/react";
 import type { SiteLocale } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const CARD_SIZES = "(min-width: 1024px) 896px, calc(100vw - 48px)";
 
@@ -42,79 +40,46 @@ function shots(locale: SiteLocale): Shot[] {
   ];
 }
 
-// 滚动进度 → 牌堆进度 ff：ff = k 时第 k 张牌转正展示。停点之间用
-// smoothstep 过渡，反向滚动严格倒放。site.css 的关键帧按同一张表烘焙，
-// 两处必须同步修改。
-const FF_STOPS: ReadonlyArray<readonly [number, number]> = [
-  [0, -0.35],
-  [0.08, -0.35],
-  [0.2, 0],
-  [0.3, 0],
-  [0.42, 1],
-  [0.5, 1],
-  [0.62, 2],
-  [0.7, 2],
-  [0.82, 3],
-  [1, 3],
-];
+// 轨道停点：滚动进度（时间轴单位 0–100）→ 牌堆进度 ff。
+// ff = k 时第 k 张牌转正展示；ff 起始于 -0.35，首张牌以轻微扇形姿态入场。
+const STOPS = [0, 8, 20, 30, 42, 50, 62, 70, 82, 100];
+const FF = [-0.35, -0.35, 0, 0, 1, 1, 2, 2, 3, 3];
+
+// 透明度停点在每段转场的中点（ff = k + 0.5）处插入：退场牌在转场前半段
+// 内完全淡出，避免半透明残影盖住下一张。
+const O_STOPS = [0, 8, 20, 30, 36, 42, 50, 56, 62, 70, 76, 82, 100];
+const O_FF = [-0.35, -0.35, 0, 0, 0.5, 1, 1, 1.5, 2, 2, 2.5, 3, 3];
+
+// 转场段（ff 发生变化的区间），供说明文字与进度点定位。
+const SEGMENTS = [
+  [8, 20],
+  [30, 42],
+  [50, 62],
+  [70, 82],
+] as const;
 
 const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, value));
 
-function ffAt(p: number) {
-  for (let i = 0; i < FF_STOPS.length - 1; i++) {
-    const [p0, v0] = FF_STOPS[i];
-    const [p1, v1] = FF_STOPS[i + 1];
-    if (p <= p1) {
-      const t = clamp((p - p0) / (p1 - p0), 0, 1);
-      return v0 + (v1 - v0) * (t * t * (3 - 2 * t));
-    }
-  }
-  return FF_STOPS[FF_STOPS.length - 1][1];
-}
-
 // 牌的相对位置 q = 牌序 - ff：0 转正展示；q > 0 在牌堆中等待（向右下
 // 扇形错位，绕底部轴心旋转）；q < 0 已展示完，上抬淡出。姿态全是 q 的纯函数。
-function cardTransform(index: number, ff: number) {
+function cardPose(index: number, ff: number) {
   const q = index - ff;
   const c = clamp(q, 0, 3);
   const t = clamp(-q, 0, 1);
-  const x = 4.8 * c + 7 * t;
-  const y = 2.8 * c - 62 * t;
-  const rotate = 3.8 * c - 8 * t;
-  const scale = 1 - 0.05 * c - 0.05 * t;
-  return `translate(${x.toFixed(2)}%, ${y.toFixed(2)}%) rotate(${rotate.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
+  return {
+    xPercent: 4.8 * c + 7 * t,
+    yPercent: 2.8 * c - 62 * t,
+    rotation: 3.8 * c - 8 * t,
+    scale: 1 - 0.05 * c - 0.05 * t,
+  };
 }
 
 function cardOpacity(index: number, ff: number) {
   const q = index - ff;
   const c = clamp(q, 0, 3);
   const t = clamp(-q, 0, 1);
-  // 退场透明度在 t = 0.5（转场前半段）处归零，与 site.css 的 -o 关键帧一致。
-  return clamp(
-    Math.min(1 - 0.2 * Math.max(0, c - 1.4), 1 - t / 0.5),
-    0,
-    1,
-  );
-}
-
-// 说明文字只在对应牌转正前后出现，进从下方、出向上方。
-function captionState(index: number, ff: number) {
-  const d = ff - index;
-  // 出：ff 越过 k 即开始，转场前 1/3 内完成；入：转场后 2/3 内浮入。
-  const out = clamp(d / 0.36, 0, 1);
-  const inn = clamp(-d / 0.35, 0, 1);
-  const opacity = d >= 0 ? 1 - out : 1 - inn;
-  const y = d >= 0 ? -14 * out : 10 * inn;
-  return { opacity, transform: `translateY(${y.toFixed(2)}px)` };
-}
-
-function dotState(index: number, ff: number) {
-  const on = 1 - clamp((Math.abs(ff - index) - 0.5) / 0.15, 0, 1);
-  return {
-    opacity: 0.3 + 0.7 * on,
-    transform: `scale(${(0.75 + 0.25 * on).toFixed(3)})`,
-  };
+  return clamp(Math.min(1 - 0.2 * Math.max(0, c - 1.4), 1 - t / 0.5), 0, 1);
 }
 
 export function Showcase({
@@ -125,25 +90,96 @@ export function Showcase({
   locale: SiteLocale;
 }) {
   const reduce = useReducedMotion();
-  const track = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: track,
-    offset: ["start start", "end end"],
-  });
+  const section = useRef<HTMLElement>(null);
   const assets = useMemo(() => shots(locale), [locale]);
-
-  // 支持 animation-timeline 时由 CSS 滚动时间线在合成器线程驱动（见 site.css），
-  // useScroll 只作为 Firefox 等尚不支持浏览器的 JS 回退。
-  const native = useMemo(
-    () =>
-      typeof CSS !== "undefined" && CSS.supports("animation-timeline: scroll()"),
-    [],
-  );
-
   const cards = copy.showcaseCards;
+
+  useLayoutEffect(() => {
+    if (reduce) return;
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".deck-track",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.5,
+        },
+      });
+
+      gsap.utils.toArray<HTMLElement>(".deck-card").forEach((el, i) => {
+        gsap.set(el, cardPose(i, FF[0]));
+        tl.to(
+          el,
+          {
+            keyframes: STOPS.slice(1).map((p, k) => ({
+              ...cardPose(i, FF[k + 1]),
+              duration: p - STOPS[k],
+              ease: FF[k + 1] === FF[k] ? "none" : "power2.inOut",
+            })),
+          },
+          0,
+        );
+        tl.to(
+          el,
+          {
+            keyframes: O_STOPS.slice(1).map((p, k) => ({
+              opacity: cardOpacity(i, O_FF[k + 1]),
+              duration: p - O_STOPS[k],
+              ease: "none",
+            })),
+          },
+          0,
+        );
+      });
+
+      const captions = gsap.utils.toArray<HTMLElement>(".deck-caption");
+      captions.forEach((el, i) => {
+        gsap.set(el, i === 0 ? { autoAlpha: 1, y: 0 } : { autoAlpha: 0, y: 10 });
+        // 入：对应牌转正的转场段后 2/5 内浮入；出：下一段转场的前 1/3 内离场。
+        if (i > 0) {
+          const [start] = SEGMENTS[i];
+          tl.fromTo(
+            el,
+            { autoAlpha: 0, y: 10 },
+            { autoAlpha: 1, y: 0, duration: 4.8, ease: "power2.out" },
+            start + 7.2,
+          );
+        }
+        if (i < SEGMENTS.length - 1) {
+          tl.to(
+            el,
+            { autoAlpha: 0, y: -14, duration: 4, ease: "power2.in" },
+            SEGMENTS[i + 1][0],
+          );
+        }
+      });
+
+      const dots = gsap.utils.toArray<HTMLElement>(".deck-dot");
+      dots.forEach((el, i) => {
+        gsap.set(el, i === 0 ? { opacity: 1, scale: 1 } : { opacity: 0.3, scale: 0.75 });
+        // 激活态在对应转场段中点切换，与 |ff - i| < 0.5 的口径一致。
+        if (i > 0) {
+          tl.to(
+            el,
+            { opacity: 1, scale: 1, duration: 2.4, ease: "power1.out" },
+            (SEGMENTS[i][0] + SEGMENTS[i][1]) / 2 - 1.2,
+          );
+        }
+        if (i < SEGMENTS.length - 1) {
+          tl.to(
+            el,
+            { opacity: 0.3, scale: 0.75, duration: 2.4, ease: "power1.in" },
+            (SEGMENTS[i + 1][0] + SEGMENTS[i + 1][1]) / 2 - 1.2,
+          );
+        }
+      });
+    }, section);
+    return () => ctx.revert();
+  }, [reduce, locale]);
 
   return (
     <section
+      ref={section}
       id="workbench"
       aria-labelledby="workbench-title"
       className="relative overflow-x-clip bg-ground"
@@ -192,39 +228,49 @@ export function Showcase({
           ))}
         </div>
       ) : (
-        <div ref={track} className="deck-track relative mt-8 h-[380vh] md:mt-12">
+        <div className="deck-track relative mt-8 h-[380vh] md:mt-12">
           <div className="sticky top-0 flex h-svh flex-col items-center justify-center gap-5 px-6 md:gap-7">
             <div className="pointer-events-none relative aspect-[8/5] h-[min(56svh,calc((100vw-3rem)*0.625))]">
               {assets.map((shot, index) => (
-                <DeckCard
+                <div
                   key={shot.fallback}
-                  native={native}
-                  progress={scrollYProgress}
-                  index={index}
-                  shot={shot}
-                  alt={cards[index].alt}
-                />
+                  className="deck-card absolute inset-0 overflow-hidden rounded-2xl border border-hairline bg-white shadow-[0_24px_70px_rgb(12_18_34/0.12)]"
+                  style={{ zIndex: 40 - index }}
+                >
+                  <img
+                    src={shot.fallback}
+                    srcSet={shot.srcSet}
+                    sizes={CARD_SIZES}
+                    alt={cards[index].alt}
+                    width={shot.width}
+                    height={shot.height}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover object-top"
+                  />
+                </div>
               ))}
             </div>
             <div className="relative h-24 w-full max-w-xl text-center md:h-20">
-              {cards.map((caption, index) => (
-                <DeckCaption
+              {cards.map((caption) => (
+                <div
                   key={caption.title}
-                  native={native}
-                  progress={scrollYProgress}
-                  index={index}
-                  title={caption.title}
-                  desc={caption.desc}
-                />
+                  className="deck-caption absolute inset-x-0 top-0"
+                >
+                  <h3 className="text-base font-semibold text-ink">
+                    {caption.title}
+                  </h3>
+                  <p className="mt-1 text-[13px] leading-6 text-muted">
+                    {caption.desc}
+                  </p>
+                </div>
               ))}
             </div>
             <div className="flex items-center gap-2" aria-hidden="true">
-              {cards.map((caption, index) => (
-                <DeckDot
+              {cards.map((caption) => (
+                <span
                   key={caption.title}
-                  native={native}
-                  progress={scrollYProgress}
-                  index={index}
+                  className="deck-dot size-1.5 rounded-full bg-accent"
                 />
               ))}
             </div>
@@ -232,100 +278,5 @@ export function Showcase({
         </div>
       )}
     </section>
-  );
-}
-
-function DeckCard({
-  native,
-  progress,
-  index,
-  shot,
-  alt,
-}: {
-  native: boolean;
-  progress: MotionValue<number>;
-  index: number;
-  shot: Shot;
-  alt: string;
-}) {
-  // 派生值直接算自 scrollYProgress，不做级联：motion 会把级联的纯
-  // opacity/transform 派生值加速成进度口径不一致的 WAAPI 滚动动画。
-  const transform = useTransform(progress, (p) => cardTransform(index, ffAt(p)));
-  const opacity = useTransform(progress, (p) => cardOpacity(index, ffAt(p)));
-  return (
-    <motion.div
-      className={`deck-card deck-card-${index} absolute inset-0 overflow-hidden rounded-2xl border border-hairline bg-white shadow-[0_24px_70px_rgb(12_18_34/0.12)]`}
-      style={
-        native
-          ? { zIndex: 40 - index }
-          : { zIndex: 40 - index, transform, opacity }
-      }
-    >
-      <img
-        src={shot.fallback}
-        srcSet={shot.srcSet}
-        sizes={CARD_SIZES}
-        alt={alt}
-        width={shot.width}
-        height={shot.height}
-        loading="lazy"
-        decoding="async"
-        className="h-full w-full object-cover object-top"
-      />
-    </motion.div>
-  );
-}
-
-function DeckCaption({
-  native,
-  progress,
-  index,
-  title,
-  desc,
-}: {
-  native: boolean;
-  progress: MotionValue<number>;
-  index: number;
-  title: string;
-  desc: string;
-}) {
-  const opacity = useTransform(
-    progress,
-    (p) => captionState(index, ffAt(p)).opacity,
-  );
-  const transform = useTransform(
-    progress,
-    (p) => captionState(index, ffAt(p)).transform,
-  );
-  return (
-    <motion.div
-      className={`deck-caption-${index} absolute inset-x-0 top-0`}
-      style={native ? undefined : { opacity, transform }}
-    >
-      <h3 className="text-base font-semibold text-ink">{title}</h3>
-      <p className="mt-1 text-[13px] leading-6 text-muted">{desc}</p>
-    </motion.div>
-  );
-}
-
-function DeckDot({
-  native,
-  progress,
-  index,
-}: {
-  native: boolean;
-  progress: MotionValue<number>;
-  index: number;
-}) {
-  const opacity = useTransform(progress, (p) => dotState(index, ffAt(p)).opacity);
-  const transform = useTransform(
-    progress,
-    (p) => dotState(index, ffAt(p)).transform,
-  );
-  return (
-    <motion.span
-      className={`deck-dot-${index} size-1.5 rounded-full bg-accent`}
-      style={native ? undefined : { opacity, transform }}
-    />
   );
 }
