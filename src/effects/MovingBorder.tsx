@@ -5,6 +5,7 @@ import {
   useInView,
   useMotionTemplate,
   useMotionValue,
+  useReducedMotion,
   useTransform,
 } from "motion/react";
 import { cn } from "../lib/utils";
@@ -80,9 +81,12 @@ export const MovingBorder = ({
   const inView = useInView(pathRef, { margin: "120px" });
   const inViewRef = useRef(inView);
   inViewRef.current = inView;
+  const reduceMotion = useReducedMotion();
+  const reduceMotionRef = useRef(reduceMotion);
+  reduceMotionRef.current = reduceMotion;
 
   useAnimationFrame((time) => {
-    if (!inViewRef.current) return;
+    if (!inViewRef.current || reduceMotionRef.current) return;
     const path = pathRef.current;
     if (!path) return;
     if (!lengthRef.current) lengthRef.current = path.getTotalLength();

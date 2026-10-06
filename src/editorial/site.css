@@ -209,3 +209,40 @@
     }
   }
 }
+
+/* 开源区光束：光斑沿路径由合成器移动，无逐帧重绘。
+   光斑在放大 --beam-scale 倍的坐标系里，尺寸除以该系数保持视觉大小。 */
+@keyframes oss-beam-travel {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+.oss-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(88px / var(--beam-scale, 1));
+  height: calc(14px / var(--beam-scale, 1));
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(79 70 229 / 0.5) 35%,
+    rgb(14 165 233 / 0.45) 65%,
+    transparent 100%
+  );
+  box-shadow: 0 0 calc(20px / var(--beam-scale, 1)) rgb(79 70 229 / 0.28);
+  offset-rotate: auto;
+  offset-anchor: center;
+  animation: oss-beam-travel linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oss-beam {
+    display: none;
+  }
+}

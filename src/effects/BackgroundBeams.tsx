@@ -1,5 +1,4 @@
-import { motion, useInView } from "motion/react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "../lib/utils";
 
 const PATHS = [
@@ -17,12 +16,34 @@ const PATHS = [
   "M-60 370C-60 370 110 290 190 235C270 185 330 155 410 135C490 115 590 95 810 -15",
 ];
 
+const VIEW_W = 696;
+const VIEW_H = 316;
+
+// 光束是沿路径移动的光斑：offset-path/offset-distance 由合成器线程驱动，
+// 不产生主线程逐帧重绘（旧实现每帧更新 12 条 SVG 渐变坐标，paint-bound）。
+// 光斑层套一层与 SVG preserveAspectRatio="slice" 相同的变换，使两套坐标系对齐。
 export function BackgroundBeams({ className }: { className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  // Animated beams unmount offscreen; the static base paths stay, so the
-  // visible result is identical while the gradient repaint loop only runs
-  // near the viewport.
-  const inView = useInView(ref, { margin: "240px" });
+  const [slice, setSlice] = useState<{ s: number; x: number; y: number } | null>(
+    null,
+  );
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const update = () => {
+      const w = el.clientWidth;
+      const h = el.clientHeight;
+      if (!w || !h) return;
+      const s = Math.max(w / VIEW_W, h / VIEW_H);
+      setSlice({ s, x: (w - VIEW_W * s) / 2, y: (h - VIEW_H * s) / 2 });
+    };
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
       ref={ref}
@@ -35,7 +56,7 @@ export function BackgroundBeams({ className }: { className?: string }) {
         className="absolute h-full w-full"
         width="100%"
         height="100%"
-        viewBox="0 0 696 316"
+        viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMidYMid slice"
@@ -48,45 +69,32 @@ export function BackgroundBeams({ className }: { className?: string }) {
             strokeWidth="0.6"
           />
         ))}
-        {inView &&
-          PATHS.map((d, index) => (
-            <motion.path
+      </svg>
+      {slice ? (
+        <div
+          aria-hidden="true"
+          className="absolute top-0 left-0"
+          style={{
+            width: VIEW_W,
+            height: VIEW_H,
+            transform: `translate(${slice.x}px, ${slice.y}px) scale(${slice.s})`,
+            transformOrigin: "0 0",
+            ["--beam-scale" as string]: slice.s,
+          }}
+        >
+          {PATHS.map((d, index) => (
+            <span
               key={`beam-${index}`}
-              d={d}
-              stroke={`url(#beam-gradient-${index})`}
-              strokeOpacity="0.5"
-              strokeWidth="0.6"
+              className="oss-beam"
+              style={{
+                offsetPath: `path("${d}")`,
+                animationDuration: `${10 + ((index * 1.7) % 8)}s`,
+                animationDelay: `${-((index * 2.3) % 8)}s`,
+              }}
             />
           ))}
-        <defs>
-          {inView &&
-            PATHS.map((_, index) => (
-              <motion.linearGradient
-                key={`gradient-${index}`}
-                id={`beam-gradient-${index}`}
-                gradientUnits="userSpaceOnUse"
-                initial={{ x1: "0%", x2: "0%", y1: "100%", y2: "100%" }}
-                animate={{
-                  x1: ["0%", "100%"],
-                  x2: ["0%", "95%"],
-                  y1: ["100%", "0%"],
-                  y2: ["100%", `${5 + ((index * 3) % 10)}%`],
-                }}
-                transition={{
-                  duration: 10 + ((index * 1.7) % 8),
-                  ease: "easeInOut",
-                  repeat: Infinity,
-                  delay: (index * 2.3) % 8,
-                }}
-              >
-                <stop stopColor="#4f46e5" stopOpacity="0" />
-                <stop stopColor="#4f46e5" stopOpacity="0.6" />
-                <stop offset="32.5%" stopColor="#0ea5e9" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0" />
-              </motion.linearGradient>
-            ))}
-        </defs>
-      </svg>
+        </div>
+      ) : null}
     </div>
   );
 }
