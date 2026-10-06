@@ -16,50 +16,39 @@ const EASE = cubicBezier(0.22, 1, 0.36, 1);
 
 const MAIN_SIZES = "(min-width: 1024px) 976px, calc(100vw - 48px)";
 const GRID_SIZES =
-  "(min-width: 1280px) 604px, (min-width: 768px) calc(50vw - 36px), calc(100vw - 48px)";
+  "(min-width: 1280px) 395px, (min-width: 768px) calc((100vw - 96px) / 3), calc(100vw - 48px)";
 
 function srcSet(name: string, widths: number[]) {
   return widths.map((w) => `/product/${name}-${w}.webp ${w}w`).join(", ");
 }
 
 // 英文页使用英文界面截图（-en 后缀），其余与中文版同规格。
+// 主图为任务对话主界面；次级三张与上方三条说明一一对应：模型市场、专家、本机工作区。
 function shots(locale: SiteLocale) {
   const en = locale === "en" ? "-en" : "";
+  const grid = (name: string, widths: number[], width: number, height: number) => ({
+    srcSet: srcSet(name, widths),
+    fallback: `/product/${name}-${widths[1]}.webp`,
+    width,
+    height,
+  });
   return {
     main: {
-      srcSet: srcSet(`zhiyuan-model-market${en}`, [976, 1464, 1952, 2440]),
-      fallback: `/product/zhiyuan-model-market${en}-1464.webp`,
+      srcSet: srcSet(`zhiyuan-conversation${en}`, [976, 1464, 1952, 2440]),
+      fallback: `/product/zhiyuan-conversation${en}-1464.webp`,
       width: 1464,
       height: 915,
     },
     secondary: locale === "en"
       ? [
-          {
-            srcSet: srcSet("zhiyuan-workspace-en", [640, 1184, 1776, 2440]),
-            fallback: "/product/zhiyuan-workspace-en-1184.webp",
-            width: 1184,
-            height: 740,
-          },
-          {
-            srcSet: srcSet("zhiyuan-skills-en", [640, 1184, 1776, 2440]),
-            fallback: "/product/zhiyuan-skills-en-1184.webp",
-            width: 1184,
-            height: 740,
-          },
+          grid("zhiyuan-model-market-en", [976, 1464, 1952, 2440], 1464, 915),
+          grid("zhiyuan-skills-en", [640, 1184, 1776, 2440], 1184, 740),
+          grid("zhiyuan-workspace-en", [640, 1184, 1776, 2440], 1184, 740),
         ]
       : [
-          {
-            srcSet: srcSet("zhiyuan-workspace", [640, 1184, 1352]),
-            fallback: "/product/zhiyuan-workspace-1184.webp",
-            width: 1184,
-            height: 786,
-          },
-          {
-            srcSet: srcSet("zhiyuan-skills", [640, 1184, 1776, 2440]),
-            fallback: "/product/zhiyuan-skills-1184.webp",
-            width: 1184,
-            height: 740,
-          },
+          grid("zhiyuan-model-market", [976, 1464, 1952, 2440], 1464, 915),
+          grid("zhiyuan-skills", [640, 1184, 1776, 2440], 1184, 740),
+          grid("zhiyuan-workspace", [640, 1184, 1352], 1184, 786),
         ],
   };
 }
@@ -161,7 +150,7 @@ export function Showcase({
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-7xl gap-6 px-6 pb-24 md:grid-cols-2 md:pb-32">
+      <div className="mx-auto grid max-w-7xl gap-6 px-6 pb-24 md:grid-cols-3 md:pb-32">
         {assets.secondary.map((shot, index) => (
           <motion.figure
             key={shot.fallback}

@@ -146,7 +146,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     showcaseTitle: "任务、模型与工具，一个工作台。",
     showcaseLead:
       "左侧进入本地推理、自动化与专家；模型市场搜索、安装、启动 GGUF 离线模型。",
-    showcaseAltMain: "知远桌面客户端的模型市场，列出可安装的离线模型",
+    showcaseAltMain: "知远桌面客户端的任务对话界面，一次问答刚刚完成",
     showcaseCaptions: [
       {
         title: "模型市场",
@@ -163,12 +163,16 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     ],
     showcaseShots: [
       {
-        label: "主界面：一个输入框分配任务",
-        alt: "知远桌面客户端主界面，中间是任务输入框",
+        label: "模型市场：搜索、安装离线模型",
+        alt: "知远桌面客户端的模型市场，列出可安装的离线模型",
       },
       {
         label: "专家：技能按任务安装调用",
-        alt: "知远桌面客户端的专家页，列出已安装技能",
+        alt: "知远桌面客户端的专家页，列出可安装的专家",
+      },
+      {
+        label: "主界面：一个输入框分配任务",
+        alt: "知远桌面客户端主界面，中间是任务输入框",
       },
     ],
     modelsOverline: "MODULE 02 // NATIVE INFERENCE ENGINE",
@@ -380,7 +384,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     showcaseLead:
       "Local inference, automation and experts in the sidebar; the built-in market installs and runs GGUF offline models.",
     showcaseAltMain:
-      "The ZhiYuan desktop client's model market, listing installable offline models",
+      "The ZhiYuan desktop client conversation view with a completed task exchange",
     showcaseCaptions: [
       {
         title: "Model market",
@@ -397,12 +401,16 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     ],
     showcaseShots: [
       {
-        label: "Home: assign a task from one input box",
-        alt: "ZhiYuan desktop client home with the task input box",
+        label: "Marketplace: find and install offline models",
+        alt: "The ZhiYuan desktop client's marketplace listing installable offline models",
       },
       {
         label: "Experts: skills installed and called per task",
-        alt: "ZhiYuan desktop client experts page listing installed skills",
+        alt: "ZhiYuan desktop client experts page listing installable experts",
+      },
+      {
+        label: "Home: assign a task from one input box",
+        alt: "ZhiYuan desktop client home with the task input box",
       },
     ],
     modelsOverline: "MODULE 02 // NATIVE INFERENCE ENGINE",
