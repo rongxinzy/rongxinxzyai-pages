@@ -43,9 +43,7 @@ export type EditorialCopy = {
   showcaseOverline: string;
   showcaseTitle: string;
   showcaseLead: string;
-  showcaseAltMain: string;
-  showcaseCaptions: Array<{ title: string; desc: string }>;
-  showcaseShots: Array<{ label: string; alt: string }>;
+  showcaseCards: Array<{ title: string; desc: string; alt: string }>;
   modelsOverline: string;
   modelsTitle: string;
   modelsLead: string;
@@ -146,32 +144,25 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     showcaseTitle: "任务、模型与工具，一个工作台。",
     showcaseLead:
       "左侧进入本地推理、自动化与专家；模型市场搜索、安装、启动 GGUF 离线模型。",
-    showcaseAltMain: "知远桌面客户端的任务对话界面，一次问答刚刚完成",
-    showcaseCaptions: [
+    showcaseCards: [
+      {
+        title: "任务对话",
+        desc: "客户端把任务拆解为步骤逐一执行，操作与结果保留在同一对话中。",
+        alt: "知远桌面客户端的任务对话界面，一次问答刚刚完成",
+      },
       {
         title: "模型市场",
         desc: "搜索、安装、启动离线模型，推理服务由工作台在后台管理。",
+        alt: "知远桌面客户端的模型市场，列出可安装的离线模型",
       },
       {
         title: "专家与技能",
         desc: "预封装的最佳实践与工具，按任务调用。",
+        alt: "知远桌面客户端的专家页，列出可安装的技能",
       },
       {
         title: "本机工作区",
         desc: "任务在授权文件夹中执行，输出写回同一位置。",
-      },
-    ],
-    showcaseShots: [
-      {
-        label: "模型市场：搜索、安装离线模型",
-        alt: "知远桌面客户端的模型市场，列出可安装的离线模型",
-      },
-      {
-        label: "专家：技能按任务安装调用",
-        alt: "知远桌面客户端的专家页，列出可安装的专家",
-      },
-      {
-        label: "主界面：一个输入框分配任务",
         alt: "知远桌面客户端主界面，中间是任务输入框",
       },
     ],
@@ -383,33 +374,25 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     showcaseTitle: "Tasks, models and tools. One workbench.",
     showcaseLead:
       "Local inference, automation and experts in the sidebar; the built-in market installs and runs GGUF offline models.",
-    showcaseAltMain:
-      "The ZhiYuan desktop client conversation view with a completed task exchange",
-    showcaseCaptions: [
+    showcaseCards: [
+      {
+        title: "Task conversation",
+        desc: "The client breaks a task into steps and executes them; actions and results stay in the same conversation.",
+        alt: "The ZhiYuan desktop client conversation view with a completed task exchange",
+      },
       {
         title: "Model market",
         desc: "Find, install and run offline models; the workbench manages the inference service in the background.",
+        alt: "The ZhiYuan desktop client's marketplace listing installable offline models",
       },
       {
         title: "Experts & skills",
         desc: "Prepackaged practices and tools, called per task.",
+        alt: "ZhiYuan desktop client experts page listing installable experts",
       },
       {
         title: "Local workspace",
         desc: "Tasks run inside authorized folders; output is written back to the same place.",
-      },
-    ],
-    showcaseShots: [
-      {
-        label: "Marketplace: find and install offline models",
-        alt: "The ZhiYuan desktop client's marketplace listing installable offline models",
-      },
-      {
-        label: "Experts: skills installed and called per task",
-        alt: "ZhiYuan desktop client experts page listing installable experts",
-      },
-      {
-        label: "Home: assign a task from one input box",
         alt: "ZhiYuan desktop client home with the task input box",
       },
     ],
