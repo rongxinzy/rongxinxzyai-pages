@@ -22,7 +22,7 @@ CloudShader（`src/effects/CloudShader.tsx`）：零依赖原生 WebGL 云层 sh
 
 ## 组件语法（`src/effects/`）
 
-TextGenerateEffect（首屏大标题逐词浮现）、MovingBorderButton（主 CTA 边框光束）、Showcase（第二屏产品截图 3D 滚动展示）、CardSpotlight（模型/原则卡 hover 光斑）、TracingBeam（企业页交付流程）、BackgroundBeams（OSS/联系区衬底）、InfiniteMovingCards、AuroraBackground、BentoGrid。
+TextGenerateEffect（首屏大标题逐词浮现）、MovingBorderButton（主 CTA 边框光束）、Showcase（第二屏产品截图手牌翻页，GSAP ScrollTrigger + Lenis）、CardSpotlight（模型/原则卡 hover 光斑）、TracingBeam（企业页交付流程）、BackgroundBeams（OSS/联系区衬底）、InfiniteMovingCards、AuroraBackground、BentoGrid。
 
 ## 规则
 

@@ -25,3 +25,12 @@
 - macOS 的 `-webkit-font-smoothing: antialiased` 会削薄笔画，1x 屏上回退 `auto`；该属性在 Windows 无效，不作为 Windows 的修复手段。
 - 背景模糊（backdrop-filter）必须有实底兜底，不支持的浏览器里内容不能透出。
 - 验证方式：用浏览器设备模拟分别以 DPR 1 和 DPR 2 截图同一区域对比；浏览器缩放改变 DPR，`max-resolution` 媒体查询会跟随缩放生效，可用缩放快速复查。
+
+# 滚动动效规范
+
+滚动驱动动效使用 GSAP ScrollTrigger + Lenis。选型依据是实测，不是传闻：同一场景下 CSS scroll-timeline 与 GSAP 的帧率、长任务无差异，主线程阻塞时两者同步劣化；换库的理由是能力与可维护性，不是帧率。
+
+- 滚轮的阶梯输入是「涩」的主要来源。Lenis 负责把输入插值成连续滚动：`gsap.ticker` 驱动 `lenis.raf`，`lenis.on("scroll", ScrollTrigger.update)`，`lagSmoothing(0)`。scrub 至多 0.3，避免与 Lenis 惯性叠加成双重迟滞。reduced-motion 不启用 Lenis，触屏保持原生手感。
+- 钉住滚动区里画面静止、页面不走的停驻段是死区，占比控制在三分之一以内，结尾死区单独压到最小。
+- 牌堆类编排：每张牌的姿态是「序号 − 进度」的纯函数，transform 与 opacity 拆成两条 tween；退场元素在转场前半段透明度归零，防半透明残影。
+- 验证滚动动效：instant 跳转后至少等 1 秒追帧再截图；DPR 1 与 2、移动端、英文版、reduced-motion 各过一遍。
