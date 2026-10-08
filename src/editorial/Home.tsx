@@ -48,7 +48,7 @@ export function Home({
             />
             <span className="text-sm font-medium text-ink">
               {releaseStatus === "ready" && release
-                ? `v${release.version} · ${copy.releaseStable}`
+                ? `v${release.version} ${copy.releaseStable}`
                 : copy.releaseFallback}
             </span>
           </div>

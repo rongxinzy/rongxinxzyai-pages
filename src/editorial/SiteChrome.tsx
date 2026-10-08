@@ -6,7 +6,7 @@ import { Icon } from "./icons";
 
 export function Brand({ home, small = false }: { home: string; small?: boolean }) {
   return (
-    <a className="inline-flex shrink-0 items-center" href={home} aria-label="知远 Zhiyuan AI">
+    <a className="inline-flex shrink-0 items-center" href={home} aria-label={home === "/en/" ? "ZhiYuan home" : "知远首页"}>
       <img
         src="/zhiyuan-logo.svg"
         width={small ? 100 : 132}

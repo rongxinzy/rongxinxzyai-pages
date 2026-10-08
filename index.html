@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ffffff" />
-    <meta name="description" content="知远把资料、模型与工具放进一个工作台。写报告、做表格、改代码；内置推理引擎支持安装和运行 GGUF 模型。Windows 安装包不含本地推理组件。" />
+    <meta name="description" content="知远是一款开源桌面 AI 工作台，可以写报告、整理表格、改代码。内置 llama.cpp，在本机运行 GGUF 模型，也能接入 OpenAI 兼容 API。支持 macOS、Windows、Linux。" />
     <link rel="canonical" href="https://www.rongxzyai.com/" />
     <link rel="alternate" hreflang="zh-CN" href="https://www.rongxzyai.com/" />
     <link rel="alternate" hreflang="en" href="https://www.rongxzyai.com/en/" />
@@ -13,18 +13,18 @@
     <meta property="og:locale" content="zh_CN" />
     <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:url" content="https://www.rongxzyai.com/" />
-    <meta property="og:title" content="知远智能体 — 你的 AI 工作室" />
-    <meta property="og:description" content="知远把资料、模型与工具放进一个工作台。写报告、做表格、改代码；内置推理引擎支持安装和运行 GGUF 模型。Windows 安装包不含本地推理组件。" />
+    <meta property="og:title" content="知远 — 开源桌面 AI 工作台，在本机运行大模型" />
+    <meta property="og:description" content="知远是一款开源桌面 AI 工作台，可以写报告、整理表格、改代码。内置 llama.cpp，在本机运行 GGUF 模型，也能接入 OpenAI 兼容 API。支持 macOS、Windows、Linux。" />
     <meta property="og:image" content="https://www.rongxzyai.com/product/zhiyuan-workspace.png" />
-    <meta property="og:image:alt" content="知远智能体桌面工作台" />
+    <meta property="og:image:alt" content="知远桌面工作台界面" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="知远智能体 — 你的 AI 工作室" />
-    <meta name="twitter:description" content="知远把资料、模型与工具放进一个工作台。写报告、做表格、改代码；内置推理引擎支持安装和运行 GGUF 模型。Windows 安装包不含本地推理组件。" />
+    <meta name="twitter:title" content="知远 — 开源桌面 AI 工作台，在本机运行大模型" />
+    <meta name="twitter:description" content="知远是一款开源桌面 AI 工作台，可以写报告、整理表格、改代码。内置 llama.cpp，在本机运行 GGUF 模型，也能接入 OpenAI 兼容 API。支持 macOS、Windows、Linux。" />
     <meta name="twitter:image" content="https://www.rongxzyai.com/product/zhiyuan-workspace.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
-    <title>知远智能体 — 你的 AI 工作室</title>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"知远智能体","description":"知远把资料、模型与工具放进一个工作台。写报告、做表格、改代码；内置推理引擎支持安装和运行 GGUF 模型。Windows 安装包不含本地推理组件。","url":"https://www.rongxzyai.com/","inLanguage":"zh-CN","image":"https://www.rongxzyai.com/product/zhiyuan-workspace.png","alternateName":"ZhiYuan Agent","codeRepository":"https://github.com/rongxinzy/RongxinAI","downloadUrl":"https://www.rongxzyai.com/#download","applicationCategory":"DeveloperApplication","operatingSystem":"Windows 10, Windows 11, macOS, Ubuntu Linux","license":"https://www.gnu.org/licenses/agpl-3.0.html"}</script>
+    <title>知远 — 开源桌面 AI 工作台，在本机运行大模型</title>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"知远","description":"知远是一款开源桌面 AI 工作台，可以写报告、整理表格、改代码。内置 llama.cpp，在本机运行 GGUF 模型，也能接入 OpenAI 兼容 API。支持 macOS、Windows、Linux。","url":"https://www.rongxzyai.com/","inLanguage":"zh-CN","image":"https://www.rongxzyai.com/product/zhiyuan-workspace.png","alternateName":"ZhiYuan Agent","codeRepository":"https://github.com/rongxinzy/RongxinAI","downloadUrl":"https://www.rongxzyai.com/#download","applicationCategory":"DeveloperApplication","operatingSystem":"Windows 10, Windows 11, macOS, Ubuntu Linux","license":"https://www.gnu.org/licenses/agpl-3.0.html"}</script>
     <style>
       html, body { margin: 0; background: #ffffff; }
       .marketing-static-shell { min-height: 100vh; max-width: 1180px; margin: 0 auto; padding: 96px 24px; box-sizing: border-box; color: #0c1222; font: 16px/1.6 "Geist Variable", "PingFang SC", "Microsoft YaHei", sans-serif; }
@@ -35,9 +35,9 @@
   </head>
   <body>
     <div id="root" data-marketing-locale="zh-CN" data-marketing-page="home">
-      <main class="marketing-static-shell" aria-label="知远智能体">
-        <h1>你的电脑，你的 AI 工作室。</h1>
-        <p>知远把资料、模型与工具放进一个工作台。写报告、做表格、改代码；内置推理引擎支持安装和运行 GGUF 模型。Windows 安装包不含本地推理组件。</p>
+      <main class="marketing-static-shell" aria-label="知远">
+        <h1>你的电脑，就是 AI 工作台。</h1>
+        <p>写报告、整理表格、改代码，都在一个窗口里完成。知远内置 llama.cpp，可以在本机下载和运行开源模型。用本地模型时，数据不会离开你的电脑。</p>
         <a href="/#download">下载知远</a>
       </main>
     </div>

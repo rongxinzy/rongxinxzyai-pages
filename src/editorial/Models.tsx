@@ -5,7 +5,6 @@ import { CardSpotlight } from "../effects/CardSpotlight";
 const STATUS_META = {
   installed: { dot: "bg-emerald-500", text: "text-emerald-700" },
   fetch: { dot: "bg-accent", text: "text-accent" },
-  light: { dot: "bg-sky-500", text: "text-sky-700" },
 } as const;
 
 export function Models({ copy }: { copy: EditorialCopy }) {

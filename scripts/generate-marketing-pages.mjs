@@ -14,16 +14,16 @@ const pages = [
     page: "home",
     path: "/",
     alternatePath: "/en/",
-    title: "知远智能体 — 你的 AI 工作室",
+    title: "知远 — 开源桌面 AI 工作台，在本机运行大模型",
     description:
-      "知远把资料、模型与工具放进一个工作台。写报告、做表格、改代码；内置推理引擎支持安装和运行 GGUF 模型。Windows 安装包不含本地推理组件。",
-    heroTitle: "你的电脑，你的 AI 工作室。",
+      "知远是一款开源桌面 AI 工作台，可以写报告、整理表格、改代码。内置 llama.cpp，在本机运行 GGUF 模型，也能接入 OpenAI 兼容 API。支持 macOS、Windows、Linux。",
+    heroTitle: "你的电脑，就是 AI 工作台。",
     heroLead:
-      "知远把资料、模型与工具放进一个工作台。写报告、做表格、改代码；内置推理引擎支持安装和运行 GGUF 模型。Windows 安装包不含本地推理组件。",
+      "写报告、整理表格、改代码，都在一个窗口里完成。知远内置 llama.cpp，可以在本机下载和运行开源模型。用本地模型时，数据不会离开你的电脑。",
     staticAction: "下载知远",
     staticHref: "/#download",
-    imageAlt: "知远智能体桌面工作台",
-    schemaName: "知远智能体",
+    imageAlt: "知远桌面工作台界面",
+    schemaName: "知远",
   },
   {
     file: "en/index.html",
@@ -32,15 +32,15 @@ const pages = [
     page: "home",
     path: "/en/",
     alternatePath: "/",
-    title: "ZhiYuan — Your AI studio",
+    title: "ZhiYuan — Open-source AI workbench that runs LLMs locally",
     description:
-      "ZhiYuan brings files, models and tools to one workbench. Write reports, build spreadsheets and edit code. A built-in inference engine runs GGUF models. The Windows installer excludes local inference components.",
-    heroTitle: "Your computer. Your AI studio.",
+      "ZhiYuan is an open-source desktop AI workbench for writing reports, cleaning up spreadsheets and editing code. llama.cpp is built in, so GGUF models run on your machine, and any OpenAI-compatible API works too.",
+    heroTitle: "Your computer, now an AI workbench.",
     heroLead:
-      "ZhiYuan brings files, models and tools to one workbench. Write reports, build spreadsheets and edit code. A built-in inference engine runs GGUF models. The Windows installer excludes local inference components.",
+      "Write reports, clean up spreadsheets and edit code in one window. ZhiYuan ships with llama.cpp, so you can download and run open models on your own machine. With a local model, your data never leaves it.",
     staticAction: "Download ZhiYuan",
     staticHref: "/en/#download",
-    imageAlt: "The ZhiYuan desktop workspace",
+    imageAlt: "The ZhiYuan desktop workbench",
     schemaName: "ZhiYuan",
   },
   {

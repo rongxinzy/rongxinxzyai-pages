@@ -39,36 +39,34 @@ export function Downloads({
     {
       id: "macos",
       title: "macOS",
-      detail: locale === "en" ? "Apple silicon" : "Apple Silicon 芯片",
+      detail: locale === "en" ? "Apple silicon" : "Apple Silicon",
       meta: [
-        locale === "en" ? "format: .dmg" : "格式：.dmg 安装包",
-        locale === "en"
-          ? "engine: local GGUF inference"
-          : "引擎：内置 GGUF 本地推理",
+        ".dmg",
+        locale === "en" ? "llama.cpp built in" : "内置 llama.cpp 本地推理",
       ],
     },
     {
       id: "windows",
       title: "Windows",
-      detail: locale === "en" ? "x64 installer" : "x64 独立安装包",
+      detail: "x64",
       meta: [
-        locale === "en" ? "format: .exe" : "格式：.exe 安装包",
+        ".exe",
         locale === "en"
-          ? "excludes local inference components"
-          : "不含本地推理组件",
+          ? "Local inference via plugin"
+          : "本地推理需另装插件",
       ],
     },
     {
       id: "linux",
       title: "Linux",
-      detail: locale === "en" ? "Ubuntu / Debian" : "Ubuntu / Debian 发行版",
-      meta: [locale === "en" ? "format: .deb" : "格式：.deb 安装包"],
+      detail: "Ubuntu / Debian",
+      meta: [".deb"],
     },
     {
       id: "linuxAppImage",
       title: "Linux",
-      detail: locale === "en" ? "Universal AppImage" : "通用 AppImage",
-      meta: [locale === "en" ? "format: AppImage" : "格式：AppImage"],
+      detail: locale === "en" ? "Most distributions" : "适用于大多数发行版",
+      meta: [".AppImage"],
     },
   ];
 
@@ -213,14 +211,18 @@ export function Downloads({
                       {platform.id === "macos"
                         ? locale === "en"
                           ? "Download .dmg"
-                          : "下载 .dmg 安装包"
+                          : "下载 .dmg"
                         : platform.id === "windows"
                           ? locale === "en"
                             ? "Download .exe"
-                            : "下载 .exe 安装包"
+                            : "下载 .exe"
                           : platform.id === "linux"
-                            ? "Ubuntu (.deb)"
-                            : "AppImage"}
+                            ? locale === "en"
+                              ? "Download .deb"
+                              : "下载 .deb"
+                            : locale === "en"
+                              ? "Download AppImage"
+                              : "下载 AppImage"}
                     </span>
                   </a>
                 ) : status === "loading" ? (
