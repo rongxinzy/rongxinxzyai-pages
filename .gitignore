@@ -10,3 +10,8 @@ docs/.vitepress/cache
 src/docs/generated/
 src/blog/generated/
 public/docs-assets/
+.codex/
+.github/agents/
+.github/hooks/
+.github/skills/
+stitch_silicon_valley_ai_redesign.zip
