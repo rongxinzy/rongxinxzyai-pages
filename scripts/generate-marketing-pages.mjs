@@ -139,6 +139,8 @@ function renderPage(page) {
     <meta name="twitter:image" content="${imageUrl}" />
     <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>${page.title}</title>
     <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
     <style>
