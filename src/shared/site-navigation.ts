@@ -11,3 +11,15 @@ export const SITE_NAVIGATION = [
 
 export const SITE_HOME_URL = "/";
 export const SITE_ENTERPRISE_URL = "/enterprise/";
+
+/** Resolve encoded heading links without letting an invalid URL fragment crash a page. */
+export function findFragmentTarget(hash = window.location.hash): HTMLElement | null {
+  if (!hash || hash === "#") return null;
+  let id = hash.slice(1);
+  try {
+    id = decodeURIComponent(id);
+  } catch {
+    // A literal percent sign is still a valid character in an element ID.
+  }
+  return document.getElementById(id);
+}

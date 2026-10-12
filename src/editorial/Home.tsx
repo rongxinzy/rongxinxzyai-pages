@@ -14,7 +14,7 @@ import { BackgroundBeams } from "../effects/BackgroundBeams";
 
 const PLATFORM_ICONS = ["laptop", "monitor", "terminal"] as const;
 
-const sectionPad = "mx-auto max-w-7xl px-6 pt-24 pb-16 md:pt-32 md:pb-20";
+const sectionPad = "pt-24 pb-16 md:pt-32 md:pb-20";
 
 export function Home({
   copy,

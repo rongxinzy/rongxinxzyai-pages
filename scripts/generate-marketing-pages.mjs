@@ -19,7 +19,7 @@ const pages = [
       "知远是一款开源桌面 AI 工作台，可以写报告、整理表格、改代码。内置 llama.cpp，在本机运行 GGUF 模型，也能接入 OpenAI 兼容 API。支持 macOS、Windows、Linux。",
     heroTitle: "你的电脑，就是 AI 工作台。",
     heroLead:
-      "写报告、整理表格、改代码，都在一个窗口里完成。知远内置 llama.cpp，可以在本机下载和运行开源模型。用本地模型时，数据不会离开你的电脑。",
+      "在一个窗口中撰写报告、整理表格和修改代码。知远内置 llama.cpp，可在本机运行开源模型。本地推理无需将输入发送至云端模型。联网工具按所选服务处理数据。",
     staticAction: "下载知远",
     staticHref: "/#download",
     imageAlt: "知远桌面工作台界面",
@@ -37,7 +37,7 @@ const pages = [
       "ZhiYuan is an open-source desktop AI workbench for writing reports, cleaning up spreadsheets and editing code. llama.cpp is built in, so GGUF models run on your machine, and any OpenAI-compatible API works too.",
     heroTitle: "Your computer, now an AI workbench.",
     heroLead:
-      "Write reports, clean up spreadsheets and edit code in one window. ZhiYuan ships with llama.cpp, so you can download and run open models on your own machine. With a local model, your data never leaves it.",
+      "Write reports, organize spreadsheets and edit code in one window. ZhiYuan includes llama.cpp for running open models locally. Local inference does not send inputs to a cloud model. Online tools process data through the services you choose.",
     staticAction: "Download ZhiYuan",
     staticHref: "/en/#download",
     imageAlt: "The ZhiYuan desktop workbench",
@@ -50,15 +50,15 @@ const pages = [
     page: "enterprise",
     path: "/enterprise/",
     alternatePath: "/en/enterprise/",
-    title: "知远企业服务 — 团队的 AI 工作室",
+    title: "知远企业版 — Persona Agent + 企业级治理",
     description:
-      "连接团队的模型、知识库与业务系统。部署知远，确定成员权限与交付范围。功能和服务以合同约定为准。",
-    heroTitle: "团队的 AI 工作室。",
+      "知远企业版以个人搭档（Persona Agent）与部门数字员工支持日常工作，以企业级治理管理身份、模型授权与受管工具数据范围。按业务场景分阶段交付。",
+    heroTitle: "Persona Agent + 企业级治理",
     heroLead:
-      "连接团队的模型、知识库与业务系统。部署知远，确定成员权限与交付范围。功能和服务以合同约定为准。",
-    staticAction: "联系企业服务",
+      "以个人搭档承接员工日常工作，以部门数字员工提供专业能力，通过企业身份、模型授权与受管工具数据范围支持协作。持续工作与多搭档能力按项目范围分阶段交付。",
+    staticAction: "讨论企业试点",
     staticHref: "/enterprise/#contact",
-    imageAlt: "知远企业版桌面工作空间界面",
+    imageAlt: "知远桌面工作台界面",
     schemaName: "知远企业版",
   },
   {
@@ -68,15 +68,15 @@ const pages = [
     page: "enterprise",
     path: "/en/enterprise/",
     alternatePath: "/enterprise/",
-    title: "ZhiYuan Enterprise — Your team’s AI studio",
+    title: "ZhiYuan Enterprise — Persona Agent + Enterprise Governance",
     description:
-      "Connect your team’s models, knowledge bases and business systems. Deploy ZhiYuan and define permissions and deliverables. The contract defines features and services.",
-    heroTitle: "Your team’s AI studio.",
+      "ZhiYuan Enterprise combines personal companions (Persona Agent), departmental digital employees and enterprise governance. Delivery is phased by project.",
+    heroTitle: "Persona Agent + Enterprise governance",
     heroLead:
-      "Connect your team’s models, knowledge bases and business systems. Deploy ZhiYuan and define permissions and deliverables. The contract defines features and services.",
-    staticAction: "Contact enterprise sales",
+      "Personal companions (Persona Agent), departmental digital employees and enterprise governance for daily work. Ongoing collaboration and multi-companion capabilities are delivered in phases, with scope confirmed per project.",
+    staticAction: "Discuss a pilot",
     staticHref: "/en/enterprise/#contact",
-    imageAlt: "The ZhiYuan Enterprise desktop workspace",
+    imageAlt: "The ZhiYuan desktop workbench",
     schemaName: "ZhiYuan Enterprise",
   },
 ];

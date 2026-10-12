@@ -47,11 +47,18 @@ function isRelease(value: unknown): value is SiteRelease {
   );
 }
 
-function detectPlatform(): Exclude<SitePlatform, "linuxAppImage"> {
+function detectPlatform(): Exclude<SitePlatform, "linuxAppImage"> | undefined {
   const agent = navigator.userAgent.toLowerCase();
+  // Desktop-mode iPadOS reports a Mac user agent; none of these packages run on mobile.
+  if (
+    /android|iphone|ipad|ipod/.test(agent) ||
+    (agent.includes("mac") && navigator.maxTouchPoints > 1)
+  )
+    return undefined;
   if (agent.includes("mac")) return "macos";
   if (agent.includes("linux")) return "linux";
-  return "windows";
+  if (agent.includes("windows")) return "windows";
+  return undefined;
 }
 
 export default function App() {

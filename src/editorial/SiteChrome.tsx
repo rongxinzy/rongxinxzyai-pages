@@ -4,9 +4,19 @@ import { cn } from "../lib/utils";
 import { GITHUB, isEnglish, type EditorialCopy } from "./copy";
 import { Icon } from "./icons";
 
-export function Brand({ home, small = false }: { home: string; small?: boolean }) {
+export function Brand({
+  home,
+  small = false,
+}: {
+  home: string;
+  small?: boolean;
+}) {
   return (
-    <a className="inline-flex shrink-0 items-center" href={home} aria-label={home === "/en/" ? "ZhiYuan home" : "知远首页"}>
+    <a
+      className="inline-flex shrink-0 items-center"
+      href={home}
+      aria-label={home === "/en/" ? "ZhiYuan home" : "知远首页"}
+    >
       <img
         src="/zhiyuan-logo.svg"
         width={small ? 100 : 132}
@@ -37,10 +47,14 @@ export function Header({
   locale,
   page,
   copy,
+  alternateHref,
+  currentSection,
 }: {
   locale: SiteLocale;
   page: SitePage;
   copy: EditorialCopy;
+  alternateHref?: string;
+  currentSection?: "docs" | "blog";
 }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -49,12 +63,16 @@ export function Header({
   const en = isEnglish(locale);
   const home = en ? "/en/" : "/";
   const enterprise = `${home}enterprise/`;
-  const alternate = `${en ? "/" : "/en/"}${page === "enterprise" ? "enterprise/" : ""}`;
+  const alternate =
+    alternateHref ??
+    `${en ? "/" : "/en/"}${page === "enterprise" ? "enterprise/" : ""}`;
 
   useEffect(() => {
     // 迟滞阈值，避免滚动位置在临界点来回抖动触发状态闪烁。
     const onScroll = () =>
-      setScrolled((value) => (value ? window.scrollY > 8 : window.scrollY > 32));
+      setScrolled((value) =>
+        value ? window.scrollY > 8 : window.scrollY > 32,
+      );
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -64,10 +82,38 @@ export function Header({
     if (!open) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    const siblings = Array.from(header.current?.parentElement?.children ?? [])
+      .filter(
+        (element): element is HTMLElement =>
+          element instanceof HTMLElement && element !== header.current,
+      )
+      .map((element) => ({ element, inert: element.inert }));
+    siblings.forEach(({ element }) => {
+      element.inert = true;
+    });
+    header.current
+      ?.querySelector<HTMLAnchorElement>("#site-navigation a")
+      ?.focus();
     const close = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setOpen(false);
         toggle.current?.focus();
+      }
+      if (event.key === "Tab") {
+        const controls = Array.from(
+          header.current?.querySelectorAll<HTMLElement>(
+            "a[href], button:not([disabled])",
+          ) ?? [],
+        ).filter((element) => element.getClientRects().length > 0);
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
       }
     };
     const outside = (event: PointerEvent) => {
@@ -88,6 +134,9 @@ export function Header({
     desktop.addEventListener("change", resized);
     return () => {
       document.body.style.overflow = previousOverflow;
+      siblings.forEach(({ element, inert }) => {
+        element.inert = inert;
+      });
       window.removeEventListener("keydown", close);
       window.removeEventListener("pointerdown", outside);
       desktop.removeEventListener("change", resized);
@@ -102,8 +151,12 @@ export function Header({
       href: enterprise,
       current: page === "enterprise",
     },
-    { label: copy.navDocs, href: en ? "/en/docs/" : "/docs/" },
-    { label: copy.navBlog, href: "/blog/" },
+    {
+      label: copy.navDocs,
+      href: en ? "/en/docs/" : "/docs/",
+      current: currentSection === "docs",
+    },
+    { label: copy.navBlog, href: "/blog/", current: currentSection === "blog" },
   ];
 
   const downloadClass =
@@ -112,6 +165,9 @@ export function Header({
   return (
     <header
       ref={header}
+      role={open ? "dialog" : undefined}
+      aria-modal={open || undefined}
+      aria-label={open ? copy.menu : undefined}
       className="fixed inset-x-0 top-0 z-50"
       onBlur={(event) => {
         if (
@@ -143,7 +199,10 @@ export function Header({
           </div>
           {/* 英文导航标签更宽，桌面导航到 xl 才展开，以下走汉堡菜单。 */}
           <nav
-            className={cn("hidden items-center gap-1", en ? "xl:flex" : "md:flex")}
+            className={cn(
+              "hidden items-center gap-1",
+              en ? "xl:flex" : "md:flex",
+            )}
             aria-label={copy.menu}
           >
             {nav.map((item) => (
@@ -187,7 +246,7 @@ export function Header({
             <button
               ref={toggle}
               className={cn(
-                "inline-flex items-center justify-center rounded-full p-2 text-ink transition-[color,background-color,transform] duration-200 ease-out hover:bg-mist active:scale-95 motion-reduce:transition-none",
+                "inline-flex items-center justify-center size-11 rounded-full p-2 text-ink transition-[color,background-color,transform] duration-200 ease-out hover:bg-mist active:scale-95 motion-reduce:transition-none",
                 en ? "xl:hidden" : "md:hidden",
               )}
               aria-expanded={open}
@@ -282,8 +341,11 @@ export function Footer({
             <p className="mt-4 max-w-xs text-sm leading-6 text-muted">
               {copy.footerBrand}
             </p>
-            <p className="tnum mt-5 inline-flex items-center gap-2 rounded-full border border-hairline bg-ground px-3 py-1.5 text-[13px] text-muted">
-              <span className="size-1.5 rounded-full bg-accent-2" aria-hidden="true" />
+            <p className="tnum mt-5 inline-flex max-w-full items-center gap-2 rounded-full border border-hairline bg-ground px-3 py-1.5 text-[13px] text-muted">
+              <span
+                className="size-1.5 shrink-0 rounded-full bg-accent-2"
+                aria-hidden="true"
+              />
               {release
                 ? `v${release.version} ${copy.footerRelease} · ${copy.footerPlatforms}`
                 : releaseStatus === "loading"

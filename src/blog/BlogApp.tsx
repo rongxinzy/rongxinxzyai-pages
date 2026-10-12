@@ -2,6 +2,7 @@ import { useEffect, useMemo } from "react";
 import { Header, Footer } from "../editorial/SiteChrome";
 import { COPY } from "../editorial/copy";
 import { cn } from "../lib/utils";
+import { findFragmentTarget } from "../shared/site-navigation";
 import type { BlogPost } from "./types";
 import rawContent from "./generated/content.json";
 
@@ -16,7 +17,10 @@ const POSTS: BlogEntry[] = Object.entries(CONTENT)
   .sort((a, b) => b.date.localeCompare(a.date));
 
 function currentSlug(): string {
-  return window.location.pathname.replace(/^\/blog\/?/, "").replace(/\/+$/, "");
+  return window.location.pathname
+    .replace(/\/index\.html$/, "/")
+    .replace(/^\/blog\/?/, "")
+    .replace(/\/+$/, "");
 }
 
 function blogHref(slug: string): string {
@@ -51,7 +55,7 @@ function BlogIndex() {
           <a
             key={post.slug}
             href={blogHref(post.slug)}
-            className="group flex flex-col gap-2.5 rounded-2xl border border-hairline bg-ground p-6 transition-shadow duration-200 hover:shadow-[0_8px_30px_rgb(12_18_34/0.08)]"
+            className="group flex flex-col gap-2.5 rounded-2xl border border-hairline bg-ground p-6 transition-colors duration-200 hover:bg-mist"
           >
             <time
               dateTime={post.date}
@@ -59,9 +63,9 @@ function BlogIndex() {
             >
               {post.date}
             </time>
-            <span className="text-xl font-semibold tracking-tight text-ink transition-colors duration-200 group-hover:text-accent">
+            <h2 className="text-xl font-semibold tracking-tight text-ink transition-colors duration-200 group-hover:text-accent">
               {post.title}
-            </span>
+            </h2>
             {post.description ? (
               <span className="text-sm leading-6 text-muted">
                 {post.description}
@@ -124,7 +128,7 @@ function PostView({ post, index }: { post: BlogEntry; index: number }) {
                 </span>
               </a>
             ) : (
-              <span />
+              <span className="hidden sm:block" aria-hidden="true" />
             )}
             {next ? (
               <a href={blogHref(next.slug)} className={cn(card, "sm:text-right")}>
@@ -147,22 +151,28 @@ export function BlogApp() {
   const post = index >= 0 ? POSTS[index] : undefined;
 
   useEffect(() => {
-    if (post) document.title = `${post.title} · 知远博客`;
-  }, [post]);
+    document.documentElement.lang = "zh-CN";
+    document.title = post
+      ? `${post.title} · 知远博客`
+      : slug ? "未找到这篇文章 · 知远博客" : "知远博客";
+  }, [post, slug]);
 
   useEffect(() => {
-    if (!window.location.hash) return;
-    const target = document.getElementById(
-      decodeURIComponent(window.location.hash.slice(1)),
-    );
-    target?.scrollIntoView();
+    findFragmentTarget()?.scrollIntoView();
   }, [slug]);
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header locale="zh-CN" page="home" copy={copy} />
-      <main className="mx-auto w-full max-w-7xl flex-1 px-5 pb-20 pt-24">
-        {post ? <PostView post={post} index={index} /> : <BlogIndex />}
+      <a className="reading-skip-link" href="#blog-content">跳至正文</a>
+      <Header locale="zh-CN" page="home" copy={copy} currentSection="blog" />
+      <main id="blog-content" tabIndex={-1} className="mx-auto w-full max-w-7xl flex-1 px-5 pb-20 pt-24">
+        {post ? <PostView post={post} index={index} /> : slug ? (
+          <div className="mx-auto w-full max-w-3xl">
+            <h1 className="text-3xl font-semibold tracking-tight text-ink">未找到这篇文章</h1>
+            <p className="mt-3 text-base leading-7 text-muted">此地址没有对应的文章。</p>
+            <a className="mt-6 inline-block text-sm text-accent underline" href="/blog/">返回博客列表</a>
+          </div>
+        ) : <BlogIndex />}
       </main>
       <Footer locale="zh-CN" copy={copy} release={null} releaseStatus="unavailable" />
     </div>

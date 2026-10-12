@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
+import { useReducedMotion } from "../lib/useReducedMotion";
 import { cn } from "../lib/utils";
 
 const CJK = /[㐀-鿿豈-﫿]/;
@@ -44,34 +45,42 @@ export function TextGenerateEffect({
   staggerDelay?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
+  const reducedMotion = useReducedMotion();
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
   const tokens = tokenize(words);
 
   return (
     <span ref={ref} className={cn("inline", className)}>
-      {tokens.map((token, index) =>
-        token === " " ? (
-          <span key={`space-${index}`}>{" "}</span>
-        ) : (
-          <motion.span
-            key={`${token}-${index}`}
-            className="inline-block"
-            initial={{ opacity: 0, filter: filter ? "blur(10px)" : "none" }}
-            animate={
-              inView
-                ? { opacity: 1, filter: filter ? "blur(0px)" : "none" }
-                : undefined
-            }
-            transition={{
-              duration,
-              delay: index * staggerDelay,
-              ease: "easeOut",
-            }}
-          >
-            {token}
-          </motion.span>
-        ),
-      )}
+      <span className="sr-only">{words}</span>
+      <span aria-hidden="true">
+        {tokens.map((token, index) =>
+          token === " " ? (
+            <span key={`space-${index}`}> </span>
+          ) : (
+            <motion.span
+              key={`${token}-${index}`}
+              className="inline-block"
+              initial={
+                reducedMotion
+                  ? false
+                  : { opacity: 0, filter: filter ? "blur(10px)" : "none" }
+              }
+              animate={
+                reducedMotion || inView
+                  ? { opacity: 1, filter: filter ? "blur(0px)" : "none" }
+                  : undefined
+              }
+              transition={{
+                duration: reducedMotion ? 0 : duration,
+                delay: reducedMotion ? 0 : index * staggerDelay,
+                ease: "easeOut",
+              }}
+            >
+              {token}
+            </motion.span>
+          ),
+        )}
+      </span>
     </span>
   );
 }

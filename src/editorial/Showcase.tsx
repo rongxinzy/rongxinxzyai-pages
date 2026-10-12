@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
-import { useReducedMotion } from "motion/react";
+import { useReducedMotion } from "../lib/useReducedMotion";
 import type { SiteLocale } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
 

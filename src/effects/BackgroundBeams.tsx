@@ -24,9 +24,11 @@ const VIEW_H = 316;
 // 光斑层套一层与 SVG preserveAspectRatio="slice" 相同的变换，使两套坐标系对齐。
 export function BackgroundBeams({ className }: { className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [slice, setSlice] = useState<{ s: number; x: number; y: number } | null>(
-    null,
-  );
+  const [slice, setSlice] = useState<{
+    s: number;
+    x: number;
+    y: number;
+  } | null>(null);
 
   useEffect(() => {
     const el = ref.current;
@@ -47,6 +49,7 @@ export function BackgroundBeams({ className }: { className?: string }) {
   return (
     <div
       ref={ref}
+      aria-hidden="true"
       className={cn(
         "pointer-events-none absolute inset-0 h-full w-full overflow-hidden",
         className,

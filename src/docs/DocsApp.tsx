@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Header, Footer } from "../editorial/SiteChrome";
 import { COPY } from "../editorial/copy";
 import { cn } from "../lib/utils";
+import { findFragmentTarget } from "../shared/site-navigation";
 import {
   DOCS_NAV,
   DOCS_NAV_EN,
@@ -27,6 +28,9 @@ const UI = {
     outline: "本页内容",
     menu: "文档目录",
     menuClose: "关闭目录",
+    skipToContent: "跳至正文",
+    notFound: "未找到这篇文档",
+    notFoundLead: "此地址没有对应的文档。请从目录中选择一篇，或返回文档首页。",
     home: "文档首页",
     prev: "上一篇",
     next: "下一篇",
@@ -42,6 +46,9 @@ const UI = {
     outline: "On this page",
     menu: "Docs menu",
     menuClose: "Close menu",
+    skipToContent: "Skip to content",
+    notFound: "Document not found",
+    notFoundLead: "There is no document at this address. Choose a page from the menu or return to Docs home.",
     home: "Docs home",
     prev: "Previous",
     next: "Next",
@@ -69,6 +76,7 @@ function detectLocale(): DocsLocale {
 
 function currentRoute(locale: DocsLocale): string {
   return window.location.pathname
+    .replace(/\/index\.html$/, "/")
     .replace(locale === "en" ? /^\/en\/docs\/?/ : /^\/docs\/?/, "")
     .replace(/\/+$/, "");
 }
@@ -158,6 +166,7 @@ function Outline({ headings, ui }: { headings: DocsHeading[]; ui: Ui }) {
         <a
           key={heading.id}
           href={`#${heading.id}`}
+          aria-current={active === heading.id ? "location" : undefined}
           className={cn(
             "border-l py-1 text-[13px] leading-5 transition-colors duration-200",
             heading.depth === 3 ? "pl-6" : "pl-3",
@@ -192,7 +201,7 @@ function PrevNext({ route, locale, ui }: { route: string; locale: DocsLocale; ui
           </span>
         </a>
       ) : (
-        <span />
+        <span className="hidden sm:block" aria-hidden="true" />
       )}
       {next ? (
         <a href={docsHref(next.route, locale)} className={cn(card, "sm:text-right")}>
@@ -306,104 +315,169 @@ export function DocsApp() {
   const siteLocale = locale === "en" ? "en" : "zh-CN";
   const copy = COPY[siteLocale];
   const route = useMemo(() => currentRoute(locale), [locale]);
-  const page = CONTENT[locale][route];
-  const isHome = route === "" || !page;
+  const page = Object.prototype.hasOwnProperty.call(CONTENT[locale], route)
+    ? CONTENT[locale][route]
+    : undefined;
+  const isHome = route === "";
   const [menuOpen, setMenuOpen] = useState(false);
+  const content = useRef<HTMLDivElement>(null);
+  const main = useRef<HTMLElement>(null);
+  const menuToggle = useRef<HTMLButtonElement>(null);
+  const sidebar = useRef<HTMLDivElement>(null);
+  const menuClose = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     document.documentElement.lang = locale === "en" ? "en" : "zh-CN";
   }, [locale]);
 
   useEffect(() => {
-    if (!isHome && page) document.title = `${page.title} · ${ui.titleSuffix}`;
+    document.title = isHome
+      ? ui.homeTitle
+      : `${page?.title ?? ui.notFound} · ${ui.titleSuffix}`;
   }, [isHome, page, ui]);
 
   useEffect(() => {
-    if (!window.location.hash) return;
-    const target = document.getElementById(
-      decodeURIComponent(window.location.hash.slice(1)),
-    );
-    target?.scrollIntoView();
+    findFragmentTarget()?.scrollIntoView();
   }, [route]);
 
   useEffect(() => {
     if (!menuOpen) return;
+    const background = content.current;
+    const panel = sidebar.current;
+    const trigger = menuToggle.current;
+    if (!background || !panel) return;
+    const previousOverflow = document.body.style.overflow;
+    const previousInert = background.inert;
+    const desktop = window.matchMedia("(min-width: 1024px)");
     document.body.style.overflow = "hidden";
-    const close = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false);
+    background.inert = true;
+    menuClose.current?.focus({ preventScroll: true });
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMenuOpen(false);
+      }
+      if (event.key !== "Tab") return;
+      const links = panel.querySelectorAll<HTMLElement>("a[href], button:not([disabled])");
+      const first = links[0];
+      const last = links[links.length - 1];
+      if (!first || !last) return;
+      if (event.shiftKey && (document.activeElement === first || !panel.contains(document.activeElement))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (document.activeElement === last || !panel.contains(document.activeElement))) {
+        event.preventDefault();
+        first.focus();
+      }
     };
-    window.addEventListener("keydown", close);
+    const onFocus = (event: FocusEvent) => {
+      if (event.target instanceof Node && !panel.contains(event.target)) {
+        menuClose.current?.focus({ preventScroll: true });
+      }
+    };
+    const onResize = () => {
+      if (desktop.matches) setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    document.addEventListener("focusin", onFocus);
+    desktop.addEventListener("change", onResize);
+    onResize();
     return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", close);
+      document.body.style.overflow = previousOverflow;
+      background.inert = previousInert;
+      window.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("focusin", onFocus);
+      desktop.removeEventListener("change", onResize);
+      if (trigger?.isConnected) {
+        (desktop.matches ? main.current : trigger)?.focus({ preventScroll: true });
+      }
     };
   }, [menuOpen]);
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header locale={siteLocale} page="home" copy={copy} />
-      <div className="mx-auto w-full max-w-7xl flex-1 px-5 pb-20 pt-24">
-        <div className="mb-6 lg:hidden">
-          <button
-            type="button"
-            aria-expanded={menuOpen}
-            aria-controls="docs-sidebar"
-            onClick={() => setMenuOpen(true)}
-            className="inline-flex items-center gap-2 rounded-full border border-hairline bg-ground px-4 py-2 text-sm text-ink"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              aria-hidden="true"
+    <div>
+      <div ref={content} className="flex min-h-screen flex-col">
+        <a className="reading-skip-link" href="#docs-content">{ui.skipToContent}</a>
+        <Header
+          locale={siteLocale}
+          page="home"
+          copy={copy}
+          currentSection="docs"
+          alternateHref={docsHref(page ? route : "", locale === "en" ? "zh" : "en")}
+        />
+        <div className="mx-auto w-full max-w-7xl flex-1 px-5 pb-20 pt-24">
+          <div className="mb-6 lg:hidden">
+            <button
+              ref={menuToggle}
+              type="button"
+              aria-haspopup="dialog"
+              aria-expanded={menuOpen}
+              aria-controls="docs-sidebar"
+              onClick={() => setMenuOpen(true)}
+              className="inline-flex items-center gap-2 rounded-full border border-hairline bg-ground px-4 py-2 text-sm text-ink"
             >
-              <path d="M4 6h16M4 12h16M4 18h10" />
-            </svg>
-            {ui.menu}
-          </button>
-        </div>
-        <div className="lg:grid lg:grid-cols-[232px_minmax(0,1fr)] lg:gap-12 xl:grid-cols-[232px_minmax(0,1fr)_184px]">
-          <aside className="hidden lg:block">
-            <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pb-8 pr-2">
-              <a
-                href={docsHref("", locale)}
-                className={cn(
-                  "mb-4 block px-3 text-sm font-medium",
-                  isHome ? "text-accent" : "text-ink hover:text-accent",
-                )}
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                aria-hidden="true"
               >
-                {ui.home}
-              </a>
-              <SidebarItems route={route} locale={locale} />
-            </div>
-          </aside>
-          <main className="min-w-0">
-            {isHome ? (
-              <DocsHome locale={locale} ui={ui} />
-            ) : (
-              <>
-                <article
-                  className="docs-prose prose max-w-none"
-                  dangerouslySetInnerHTML={{ __html: page.html }}
-                />
-                <PrevNext route={route} locale={locale} ui={ui} />
-              </>
-            )}
-          </main>
-          <aside className="hidden xl:block">
-            {!isHome && (
-              <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pb-8">
-                <Outline headings={page.headings} ui={ui} />
+                <path d="M4 6h16M4 12h16M4 18h10" />
+              </svg>
+              {ui.menu}
+            </button>
+          </div>
+          <div className="lg:grid lg:grid-cols-[232px_minmax(0,1fr)] lg:gap-12 xl:grid-cols-[232px_minmax(0,1fr)_184px]">
+            <aside className="hidden lg:block" aria-label={ui.menu}>
+              <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pb-8 pr-2">
+                <a
+                  href={docsHref("", locale)}
+                  aria-current={isHome ? "page" : undefined}
+                  className={cn(
+                    "mb-4 block px-3 text-sm font-medium",
+                    isHome ? "text-accent" : "text-ink hover:text-accent",
+                  )}
+                >
+                  {ui.home}
+                </a>
+                <SidebarItems route={route} locale={locale} />
               </div>
-            )}
-          </aside>
+            </aside>
+            <main ref={main} id="docs-content" tabIndex={-1} className="min-w-0 scroll-mt-24">
+              {isHome ? (
+                <DocsHome locale={locale} ui={ui} />
+              ) : page ? (
+                <>
+                  <article
+                    className="docs-prose prose max-w-none"
+                    dangerouslySetInnerHTML={{ __html: page.html }}
+                  />
+                  <PrevNext route={route} locale={locale} ui={ui} />
+                </>
+              ) : (
+                <div>
+                  <h1 className="text-3xl font-semibold tracking-tight text-ink">{ui.notFound}</h1>
+                  <p className="mt-3 text-base leading-7 text-muted">{ui.notFoundLead}</p>
+                  <a className="mt-6 inline-block text-sm text-accent underline" href={docsHref("", locale)}>{ui.home}</a>
+                </div>
+              )}
+            </main>
+            <aside className="hidden xl:block">
+              {!isHome && page && (
+                <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pb-8">
+                  <Outline headings={page.headings} ui={ui} />
+                </div>
+              )}
+            </aside>
+          </div>
         </div>
+        <Footer locale={siteLocale} copy={copy} release={null} releaseStatus="unavailable" />
       </div>
-      <Footer locale={siteLocale} copy={copy} release={null} releaseStatus="unavailable" />
       {menuOpen ? (
         <div className="fixed inset-0 z-[60] lg:hidden">
           <div
@@ -412,18 +486,21 @@ export function DocsApp() {
             aria-hidden="true"
           />
           <div
+            ref={sidebar}
             id="docs-sidebar"
             role="dialog"
+            aria-modal="true"
             aria-label={ui.menu}
-            className="absolute inset-y-0 left-0 w-72 overflow-y-auto bg-ground p-5 shadow-[0_8px_30px_rgb(12_18_34/0.12)]"
+            className="absolute inset-y-0 left-0 w-72 max-w-[calc(100%-2rem)] overflow-y-auto overscroll-contain bg-ground p-5 shadow-[0_8px_30px_rgb(12_18_34/0.12)]"
           >
             <div className="mb-4 flex items-center justify-between">
               <p className="text-sm font-medium text-ink">{ui.menu}</p>
               <button
+                ref={menuClose}
                 type="button"
                 aria-label={ui.menuClose}
                 onClick={() => setMenuOpen(false)}
-                className="rounded-full p-1.5 text-muted transition-colors duration-200 hover:bg-mist hover:text-ink"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full p-2 text-muted transition-colors duration-200 hover:bg-mist hover:text-ink"
               >
                 <svg
                   width="18"
@@ -441,6 +518,7 @@ export function DocsApp() {
             </div>
             <a
               href={docsHref("", locale)}
+              aria-current={isHome ? "page" : undefined}
               onClick={() => setMenuOpen(false)}
               className="mb-4 block px-3 text-sm font-medium text-ink"
             >

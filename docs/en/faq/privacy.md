@@ -1,12 +1,18 @@
 # Data and Privacy Policy
 
-Last updated: 2026-10-06. Operator: Beijing Rongxin Zhiyuan Technology Co., Ltd.
+Last updated: 2026-10-12. Operator: Beijing Rongxin Zhiyuan Technology Co., Ltd.
 
 ## Product Data
 
 ZhiYuan is a local-first desktop application: sessions, tasks, configuration, and management data for local models are stored on the user's own device by default. We do not automatically collect this content because a user installs or uses ZhiYuan.
 
 Users can configure cloud models, MCP services, web search, email, or instant messaging channels on their own. When the user explicitly enables these features or initiates a related operation, prompts, file contents, tool parameters, or results may be sent to the third-party service the user has chosen in order to complete that operation. Users should read the privacy policy of the corresponding service before enabling it, and avoid providing sensitive material that should not leave the device.
+
+## Data Scope in Enterprise Deployments
+
+The local-storage description above applies to the open-source desktop edition. Enterprise conversations, files, tasks and runtime data may be stored on servers or in work environments configured for the project. External models and business tools may also receive data needed for their operations.
+
+Enterprise pilots and deployments must define storage locations, authorized users, third-party services, retention periods and deletion procedures. The project configuration and applicable agreements determine the data-processing scope.
 
 ## Downloads and Updates
 
@@ -18,7 +24,7 @@ The official website is hosted on Cloudflare Pages. The network service may proc
 
 ## Code Signing
 
-The current installers are not code-signed; Windows and macOS may warn that the publisher is unverified. Verify installer integrity against the SHA-256 checksums published on the release page.
+Installer code-signing status varies by version and platform; check the corresponding release notes. Update-manifest signatures verify the manifest source, while installer code signatures verify the software publisher. One does not substitute for the other. Check downloaded files against the SHA-256 checksums on the release page.
 
 ## Contact and Rights
 

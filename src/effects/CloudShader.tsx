@@ -273,15 +273,28 @@ export const CloudShader = ({
 
     const vert = compile(gl, gl.VERTEX_SHADER, VERT);
     const frag = compile(gl, gl.FRAGMENT_SHADER, FRAG);
-    if (!vert || !frag) return;
+    if (!vert || !frag) {
+      if (vert) gl.deleteShader(vert);
+      if (frag) gl.deleteShader(frag);
+      return;
+    }
 
     const program = gl.createProgram();
-    if (!program) return;
+    if (!program) {
+      gl.deleteShader(vert);
+      gl.deleteShader(frag);
+      return;
+    }
     gl.attachShader(program, vert);
     gl.attachShader(program, frag);
     gl.bindAttribLocation(program, 0, "a_pos");
     gl.linkProgram(program);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      gl.deleteProgram(program);
+      gl.deleteShader(vert);
+      gl.deleteShader(frag);
+      return;
+    }
     gl.useProgram(program);
 
     const buffer = gl.createBuffer();
@@ -306,9 +319,10 @@ export const CloudShader = ({
     let frame = 0;
     let running = true;
     let inView = false;
-    const reduceMotion = window.matchMedia(
+    const motionPreference = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
-    ).matches;
+    );
+    let reduceMotion = motionPreference.matches;
 
     // Clouds are low-frequency; beyond 1080p of backing pixels the extra
     // resolution is invisible after upscaling, so cap the renderbuffer.
@@ -379,6 +393,13 @@ export const CloudShader = ({
       else play();
     };
     document.addEventListener("visibilitychange", onVisibilityChange);
+    const onMotionChange = () => {
+      reduceMotion = motionPreference.matches;
+      pause();
+      if (reduceMotion) renderFrame(performance.now());
+      else play();
+    };
+    motionPreference.addEventListener("change", onMotionChange);
 
     resize();
     if (reduceMotion) renderFrame(performance.now());
@@ -390,6 +411,7 @@ export const CloudShader = ({
       observer.disconnect();
       visibility.disconnect();
       document.removeEventListener("visibilitychange", onVisibilityChange);
+      motionPreference.removeEventListener("change", onMotionChange);
       gl.deleteBuffer(buffer);
       gl.deleteProgram(program);
       gl.deleteShader(vert);
@@ -399,6 +421,9 @@ export const CloudShader = ({
 
   return (
     <div
+      style={{
+        background: `linear-gradient(to bottom, ${skyTopColor}, ${skyBottomColor})`,
+      }}
       className={cn(
         "relative h-full min-h-80 w-full overflow-hidden",
         className,

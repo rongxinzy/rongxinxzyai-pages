@@ -9,8 +9,9 @@
   --color-accent-2: #2563eb;
   --color-hairline: rgb(15 23 42 / var(--hairline-alpha));
 
-  --font-sans: "Geist Variable", "PingFang SC", "Hiragino Sans GB",
-    "Microsoft YaHei", system-ui, sans-serif;
+  --font-sans:
+    "Geist Variable", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 
   --animate-scroll: scroll 40s linear infinite;
@@ -108,12 +109,14 @@
 :root {
   --fs-micro: 11px;
   --hairline-alpha: 0.08;
+  --icon-stroke: 1.5;
 }
 
 @media (max-resolution: 1.2dppx) {
   :root {
     --fs-micro: 12px;
     --hairline-alpha: 0.14;
+    --icon-stroke: 2;
   }
 
   body {
