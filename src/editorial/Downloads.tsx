@@ -166,7 +166,7 @@ export function Downloads({
                     <Icon name={PLATFORM_ICONS[platform.id]} size={22} />
                   </span>
                   {isPreferred ? (
-                    <span className="rounded-full bg-accent px-2.5 py-1 text-[var(--fs-micro)] font-medium text-white">
+                    <span className="rounded-full bg-ink px-2.5 py-1 text-[var(--fs-micro)] font-medium text-white shadow-sm">
                       {locale === "en" ? "Recommended" : "推荐"}
                     </span>
                   ) : null}
@@ -198,10 +198,10 @@ export function Downloads({
                 {artifact ? (
                   <a
                     className={cn(
-                      "inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
+                      "inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-[transform,background-color,box-shadow]",
                       isPreferred
-                        ? "bg-accent text-white hover:bg-[#4338ca]"
-                        : "border border-hairline bg-white text-ink hover:bg-mist",
+                        ? "bg-ink text-white shadow-[0_1px_2px_rgb(9_13_22/0.2),0_4px_12px_rgb(9_13_22/0.1)] hover:bg-black hover:shadow-[0_6px_20px_rgb(9_13_22/0.18)]"
+                        : "border border-hairline bg-white text-ink hover:border-ink/25 hover:bg-mist",
                     )}
                     href={artifact.url}
                     aria-label={`${copy.headerDownload} ${platform.title} ${platform.detail}`}

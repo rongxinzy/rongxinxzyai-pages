@@ -76,7 +76,7 @@ export function Home({
               as="a"
               href="#download"
               borderRadius="9999px"
-              className="border-transparent bg-accent px-7 py-3 text-[15px] font-semibold text-white"
+              className="border-transparent bg-ink px-7 py-3 text-[15px] font-semibold text-white shadow-[0_1px_3px_rgb(9_13_22/0.25),0_10px_24px_rgb(9_13_22/0.14)] transition-colors hover:bg-black"
             >
               <span className="inline-flex items-center gap-2">
                 <Icon name="download" size={16} />
@@ -193,7 +193,7 @@ function OssSection({ copy }: { copy: EditorialCopy }) {
           href={GITHUB}
           target="_blank"
           rel="noreferrer"
-          className="mt-6 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-white px-5 py-2.5 text-sm font-medium text-accent transition-colors hover:border-accent/50"
+          className="mt-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-white px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-ink/30 hover:bg-mist"
         >
           <Icon name="star" size={15} />
           {copy.ossStar}

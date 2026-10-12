@@ -93,7 +93,7 @@ function renderPage(page) {
   const staticBackground = "#ffffff";
   const staticText = "#0c1222";
   const staticMuted = "#5b6478";
-  const staticButtonBackground = "#4f46e5";
+  const staticButtonBackground = "#090d16";
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": page.page === "enterprise" ? "WebPage" : "SoftwareApplication",
