@@ -62,6 +62,7 @@ export function Header({
 
   useEffect(() => {
     if (!open) return;
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const close = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -86,7 +87,7 @@ export function Header({
     window.addEventListener("pointerdown", outside);
     desktop.addEventListener("change", resized);
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", close);
       window.removeEventListener("pointerdown", outside);
       desktop.removeEventListener("change", resized);
@@ -95,7 +96,7 @@ export function Header({
 
   const nav = [
     { label: copy.navWorkflow, href: `${home}#workbench` },
-    { label: copy.navInference, href: `${home}#local-models` },
+    { label: copy.navInference, href: `${home}#models` },
     {
       label: copy.navEnterprise,
       href: enterprise,
@@ -175,7 +176,11 @@ export function Header({
             >
               {en ? "中文" : "EN"}
             </a>
-            <a className={downloadClass} href={`${home}#download`}>
+            <a
+              className={downloadClass}
+              href={`${home}#download`}
+              onClick={() => setOpen(false)}
+            >
               <Icon name="download" size={15} />
               <span>{copy.headerDownload}</span>
             </a>
@@ -198,12 +203,13 @@ export function Header({
       {open ? (
         <div
           id="site-navigation"
+          data-lenis-prevent
           className={cn(
-            "fixed inset-0 -z-10 flex flex-col bg-ground px-6 pb-8 pt-24",
+            "fixed inset-0 -z-10 flex flex-col gap-8 overflow-y-auto overscroll-contain bg-ground px-6 pb-8 pt-24",
             en ? "xl:hidden" : "md:hidden",
           )}
         >
-          <nav aria-label={copy.menu} className="flex flex-col">
+          <nav aria-label={copy.menu} className="flex shrink-0 flex-col">
             {nav.map((item) => (
               <a
                 key={item.label}
@@ -216,7 +222,7 @@ export function Header({
               </a>
             ))}
           </nav>
-          <div className="mt-auto flex flex-col gap-5">
+          <div className="mt-auto flex shrink-0 flex-col gap-5">
             <a
               className={cn(downloadClass, "justify-center py-3")}
               href={`${home}#download`}

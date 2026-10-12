@@ -7,7 +7,7 @@
   --color-muted: #525c71;
   --color-accent: #0f172a;
   --color-accent-2: #2563eb;
-  --color-hairline: rgb(15 23 42 / 0.08);
+  --color-hairline: rgb(15 23 42 / var(--hairline-alpha));
 
   --font-sans: "Geist Variable", "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", system-ui, sans-serif;
@@ -158,6 +158,10 @@
   }
 }
 
+.site-main section[id] {
+  scroll-margin-top: 6rem;
+}
+
 /* 第二屏 Showcase：四张产品截图呈手牌叠放，由 GSAP ScrollTrigger
    沿 380vh 轨道 scrub 驱动（见 Showcase.tsx）。这里只保留姿态基准：
    扇形旋转绕底部轴心，动画期间常驻合成层。 */
@@ -198,6 +202,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .oss-beam {
     display: none;
   }

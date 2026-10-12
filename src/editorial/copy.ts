@@ -82,6 +82,7 @@ export type EditorialCopy = {
   cloneCommand: string;
   copyCommand: string;
   copiedCommand: string;
+  copyFailedCommand: string;
   ossStar: string;
   footerBrand: string;
   footerRelease: string;
@@ -264,6 +265,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     cloneCommand: "git clone https://github.com/rongxinzy/RongxinAI.git",
     copyCommand: "复制命令",
     copiedCommand: "已复制",
+    copyFailedCommand: "复制失败，请手动复制命令。",
     ossStar: "在 GitHub 上点 Star",
     footerBrand:
       "知远是一款开源的桌面 AI 工作台。内置 llama.cpp，模型和数据都可以留在你自己的电脑上。",
@@ -499,6 +501,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     cloneCommand: "git clone https://github.com/rongxinzy/RongxinAI.git",
     copyCommand: "Copy",
     copiedCommand: "Copied",
+    copyFailedCommand: "Copy failed. Select and copy the command manually.",
     ossStar: "Star on GitHub",
     footerBrand:
       "ZhiYuan is an open-source desktop AI workbench. With llama.cpp built in, your models and data can stay on your own computer.",
