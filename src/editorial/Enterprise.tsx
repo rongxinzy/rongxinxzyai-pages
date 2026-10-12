@@ -70,7 +70,7 @@ export function Enterprise({
               as="a"
               href="#contact"
               borderRadius="9999px"
-              className="border-transparent bg-accent px-7 py-3 text-[15px] font-semibold text-white"
+              className="border-transparent bg-ink px-7 py-3 text-[15px] font-semibold text-white shadow-[0_1px_3px_rgb(9_13_22/0.25),0_10px_24px_rgb(9_13_22/0.14)] transition-colors hover:bg-black"
             >
               <span className="inline-flex items-center gap-2">
                 {copy.contactAction}
