@@ -60,17 +60,23 @@ export function Enterprise({
           </span>
           <h1
             id="enterprise-title"
-            className="mt-8 text-[clamp(36px,6vw,64px)] leading-[1.08] font-semibold tracking-[-0.02em] text-ink"
+            className="mt-8 text-ink"
           >
             <TextGenerateEffect
               words={copy.enterpriseTitle[0]}
-              staggerDelay={0.05}
-              className="block"
+              staggerDelay={0.055}
+              className={`hero-editorial-lead block ${
+                locale === "en"
+                  ? "text-[clamp(26px,3.8vw,44px)] leading-[1.16] italic tracking-[0.01em]"
+                  : "text-[clamp(26px,3.8vw,42px)] leading-[1.22]"
+              }`}
             />
             <TextGenerateEffect
               words={copy.enterpriseTitle[1]}
-              staggerDelay={0.05}
-              className="block"
+              staggerDelay={0.06}
+              initialDelay={0.2}
+              tokenClassName="hero-obsidian-glint"
+              className="hero-accent-line mt-2 block text-[clamp(36px,6vw,68px)] leading-[1.08] md:mt-2.5"
             />
           </h1>
           <p className="mt-6 max-w-[62ch] text-base leading-8 text-muted md:text-lg">

@@ -1,5 +1,29 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "ZhiYuan Editorial Serif";
+  src: url("/fonts/songti-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ZhiYuan Editorial Serif";
+  src: url("/fonts/songti-bold.woff2") format("woff2");
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ZhiYuan Editorial Serif";
+  src: url("/fonts/baskerville-italic.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @theme {
   --color-ground: #ffffff;
   --color-mist: #f8fafc;
@@ -12,6 +36,9 @@
   --font-sans:
     "Geist Variable", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
     system-ui, sans-serif;
+  --font-serif:
+    "ZhiYuan Editorial Serif", "Songti SC", "STSongti-SC-Regular",
+    "Source Han Serif SC", "Noto Serif CJK SC", "SimSun", Georgia, serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 
   --animate-scroll: scroll 40s linear infinite;
@@ -110,6 +137,7 @@
   --fs-micro: 11px;
   --hairline-alpha: 0.08;
   --icon-stroke: 1.5;
+  --hero-serif-weight: 600;
 }
 
 @media (max-resolution: 1.2dppx) {
@@ -117,6 +145,7 @@
     --fs-micro: 12px;
     --hairline-alpha: 0.14;
     --icon-stroke: 2;
+    --hero-serif-weight: 600;
   }
 
   body {
@@ -165,6 +194,63 @@
   scroll-margin-top: 6rem;
 }
 
+/* 首屏主 Slogan：方案 2（宋黑对排）+ 方案 3（天顶黑曜石 + 单次天光掠影）
+   第一行以人文宋刻/衬线斜体舒展引出，第二行以紧排重黑体承载黑曜石天顶受光面与入场一次掠光。 */
+@keyframes hero-obsidian-sweep {
+  0% {
+    background-position: 118% 0, 0 0;
+  }
+  100% {
+    background-position: -18% 0, 0 0;
+  }
+}
+
+.hero-editorial-lead {
+  font-family: var(--font-serif);
+  font-weight: var(--hero-serif-weight);
+  letter-spacing: 0.04em;
+  color: #172133;
+  text-shadow: 0 1px 0 rgb(255 255 255 / 0.75);
+}
+
+.hero-accent-line {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  filter: drop-shadow(0 1px 0 rgb(255 255 255 / 0.78))
+    drop-shadow(0 16px 34px rgb(9 13 22 / 0.08));
+}
+
+.hero-obsidian-glint {
+  background-image:
+    linear-gradient(
+      112deg,
+      transparent 0%,
+      transparent 40%,
+      rgb(148 197 255 / 0.5) 46.5%,
+      rgb(255 255 255 / 0.96) 50%,
+      rgb(186 218 255 / 0.45) 53.5%,
+      transparent 60%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      #364d6d 0%,
+      #1c283b 32%,
+      #090d16 70%,
+      #05070d 100%
+    );
+  background-size: 340% 100%, 100% 100%;
+  background-position: 118% 0, 0 0;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: hero-obsidian-sweep 1.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: calc(0.75s + var(--token-i, 0) * 0.12s);
+}
+
 /* 第二屏 Showcase：四张产品截图呈手牌叠放，由 GSAP ScrollTrigger
    沿 380vh 轨道 scrub 驱动（见 Showcase.tsx）。这里只保留姿态基准：
    扇形旋转绕底部轴心，动画期间常驻合成层。 */
@@ -211,5 +297,10 @@
 
   .oss-beam {
     display: none;
+  }
+
+  .hero-obsidian-glint {
+    animation: none;
+    background-position: -18% 0, 0 0;
   }
 }
