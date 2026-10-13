@@ -55,17 +55,25 @@ export function Home({
           <p className="mt-3 text-[13px] text-muted">{copy.heroBadgeSub}</p>
           <h1
             id="hero-title"
-            className="mt-8 text-[clamp(40px,7vw,76px)] leading-[1.06] font-semibold tracking-[-0.02em] text-ink"
+            className="mt-8 text-ink"
           >
             <TextGenerateEffect
               words={copy.headlineTop}
-              staggerDelay={0.05}
-              className="block"
+              staggerDelay={0.055}
+              className={`hero-editorial-lead block ${
+                locale === "en"
+                  ? "text-[clamp(28px,4.4vw,50px)] leading-[1.16] italic tracking-[0.01em]"
+                  : "pl-[0.42em] text-[clamp(28px,4.2vw,48px)] leading-[1.22]"
+              }`}
             />
             <TextGenerateEffect
               words={copy.headlineAccent}
-              staggerDelay={0.05}
-              className="block"
+              staggerDelay={0.06}
+              initialDelay={0.22}
+              tokenClassName="hero-obsidian-glint"
+              className={`hero-accent-line mt-2 block text-[clamp(42px,7.2vw,80px)] leading-[1.06] md:mt-2.5 ${
+                locale === "en" ? "" : "pl-[0.36em]"
+              }`}
             />
           </h1>
           <p className="mt-6 max-w-[62ch] text-base leading-8 text-muted md:text-lg">

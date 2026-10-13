@@ -34,15 +34,19 @@ function tokenize(words: string): string[] {
 export function TextGenerateEffect({
   words,
   className,
+  tokenClassName,
   filter = true,
   duration = 0.5,
   staggerDelay = 0.08,
+  initialDelay = 0,
 }: {
   words: string;
   className?: string;
+  tokenClassName?: string;
   filter?: boolean;
   duration?: number;
   staggerDelay?: number;
+  initialDelay?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const reducedMotion = useReducedMotion();
@@ -59,7 +63,8 @@ export function TextGenerateEffect({
           ) : (
             <motion.span
               key={`${token}-${index}`}
-              className="inline-block"
+              className={cn("inline-block", tokenClassName)}
+              style={{ "--token-i": index } as React.CSSProperties}
               initial={
                 reducedMotion
                   ? false
@@ -67,12 +72,16 @@ export function TextGenerateEffect({
               }
               animate={
                 reducedMotion || inView
-                  ? { opacity: 1, filter: filter ? "blur(0px)" : "none" }
+                  ? {
+                      opacity: 1,
+                      filter: filter ? "blur(0px)" : "none",
+                      transitionEnd: { filter: "none" },
+                    }
                   : undefined
               }
               transition={{
                 duration: reducedMotion ? 0 : duration,
-                delay: reducedMotion ? 0 : index * staggerDelay,
+                delay: reducedMotion ? 0 : initialDelay + index * staggerDelay,
                 ease: "easeOut",
               }}
             >
