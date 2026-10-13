@@ -19,3 +19,7 @@ The ZhiYuan agent is an open-source, local-first desktop AI agent. It organizes 
 These pages will be updated continuously as product capabilities and practical experience grow.
 
 Submit issues and suggestions via [GitHub Issues](https://github.com/rongxinzy/RongxinAI/issues).
+
+## Enterprise
+
+This guide covers the open-source desktop edition. For personal companions (Persona Agent), departmental digital employees and enterprise governance, read the [enterprise overview](./what-is-zhiyuan.md#enterprise-persona-agent-and-enterprise-governance).

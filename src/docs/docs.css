@@ -1,8 +1,27 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+.reading-skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 70;
+  transform: translateY(calc(-100% - 2rem));
+  border-radius: 0.5rem;
+  background: var(--color-ground);
+  color: var(--color-ink);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.reading-skip-link:focus {
+  transform: translateY(0);
+}
+
 /* Markdown 正文排版：颜色与线宽全部走 site.css 的 token。 */
 .docs-prose {
+  overflow-wrap: anywhere;
   --tw-prose-body: var(--color-ink);
   --tw-prose-headings: var(--color-ink);
   --tw-prose-lead: var(--color-muted);
@@ -23,17 +42,19 @@
   --tw-prose-td-borders: var(--color-hairline);
 }
 
-.docs-prose :where(h2, h3, h4) {
+.docs-prose :where(h1, h2, h3, h4, h5, h6) {
   scroll-margin-top: 6.5rem;
 }
 
 .docs-prose :where(a) {
   font-weight: 450;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 .docs-prose :where(a):hover {
-  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 .docs-prose :where(code):not(pre code) {

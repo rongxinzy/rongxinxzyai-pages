@@ -8,9 +8,13 @@ import { GITHUB, type EditorialCopy } from "./copy";
 import { Icon } from "./icons";
 import { cn } from "../lib/utils";
 
-type DownloadPlatform = Exclude<SitePlatform, "linuxAppImage"> | "linuxAppImage";
+type DownloadPlatform =
+  Exclude<SitePlatform, "linuxAppImage"> | "linuxAppImage";
 
-const PLATFORM_ICONS: Record<DownloadPlatform, "apple" | "monitor" | "windows" | "linux"> = {
+const PLATFORM_ICONS: Record<
+  DownloadPlatform,
+  "apple" | "monitor" | "windows" | "linux"
+> = {
   macos: "apple",
   windows: "windows",
   linux: "linux",
@@ -51,9 +55,7 @@ export function Downloads({
       detail: "x64",
       meta: [
         ".exe",
-        locale === "en"
-          ? "Local inference via plugin"
-          : "本地推理需另装插件",
+        locale === "en" ? "Local inference via plugin" : "本地推理需另装插件",
       ],
     },
     {
@@ -117,7 +119,7 @@ export function Downloads({
           className={cn(
             "tnum font-mono text-[13px]",
             release ? "text-ink" : "text-muted",
-            status === "loading" && "animate-pulse",
+            status === "loading" && "motion-safe:animate-pulse",
           )}
         >
           {release
@@ -171,9 +173,9 @@ export function Downloads({
                     </span>
                   ) : null}
                 </div>
-                <h4 className="mt-4 text-base font-semibold text-ink">
+                <h3 className="mt-4 text-base font-semibold text-ink">
                   {platform.title}
-                </h4>
+                </h3>
                 <p className="mt-1 text-sm text-muted">{platform.detail}</p>
                 <div className="mt-4 space-y-1.5">
                   <span className="tnum block text-[13px] text-muted">
@@ -227,7 +229,7 @@ export function Downloads({
                   </a>
                 ) : status === "loading" ? (
                   <span
-                    className="block h-10 w-full animate-pulse rounded-full bg-mist"
+                    className="block h-10 w-full motion-safe:animate-pulse rounded-full bg-mist"
                     aria-hidden="true"
                   />
                 ) : (
@@ -260,7 +262,9 @@ export function Downloads({
         </div>
         <a
           className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-accent hover:underline"
-          href={locale === "en" ? `${GITHUB}/blob/main/docs/faq/install.md` : "/docs/faq/install"}
+          href={
+            locale === "en" ? "/en/docs/faq/install/" : "/docs/faq/install/"
+          }
         >
           {copy.windowsGuide}
           <Icon name="arrow-forward" size={14} />

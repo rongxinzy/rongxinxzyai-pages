@@ -5,9 +5,9 @@ import {
   useInView,
   useMotionTemplate,
   useMotionValue,
-  useReducedMotion,
   useTransform,
 } from "motion/react";
+import { useReducedMotion } from "../lib/useReducedMotion";
 import { cn } from "../lib/utils";
 
 export function MovingBorderButton({
@@ -38,7 +38,8 @@ export function MovingBorderButton({
       {...otherProps}
     >
       <div
-        className="absolute inset-0"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
         style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
       >
         <MovingBorder duration={duration} rx="30%" ry="30%">
@@ -52,7 +53,7 @@ export function MovingBorderButton({
       </div>
       <div
         className={cn(
-          "relative flex h-full w-full items-center justify-center border border-hairline bg-white px-6 py-2.5 text-sm font-medium text-ink antialiased",
+          "relative flex h-full w-full items-center justify-center border border-hairline bg-white px-6 py-2.5 text-sm font-medium text-ink",
           className,
         )}
         style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}

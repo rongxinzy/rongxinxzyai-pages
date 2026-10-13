@@ -19,3 +19,7 @@
 这些页面会随着产品能力和实际使用经验持续补充。
 
 通过 [GitHub Issues](https://github.com/rongxinzy/RongxinAI/issues) 提交问题与建议。
+
+## 企业版
+
+本节介绍开源桌面版。个人搭档（Persona Agent）、部门数字员工与企业级治理的定位和交付边界，请阅读[企业版说明](./what-is-zhiyuan.md#企业版persona-agent-与企业级治理)。

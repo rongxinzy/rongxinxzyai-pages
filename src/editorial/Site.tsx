@@ -3,6 +3,7 @@ import type { SiteSiteProps } from "../shared/site-types";
 import { COPY } from "./copy";
 import { Header, Footer } from "./SiteChrome";
 import { Home } from "./Home";
+import { findFragmentTarget } from "../shared/site-navigation";
 import "./site.css";
 
 const Enterprise = lazy(() =>
@@ -12,17 +13,13 @@ const Enterprise = lazy(() =>
 export function EditorialSite(props: SiteSiteProps) {
   const copy = COPY[props.locale];
   useEffect(() => {
-    // The static HTML has only the hero; fragment targets appear after React mounts.
+    // Enterprise handles its fragment after the lazy-loaded page has mounted.
+    if (props.page !== "home") return;
     const frame = requestAnimationFrame(() => {
-      const fragment = window.location.hash.slice(1);
-      if (!fragment) return;
-      try {
-        document
-          .getElementById(decodeURIComponent(fragment))
-          ?.scrollIntoView({ behavior: "instant", block: "start" });
-      } catch {
-        /* An invalid URL fragment must not prevent the page from rendering. */
-      }
+      findFragmentTarget()?.scrollIntoView({
+        behavior: "instant",
+        block: "start",
+      });
     });
     return () => cancelAnimationFrame(frame);
   }, [props.page, props.locale]);
@@ -38,7 +35,22 @@ export function EditorialSite(props: SiteSiteProps) {
       {props.page === "home" ? (
         <Home {...props} copy={copy} />
       ) : (
-        <Suspense fallback={null}>
+        <Suspense
+          fallback={
+            <main
+              id="main"
+              className="flex min-h-[70vh] flex-col items-center justify-center px-6 pb-20 pt-28 text-center"
+              aria-busy="true"
+            >
+              <h1 className="text-4xl font-semibold leading-tight tracking-tight text-ink md:text-6xl">
+                {copy.enterpriseTitle.join(" ")}
+              </h1>
+              <p className="mt-6 max-w-2xl text-base leading-8 text-muted">
+                {copy.enterpriseLead}
+              </p>
+            </main>
+          }
+        >
           <Enterprise copy={copy} locale={props.locale} />
         </Suspense>
       )}

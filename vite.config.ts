@@ -11,7 +11,12 @@ function spaDevRewrite(): Plugin {
     configureServer(server) {
       server.middlewares.use((req, _res, next) => {
         const path = (req.url ?? "").split(/[?#]/, 1)[0];
-        if (path === "/docs" || (path.startsWith("/docs/") && path !== "/docs.html")) {
+        if (
+          path === "/docs" ||
+          path.startsWith("/docs/") ||
+          path === "/en/docs" ||
+          path.startsWith("/en/docs/")
+        ) {
           req.url = "/docs.html";
         } else if (
           path === "/blog" ||

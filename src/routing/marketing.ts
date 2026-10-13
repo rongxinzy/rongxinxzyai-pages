@@ -12,8 +12,6 @@ export type MarketingRoute = Readonly<{
   documentationHref: string;
 }>;
 
-const ENGLISH_README_URL = "https://github.com/rongxinzy/RongxinAI#readme";
-
 const ROUTES: Record<MarketingLocale, Record<MarketingPage, MarketingRoute>> = {
   "zh-CN": {
     home: {
@@ -37,14 +35,14 @@ const ROUTES: Record<MarketingLocale, Record<MarketingPage, MarketingRoute>> = {
       page: "home",
       path: "/en/",
       alternatePath: "/",
-      documentationHref: ENGLISH_README_URL,
+      documentationHref: "/en/docs/",
     },
     enterprise: {
       locale: "en",
       page: "enterprise",
       path: "/en/enterprise/",
       alternatePath: "/enterprise/",
-      documentationHref: ENGLISH_README_URL,
+      documentationHref: "/en/docs/",
     },
   },
 };

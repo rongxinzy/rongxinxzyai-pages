@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { SiteSiteProps } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
 import { GITHUB } from "./copy";
@@ -14,7 +14,7 @@ import { BackgroundBeams } from "../effects/BackgroundBeams";
 
 const PLATFORM_ICONS = ["laptop", "monitor", "terminal"] as const;
 
-const sectionPad = "mx-auto max-w-7xl px-6 pt-24 pb-16 md:pt-32 md:pb-20";
+const sectionPad = "pt-24 pb-16 md:pt-32 md:pb-20";
 
 export function Home({
   copy,
@@ -142,19 +142,35 @@ export function Home({
 }
 
 function OssSection({ copy }: { copy: EditorialCopy }) {
-  const [copied, setCopied] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<
+    "idle" | "copying" | "copied" | "error"
+  >("idle");
+  const command = useRef<HTMLElement>(null);
+  const copied = copyStatus === "copied";
 
   useEffect(() => {
     if (!copied) return;
-    const timer = window.setTimeout(() => setCopied(false), 1600);
+    const timer = window.setTimeout(() => setCopyStatus("idle"), 1600);
     return () => window.clearTimeout(timer);
   }, [copied]);
 
-  const onCopy = () => {
-    if (navigator.clipboard?.writeText) {
-      navigator.clipboard.writeText(copy.cloneCommand).catch(() => {});
+  const onCopy = async () => {
+    setCopyStatus("copying");
+    try {
+      await navigator.clipboard.writeText(copy.cloneCommand);
+      setCopyStatus("copied");
+    } catch {
+      setCopyStatus("error");
+      // Keep the full command available when clipboard access is unavailable.
+      if (command.current) {
+        command.current.focus();
+        const range = document.createRange();
+        range.selectNodeContents(command.current);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+      }
     }
-    setCopied(true);
   };
 
   return (
@@ -177,18 +193,34 @@ function OssSection({ copy }: { copy: EditorialCopy }) {
           {copy.ossBody}
         </p>
         <div className="mx-auto mt-10 flex max-w-xl items-center gap-2 rounded-2xl bg-ink p-2 pl-5">
-          <code className="min-w-0 flex-1 truncate text-left font-mono text-sm text-white/90">
+          <code
+            ref={command}
+            tabIndex={-1}
+            className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap py-2 text-left font-mono text-sm text-white/90 selection:bg-white selection:text-ink focus-visible:outline-white"
+          >
             {copy.cloneCommand}
           </code>
           <button
             type="button"
             onClick={onCopy}
+            disabled={copyStatus === "copying"}
+            aria-busy={copyStatus === "copying"}
             className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-white/10 px-3.5 py-2 text-[13px] font-medium text-white transition-colors hover:bg-white/20"
           >
             <Icon name={copied ? "check" : "copy"} size={14} />
             {copied ? copy.copiedCommand : copy.copyCommand}
           </button>
         </div>
+        <p
+          role="status"
+          className="mx-auto mt-3 min-h-5 max-w-xl text-sm text-muted"
+        >
+          {copyStatus === "error"
+            ? copy.copyFailedCommand
+            : copied
+              ? copy.copiedCommand
+              : ""}
+        </p>
         <a
           href={GITHUB}
           target="_blank"

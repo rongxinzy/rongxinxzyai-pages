@@ -82,6 +82,7 @@ export type EditorialCopy = {
   cloneCommand: string;
   copyCommand: string;
   copiedCommand: string;
+  copyFailedCommand: string;
   ossStar: string;
   footerBrand: string;
   footerRelease: string;
@@ -90,7 +91,14 @@ export type EditorialCopy = {
   footerLegal: string[];
   footerBoundary: string;
   copyright: string;
+  enterpriseBadge: string;
   enterpriseTitle: string[];
+  enterpriseStatus: string;
+  enterpriseBenefitsTitle: string;
+  enterpriseBenefits: Array<{ title: string; body: string }>;
+  enterpriseDocsAction: string;
+  enterpriseDocsHref: string;
+  architectureLead: string;
   enterpriseLead: string;
   contactAction: string;
   scope: string;
@@ -131,7 +139,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     headlineTop: "你的电脑，",
     headlineAccent: "就是 AI 工作台。",
     heroLead:
-      "写报告、整理表格、改代码，都在一个窗口里完成。知远内置 llama.cpp，可以在本机下载和运行开源模型。用本地模型时，数据不会离开你的电脑。",
+      "在一个窗口中撰写报告、整理表格和修改代码。知远内置 llama.cpp，可在本机运行开源模型。本地推理无需将输入发送至云端模型。联网工具按所选服务处理数据。",
     heroCtaPrimary: "免费下载",
     agplChip: "AGPL-3.0",
     heroCtaSecondary: "看看界面",
@@ -264,6 +272,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     cloneCommand: "git clone https://github.com/rongxinzy/RongxinAI.git",
     copyCommand: "复制命令",
     copiedCommand: "已复制",
+    copyFailedCommand: "复制失败，请手动复制命令。",
     ossStar: "在 GitHub 上点 Star",
     footerBrand:
       "知远是一款开源的桌面 AI 工作台。内置 llama.cpp，模型和数据都可以留在你自己的电脑上。",
@@ -303,47 +312,69 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     footerLegal: ["AGPL-3.0 开源协议", "版本记录", "隐私说明"],
     footerBoundary: `${DOC_BASE}faq/privacy`,
     copyright: "© 2026 北京容芯致远科技有限公司",
-    enterpriseTitle: ["团队的", "AI 工作室。"],
+    enterpriseBadge: "ZHIYUAN ENTERPRISE",
+    enterpriseTitle: ["Persona Agent", "+ 企业级治理"],
     enterpriseLead:
-      "连接团队的模型、知识库与业务系统。让 AI 参与项目，交付文档、数据和代码。",
-    contactAction: "联系企业服务",
-    scope: "功能、部署范围和交付内容以合同约定为准。",
-    architectureTitle: "部署结构",
-    architecture: [
-      { title: "成员与项目", items: "团队与成员 / 项目与空间" },
-      { title: "模型与知识库", items: "模型接入 / 共享知识" },
-      { title: "系统与权限", items: "业务系统 / 访问策略" },
+      "个人搭档围绕员工的日常工作持续协作，部门数字员工承担专业任务。企业级治理管理身份、模型授权与受管工具的数据范围，让协作进入业务流程。",
+    enterpriseStatus:
+      "企业版按业务场景分阶段交付。持续工作、多搭档共享环境及跨员工协作的功能与验收范围，在项目评估中逐项确认。",
+    enterpriseBenefitsTitle: "从个人工作，连接部门协作",
+    enterpriseBenefits: [
+      {
+        title: "延续工作上下文",
+        body: "个人搭档（Persona Agent）面向固定用户，围绕目标、资料和待办持续协作，减少重复交代背景。",
+      },
+      {
+        title: "调用部门专业能力",
+        body: "部门数字员工按职责处理专业任务，将结果交付给请求者，支持员工直接交办与搭档协作。",
+      },
+      {
+        title: "管理协作边界",
+        body: "企业管理身份与模型授权，受管业务工具检查请求者的数据范围，操作事件为运行排查提供依据。",
+      },
     ],
-    deliveryOverline: "DELIVERY PROCESS",
-    deliveryTitle: "从一个任务，开始合作。",
+    enterpriseDocsAction: "阅读企业产品说明",
+    enterpriseDocsHref: "/docs/guide/what-is-zhiyuan#企业版persona-agent-与企业级治理",
+    contactAction: "讨论企业试点",
+    scope: "功能状态、部署方式、数据范围与验收标准在项目评估中确认，交付内容以合同约定为准。",
+    architectureTitle: "个人搭档、部门能力与企业治理",
+    architectureLead:
+      "个人搭档承接用户目标，部门数字员工提供专业服务，治理层定义访问与运行边界。多搭档方案按用户设置个人工作环境（Personal Workspace），共享该用户的文件与浏览器登录状态，不同用户的环境相互隔离。",
+    architecture: [
+      { title: "个人搭档 · Persona Agent", items: "固定用户 / 持续工作上下文 / 个人工作环境" },
+      { title: "部门数字员工", items: "部门职责 / 专业工具与流程 / 任务结果交付" },
+      { title: "企业级治理", items: "企业身份 / 模型授权 / 受管工具数据范围" },
+    ],
+    deliveryOverline: "PILOT & DELIVERY",
+    deliveryTitle: "用具体任务验证协作价值",
     delivery: [
       {
-        title: "确认需求",
-        body: "确定任务、数据来源、使用人员和验收标准。",
+        title: "选择试点任务",
+        body: "确认使用人员、日常任务与部门协作需求，约定效率、响应速度和结果质量的验收标准。",
       },
       {
-        title: "部署与接入",
-        body: "安装服务，连接模型和业务系统，设置成员权限。",
+        title: "配置运行环境",
+        body: "根据试点范围确认模型、业务系统、数据访问与资源配置，明确可用能力和待开发项。",
       },
       {
-        title: "测试与验收",
-        body: "执行测试任务，核对结果，交付文档和培训。",
+        title: "验证与扩展",
+        body: "以实际任务检查结果和运行记录，完成验收后再确定人员、场景与服务范围的扩展。",
       },
     ],
-    comparisonOverline: "EDITIONS & SERVICES",
-    comparisonTitle: "版本与服务",
+    comparisonOverline: "DESKTOP & ENTERPRISE",
+    comparisonTitle: "个人桌面与企业方案",
     comparisonHint: "左右滑动查看对比",
-    headers: ["项目", "开源桌面版", "企业项目方案"],
+    headers: ["范围", "开源桌面版", "企业方案"],
     comparison: [
-      ["工作空间", "个人使用", "项目空间、任务模板、成员管理"],
-      ["模型与工具", "用户配置", "模型网关、额度、工具连接"],
-      ["数据与权限", "本机存储", "成员权限、操作记录、数据管理"],
-      ["部署与服务", "文档与社区", "部署、培训、运维"],
+      ["服务对象", "个人在本机完成任务", "员工个人搭档与部门专业服务"],
+      ["工作环境", "用户授权的本机文件与工具", "按用户划分工作环境，接入企业系统"],
+      ["模型与管理", "用户配置模型和工具", "管理企业身份、模型授权与工具访问范围"],
+      ["获取方式", "下载安装，参考文档使用", "需求评估、试点与分阶段交付"],
     ],
     contactOverline: "CONTACT",
-    contactTitle: "谈谈团队的工作。",
+    contactTitle: "确定第一个试点场景",
     contactBody:
-      "告诉我们要完成的任务、使用人数和接入系统。我们确定部署方案与交付范围。",
+      "请提供使用部门、典型任务、预计人数与需接入的系统。我们据此评估现有能力、部署条件与交付范围。",
     qr: ["用户社区", "官方公众号"],
   },
 
@@ -365,7 +396,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     headlineTop: "Your computer,",
     headlineAccent: "now an AI workbench.",
     heroLead:
-      "Write reports, clean up spreadsheets and edit code in one window. ZhiYuan ships with llama.cpp, so you can download and run open models on your own machine. With a local model, your data never leaves it.",
+      "Write reports, organize spreadsheets and edit code in one window. ZhiYuan includes llama.cpp for running open models locally. Local inference does not send inputs to a cloud model. Online tools process data through the services you choose.",
     heroCtaPrimary: "Download for free",
     agplChip: "AGPL-3.0",
     heroCtaSecondary: "Take a look",
@@ -499,6 +530,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     cloneCommand: "git clone https://github.com/rongxinzy/RongxinAI.git",
     copyCommand: "Copy",
     copiedCommand: "Copied",
+    copyFailedCommand: "Copy failed. Select and copy the command manually.",
     ossStar: "Star on GitHub",
     footerBrand:
       "ZhiYuan is an open-source desktop AI workbench. With llama.cpp built in, your models and data can stay on your own computer.",
@@ -538,59 +570,69 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     footerLegal: ["AGPL-3.0 License", "Release notes", "Privacy"],
     footerBoundary: "/en/docs/faq/privacy",
     copyright: "© 2026 Beijing Rongxin Zhiyuan Technology Co., Ltd.",
-    enterpriseTitle: ["Your team’s", "AI studio."],
+    enterpriseBadge: "ZHIYUAN ENTERPRISE",
+    enterpriseTitle: ["Persona Agent", "+ Enterprise governance"],
     enterpriseLead:
-      "Connect your team’s models, knowledge bases and business systems. Bring AI into projects to create documents, data and code.",
-    contactAction: "Contact enterprise sales",
-    scope: "The contract defines features, deployment scope and deliverables.",
-    architectureTitle: "Deployment structure",
-    architecture: [
-      { title: "Members & projects", items: "Teams & members / Projects & spaces" },
-      { title: "Models & knowledge", items: "Model access / Shared knowledge" },
-      { title: "Systems & policies", items: "Business systems / Access policies" },
+      "Personal companions work with employees across their daily tasks. Departmental digital employees handle specialized work. Enterprise governance manages identity, model authorization and data scope for managed tools.",
+    enterpriseStatus:
+      "Enterprise delivery is phased by use case. Ongoing work, shared environments for multiple companions and collaboration across employees are evaluated individually, with feature scope and acceptance criteria defined for each project.",
+    enterpriseBenefitsTitle: "From individual work to department collaboration",
+    enterpriseBenefits: [
+      {
+        title: "Carry work context forward",
+        body: "A personal companion, or Persona Agent, serves a specific user across goals, materials and follow-ups, reducing the need to repeat background information.",
+      },
+      {
+        title: "Draw on department expertise",
+        body: "Departmental digital employees handle specialized tasks and deliver results to the requester, supporting direct employee requests and companion collaboration.",
+      },
+      {
+        title: "Set working boundaries",
+        body: "The organization manages identity and model authorization. Managed business tools check the requester’s data scope, while event records support operational troubleshooting.",
+      },
     ],
-    deliveryOverline: "DELIVERY PROCESS",
-    deliveryTitle: "Start with a task.",
+    enterpriseDocsAction: "Read the enterprise overview",
+    enterpriseDocsHref: "/en/docs/guide/what-is-zhiyuan#enterprise-persona-agent-and-enterprise-governance",
+    contactAction: "Discuss a pilot",
+    scope: "Feature availability, deployment, data scope and acceptance criteria are confirmed during evaluation. The contract defines deliverables.",
+    architectureTitle: "Personal companions, department expertise and governance",
+    architectureLead:
+      "Personal companions work toward user goals; departmental digital employees provide specialist services; governance defines access and operating boundaries. The multi-companion design uses a Personal Workspace per user, with shared files and browser sign-in state for that user's companions and isolation between users.",
+    architecture: [
+      { title: "Personal companion · Persona Agent", items: "Dedicated user / Ongoing work context / Personal Workspace" },
+      { title: "Departmental digital employee", items: "Defined remit / Specialized tools and workflows / Task deliverables" },
+      { title: "Enterprise governance", items: "Enterprise identity / Model authorization / Managed-tool data scope" },
+    ],
+    deliveryOverline: "PILOT & DELIVERY",
+    deliveryTitle: "Evaluate collaboration through real work",
     delivery: [
       {
-        title: "Define requirements",
-        body: "Specify tasks, data sources, users and acceptance criteria.",
+        title: "Choose pilot tasks",
+        body: "Identify users, daily tasks and department handoffs. Agree on acceptance criteria for efficiency, response time and result quality.",
       },
       {
-        title: "Deploy and integrate",
-        body: "Install services, connect models and business systems, and set member permissions.",
+        title: "Configure the environment",
+        body: "Define models, business systems, data access and resources. Identify available capabilities and development work within the pilot scope.",
       },
       {
-        title: "Test and accept",
-        body: "Run test tasks, check results and provide documentation and training.",
+        title: "Validate and expand",
+        body: "Review task results and execution records. Agree on additional users, use cases and services after acceptance.",
       },
     ],
-    comparisonOverline: "EDITIONS & SERVICES",
-    comparisonTitle: "Editions and services",
-    comparisonHint: "Scroll to compare editions",
-    headers: ["Scope", "Open-source desktop", "Enterprise project"],
+    comparisonOverline: "DESKTOP & ENTERPRISE",
+    comparisonTitle: "Personal desktop and enterprise",
+    comparisonHint: "Scroll to compare",
+    headers: ["Scope", "Open-source desktop", "Enterprise"],
     comparison: [
-      ["Workspace", "Personal use", "Shared spaces, templates and members"],
-      [
-        "Models & tools",
-        "Personal configuration",
-        "Model gateways, quotas and tool connections",
-      ],
-      [
-        "Data & permissions",
-        "Device storage",
-        "Member permissions, activity logs and data management",
-      ],
-      [
-        "Deployment & support",
-        "Documentation and community",
-        "Deployment, training and operations",
-      ],
+      ["Users", "Individuals working on their own computer", "Employee companions and departmental digital employees"],
+      ["Environment", "Authorized local files and tools", "Per-user workspaces and business integrations"],
+      ["Models & management", "User-configured models and tools", "Enterprise identity, model authorization and tool access scope"],
+      ["Getting started", "Download and follow the documentation", "Evaluation, pilot and phased delivery"],
     ],
     contactOverline: "CONTACT",
-    contactTitle: "Let’s talk about your work.",
+    contactTitle: "Define your first pilot",
     contactBody:
-      "Tell us about the task, your team and the systems to connect. We will define deployment and deliverables.",
+      "Tell us the department, typical tasks, expected number of users and systems involved. We will assess available capabilities, deployment requirements and delivery scope.",
     qr: ["User community", "Official account"],
   },
 };

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { findFragmentTarget } from "../shared/site-navigation";
 import type { SiteLocale } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
 import { Icon } from "./icons";
@@ -25,7 +27,16 @@ export function Enterprise({
   copy: EditorialCopy;
   locale: SiteLocale;
 }) {
-  const en = locale === "en";
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      findFragmentTarget()?.scrollIntoView({
+        behavior: "instant",
+        block: "start",
+      });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [locale]);
+
   return (
     <main id="main" className="site-main" tabIndex={-1}>
       <section
@@ -45,7 +56,7 @@ export function Enterprise({
         />
         <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pt-28 pb-20 text-center">
           <span className="glass-chip rounded-full border border-hairline px-4 py-1.5 font-mono text-[length:var(--fs-micro)] font-medium uppercase tracking-[0.18em] text-muted">
-            Enterprise / Teams
+            {copy.enterpriseBadge}
           </span>
           <h1
             id="enterprise-title"
@@ -65,7 +76,7 @@ export function Enterprise({
           <p className="mt-6 max-w-[62ch] text-base leading-8 text-muted md:text-lg">
             {copy.enterpriseLead}
           </p>
-          <div className="mt-10">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <MovingBorderButton
               as="a"
               href="#contact"
@@ -77,15 +88,61 @@ export function Enterprise({
                 <Icon name="arrow-forward" size={16} />
               </span>
             </MovingBorderButton>
+            <a
+              href={copy.enterpriseDocsHref}
+              className="inline-flex items-center gap-2 rounded-full border border-hairline bg-white px-6 py-3 text-sm font-medium text-ink transition-colors hover:bg-mist"
+            >
+              {copy.enterpriseDocsAction}
+              <Icon name="arrow-forward" size={16} />
+            </a>
+          </div>
+          <p className="mt-6 max-w-2xl text-sm leading-6 text-muted">
+            {copy.enterpriseStatus}
+          </p>
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="enterprise-benefits-title"
+        className="bg-ground"
+      >
+        <div className={sectionPad}>
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
+            <h2 id="enterprise-benefits-title" className={sectionTitle}>
+              {copy.enterpriseBenefitsTitle}
+            </h2>
+            <ol className="divide-y divide-hairline border-y border-hairline">
+              {copy.enterpriseBenefits.map((benefit, index) => (
+                <li key={benefit.title} className="flex gap-5 py-7 sm:gap-8">
+                  <span
+                    className="tnum pt-1 font-mono text-sm text-muted"
+                    aria-hidden="true"
+                  >
+                    0{index + 1}
+                  </span>
+                  <div>
+                    <h3 className="text-lg font-semibold text-ink">
+                      {benefit.title}
+                    </h3>
+                    <p className="mt-3 max-w-xl text-base leading-7 text-muted">
+                      {benefit.body}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
-      <section aria-labelledby="architecture-title" className="bg-ground">
+      <section aria-labelledby="architecture-title" className="bg-mist">
         <div className={sectionPad}>
           <h2 id="architecture-title" className={sectionTitle}>
             {copy.architectureTitle}
           </h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-muted">
+            {copy.architectureLead}
+          </p>
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {copy.architecture.map((row, index) => (
               <CardSpotlight key={row.title} className="p-6">
@@ -95,16 +152,14 @@ export function Enterprise({
                 <h3 className="mt-5 text-base font-semibold text-ink">
                   {row.title}
                 </h3>
-                <p className="mt-2 font-mono text-[length:var(--fs-micro)] leading-6 text-muted">
-                  {row.items}
-                </p>
+                <p className="mt-3 text-sm leading-7 text-muted">{row.items}</p>
               </CardSpotlight>
             ))}
           </div>
         </div>
       </section>
 
-      <section aria-labelledby="delivery-title" className="bg-mist">
+      <section aria-labelledby="delivery-title" className="bg-ground">
         <div className={sectionPad}>
           <span className={overline}>{copy.deliveryOverline}</span>
           <h2 id="delivery-title" className={sectionTitle}>
@@ -123,7 +178,7 @@ export function Enterprise({
                   <h3 className="mt-2 text-lg font-semibold text-ink">
                     {step.title}
                   </h3>
-                  <p className="mt-2 max-w-xl text-sm leading-7 text-muted">
+                  <p className="mt-2 max-w-xl text-base leading-7 text-muted">
                     {step.body}
                   </p>
                 </li>
@@ -133,7 +188,7 @@ export function Enterprise({
         </div>
       </section>
 
-      <section aria-labelledby="comparison-title" className="bg-ground">
+      <section aria-labelledby="comparison-title" className="bg-mist">
         <div className={sectionPad}>
           <span className={overline}>{copy.comparisonOverline}</span>
           <h2 id="comparison-title" className={sectionTitle}>
@@ -167,7 +222,7 @@ export function Enterprise({
                   <tr key={row[0]} className="border-t border-hairline">
                     <th
                       scope="row"
-                      className="px-5 py-4 font-medium text-ink"
+                      className="sticky left-0 bg-white px-5 py-4 font-medium text-ink"
                     >
                       {row[0]}
                     </th>
@@ -181,11 +236,15 @@ export function Enterprise({
         </div>
       </section>
 
-      <section id="contact" aria-labelledby="contact-title" className="bg-mist">
+      <section
+        id="contact"
+        aria-labelledby="contact-title"
+        className="bg-ground"
+      >
         <div className={sectionPad}>
           <div className="relative overflow-hidden rounded-2xl border border-hairline bg-white">
             <BackgroundBeams />
-            <div className="relative grid gap-10 p-8 md:grid-cols-[1.1fr_1fr] md:p-12">
+            <div className="relative grid gap-10 p-6 sm:p-8 lg:grid-cols-[1.1fr_1fr] lg:p-12">
               <div>
                 <span className={overline}>{copy.contactOverline}</span>
                 <h2 id="contact-title" className={sectionTitle}>
@@ -196,7 +255,7 @@ export function Enterprise({
                 </p>
                 <a
                   href="mailto:likeran@rongxinzy.com"
-                  className="mt-6 inline-flex items-center gap-2 font-mono text-sm font-medium text-accent transition-colors hover:text-accent-2"
+                  className="mt-6 inline-flex max-w-full flex-wrap items-center gap-2 font-mono text-sm font-medium text-accent transition-colors hover:text-accent-2"
                 >
                   likeran@rongxinzy.com
                   <Icon name="arrow-forward" size={14} />
@@ -205,30 +264,27 @@ export function Enterprise({
                   {copy.scope}
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  en
-                    ? "/zhiyuan-community-qr.png"
-                    : "/zhiyuan-community-qr.png",
-                  "/zhiyuan-official-qr.png",
-                ].map((src, index) => (
-                  <figure
-                    key={src}
-                    className="flex flex-col items-center justify-center rounded-2xl border border-hairline bg-white p-5"
-                  >
-                    <img
-                      src={src}
-                      width="136"
-                      height="136"
-                      alt={copy.qr[index]}
-                      loading="lazy"
-                      className="h-auto w-full max-w-36"
-                    />
-                    <figcaption className="mt-3 text-[13px] text-muted">
-                      {copy.qr[index]}
-                    </figcaption>
-                  </figure>
-                ))}
+              <div className="grid grid-cols-1 items-start gap-4 min-[420px]:grid-cols-2">
+                {["/zhiyuan-community-qr.png", "/zhiyuan-official-qr.png"].map(
+                  (src, index) => (
+                    <figure
+                      key={src}
+                      className="flex w-full max-w-56 flex-col items-center justify-center justify-self-center rounded-2xl border border-hairline bg-white p-5"
+                    >
+                      <img
+                        src={src}
+                        width="136"
+                        height="136"
+                        alt={copy.qr[index]}
+                        loading="lazy"
+                        className="h-auto w-full max-w-36"
+                      />
+                      <figcaption className="mt-3 text-[13px] text-muted">
+                        {copy.qr[index]}
+                      </figcaption>
+                    </figure>
+                  ),
+                )}
               </div>
             </div>
           </div>
