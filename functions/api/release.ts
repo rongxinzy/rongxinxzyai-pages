@@ -3,7 +3,7 @@ const DOWNLOAD_HOST = "downloads.rongxzyai.com";
 const SUCCESS_CACHE_CONTROL = "public, max-age=300, s-maxage=300, stale-while-revalidate=86400";
 
 type ArtifactTarget = {
-  name: "linux" | "linuxAppImage" | "macos" | "windows";
+  name: "linux" | "linuxAppImage" | "macos" | "macosIntel" | "windows";
   platform: "darwin" | "linux" | "win32";
   arch: "arm64" | "x64";
   variant: "appimage" | "deb" | "default" | "lite";
@@ -28,6 +28,7 @@ type ReleasePayload = {
 const ARTIFACT_TARGETS: ArtifactTarget[] = [
   { name: "windows", platform: "win32", arch: "x64", variant: "lite", extension: ".exe" },
   { name: "macos", platform: "darwin", arch: "arm64", variant: "default", extension: ".dmg" },
+  { name: "macosIntel", platform: "darwin", arch: "x64", variant: "default", extension: ".dmg" },
   { name: "linux", platform: "linux", arch: "x64", variant: "deb", extension: ".deb" },
   {
     name: "linuxAppImage",
@@ -124,11 +125,12 @@ async function fetchRelease(target: ArtifactTarget): Promise<ReleasePayload> {
 
 export async function onRequestGet(): Promise<Response> {
   try {
-    const [windows, macos, linux, linuxAppImage] = await Promise.all([
+    const [windows, macos, macosIntel, linux, linuxAppImage] = await Promise.all([
       fetchRelease(ARTIFACT_TARGETS[0]),
       fetchRelease(ARTIFACT_TARGETS[1]),
       fetchRelease(ARTIFACT_TARGETS[2]).catch(() => null),
       fetchRelease(ARTIFACT_TARGETS[3]).catch(() => null),
+      fetchRelease(ARTIFACT_TARGETS[4]).catch(() => null),
     ]);
     if (windows.version !== macos.version) {
       throw new Error("The platform manifests point to different versions.");
@@ -138,6 +140,9 @@ export async function onRequestGet(): Promise<Response> {
       windows: windows.artifact,
       macos: macos.artifact,
     };
+    if (macosIntel?.version === windows.version) {
+      artifacts.macosIntel = macosIntel.artifact;
+    }
     if (linux?.version === windows.version) artifacts.linux = linux.artifact;
     if (linuxAppImage?.version === windows.version) {
       artifacts.linuxAppImage = linuxAppImage.artifact;

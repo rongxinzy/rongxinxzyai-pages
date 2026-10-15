@@ -41,13 +41,17 @@ function isRelease(value: unknown): value is SiteRelease {
   return (
     isReleaseArtifact(artifacts.windows) &&
     isReleaseArtifact(artifacts.macos) &&
+    (artifacts.macosIntel === undefined ||
+      isReleaseArtifact(artifacts.macosIntel)) &&
     (artifacts.linux === undefined || isReleaseArtifact(artifacts.linux)) &&
     (artifacts.linuxAppImage === undefined ||
       isReleaseArtifact(artifacts.linuxAppImage))
   );
 }
 
-function detectPlatform(): Exclude<SitePlatform, "linuxAppImage"> | undefined {
+function detectPlatform():
+  | Exclude<SitePlatform, "linuxAppImage" | "macosIntel">
+  | undefined {
   const agent = navigator.userAgent.toLowerCase();
   // Desktop-mode iPadOS reports a Mac user agent; none of these packages run on mobile.
   if (

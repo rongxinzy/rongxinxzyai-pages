@@ -144,7 +144,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     agplChip: "AGPL-3.0",
     heroCtaSecondary: "看看界面",
     platforms: [
-      "macOS (Apple Silicon)",
+      "macOS (Apple Silicon / Intel)",
       "Windows (x64)",
       "Linux (deb / AppImage)",
     ],
@@ -401,7 +401,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     agplChip: "AGPL-3.0",
     heroCtaSecondary: "Take a look",
     platforms: [
-      "macOS (Apple Silicon)",
+      "macOS (Apple Silicon / Intel)",
       "Windows (x64)",
       "Linux (deb / AppImage)",
     ],
