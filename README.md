@@ -29,5 +29,5 @@ npm run deploy
 Cloudflare Pages** 也会部署当前 `main`。
 
 下载区通过 `/api/release` 动态读取签名稳定版清单，目前展示 Windows x64、
-macOS Apple Silicon、Ubuntu x64 `.deb`，并为其他 Linux 发行版提供 AppImage。
+macOS（Apple Silicon / Intel）、Ubuntu x64 `.deb`，并为其他 Linux 发行版提供 AppImage。
 发布新版本时无需在页面中手动填写版本号、安装包 URL 或文件大小。

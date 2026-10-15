@@ -7,7 +7,7 @@ The ZhiYuan agent is a desktop application. On first use, prepare it in this ord
 Select the installer matching your system from the [download section on the official website homepage](https://www.rongxzyai.com/#download). The download section reads the latest stable release and provides:
 
 - Windows x64 installer.
-- macOS Apple Silicon installer.
+- macOS installer (available for both Apple Silicon and Intel).
 - Ubuntu x64 `.deb` package.
 - x64 AppImage for other Linux distributions.
 

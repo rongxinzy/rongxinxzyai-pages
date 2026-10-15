@@ -2,7 +2,12 @@ export type SiteLocale = "zh-CN" | "en";
 
 export type SitePage = "home" | "enterprise";
 
-export type SitePlatform = "windows" | "macos" | "linux" | "linuxAppImage";
+export type SitePlatform =
+  | "windows"
+  | "macos"
+  | "macosIntel"
+  | "linux"
+  | "linuxAppImage";
 
 export type SiteReleaseArtifact = {
   url: string;
@@ -14,6 +19,7 @@ export type SiteRelease = {
   artifacts: {
     windows: SiteReleaseArtifact;
     macos: SiteReleaseArtifact;
+    macosIntel?: SiteReleaseArtifact;
     linux?: SiteReleaseArtifact;
     linuxAppImage?: SiteReleaseArtifact;
   };
@@ -26,5 +32,5 @@ export type SiteSiteProps = {
   page: SitePage;
   release: SiteRelease | null;
   releaseStatus: SiteReleaseStatus;
-  preferredPlatform?: Exclude<SitePlatform, "linuxAppImage">;
+  preferredPlatform?: Exclude<SitePlatform, "linuxAppImage" | "macosIntel">;
 };

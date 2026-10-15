@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type {
   SiteLocale,
   SitePlatform,
@@ -9,7 +10,7 @@ import { Icon } from "./icons";
 import { cn } from "../lib/utils";
 
 type DownloadPlatform =
-  Exclude<SitePlatform, "linuxAppImage"> | "linuxAppImage";
+  Exclude<SitePlatform, "linuxAppImage" | "macosIntel"> | "linuxAppImage";
 
 const PLATFORM_ICONS: Record<
   DownloadPlatform,
@@ -20,6 +21,27 @@ const PLATFORM_ICONS: Record<
   linux: "linux",
   linuxAppImage: "linux",
 };
+
+function detectMacArch(): "arm64" | "x64" {
+  if (typeof window === "undefined") return "arm64";
+  try {
+    const canvas = document.createElement("canvas");
+    const gl =
+      canvas.getContext("webgl") ||
+      (canvas.getContext("experimental-webgl") as WebGLRenderingContext | null);
+    const debugInfo = gl?.getExtension("WEBGL_debug_renderer_info");
+    const renderer =
+      debugInfo && gl
+        ? String(gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL))
+        : "";
+    if (/intel|amd/i.test(renderer) && !/apple/i.test(renderer)) {
+      return "x64";
+    }
+  } catch {
+    // fallback
+  }
+  return "arm64";
+}
 
 export function Downloads({
   locale,
@@ -32,8 +54,10 @@ export function Downloads({
   copy: EditorialCopy;
   release: SiteRelease | null;
   status: SiteReleaseStatus;
-  preferredPlatform?: Exclude<SitePlatform, "linuxAppImage">;
+  preferredPlatform?: Exclude<SitePlatform, "linuxAppImage" | "macosIntel">;
 }) {
+  const [macArch, setMacArch] = useState<"arm64" | "x64">(detectMacArch);
+
   const platforms: Array<{
     id: DownloadPlatform;
     title: string;
@@ -43,7 +67,12 @@ export function Downloads({
     {
       id: "macos",
       title: "macOS",
-      detail: locale === "en" ? "Apple silicon" : "Apple Silicon",
+      detail:
+        macArch === "arm64"
+          ? locale === "en"
+            ? "Apple silicon"
+            : "Apple Silicon"
+          : "Intel",
       meta: [
         ".dmg",
         locale === "en" ? "llama.cpp built in" : "内置 llama.cpp 本地推理",
@@ -74,15 +103,28 @@ export function Downloads({
 
   function artifactOf(id: DownloadPlatform) {
     if (!release) return undefined;
-    return id === "linuxAppImage"
-      ? release.artifacts.linuxAppImage
-      : release.artifacts[id];
+    if (id === "linuxAppImage") return release.artifacts.linuxAppImage;
+    if (id === "macos") {
+      return macArch === "x64"
+        ? (release.artifacts.macosIntel ?? release.artifacts.macos)
+        : release.artifacts.macos;
+    }
+    return release.artifacts[id];
   }
 
   function sizeOf(id: DownloadPlatform) {
     const artifact = artifactOf(id);
     return artifact ? `${(artifact.size / 1_000_000).toFixed(0)} MB` : null;
   }
+
+  const altMacArtifact =
+    release &&
+    (macArch === "arm64"
+      ? release.artifacts.macosIntel
+      : release.artifacts.macos);
+  const altMacSize = altMacArtifact
+    ? `${(altMacArtifact.size / 1_000_000).toFixed(0)} MB`
+    : null;
 
   return (
     <section
@@ -176,7 +218,46 @@ export function Downloads({
                 <h3 className="mt-4 text-base font-semibold text-ink">
                   {platform.title}
                 </h3>
-                <p className="mt-1 text-sm text-muted">{platform.detail}</p>
+                {platform.id === "macos" ? (
+                  <div className="mt-2">
+                    <div
+                      role="group"
+                      aria-label={
+                        locale === "en"
+                          ? "macOS architecture"
+                          : "macOS 芯片架构"
+                      }
+                      className="inline-flex rounded-lg border border-hairline bg-mist p-0.5 text-xs font-medium"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setMacArch("arm64")}
+                        className={cn(
+                          "rounded-md px-2.5 py-1 text-xs transition-colors",
+                          macArch === "arm64"
+                            ? "bg-white font-medium text-ink shadow-sm"
+                            : "text-muted hover:text-ink",
+                        )}
+                      >
+                        Apple Silicon
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setMacArch("x64")}
+                        className={cn(
+                          "rounded-md px-2.5 py-1 text-xs transition-colors",
+                          macArch === "x64"
+                            ? "bg-white font-medium text-ink shadow-sm"
+                            : "text-muted hover:text-ink",
+                        )}
+                      >
+                        Intel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="mt-1 text-sm text-muted">{platform.detail}</p>
+                )}
                 <div className="mt-4 space-y-1.5">
                   <span className="tnum block text-[13px] text-muted">
                     {copy.sizeLabel}:{size ?? " —"}
@@ -198,35 +279,53 @@ export function Downloads({
               </div>
               <div className="mt-6">
                 {artifact ? (
-                  <a
-                    className={cn(
-                      "inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-[transform,background-color,box-shadow]",
-                      isPreferred
-                        ? "bg-ink text-white shadow-[0_1px_2px_rgb(9_13_22/0.2),0_4px_12px_rgb(9_13_22/0.1)] hover:bg-black hover:shadow-[0_6px_20px_rgb(9_13_22/0.18)]"
-                        : "border border-hairline bg-white text-ink hover:border-ink/25 hover:bg-mist",
-                    )}
-                    href={artifact.url}
-                    aria-label={`${copy.headerDownload} ${platform.title} ${platform.detail}`}
-                  >
-                    <Icon name="download" size={16} />
-                    <span>
-                      {platform.id === "macos"
-                        ? locale === "en"
-                          ? "Download .dmg"
-                          : "下载 .dmg"
-                        : platform.id === "windows"
+                  <>
+                    <a
+                      className={cn(
+                        "inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-[transform,background-color,box-shadow]",
+                        isPreferred
+                          ? "bg-ink text-white shadow-[0_1px_2px_rgb(9_13_22/0.2),0_4px_12px_rgb(9_13_22/0.1)] hover:bg-black hover:shadow-[0_6px_20px_rgb(9_13_22/0.18)]"
+                          : "border border-hairline bg-white text-ink hover:border-ink/25 hover:bg-mist",
+                      )}
+                      href={artifact.url}
+                      aria-label={`${copy.headerDownload} ${platform.title} ${platform.detail}`}
+                    >
+                      <Icon name="download" size={16} />
+                      <span>
+                        {platform.id === "macos"
                           ? locale === "en"
-                            ? "Download .exe"
-                            : "下载 .exe"
-                          : platform.id === "linux"
+                            ? `Download .dmg (${macArch === "arm64" ? "Apple Silicon" : "Intel"})`
+                            : `下载 .dmg（${macArch === "arm64" ? "Apple Silicon" : "Intel"}）`
+                          : platform.id === "windows"
                             ? locale === "en"
-                              ? "Download .deb"
-                              : "下载 .deb"
+                              ? "Download .exe"
+                              : "下载 .exe"
+                            : platform.id === "linux"
+                              ? locale === "en"
+                                ? "Download .deb"
+                                : "下载 .deb"
+                              : locale === "en"
+                                ? "Download AppImage"
+                                : "下载 AppImage"}
+                      </span>
+                    </a>
+                    {platform.id === "macos" && altMacArtifact ? (
+                      <p className="mt-2 text-center">
+                        <a
+                          className="text-[12px] text-muted transition-colors hover:text-ink hover:underline"
+                          href={altMacArtifact.url}
+                        >
+                          {macArch === "arm64"
+                            ? locale === "en"
+                              ? `Download Intel version (.dmg · ${altMacSize})`
+                              : `下载 Intel 芯片版（.dmg · ${altMacSize}）`
                             : locale === "en"
-                              ? "Download AppImage"
-                              : "下载 AppImage"}
-                    </span>
-                  </a>
+                              ? `Download Apple Silicon version (.dmg · ${altMacSize})`
+                              : `下载 Apple Silicon 版（.dmg · ${altMacSize}）`}
+                        </a>
+                      </p>
+                    ) : null}
+                  </>
                 ) : status === "loading" ? (
                   <span
                     className="block h-10 w-full motion-safe:animate-pulse rounded-full bg-mist"
