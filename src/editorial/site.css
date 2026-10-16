@@ -290,6 +290,98 @@
   animation: oss-beam-travel linear infinite;
 }
 
+.roadmap-progress-fill {
+  transform-origin: left center;
+}
+
+.roadmap-entry:last-child .roadmap-rail {
+  display: none;
+}
+
+.roadmap-star {
+  background: #090d16;
+  color: #ffffff;
+}
+
+.roadmap-star-count {
+  box-shadow: inset 1px 0 0 rgb(255 255 255 / 0.4);
+  background: rgb(255 255 255 / 0.08);
+}
+
+@media (max-resolution: 1.2dppx) {
+  .roadmap-star-count {
+    box-shadow: inset 1px 0 0 rgb(255 255 255 / 0.62);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body:has(.roadmap-root) {
+    background: #10141c;
+    color-scheme: dark;
+  }
+
+  .roadmap-root {
+    --color-ground: #10141c;
+    --color-mist: #181e2a;
+    --color-ink: #f3f5f8;
+    --color-muted: #c5cedb;
+    --color-accent: #f3f5f8;
+    --color-accent-2: #8eb7ff;
+    --color-hairline: rgb(243 245 248 / var(--hairline-alpha));
+    color-scheme: dark;
+  }
+
+  .roadmap-root .glass-chip {
+    background: rgb(16 20 28 / 0.82);
+  }
+
+  @supports not (backdrop-filter: blur(1px)) {
+    .roadmap-root .glass-chip {
+      background: #181e2a;
+    }
+  }
+
+  .roadmap-root header img,
+  .roadmap-root footer img {
+    filter: brightness(0) invert(1);
+  }
+
+  .roadmap-root a.header-download {
+    background-color: #f3f5f8;
+    color: #10141c;
+  }
+
+  .roadmap-root a.header-download:hover {
+    background-color: #ffffff;
+    color: #10141c;
+  }
+
+  .roadmap-root .roadmap-star {
+    background: #f3f5f8;
+    color: #10141c;
+  }
+
+  .roadmap-root .roadmap-star-count {
+    box-shadow: inset 1px 0 0 rgb(16 20 28 / 0.28);
+    background: rgb(16 20 28 / 0.06);
+  }
+
+  .roadmap-root ::selection {
+    background: rgb(243 245 248 / 0.22);
+    color: #f3f5f8;
+  }
+
+  body:has(.roadmap-root)::-webkit-scrollbar-thumb {
+    background-color: rgb(243 245 248 / 0.28);
+  }
+}
+
+@media (prefers-color-scheme: dark) and (max-resolution: 1.2dppx) {
+  .roadmap-root .roadmap-star-count {
+    box-shadow: inset 1px 0 0 rgb(16 20 28 / 0.45);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

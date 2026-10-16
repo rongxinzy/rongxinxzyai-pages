@@ -6,6 +6,7 @@ export const SITE_NAVIGATION = [
   { label: "作品与任务", href: "/#workflow", id: "workflow" },
   { label: "本地推理", href: "/#inference", id: "inference" },
   { label: "企业服务", href: "/enterprise/", id: "enterprise" },
+  { label: "路线图", href: "/roadmap/", id: "roadmap" },
   { label: "使用文档", href: "/docs/", id: "docs" },
 ] as const;
 

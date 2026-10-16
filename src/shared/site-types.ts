@@ -1,6 +1,6 @@
 export type SiteLocale = "zh-CN" | "en";
 
-export type SitePage = "home" | "enterprise";
+export type SitePage = "home" | "enterprise" | "roadmap";
 
 export type SitePlatform =
   | "windows"
