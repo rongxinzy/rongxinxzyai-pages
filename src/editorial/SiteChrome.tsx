@@ -63,9 +63,9 @@ export function Header({
   const en = isEnglish(locale);
   const home = en ? "/en/" : "/";
   const enterprise = `${home}enterprise/`;
-  const alternate =
-    alternateHref ??
-    `${en ? "/" : "/en/"}${page === "enterprise" ? "enterprise/" : ""}`;
+  const section =
+    page === "enterprise" ? "enterprise/" : page === "roadmap" ? "roadmap/" : "";
+  const alternate = alternateHref ?? `${en ? "/" : "/en/"}${section}`;
 
   useEffect(() => {
     // 迟滞阈值，避免滚动位置在临界点来回抖动触发状态闪烁。
@@ -152,6 +152,11 @@ export function Header({
       current: page === "enterprise",
     },
     {
+      label: copy.navRoadmap,
+      href: `${home}roadmap/`,
+      current: page === "roadmap",
+    },
+    {
       label: copy.navDocs,
       href: en ? "/en/docs/" : "/docs/",
       current: currentSection === "docs",
@@ -160,7 +165,7 @@ export function Header({
   ];
 
   const downloadClass =
-    "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-ink px-4 py-2 text-sm font-medium text-white shadow-[0_1px_2px_rgb(9_13_22/0.2),0_4px_12px_rgb(9_13_22/0.12)] transition-[transform,background-color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:bg-black hover:shadow-[0_8px_24px_rgb(9_13_22/0.2)] active:translate-y-0 active:scale-[0.97] motion-reduce:transition-none motion-reduce:hover:translate-y-0";
+    "header-download inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-ink px-4 py-2 text-sm font-medium text-white shadow-[0_1px_2px_rgb(9_13_22/0.2),0_4px_12px_rgb(9_13_22/0.12)] transition-[transform,background-color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:bg-black hover:shadow-[0_8px_24px_rgb(9_13_22/0.2)] active:translate-y-0 active:scale-[0.97] motion-reduce:transition-none motion-reduce:hover:translate-y-0";
 
   return (
     <header
@@ -274,7 +279,10 @@ export function Header({
                 key={item.label}
                 href={item.href}
                 aria-current={item.current ? "page" : undefined}
-                className="border-b border-hairline py-4 text-xl font-medium text-ink"
+                className={cn(
+                  "border-b border-hairline py-4 text-xl font-medium text-ink",
+                  item.current && "-mx-3 bg-mist px-3",
+                )}
                 onClick={() => setOpen(false)}
               >
                 {item.label}

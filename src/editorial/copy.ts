@@ -26,8 +26,19 @@ export type EditorialCopy = {
   navWorkflow: string;
   navInference: string;
   navEnterprise: string;
+  navRoadmap: string;
   navDocs: string;
   navBlog: string;
+  roadmapBadge: string;
+  roadmapTitle: string;
+  roadmapLead: string;
+  roadmapDone: string;
+  roadmapActive: string;
+  roadmapPlanned: string;
+  roadmapProgress: string;
+  roadmapStar: string;
+  roadmapStarAria: string;
+  roadmapStarCountAria: string;
   headerDownload: string;
   star: string;
   releaseStable: string;
@@ -129,8 +140,19 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     navWorkflow: "功能",
     navInference: "本地模型",
     navEnterprise: "企业服务",
+    navRoadmap: "路线图",
     navDocs: "文档",
     navBlog: "博客",
+    roadmapBadge: "DESKTOP · OPEN SOURCE",
+    roadmapTitle: "桌面版路线图",
+    roadmapLead: "开源桌面应用的里程碑。每条进展对应一个 Pull Request 或 Issue。",
+    roadmapDone: "已完成",
+    roadmapActive: "进行中",
+    roadmapPlanned: "计划中",
+    roadmapProgress: "已完成条目",
+    roadmapStar: "在 GitHub 上 Star",
+    roadmapStarAria: "在 GitHub 上给 RongxinAI 加 Star",
+    roadmapStarCountAria: "在 GitHub 上给 RongxinAI 加 Star，当前 {count} 个",
     headerDownload: "免费下载",
     star: "Star",
     releaseStable: "稳定版",
@@ -285,6 +307,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
           { label: "下载", href: "/#download" },
           { label: "产品界面", href: "/#workbench" },
           { label: "企业服务", href: "/enterprise/" },
+          { label: "路线图", href: "/roadmap/" },
           { label: "博客", href: "/blog/" },
           { label: "版本记录", href: `${GITHUB}/releases` },
         ],
@@ -386,8 +409,19 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     navWorkflow: "Features",
     navInference: "Local models",
     navEnterprise: "For teams",
+    navRoadmap: "Roadmap",
     navDocs: "Docs",
     navBlog: "Blog",
+    roadmapBadge: "DESKTOP · OPEN SOURCE",
+    roadmapTitle: "Desktop roadmap",
+    roadmapLead: "Milestones for the open-source desktop app. Each entry links to its pull request or issue.",
+    roadmapDone: "Done",
+    roadmapActive: "In progress",
+    roadmapPlanned: "Planned",
+    roadmapProgress: "Items done",
+    roadmapStar: "Star on GitHub",
+    roadmapStarAria: "Star RongxinAI on GitHub",
+    roadmapStarCountAria: "Star RongxinAI on GitHub, {count} stars",
     headerDownload: "Download",
     star: "Star",
     releaseStable: "stable",
@@ -543,6 +577,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
           { label: "Download", href: "/en/#download" },
           { label: "Product tour", href: "/en/#workbench" },
           { label: "For teams", href: "/en/enterprise/" },
+          { label: "Roadmap", href: "/en/roadmap/" },
           { label: "Blog", href: "/blog/" },
           { label: "Release notes", href: `${GITHUB}/releases` },
         ],

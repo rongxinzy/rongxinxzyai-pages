@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#10141c" media="(prefers-color-scheme: dark)" />
+    <meta name="description" content="知远开源桌面应用的里程碑：发布流程、macOS 与 Linux 安装包、llama.cpp 本地推理、安装包体积。每条进展对应一个 Pull Request 或 Issue。" />
+    <link rel="canonical" href="https://www.rongxzyai.com/roadmap/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://www.rongxzyai.com/roadmap/" />
+    <link rel="alternate" hreflang="en" href="https://www.rongxzyai.com/en/roadmap/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.rongxzyai.com/roadmap/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:url" content="https://www.rongxzyai.com/roadmap/" />
+    <meta property="og:title" content="知远路线图 — 桌面版" />
+    <meta property="og:description" content="知远开源桌面应用的里程碑：发布流程、macOS 与 Linux 安装包、llama.cpp 本地推理、安装包体积。每条进展对应一个 Pull Request 或 Issue。" />
+    <meta property="og:image" content="https://www.rongxzyai.com/product/zhiyuan-workspace.png" />
+    <meta property="og:image:alt" content="知远桌面工作台界面" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="知远路线图 — 桌面版" />
+    <meta name="twitter:description" content="知远开源桌面应用的里程碑：发布流程、macOS 与 Linux 安装包、llama.cpp 本地推理、安装包体积。每条进展对应一个 Pull Request 或 Issue。" />
+    <meta name="twitter:image" content="https://www.rongxzyai.com/product/zhiyuan-workspace.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <title>知远路线图 — 桌面版</title>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"知远桌面版路线图","description":"知远开源桌面应用的里程碑：发布流程、macOS 与 Linux 安装包、llama.cpp 本地推理、安装包体积。每条进展对应一个 Pull Request 或 Issue。","url":"https://www.rongxzyai.com/roadmap/","inLanguage":"zh-CN","image":"https://www.rongxzyai.com/product/zhiyuan-workspace.png"}</script>
+    <style>
+      html, body { margin: 0; background: #ffffff; }
+      .marketing-static-shell { min-height: 100vh; max-width: 1180px; margin: 0 auto; padding: 96px 24px; box-sizing: border-box; color: #0c1222; font: 16px/1.6 "Geist Variable", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .marketing-static-shell h1 { max-width: 20ch; margin: 0 0 20px; font-size: clamp(34px, 6vw, 64px); letter-spacing: -.03em; line-height: 1.15; font-weight: 600; }
+      .marketing-static-shell p { max-width: 680px; color: #5b6478; font-size: 18px; line-height: 1.6; }
+      .marketing-static-shell a { display: inline-block; margin-top: 12px; padding: 13px 24px; border-radius: 9999px; background: #090d16; color: #fff; font: inherit; font-size: 13px; font-weight: 600; letter-spacing: .04em; text-decoration: none; }
+      .marketing-static-shell section a { display: inline; margin: 0; padding: 0; border-radius: 0; background: none; color: inherit; font-size: inherit; font-weight: 400; letter-spacing: 0; text-decoration: underline; }
+      .marketing-static-shell h2 { margin: 32px 0 8px; font-size: 22px; }
+      .marketing-static-shell ul { max-width: 680px; padding-left: 1.2em; }
+      @media (prefers-color-scheme: dark) { html, body { background: #10141c; } .marketing-static-shell { color: #f3f5f8; } .marketing-static-shell p, .marketing-static-shell li { color: #c5cedb; } }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-marketing-locale="zh-CN" data-marketing-page="roadmap">
+      <main class="marketing-static-shell" aria-label="知远桌面版路线图">
+        <h1>桌面版路线图</h1>
+        <p>开源桌面应用的里程碑。每条进展对应一个 Pull Request 或 Issue。</p>
+        <a href="https://github.com/rongxinzy/RongxinAI">在 GitHub 上 Star</a>
+        <section><h2>发布流程重构（#1040）</h2><p>6 / 7</p><ul><li><a href="https://github.com/rongxinzy/RongxinAI/pull/1040">2026-10-16 发布收成两步：打 tag 先发 beta，再单独把该版本晋升为 stable。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/1037">2026-10-16 定时发布被一次合并重新打开后再次关掉。重构完成前，不再每天自动发到生产。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/1022">2026-10-16 代码重构期间关掉每日发布的定时触发，手动触发仍可用。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/903">2026-10-03 增加每日自动发布。安装包要通过冒烟检查才进入发布。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/493">2026-08-13 稳定版改为晋升已经构建好的候选包，不再为 stable 重新打包。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/374">2026-08-06 发布前校验 electron-updater 写出的更新元数据。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/361">2026-08-06 应用内更新改用 electron-updater，稳定版清单和另一套发布协议一起保留。</a></li></ul></section><section><h2>macOS / Linux 正式版</h2><p>8 / 8</p><ul><li><a href="https://github.com/rongxinzy/RongxinAI/pull/975">2026-10-15 公证改到签名完成后的 afterSign 钩子里执行，并保留装订重试。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/974">2026-10-15 Apple 公证校验接口丢响应时，改为重试票据校验。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/958">2026-10-14 macOS 公证票据装订失败时只重试装订，不再把整个包重新提交公证。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/956">2026-10-14 Linux 安装路径改为从打包配置读取。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/944">2026-10-13 发布流程补上 macOS Intel（x64）安装包和更新元数据。Intel 与 Apple Silicon 走同一套签名和稳定版门禁。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/570">2026-08-24 修正 AppImage 的启动和退出。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/539">2026-08-18 安装 .deb 前先结束旧进程。单实例锁失败时改为报错退出，不再静默关掉。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/218">2026-07-30 发布面向 Ubuntu 的 Linux 安装包，包含 .deb 和 AppImage，并写入签名后的稳定版更新清单。</a></li></ul></section><section><h2>llama.cpp 本地推理</h2><p>5 / 6</p><ul><li><a href="https://github.com/rongxinzy/RongxinAI/issues/772">2026-09-15 工作模式下，本地模型上下文过小时只输出 1 个 token 就结束任务，界面没有明显报错。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/507">2026-08-14 切换推理后端前先停掉正在运行的本地服务。已经装好的后端不再重走完整安装进度。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/77">2026-05-22 支持导入本机已有的 llama.cpp，安装说明按操作系统分开写。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/68">2026-05-21 可以卸载运行时、指定可执行文件路径，并重新发现本机已有的 llama.cpp。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/67">2026-05-21 安装包改为不内置 llama.cpp。第一次使用本地推理时，按需下载预编译运行时。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/56">2026-05-20 本地推理运行时改为使用 llama.cpp 官方发布的文件。</a></li></ul></section><section><h2>安装包瘦身</h2><p>3 / 3</p><ul><li><a href="https://github.com/rongxinzy/RongxinAI/pull/665">2026-09-03 缩短 Windows 安装耗时。安装过程不再写入 Defender 排除项。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/509">2026-08-14 Windows 安装包继续收紧压缩。Electron 只携带 8 个语言包，并去掉生产环境的 source map。</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/485">2026-08-13 缩小 Windows 离线安装包。Git、Python 和共享技能环境改用 solid 7z，只在安装时整包解压。</a></li></ul></section>
+      </main>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

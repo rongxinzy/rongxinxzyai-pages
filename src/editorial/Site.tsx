@@ -10,6 +10,10 @@ const Enterprise = lazy(() =>
   import("./Enterprise").then((m) => ({ default: m.Enterprise })),
 );
 
+const RoadmapPage = lazy(() =>
+  import("../roadmap/RoadmapPage").then((m) => ({ default: m.RoadmapPage })),
+);
+
 export function EditorialSite(props: SiteSiteProps) {
   const copy = COPY[props.locale];
   useEffect(() => {
@@ -24,9 +28,16 @@ export function EditorialSite(props: SiteSiteProps) {
     return () => cancelAnimationFrame(frame);
   }, [props.page, props.locale]);
   return (
-    <div className="editorial-site" data-locale={props.locale}>
+    <div
+      className={
+        props.page === "roadmap"
+          ? "editorial-site roadmap-root min-h-screen bg-ground"
+          : "editorial-site"
+      }
+      data-locale={props.locale}
+    >
       <a
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-5 focus:py-2 focus:text-sm focus:font-medium focus:text-white"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-2 focus:text-sm focus:font-medium focus:text-ground"
         href="#main"
       >
         {copy.skip}
@@ -34,6 +45,23 @@ export function EditorialSite(props: SiteSiteProps) {
       <Header locale={props.locale} page={props.page} copy={copy} />
       {props.page === "home" ? (
         <Home {...props} copy={copy} />
+      ) : props.page === "roadmap" ? (
+        <Suspense
+          fallback={
+            <main
+              id="main"
+              className="mx-auto min-h-[70vh] max-w-3xl px-6 pb-20 pt-28"
+              aria-busy="true"
+            >
+              <h1 className="text-3xl font-semibold tracking-tight text-ink md:text-5xl">
+                {copy.roadmapTitle}
+              </h1>
+              <p className="mt-4 text-base leading-7 text-muted">{copy.roadmapLead}</p>
+            </main>
+          }
+        >
+          <RoadmapPage copy={copy} locale={props.locale} />
+        </Suspense>
       ) : (
         <Suspense
           fallback={

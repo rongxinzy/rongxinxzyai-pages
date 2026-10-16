@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#10141c" media="(prefers-color-scheme: dark)" />
+    <meta name="description" content="Milestones for the ZhiYuan open-source desktop app: the release pipeline, macOS and Linux installers, llama.cpp local inference, and installer size. Each entry links to a pull request or issue." />
+    <link rel="canonical" href="https://www.rongxzyai.com/en/roadmap/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://www.rongxzyai.com/roadmap/" />
+    <link rel="alternate" hreflang="en" href="https://www.rongxzyai.com/en/roadmap/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.rongxzyai.com/roadmap/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="zh_CN" />
+    <meta property="og:url" content="https://www.rongxzyai.com/en/roadmap/" />
+    <meta property="og:title" content="ZhiYuan roadmap — Desktop" />
+    <meta property="og:description" content="Milestones for the ZhiYuan open-source desktop app: the release pipeline, macOS and Linux installers, llama.cpp local inference, and installer size. Each entry links to a pull request or issue." />
+    <meta property="og:image" content="https://www.rongxzyai.com/product/zhiyuan-workspace.png" />
+    <meta property="og:image:alt" content="The ZhiYuan desktop workbench" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ZhiYuan roadmap — Desktop" />
+    <meta name="twitter:description" content="Milestones for the ZhiYuan open-source desktop app: the release pipeline, macOS and Linux installers, llama.cpp local inference, and installer size. Each entry links to a pull request or issue." />
+    <meta name="twitter:image" content="https://www.rongxzyai.com/product/zhiyuan-workspace.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <title>ZhiYuan roadmap — Desktop</title>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"ZhiYuan desktop roadmap","description":"Milestones for the ZhiYuan open-source desktop app: the release pipeline, macOS and Linux installers, llama.cpp local inference, and installer size. Each entry links to a pull request or issue.","url":"https://www.rongxzyai.com/en/roadmap/","inLanguage":"en","image":"https://www.rongxzyai.com/product/zhiyuan-workspace.png"}</script>
+    <style>
+      html, body { margin: 0; background: #ffffff; }
+      .marketing-static-shell { min-height: 100vh; max-width: 1180px; margin: 0 auto; padding: 96px 24px; box-sizing: border-box; color: #0c1222; font: 16px/1.6 "Geist Variable", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .marketing-static-shell h1 { max-width: 20ch; margin: 0 0 20px; font-size: clamp(34px, 6vw, 64px); letter-spacing: -.03em; line-height: 1.15; font-weight: 600; }
+      .marketing-static-shell p { max-width: 680px; color: #5b6478; font-size: 18px; line-height: 1.6; }
+      .marketing-static-shell a { display: inline-block; margin-top: 12px; padding: 13px 24px; border-radius: 9999px; background: #090d16; color: #fff; font: inherit; font-size: 13px; font-weight: 600; letter-spacing: .04em; text-decoration: none; }
+      .marketing-static-shell section a { display: inline; margin: 0; padding: 0; border-radius: 0; background: none; color: inherit; font-size: inherit; font-weight: 400; letter-spacing: 0; text-decoration: underline; }
+      .marketing-static-shell h2 { margin: 32px 0 8px; font-size: 22px; }
+      .marketing-static-shell ul { max-width: 680px; padding-left: 1.2em; }
+      @media (prefers-color-scheme: dark) { html, body { background: #10141c; } .marketing-static-shell { color: #f3f5f8; } .marketing-static-shell p, .marketing-static-shell li { color: #c5cedb; } }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-marketing-locale="en" data-marketing-page="roadmap">
+      <main class="marketing-static-shell" aria-label="ZhiYuan desktop roadmap">
+        <h1>Desktop roadmap</h1>
+        <p>Milestones for the open-source desktop app. Each entry links to its pull request or issue.</p>
+        <a href="https://github.com/rongxinzy/RongxinAI">Star on GitHub</a>
+        <section><h2>Release pipeline rewrite (#1040)</h2><p>6 / 7</p><ul><li><a href="https://github.com/rongxinzy/RongxinAI/pull/1040">2026-10-16 Publishing is being cut down to two steps: a tag ships beta, then that build is promoted to stable.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/1037">2026-10-16 After a merge turned the daily schedule back on, it was removed again. Production builds are not published automatically each day while the refactor is open.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/1022">2026-10-16 The daily release schedule is off during the refactor. Manual runs still work.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/903">2026-10-03 Daily releases were added. An installer has to pass smoke checks before it is published.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/493">2026-08-13 A stable release promotes an existing candidate build instead of packaging again.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/374">2026-08-06 Release checks now validate the update metadata that electron-updater writes.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/361">2026-08-06 In-app updates now go through electron-updater. The stable manifest and the second release protocol both stay.</a></li></ul></section><section><h2>macOS / Linux stable releases</h2><p>8 / 8</p><ul><li><a href="https://github.com/rongxinzy/RongxinAI/pull/975">2026-10-15 Notarization runs in the afterSign hook, after signing, and still retries stapling.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/974">2026-10-15 Ticket validation retries when Apple's notarization endpoint drops the response.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/958">2026-10-14 If stapling the macOS notarization ticket fails, the build retries the staple instead of submitting the package again.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/956">2026-10-14 The installed Linux path is read from the packaging config.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/944">2026-10-13 The release pipeline now builds macOS Intel (x64) installers and update metadata. Intel and Apple Silicon go through the same signing and stable gates.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/570">2026-08-24 AppImage startup and shutdown were stabilized.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/539">2026-08-18 The .deb installer stops an older process before installing. If the single-instance lock fails, the app exits with an error instead of closing quietly.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/218">2026-07-30 Ubuntu-first Linux installers are published: .deb and AppImage, both listed in the signed stable update manifest.</a></li></ul></section><section><h2>Local inference with llama.cpp</h2><p>5 / 6</p><ul><li><a href="https://github.com/rongxinzy/RongxinAI/issues/772">2026-09-15 In work mode, a too-small local context ends the task after one token, and the app does not show a clear error.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/507">2026-08-14 Switching inference backends stops the local service first. A backend that is already installed skips the full install progress.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/77">2026-05-22 An existing local llama.cpp can be imported. The setup notes differ by operating system.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/68">2026-05-21 The runtime can be uninstalled, pointed at a chosen executable, or discovered again on the machine.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/67">2026-05-21 The installer no longer bundles llama.cpp. The prebuilt runtime is downloaded the first time local inference is used.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/56">2026-05-20 The local inference runtime now uses official llama.cpp release files.</a></li></ul></section><section><h2>Smaller installers</h2><p>3 / 3</p><ul><li><a href="https://github.com/rongxinzy/RongxinAI/pull/665">2026-09-03 The Windows installer runs faster, and it no longer adds a Defender exclusion.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/509">2026-08-14 Windows installer compression was tightened further. Electron ships 8 locales, and production source maps are removed.</a></li><li><a href="https://github.com/rongxinzy/RongxinAI/pull/485">2026-08-13 The Windows offline installer is smaller. Git, Python, and the shared skill environment use solid 7z and are unpacked in full at install time.</a></li></ul></section>
+      </main>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
