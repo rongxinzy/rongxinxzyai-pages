@@ -36,10 +36,10 @@ const pages = [
     alternatePath: "/en/",
     title: "知远 — 开源桌面 AI 工作台，在本机运行大模型",
     description:
-      "知远是一款开源桌面 AI 工作台，可以写报告、整理表格、改代码。内置 llama.cpp，在本机运行 GGUF 模型，也能接入 OpenAI 兼容 API。支持 macOS、Windows、Linux。",
+      "知远是开源桌面 AI 工作台，用于撰写报告、整理表格和修改代码。内置 llama.cpp，在本机运行 GGUF 模型，也可接入兼容 OpenAI 接口的服务。支持 macOS、Windows、Linux。",
     heroTitle: "你的电脑，就是 AI 工作台。",
     heroLead:
-      "在一个窗口中撰写报告、整理表格和修改代码。知远内置 llama.cpp，可在本机运行开源模型。本地推理无需将输入发送至云端模型。联网工具按所选服务处理数据。",
+      "在一个窗口中撰写报告、整理表格和修改代码。知远内置 llama.cpp，在本机运行开源模型。本地推理不向云端发送输入，联网工具按所选服务处理数据。",
     staticAction: "下载知远",
     staticHref: "/#download",
     imageAlt: "知远桌面工作台界面",
@@ -54,10 +54,10 @@ const pages = [
     alternatePath: "/",
     title: "ZhiYuan — Open-source AI workbench that runs LLMs locally",
     description:
-      "ZhiYuan is an open-source desktop AI workbench for writing reports, cleaning up spreadsheets and editing code. llama.cpp is built in, so GGUF models run on your machine, and any OpenAI-compatible API works too.",
+      "ZhiYuan is an open-source desktop AI workbench for writing reports, organizing spreadsheets and editing code. It embeds llama.cpp to run GGUF models locally and connects to any OpenAI-compatible API across macOS, Windows and Linux.",
     heroTitle: "Your computer, now an AI workbench.",
     heroLead:
-      "Write reports, organize spreadsheets and edit code in one window. ZhiYuan includes llama.cpp for running open models locally. Local inference does not send inputs to a cloud model. Online tools process data through the services you choose.",
+      "Write reports, organize spreadsheets and edit code in one window. ZhiYuan includes llama.cpp for running open models on your machine. Local inference does not send inputs to cloud models, while online tools process data through the services you configure.",
     staticAction: "Download ZhiYuan",
     staticHref: "/en/#download",
     imageAlt: "The ZhiYuan desktop workbench",
