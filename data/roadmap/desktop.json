@@ -193,6 +193,92 @@
           "textEn": "The Windows installer runs faster, and it no longer adds a Defender exclusion.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/665",
           "done": true
+        },
+        {
+          "date": "2026-10-16",
+          "text": "安装包不再携带本地令牌文件，打包后扫描包体，发现令牌、source map 或多余语言文件即失败。渲染器只保留一份代码高亮与图表库，包体更小。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1051",
+          "done": true
+        },
+        {
+          "date": "2026-10-16",
+          "text": "删掉 28 个没有任何代码引用的依赖，shiki、esbuild 和 mermaid 各只保留一个版本。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1052",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "unified-model-service",
+      "title": "统一模型服务",
+      "titleEn": "Unified model service",
+      "items": [
+        {
+          "date": "2026-10-16",
+          "text": "界面文案不再出现内部运行时名称，模型设置与本机管理入口统一改称「模型服务」。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1033",
+          "done": true
+        },
+        {
+          "date": "2026-10-16",
+          "text": "聊天预检与实际调用改用同一个模型来源，统一服务解析失败时直接报错，不再回退旧的供应商配置。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1036",
+          "done": true
+        },
+        {
+          "date": "2026-10-16",
+          "text": "Chat、Work 和编程会话改为只从统一模型服务解析模型，模型探测改为向模型网关发一条 1 token 请求。服务未开启时，任务直接提示先在设置里启用并选择默认模型。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1059",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "sessions-and-ui",
+      "title": "会话与界面修缮",
+      "titleEn": "Sessions and UI fixes",
+      "items": [
+        {
+          "date": "2026-10-16",
+          "text": "临时会话转正时保留输入草稿和附件，长会话导出不再截断；工具输入输出加行数和字数上限，大结果不再卡住界面。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1017",
+          "done": true
+        },
+        {
+          "date": "2026-10-16",
+          "text": "活动页重排：状态筛选改为分段标签并显示各来源数量，活动行改用卡片布局、按日期分组。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1029",
+          "done": true
+        },
+        {
+          "date": "2026-10-16",
+          "text": "流中断自动续跑后保留会话的审批模式，「全部允许」不再退化为逐条询问；分页恢复不可用时回退旧的全量读取，历史不再丢。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1031",
+          "done": true
+        },
+        {
+          "date": "2026-10-16",
+          "text": "用户指定工作区外的输出位置时，产物按外部交付物验收，文件与哈希校验不变；中间产物仍须留在工作区。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1028",
+          "done": true
+        },
+        {
+          "date": "2026-10-16",
+          "text": "移除旧的两套记忆实现，升级时顺带清掉遗留数据表；现行记忆功能不变。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1061",
+          "done": true
+        },
+        {
+          "date": "2026-10-16",
+          "text": "会话运行时依赖升级到 1.3.0，跟进上游在模型供应商、重试和会话恢复方面的修复。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1058",
+          "done": true
+        },
+        {
+          "date": "2026-10-16",
+          "text": "删掉与运行时自带重试重复的流中断看门狗和 15 秒兜底完成，会话只在运行时确认结束后才算完成。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1063",
+          "done": true
         }
       ]
     }
