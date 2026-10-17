@@ -84,7 +84,7 @@ export function Downloads({
       detail: "x64",
       meta: [
         ".exe",
-        locale === "en" ? "Local inference via plugin" : "本地推理需另装插件",
+        locale === "en" ? "Lite · no local inference" : "轻量版 · 不含本地推理",
       ],
     },
     {
