@@ -4,10 +4,13 @@
 
 开发时可以重点关注：
 
-- `src/main/`：桌面主进程和本地能力。
+- `src/main/`：桌面主进程和本地能力。入口 `src/main/main.ts` 只负责编排，IPC 注册、运行时准备、窗口创建和启动顺序都在 `src/main/appBootstrap/` 中。
+- `src/main/magpie/`：Magpie 模型网关的管理与模型服务。Magpie 是从固定上游提交构建的随包二进制，由 `src/main/appBootstrap/magpieRuntime.ts` 启动接入；对话（Pi）和编码代理（ACP）的模型配置都经由它。
+- `src/main/preload.ts` 与 `src/main/preload/`：通过 `contextBridge` 暴露的受控 IPC，按领域拆分（会话、技能与 MCP、本地推理、消息渠道等）。
+- `src/renderer/types/electron.d.ts` 与 `src/renderer/types/electron/`：渲染端可见的 IPC 类型，按同样的领域拆分。
 - `src/renderer/`：界面和用户交互。
 - `SKILLs/`：可复用的 Skill 定义。
-- `docs/`：官网文档站点。
+- `resources/magpie/`：Magpie 的上游锁定信息与构建说明。
 
 ## 企业版的技术边界
 

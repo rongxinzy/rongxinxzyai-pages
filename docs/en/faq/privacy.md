@@ -24,7 +24,7 @@ The official website is hosted on Cloudflare Pages. The network service may proc
 
 ## Code Signing
 
-Installer code-signing status varies by version and platform; check the corresponding release notes. Update-manifest signatures verify the manifest source, while installer code signatures verify the software publisher. One does not substitute for the other. Check downloaded files against the SHA-256 checksums on the release page.
+Official Windows installers are signed with a Certum code-signing certificate, and signed macOS builds are notarized by Apple. The release notes for each version are authoritative. Update-manifest signatures verify the manifest source, while installer code signatures verify the software publisher. One does not substitute for the other. Check downloaded files against the SHA-256 checksums on the release page.
 
 ## Contact and Rights
 

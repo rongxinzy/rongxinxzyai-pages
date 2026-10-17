@@ -274,7 +274,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     downloadTitle: "下载知远",
     downloadLead: "选择你的系统，安装后挑一个模型，就能开始第一个任务。",
     downloadAssurance:
-      "更新清单附带签名和 SHA-256 校验值，各平台的代码签名情况见版本说明。",
+      "Windows 安装包使用 Certum 代码签名，macOS 签名版本经过 Apple 公证；更新清单附带签名和 SHA-256 校验值。",
     sizeLabel: "大小",
     releases: "版本记录",
     version: "稳定版",
@@ -286,7 +286,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
       "Windows 安装包默认不带本地推理组件。想运行本地模型的话，安装后打开「设置」，装上社区维护的本地推理插件即可。",
     windowsGuide: "查看 Windows 安装指南",
     signingNote:
-      "更新清单附带签名和 SHA-256 校验值，各平台的代码签名情况见版本说明。",
+      "Windows 安装包使用 Certum 代码签名，macOS 签名版本经过 Apple 公证；更新清单附带签名和 SHA-256 校验值。",
     ossOverline: "OPEN SOURCE · AGPL-3.0",
     ossTitle: "代码开源，欢迎一起改。",
     ossBody:
@@ -544,7 +544,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     downloadLead:
       "Pick your platform, install, choose a model and start your first task.",
     downloadAssurance:
-      "Update manifests include signatures and SHA-256 checksums. See the release notes for code-signing status on each platform.",
+      "Windows installers are Certum code-signed and signed macOS builds are notarized by Apple. Update manifests include signatures and SHA-256 checksums.",
     sizeLabel: "Size",
     releases: "Release notes",
     version: "Stable",
@@ -556,7 +556,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
       "The Windows installer doesn't include local inference. To run local models, open Settings after installing and add the community-maintained inference plugin.",
     windowsGuide: "Windows setup guide",
     signingNote:
-      "Update manifests include signatures and SHA-256 checksums. See the release notes for code-signing status on each platform.",
+      "Windows installers are Certum code-signed and signed macOS builds are notarized by Apple. Update manifests include signatures and SHA-256 checksums.",
     ossOverline: "OPEN SOURCE · AGPL-3.0",
     ossTitle: "Open source. Come build with us.",
     ossBody:
