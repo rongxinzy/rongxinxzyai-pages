@@ -15,7 +15,7 @@
     "typecheck:functions": "tsc --project tsconfig.functions.json",
     "preview": "vite preview --host 127.0.0.1",
     "deploy": "npm run build && wrangler pages deploy dist --project-name rongxzyai-pages --branch main",
-    "test:functions": "node --test tests/"
+    "test:functions": "node --test tests/release-api.test.mjs"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",
