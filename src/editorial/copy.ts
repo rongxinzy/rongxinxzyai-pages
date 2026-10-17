@@ -282,7 +282,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     noLinux: "当前版本未提供该平台安装包。",
     windowsNoteTitle: "Windows 本地推理说明：",
     windowsNote:
-      "Windows 安装包默认不含本地推理组件。如需在本机运行 GGUF 模型，安装后可在「设置」中添加社区维护的本地推理插件。",
+      "首页提供的 Windows 安装包是轻量版，不含本地推理。如需在本机运行 GGUF 模型，请在版本记录中选择 CPU 版，它内置 CPU 与 Vulkan 本地推理，同样离线安装。",
     windowsGuide: "查看 Windows 安装指南",
     signingNote:
       "Windows 安装包经 Certum 代码签名，macOS 签名版本通过 Apple 公证。更新清单附带签名与 SHA-256 校验值。",
@@ -551,7 +551,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     noLinux: "No installer for this platform in the current release.",
     windowsNoteTitle: "Windows local inference: ",
     windowsNote:
-      "The Windows installer does not include the local inference component by default. To run GGUF models locally, install the community-maintained inference plugin in Settings.",
+      "The Windows installer offered here is the lite edition, without local inference. To run GGUF models locally, pick the CPU edition under “Release notes”; it bundles CPU and Vulkan local inference and also installs offline.",
     windowsGuide: "Windows setup guide",
     signingNote:
       "Windows installers are Certum code-signed, and signed macOS builds are notarized by Apple. Update manifests include signatures and SHA-256 checksums.",
