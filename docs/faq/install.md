@@ -2,9 +2,19 @@
 
 请从官网首页下载适合操作系统的版本。更新前建议保存正在处理的任务和文件。
 
+## 选择哪个版本
+
+| 版本 | 平台 | 适合 |
+| --- | --- | --- |
+| 轻量版（lite） | 仅 Windows | 只使用云端模型，不需要本地推理，安装包最小 |
+| CPU 版 | Windows、Linux、macOS（Apple Silicon 与 Intel） | 需要在本机运行 GGUF 模型。Windows/Linux 内置 CPU 与 Vulkan 推理，macOS 使用 Metal |
+| CUDA 版 | Windows、Linux | 配备 NVIDIA RTX 40 系列显卡的电脑，内置 CUDA 推理，无法使用显卡时自动回退到 CPU |
+
+macOS 和 Linux 没有轻量版。所有版本都离线内置所需组件，安装时不需要再下载。
+
 ## Windows
 
-Windows 安装包内置全部离线组件，安装过程不需要再联网下载组件，适合网络较慢的环境。安装界面依赖系统的 WebView2，缺失时安装器会明确提示。
+Windows 各版本都内置全部离线组件，安装过程不需要再联网下载组件，适合网络较慢的环境。安装界面依赖系统的 WebView2，缺失时安装器会明确提示。
 
 正式发布的 Windows 安装包使用 Certum 代码签名证书签名。如果 SmartScreen 仍弹出“Windows 已保护你的电脑”，可以先在文件属性的“数字签名”页查看签名，确认无误后点击“更多信息”→“仍要运行”。
 

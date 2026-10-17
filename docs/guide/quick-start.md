@@ -6,12 +6,12 @@
 
 请从[官网首页的下载区域](https://www.rongxzyai.com/#download)选择与你的系统相匹配的安装包。当前下载区会读取最新的稳定版本，并提供：
 
-- Windows x64 安装包。
+- Windows x64 安装包（轻量版，不含本地推理）。
 - macOS 安装包（提供 Apple Silicon 与 Intel 架构）。
 - Ubuntu x64 `.deb` 安装包。
 - 面向其他 Linux 发行版的 x64 AppImage。
 
-下载区显示的版本号、文件大小和下载地址会随当前稳定版本自动更新。
+下载区显示的版本号、文件大小和下载地址会随当前稳定版本自动更新。需要本地推理的 Windows 用户可在版本记录中选择 CPU 版，各版本的区别见[安装与更新](../faq/install.md)。
 
 ## 安装
 

@@ -2,9 +2,19 @@
 
 Download the version for your operating system from the homepage of the official website. Before updating, save any tasks and files you are working on.
 
+## Which edition to choose
+
+| Edition | Platforms | Best for |
+| --- | --- | --- |
+| Lite | Windows only | Cloud models only, no local inference; smallest installer |
+| CPU | Windows, Linux, macOS (Apple Silicon and Intel) | Running GGUF models locally. Windows/Linux bundle CPU and Vulkan inference; macOS uses Metal |
+| CUDA | Windows, Linux | PCs with an NVIDIA RTX 40-series GPU; bundles CUDA inference and falls back to the CPU when the GPU is unavailable |
+
+macOS and Linux have no lite edition. Every edition bundles its components offline, so installation downloads nothing extra.
+
 ## Windows
 
-The Windows installer bundles all offline components, so installation does not download components over the network, which helps on slow connections. The installer UI relies on the system WebView2 and tells you clearly if it is missing.
+Every Windows edition bundles all offline components, so installation does not download components over the network, which helps on slow connections. The installer UI relies on the system WebView2 and tells you clearly if it is missing.
 
 Official Windows releases are signed with a Certum code-signing certificate. If SmartScreen still shows "Windows protected your PC", check the signature on the Digital Signatures tab of the file properties, then choose "More info" → "Run anyway".
 
