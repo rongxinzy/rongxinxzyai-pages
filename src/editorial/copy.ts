@@ -248,7 +248,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     benchMax: "模型上限：最高 128K",
     benchFlag: "GPU 加速已开启",
     modelsNote:
-      "推理速度受芯片架构、内存带宽与量化精度影响。Windows 安装包需在设置中另装本地推理插件。",
+      "推理速度受芯片架构、内存带宽与量化精度影响。Windows 轻量版不含本地推理，CPU 版与 CUDA 版内置。",
     pillarsOverline: "PRIVACY & CONTROL",
     pillarsTitle: "数据位置与执行边界可控。",
     pillarsLead:
@@ -282,7 +282,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     noLinux: "当前版本未提供该平台安装包。",
     windowsNoteTitle: "Windows 本地推理说明：",
     windowsNote:
-      "首页提供的 Windows 安装包是轻量版，不含本地推理。如需在本机运行 GGUF 模型，请在版本记录中选择 CPU 版，它内置 CPU 与 Vulkan 本地推理，同样离线安装。",
+      "首页提供的 Windows 安装包是轻量版，不含本地推理。如需在本机运行 GGUF 模型，请在版本记录中选择 CPU 版（内置 CPU 与 Vulkan 推理），或适用于 RTX 40 系列显卡的 CUDA 版（显卡不可用时回退到 CPU），同样离线安装。",
     windowsGuide: "查看 Windows 安装指南",
     signingNote:
       "Windows 安装包经 Certum 代码签名，macOS 签名版本通过 Apple 公证。更新清单附带签名与 SHA-256 校验值。",
@@ -516,7 +516,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     benchMax: "Model max: up to 128K",
     benchFlag: "GPU offload enabled",
     modelsNote:
-      "Inference speed depends on chip architecture, memory bandwidth and quantization. The Windows installer requires the local inference plugin from Settings.",
+      "Inference speed depends on chip architecture, memory bandwidth and quantization. The Windows lite edition has no local inference; the CPU and CUDA editions bundle it.",
     pillarsOverline: "PRIVACY & CONTROL",
     pillarsTitle: "Control over files, models and execution.",
     pillarsLead:
@@ -551,7 +551,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     noLinux: "No installer for this platform in the current release.",
     windowsNoteTitle: "Windows local inference: ",
     windowsNote:
-      "The Windows installer offered here is the lite edition, without local inference. To run GGUF models locally, pick the CPU edition under “Release notes”; it bundles CPU and Vulkan local inference and also installs offline.",
+      "The Windows installer offered here is the lite edition, without local inference. To run GGUF models locally, pick the CPU edition (CPU and Vulkan inference) or the CUDA edition for RTX 40-series GPUs (with a CPU fallback) under “Release notes”; both install offline.",
     windowsGuide: "Windows setup guide",
     signingNote:
       "Windows installers are Certum code-signed, and signed macOS builds are notarized by Apple. Update manifests include signatures and SHA-256 checksums.",
