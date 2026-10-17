@@ -551,7 +551,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     noLinux: "No installer for this platform in the current release.",
     windowsNoteTitle: "Windows local inference: ",
     windowsNote:
-      "The Windows installer offered here is the lite edition, without local inference. To run GGUF models locally, pick the CPU edition under "Release notes"; it bundles CPU and Vulkan local inference and also installs offline.",
+      "The Windows installer offered here is the lite edition, without local inference. To run GGUF models locally, pick the CPU edition under “Release notes”; it bundles CPU and Vulkan local inference and also installs offline.",
     windowsGuide: "Windows setup guide",
     signingNote:
       "Windows installers are Certum code-signed, and signed macOS builds are notarized by Apple. Update manifests include signatures and SHA-256 checksums.",

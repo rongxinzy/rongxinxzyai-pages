@@ -11,7 +11,7 @@ Select the installer matching your system from the [download section on the offi
 - Ubuntu x64 `.deb` package.
 - x64 AppImage for other Linux distributions.
 
-The version number, file size, and download URLs shown in the download section update automatically with the current stable release. Windows users who need local inference can pick the CPU edition under "Release notes"; see [Installation and Updates](../faq/install.md) for the differences between editions.
+The version number, file size, and download URLs shown in the download section update automatically with the current stable release. Windows users who need local inference can pick the CPU edition under “Release notes”; see [Installation and Updates](../faq/install.md) for the differences between editions.
 
 ## Installation
 
