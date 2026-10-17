@@ -96,7 +96,7 @@ export function Downloads({
     {
       id: "linuxAppImage",
       title: "Linux",
-      detail: locale === "en" ? "Most distributions" : "适用于大多数发行版",
+      detail: locale === "en" ? "Generic Linux" : "通用 Linux 发行版",
       meta: [".AppImage"],
     },
   ];
@@ -260,7 +260,7 @@ export function Downloads({
                 )}
                 <div className="mt-4 space-y-1.5">
                   <span className="tnum block text-[13px] text-muted">
-                    {copy.sizeLabel}:{size ?? " —"}
+                    {copy.sizeLabel}: {size ?? "—"}
                   </span>
                   {platform.meta.map((line, index) => (
                     <span
@@ -294,8 +294,8 @@ export function Downloads({
                       <span>
                         {platform.id === "macos"
                           ? locale === "en"
-                            ? `Download .dmg (${macArch === "arm64" ? "Apple Silicon" : "Intel"})`
-                            : `下载 .dmg（${macArch === "arm64" ? "Apple Silicon" : "Intel"}）`
+                            ? `Download .dmg · ${macArch === "arm64" ? "Apple Silicon" : "Intel"}`
+                            : `下载 .dmg · ${macArch === "arm64" ? "Apple Silicon" : "Intel"}`
                           : platform.id === "windows"
                             ? locale === "en"
                               ? "Download .exe"
@@ -317,11 +317,11 @@ export function Downloads({
                         >
                           {macArch === "arm64"
                             ? locale === "en"
-                              ? `Download Intel version (.dmg · ${altMacSize})`
-                              : `下载 Intel 芯片版（.dmg · ${altMacSize}）`
+                              ? `Download Intel build · .dmg · ${altMacSize}`
+                              : `下载 Intel 版 · .dmg · ${altMacSize}`
                             : locale === "en"
-                              ? `Download Apple Silicon version (.dmg · ${altMacSize})`
-                              : `下载 Apple Silicon 版（.dmg · ${altMacSize}）`}
+                              ? `Download Apple Silicon build · .dmg · ${altMacSize}`
+                              : `下载 Apple Silicon 版 · .dmg · ${altMacSize}`}
                         </a>
                       </p>
                     ) : null}
