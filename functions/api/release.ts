@@ -6,7 +6,8 @@ type ArtifactTarget = {
   name: "linux" | "linuxAppImage" | "macos" | "macosIntel" | "windows";
   platform: "darwin" | "linux" | "win32";
   arch: "arm64" | "x64";
-  variant: "appimage" | "deb" | "default" | "lite";
+  /** Variants to request in order; later entries are fallbacks for older releases. */
+  variants: string[];
   extension: ".AppImage" | ".deb" | ".dmg" | ".exe";
 };
 
@@ -26,15 +27,15 @@ type ReleasePayload = {
 };
 
 const ARTIFACT_TARGETS: ArtifactTarget[] = [
-  { name: "windows", platform: "win32", arch: "x64", variant: "lite", extension: ".exe" },
-  { name: "macos", platform: "darwin", arch: "arm64", variant: "default", extension: ".dmg" },
-  { name: "macosIntel", platform: "darwin", arch: "x64", variant: "default", extension: ".dmg" },
-  { name: "linux", platform: "linux", arch: "x64", variant: "deb", extension: ".deb" },
+  { name: "windows", platform: "win32", arch: "x64", variants: ["lite"], extension: ".exe" },
+  { name: "macos", platform: "darwin", arch: "arm64", variants: ["cpu", "default"], extension: ".dmg" },
+  { name: "macosIntel", platform: "darwin", arch: "x64", variants: ["cpu", "default"], extension: ".dmg" },
+  { name: "linux", platform: "linux", arch: "x64", variants: ["deb-cpu", "deb"], extension: ".deb" },
   {
     name: "linuxAppImage",
     platform: "linux",
     arch: "x64",
-    variant: "appimage",
+    variants: ["appimage-cpu", "appimage"],
     extension: ".AppImage",
   },
 ];
@@ -88,13 +89,28 @@ function normalizeArtifact(value: unknown, target: ArtifactTarget): ReleaseArtif
   return { url: url.toString(), size: artifact.size };
 }
 
+// Releases built since the lite/cpu/cuda editions publish cpu, deb-cpu and
+// appimage-cpu; older releases (e.g. v2026.8.13) only know default, deb and
+// appimage. Try each variant in order and use the first that validates.
 async function fetchRelease(target: ArtifactTarget): Promise<ReleasePayload> {
+  let lastError: unknown;
+  for (const variant of target.variants) {
+    try {
+      return await fetchReleaseVariant(target, variant);
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError instanceof Error ? lastError : new Error(`No ${target.name} release found.`);
+}
+
+async function fetchReleaseVariant(target: ArtifactTarget, variant: string): Promise<ReleasePayload> {
   const url = new URL(UPDATE_URL);
   url.search = new URLSearchParams({
     channel: "stable",
     platform: target.platform,
     arch: target.arch,
-    variant: target.variant,
+    variant,
   }).toString();
 
   const response = await fetch(url, { headers: { Accept: "application/json" } });

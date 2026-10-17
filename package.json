@@ -11,10 +11,11 @@
     "blog:content": "node scripts/build-blog.mjs",
     "blog:emit": "node scripts/emit-blog-pages.mjs",
     "roadmap:check": "node scripts/validate-roadmap.mjs",
-    "build": "npm run roadmap:check && npm run generate:marketing && npm run docs:content && npm run blog:content && npm run typecheck:functions && tsc && vite build && npm run docs:emit && npm run blog:emit",
+    "build": "npm run test:functions && npm run roadmap:check && npm run generate:marketing && npm run docs:content && npm run blog:content && npm run typecheck:functions && tsc && vite build && npm run docs:emit && npm run blog:emit",
     "typecheck:functions": "tsc --project tsconfig.functions.json",
     "preview": "vite preview --host 127.0.0.1",
-    "deploy": "npm run build && wrangler pages deploy dist --project-name rongxzyai-pages --branch main"
+    "deploy": "npm run build && wrangler pages deploy dist --project-name rongxzyai-pages --branch main",
+    "test:functions": "node --test tests/"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",
