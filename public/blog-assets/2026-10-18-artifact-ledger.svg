@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660" role="img" aria-labelledby="t d" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+  <title id="t">制品识别新旧架构对比</title>
+  <desc id="d">重构前：消息存下来以后，主进程、渲染进程、编程模式、任务交付和卡片定位五处各自从消息日志里推断文件，渲染进程还用正则扫回答文字。重构后：主进程在工具事件发生时写入一张账本表，界面、编程模式和任务交付都读这一本账。</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5b6470"/></marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c2410c"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#15803d"/></marker>
+  </defs>
+  <rect width="1200" height="660" fill="#ffffff"/>
+  <g font-size="15" fill="#1f2937">
+    <!-- before -->
+    <text x="40" y="44" font-size="20" font-weight="700">重构前</text>
+    <text x="118" y="44" font-size="14" fill="#6b7280">事后从消息日志里推断，规则散在五处</text>
+    <rect x="40" y="72" width="200" height="200" rx="10" fill="#f3f4f6" stroke="#9ca3af"/>
+    <text x="140" y="140" text-anchor="middle" font-weight="600">Pi 工具事件</text>
+    <text x="140" y="164" text-anchor="middle" font-size="13" fill="#4b5563">路径、成败、diff</text>
+    <text x="140" y="188" text-anchor="middle" font-size="13" fill="#c2410c">事件到达时没有保存</text>
+    <rect x="290" y="140" width="150" height="64" rx="10" fill="#f3f4f6" stroke="#9ca3af"/>
+    <text x="365" y="168" text-anchor="middle" font-weight="600">消息日志</text>
+    <text x="365" y="190" text-anchor="middle" font-size="13" fill="#4b5563">只存下了消息</text>
+    <line x1="240" y1="172" x2="286" y2="172" stroke="#5b6470" stroke-width="2" marker-end="url(#a)"/>
+    <g font-size="14">
+      <rect x="500" y="72" width="390" height="34" rx="8" fill="#fff7ed" stroke="#c2410c"/>
+      <text x="516" y="94">① 主进程收集器 + 持久化索引（版本到 8）</text>
+      <rect x="500" y="114" width="390" height="34" rx="8" fill="#fff7ed" stroke="#c2410c"/>
+      <text x="516" y="136">② 渲染进程解析器 + 检测 worker（正则扫回答）</text>
+      <rect x="500" y="156" width="390" height="34" rx="8" fill="#fff7ed" stroke="#c2410c"/>
+      <text x="516" y="178">③ 编程模式自己的收集与合并</text>
+      <rect x="500" y="198" width="390" height="34" rx="8" fill="#fff7ed" stroke="#c2410c"/>
+      <text x="516" y="220">④ 任务交付从审批记录取 path 字段</text>
+      <rect x="500" y="240" width="390" height="34" rx="8" fill="#fff7ed" stroke="#c2410c"/>
+      <text x="516" y="262">⑤ 卡片定位：反引号正则匹配文件名</text>
+    </g>
+    <path d="M440 172 H470 V89 H496" fill="none" stroke="#c2410c" stroke-width="2" marker-end="url(#ar)"/>
+    <path d="M470 131 H496" fill="none" stroke="#c2410c" stroke-width="2" marker-end="url(#ar)"/>
+    <path d="M470 173 H496" fill="none" stroke="#c2410c" stroke-width="2" marker-end="url(#ar)"/>
+    <path d="M470 172 V257 H496" fill="none" stroke="#c2410c" stroke-width="2" marker-end="url(#ar)"/>
+    <path d="M470 215 H496" fill="none" stroke="#c2410c" stroke-width="2" marker-end="url(#ar)"/>
+    <rect x="940" y="72" width="220" height="200" rx="10" fill="#f3f4f6" stroke="#9ca3af"/>
+    <text x="1050" y="128" text-anchor="middle" font-weight="600">卡片 / 预览面板</text>
+    <text x="1050" y="156" text-anchor="middle" font-size="13" fill="#4b5563">五套结果在这里合并</text>
+    <text x="1050" y="180" text-anchor="middle" font-size="13" fill="#c2410c">不认 edit 工具</text>
+    <text x="1050" y="204" text-anchor="middle" font-size="13" fill="#c2410c">声明前轮询最多 2.5 秒</text>
+    <line x1="890" y1="172" x2="936" y2="172" stroke="#c2410c" stroke-width="2" marker-end="url(#ar)"/>
+
+    <line x1="40" y1="312" x2="1160" y2="312" stroke="#e5e7eb" stroke-width="2"/>
+
+    <!-- after -->
+    <text x="40" y="352" font-size="20" font-weight="700">重构后</text>
+    <text x="118" y="352" font-size="14" fill="#6b7280">事件发生时记账，只有一本账</text>
+    <rect x="40" y="380" width="200" height="150" rx="10" fill="#f3f4f6" stroke="#9ca3af"/>
+    <text x="140" y="420" text-anchor="middle" font-weight="600">事件</text>
+    <text x="140" y="446" text-anchor="middle" font-size="13" fill="#4b5563">write / edit 成功</text>
+    <text x="140" y="468" text-anchor="middle" font-size="13" fill="#4b5563">其他工具后的工作区比对</text>
+    <text x="140" y="490" text-anchor="middle" font-size="13" fill="#4b5563">编程 lane 的文件事件</text>
+    <text x="140" y="512" text-anchor="middle" font-size="13" fill="#4b5563">declare_artifact 只标注</text>
+    <rect x="300" y="380" width="300" height="150" rx="10" fill="#f0fdf4" stroke="#15803d"/>
+    <text x="450" y="420" text-anchor="middle" font-weight="600">主进程账本 artifact_ledger</text>
+    <text x="450" y="448" text-anchor="middle" font-size="13" fill="#4b5563">SQLite，主键 (scope_id, artifact_key)</text>
+    <text x="450" y="470" text-anchor="middle" font-size="13" fill="#4b5563">scope = 会话 id 或编程 lane id</text>
+    <text x="450" y="492" text-anchor="middle" font-size="13" fill="#4b5563">记录 toolCallId、runId、角色、标题</text>
+    <line x1="240" y1="455" x2="296" y2="455" stroke="#15803d" stroke-width="2" marker-end="url(#ag)"/>
+    <g font-size="14">
+      <rect x="680" y="380" width="480" height="44" rx="8" fill="#f0fdf4" stroke="#15803d"/>
+      <text x="696" y="407">界面：artifact:upsert 实时推送，按 toolCallId 挂卡片</text>
+      <rect x="680" y="433" width="480" height="44" rx="8" fill="#f0fdf4" stroke="#15803d"/>
+      <text x="696" y="460">编程模式：artifact:list 读 lane 历史</text>
+      <rect x="680" y="486" width="480" height="44" rx="8" fill="#f0fdf4" stroke="#15803d"/>
+      <text x="696" y="513">任务交付：读本次运行的账本记录</text>
+    </g>
+    <path d="M600 455 H640 V402 H676" fill="none" stroke="#15803d" stroke-width="2" marker-end="url(#ag)"/>
+    <path d="M640 455 H676" fill="none" stroke="#15803d" stroke-width="2" marker-end="url(#ag)"/>
+    <path d="M640 455 V508 H676" fill="none" stroke="#15803d" stroke-width="2" marker-end="url(#ag)"/>
+    <rect x="40" y="566" width="1120" height="56" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+    <text x="60" y="600" font-size="15" fill="#14532d">三个 PR 合计 +4162 / −4767（净 −605 行）；不再从文字里猜路径，文件制品只在主进程识别一次</text>
+  </g>
+</svg>
