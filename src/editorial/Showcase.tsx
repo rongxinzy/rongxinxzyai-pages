@@ -36,9 +36,7 @@ function shots(locale: SiteLocale): Shot[] {
     card(`zhiyuan-conversation${en}`, [976, 1464, 1952, 2440], 1464, 915),
     card(`zhiyuan-model-market${en}`, [976, 1464, 1952, 2440], 1464, 915),
     card(`zhiyuan-skills${en}`, [640, 1184, 1776, 2440], 1184, 740),
-    locale === "en"
-      ? card("zhiyuan-workspace-en", [640, 1184, 1776, 2440], 1184, 740)
-      : card("zhiyuan-workspace", [640, 1184, 1352], 1184, 786),
+    card(`zhiyuan-workspace${en}`, [640, 1184, 1776, 2440], 1184, 740),
   ];
 }
 
