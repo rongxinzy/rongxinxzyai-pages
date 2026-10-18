@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" role="img" aria-labelledby="t d" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+  <title id="t">聊天页流式管线修复前后对比</title>
+  <desc id="d">修复前：主进程从 Pi 的共享快照反推增量，多数帧落到全文快照分支，工具结果在共享 worker 池里排队。修复后：只用 delta 累积，按增量发送，工具结果在主线程同步提取。</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5b6470"/></marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c2410c"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#15803d"/></marker>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <g font-size="15" fill="#1f2937">
+    <!-- before -->
+    <text x="40" y="44" font-size="20" font-weight="700">修复前</text>
+    <text x="118" y="44" font-size="14" fill="#6b7280">从共享快照反推增量</text>
+    <rect x="40" y="68" width="200" height="88" rx="10" fill="#f3f4f6" stroke="#9ca3af"/>
+    <text x="140" y="100" text-anchor="middle" font-weight="600">Pi message_update</text>
+    <text x="140" y="124" text-anchor="middle" font-size="13" fill="#4b5563">delta + partial 快照</text>
+    <text x="140" y="143" text-anchor="middle" font-size="13" fill="#4b5563">（快照领先、会被改写）</text>
+    <rect x="290" y="68" width="210" height="88" rx="10" fill="#fff7ed" stroke="#c2410c"/>
+    <text x="395" y="100" text-anchor="middle" font-weight="600">累积器读快照</text>
+    <text x="395" y="124" text-anchor="middle" font-size="13" fill="#4b5563">replaceFromSnapshot</text>
+    <text x="395" y="143" text-anchor="middle" font-size="13" fill="#4b5563">再与已发送文本比对</text>
+    <rect x="550" y="68" width="230" height="88" rx="10" fill="#fff7ed" stroke="#c2410c"/>
+    <text x="665" y="100" text-anchor="middle" font-weight="600">不是纯追加 → 全文快照</text>
+    <text x="665" y="124" text-anchor="middle" font-size="13" fill="#4b5563">uiStreamSnapshot</text>
+    <text x="665" y="143" text-anchor="middle" font-size="13" fill="#4b5563">→ content_patch（offset 0）</text>
+    <rect x="830" y="68" width="150" height="88" rx="10" fill="#f3f4f6" stroke="#9ca3af"/>
+    <text x="905" y="106" text-anchor="middle" font-weight="600">IPC</text>
+    <text x="905" y="130" text-anchor="middle" font-size="13" fill="#c2410c">≈360–450 B/字符</text>
+    <rect x="1020" y="68" width="140" height="88" rx="10" fill="#f3f4f6" stroke="#9ca3af"/>
+    <text x="1090" y="106" text-anchor="middle" font-weight="600">渲染进程</text>
+    <text x="1090" y="130" text-anchor="middle" font-size="13" fill="#4b5563">Redux / 气泡</text>
+    <line x1="240" y1="112" x2="286" y2="112" stroke="#5b6470" stroke-width="2" marker-end="url(#a)"/>
+    <line x1="500" y1="112" x2="546" y2="112" stroke="#c2410c" stroke-width="2" marker-end="url(#ar)"/>
+    <line x1="780" y1="112" x2="826" y2="112" stroke="#c2410c" stroke-width="2" marker-end="url(#ar)"/>
+    <line x1="980" y1="112" x2="1016" y2="112" stroke="#5b6470" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="40" y="186" width="200" height="64" rx="10" fill="#f3f4f6" stroke="#9ca3af"/>
+    <text x="140" y="224" text-anchor="middle" font-weight="600">tool_execution_end</text>
+    <rect x="290" y="186" width="490" height="64" rx="10" fill="#fff7ed" stroke="#c2410c"/>
+    <text x="535" y="212" text-anchor="middle" font-weight="600">共享 worker 池提取展示文本（异步）</text>
+    <text x="535" y="235" text-anchor="middle" font-size="13" fill="#4b5563">后续事件全部排在它后面；队列满时 reject → 展示文本为空</text>
+    <line x1="240" y1="218" x2="286" y2="218" stroke="#5b6470" stroke-width="2" marker-end="url(#a)"/>
+    <path d="M780 218 H905 V160" fill="none" stroke="#c2410c" stroke-width="2" marker-end="url(#ar)"/>
+    <rect x="40" y="266" width="1120" height="44" rx="8" fill="#fef2f2" stroke="#fca5a5"/>
+    <text x="60" y="294" font-size="14" fill="#991b1b">自动重试：每次 turn_start 都新建气泡 → 重试一次两个气泡，重试两次数据库里三条回答</text>
+
+    <line x1="40" y1="338" x2="1160" y2="338" stroke="#e5e7eb" stroke-width="2"/>
+
+    <!-- after -->
+    <text x="40" y="378" font-size="20" font-weight="700">修复后</text>
+    <text x="118" y="378" font-size="14" fill="#6b7280">只用 delta 累积</text>
+    <rect x="40" y="402" width="200" height="88" rx="10" fill="#f3f4f6" stroke="#9ca3af"/>
+    <text x="140" y="434" text-anchor="middle" font-weight="600">Pi message_update</text>
+    <text x="140" y="458" text-anchor="middle" font-size="13" fill="#4b5563">增量事件忽略快照</text>
+    <text x="140" y="477" text-anchor="middle" font-size="13" fill="#4b5563">message_end 先深拷贝</text>
+    <rect x="290" y="402" width="210" height="88" rx="10" fill="#f0fdf4" stroke="#15803d"/>
+    <text x="395" y="430" text-anchor="middle" font-weight="600">分段累积</text>
+    <text x="395" y="453" text-anchor="middle" font-size="13" fill="#4b5563">*_start 开空段 · delta 追加</text>
+    <text x="395" y="472" text-anchor="middle" font-size="13" fill="#4b5563">*_end 用事件自带内容收尾</text>
+    <rect x="550" y="402" width="230" height="88" rx="10" fill="#f0fdf4" stroke="#15803d"/>
+    <text x="665" y="434" text-anchor="middle" font-weight="600">stream_part 增量</text>
+    <text x="665" y="458" text-anchor="middle" font-size="13" fill="#4b5563">每帧都是最终文本的前缀</text>
+    <text x="665" y="477" text-anchor="middle" font-size="13" fill="#4b5563">流式中 content_patch：0</text>
+    <rect x="830" y="402" width="150" height="88" rx="10" fill="#f3f4f6" stroke="#9ca3af"/>
+    <text x="905" y="440" text-anchor="middle" font-weight="600">IPC</text>
+    <text x="905" y="464" text-anchor="middle" font-size="13" fill="#15803d">≈6–10 B/字符</text>
+    <rect x="1020" y="402" width="140" height="88" rx="10" fill="#f3f4f6" stroke="#9ca3af"/>
+    <text x="1090" y="440" text-anchor="middle" font-weight="600">渲染进程</text>
+    <text x="1090" y="464" text-anchor="middle" font-size="13" fill="#4b5563">Redux / 气泡</text>
+    <line x1="240" y1="446" x2="286" y2="446" stroke="#5b6470" stroke-width="2" marker-end="url(#a)"/>
+    <line x1="500" y1="446" x2="546" y2="446" stroke="#15803d" stroke-width="2" marker-end="url(#ag)"/>
+    <line x1="780" y1="446" x2="826" y2="446" stroke="#15803d" stroke-width="2" marker-end="url(#ag)"/>
+    <line x1="980" y1="446" x2="1016" y2="446" stroke="#5b6470" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="40" y="520" width="200" height="64" rx="10" fill="#f3f4f6" stroke="#9ca3af"/>
+    <text x="140" y="558" text-anchor="middle" font-weight="600">tool_execution_end</text>
+    <rect x="290" y="520" width="490" height="64" rx="10" fill="#f0fdf4" stroke="#15803d"/>
+    <text x="535" y="546" text-anchor="middle" font-weight="600">主线程同步提取展示文本</text>
+    <text x="535" y="569" text-anchor="middle" font-size="13" fill="#4b5563">跳过图片块；不再排队，后续事件不被阻塞</text>
+    <line x1="240" y1="552" x2="286" y2="552" stroke="#5b6470" stroke-width="2" marker-end="url(#a)"/>
+    <path d="M780 552 H905 V494" fill="none" stroke="#15803d" stroke-width="2" marker-end="url(#ag)"/>
+    <rect x="40" y="596" width="1120" height="36" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+    <text x="60" y="619" font-size="14" fill="#166534">自动重试：复用同一个消息 id，发 streamReopen 让气泡回到流式状态，保留上一次的文字；不可重试的错误立即收尾</text>
+  </g>
+</svg>
