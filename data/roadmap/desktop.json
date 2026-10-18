@@ -48,11 +48,23 @@
           "done": true
         },
         {
-          "date": "2026-10-16",
+          "date": "2026-10-17",
           "text": "发布收成两步：打 tag 先发 beta，再单独把该版本晋升为 stable。",
-          "textEn": "Publishing is being cut down to two steps: a tag ships beta, then that build is promoted to stable.",
+          "textEn": "Publishing is now two steps: a tag ships beta, then that build is promoted to stable.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1040",
-          "done": false
+          "done": true
+        },
+        {
+          "date": "2026-10-17",
+          "text": "随包的模型网关二进制改为按锁定版本本地编译：Windows 上纳入代码签名，macOS 发布校验增加对网关签名与加固运行时的检查。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1074",
+          "done": true
+        },
+        {
+          "date": "2026-10-17",
+          "text": "打 tag 发布前先编译并校验模型网关，再进入各平台打包，发布任务不再因缺少网关失败。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1122",
+          "done": true
         }
       ]
     },
@@ -165,6 +177,18 @@
           "textEn": "In work mode, a too-small local context ends the task after one token, and the app does not show a clear error.",
           "url": "https://github.com/rongxinzy/RongxinAI/issues/772",
           "done": false
+        },
+        {
+          "date": "2026-10-17",
+          "text": "安装包分成 lite、CPU、CUDA 三个版本：lite 不带 llama.cpp，CPU 版内置 CPU 与 Vulkan 运行时（macOS 为 Metal），CUDA 版面向 Windows 和 Linux x64。三个版本与打 tag 的 beta 发布共用同一套构建。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1117",
+          "done": true
+        },
+        {
+          "date": "2026-10-17",
+          "text": "llama.cpp 的管理、后端和 IPC 大文件按职责拆成小模块，行为不变。至此超过一千行的源文件已全部拆完，CI 也不再允许新增。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1116",
+          "done": true
         }
       ]
     },
@@ -230,6 +254,18 @@
           "text": "Chat、Work 和编程会话改为只从统一模型服务解析模型，模型探测改为向模型网关发一条 1 token 请求。服务未开启时，任务直接提示先在设置里启用并选择默认模型。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1059",
           "done": true
+        },
+        {
+          "date": "2026-10-17",
+          "text": "统一模型服务新增外部编程工具的接入与断开：接入时把工具的模型调用改走网关，断开后恢复原配置，应用启动时自动重新套用。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1118",
+          "done": true
+        },
+        {
+          "date": "2026-10-17",
+          "text": "删掉已没有界面入口的按提供商 API 配置通道和对应密钥文件读写，模型设置只保留统一网关。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1070",
+          "done": true
         }
       ]
     },
@@ -278,6 +314,37 @@
           "date": "2026-10-16",
           "text": "删掉与运行时自带重试重复的流中断看门狗和 15 秒兜底完成，会话只在运行时确认结束后才算完成。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1063",
+          "done": true
+        },
+        {
+          "date": "2026-10-17",
+          "text": "会话的流式回复改为增量传输、增量渲染，不再随输出变长整段重发全文。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1119",
+          "done": true
+        },
+        {
+          "date": "2026-10-17",
+          "text": "用户明确要求保存的记忆直接落库，不再被自动抽取的「不够持久」判定挡住。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1071",
+          "done": true
+        },
+        {
+          "date": "2026-10-17",
+          "text": "修正显式保存的记忆在召回时被过滤掉的问题，注入的上下文不再为空。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1073",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "experts-and-connectors",
+      "title": "自定义专家与连接器",
+      "titleEn": "Custom experts and connectors",
+      "items": [
+        {
+          "date": "2026-10-17",
+          "text": "专家页拆成专家、技能、连接器三部分，支持创建自定义专家并绑定系统提示词、技能与连接器，连接器可粘贴或上传 JSON 导入。会话启动时自动装载专家绑定的技能，只启用其绑定的连接器。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1038",
           "done": true
         }
       ]
