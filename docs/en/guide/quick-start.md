@@ -6,12 +6,12 @@ The ZhiYuan agent is a desktop application. On first use, prepare it in this ord
 
 Select the installer matching your system from the [download section on the official website homepage](https://www.rongxzyai.com/#download). The download section reads the latest stable release and provides:
 
-- Windows x64 installers: lite (without local inference), CPU and CUDA.
+- Windows x64 installers: lite (without local inference), CPU, and CUDA.
 - macOS installer (available for both Apple Silicon and Intel).
 - Ubuntu x64 `.deb` package.
 - x64 AppImage for other Linux distributions.
 
-The version number, file size, and download URLs shown in the download section update automatically with the current stable release. Windows users who need local inference can pick the CPU edition or the CUDA edition for RTX 40-series PCs (with a CPU fallback) right in the download section; the Linux CUDA edition is under “Release notes”. Per-edition installers are available starting with the first release built with edition support. See [Installation and Updates](../faq/install.md) for the differences between editions.
+The version number, file size, and download URLs shown in the download section update automatically with the current stable release. Windows users who need local inference can pick the CPU edition, or the CUDA edition for PCs with an RTX 40-series GPU (with a CPU fallback when the GPU is unavailable), right in the download section; the Linux CUDA edition is under "Release notes". Per-edition installers are available starting with the first release built with edition support. See [Installation and Updates](../faq/install.md) for the differences between editions.
 
 ## Installation
 
@@ -20,23 +20,22 @@ After downloading, complete the installation according to your operating system.
 If the system asks you to confirm the source or permissions, first confirm the installer comes from the ZhiYuan agent [official website](https://www.rongxzyai.com/), then continue.
 
 ## First Launch
-The installation page is shown below. Without special requirements, click Next to complete the installation.
+
+The Windows installer has a single page: confirm the install location, check the box to agree to the license, and click **Install**. Keep the **Install local inference components** switch off: the CPU and CUDA editions already include the local inference runtime, and the lite edition does not provide local inference. The installer UI relies on the system WebView2 and prompts you if it is missing.
 
 ![ZhiYuan installation options](../assets/guide/quick-start/installer-options.png)
 
 ![ZhiYuan installation progress](../assets/guide/quick-start/install-progress.png)
 
-On first launch, you will see the ZhiYuan Work Page. The mode switch at the top toggles between Work and Chat: Work mode is for multi-step tasks, Chat mode is for everyday Q&A. The Work Page includes the task input area, model selection, permission settings, and the Projects entry. You can start assigning tasks from here.
+After installation, launch ZhiYuan and you will see the Work Page. At the top of the sidebar you can switch between the two modes, **Work** and **Chat**: Work mode is for assigning multi-step tasks, and Chat mode is for everyday Q&A. The Work Page includes the task input area, project selection, permission mode, and model selection.
 
 ![ZhiYuan Work Page](../assets/guide/quick-start/work-page.png)
 
+It is recommended to complete the setup in the following order:
 
-After installation, launch the ZhiYuan agent. It is recommended to complete the setup in the following order:
-
-1. Open the ZhiYuan agent.
-2. Set up a model. ZhiYuan ships with a free built-in model that works online without an API Key; you can also connect a cloud provider such as [DeepSeek](https://platform.deepseek.com/) in Settings, or [use a local model](./model/local.md).
-3. Create a [Work Page](./first-work-page.md).
-4. Confirm the model responds normally with a simple task.
+1. Confirm the model. ZhiYuan ships with a free model from the "ZhiYuan" provider (**ZhiYuan Free**) that works online without an API Key. The free model has a daily quota; when it is used up, the app asks you to try again the next day. You can also connect a cloud model such as [DeepSeek](./model/cloud.md) in Settings, or [use a local model](./model/local.md).
+2. Create a [Work Page](./first-work-page.md).
+3. Confirm the model responds normally with a simple task.
 
 After completing these steps, you can continue with [Creating and Running Tasks](./tasks.md).
 

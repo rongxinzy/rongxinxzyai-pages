@@ -33,6 +33,10 @@ export const DOCS_NAV: DocsNavGroup[] = [
       { text: "创建和执行任务", route: "guide/tasks" },
       { text: "添加文件与上下文", route: "guide/context" },
       { text: "使用与管理技能", route: "guide/skills" },
+      { text: "编程工作区", route: "guide/coding" },
+      { text: "自动化与待办", route: "guide/automation" },
+      { text: "消息渠道与邮箱", route: "guide/channels" },
+      { text: "设置", route: "guide/settings" },
     ],
   },
   {
@@ -110,6 +114,10 @@ export const DOCS_NAV_EN: DocsNavGroup[] = [
       { text: "Create and run tasks", route: "guide/tasks" },
       { text: "Files and context", route: "guide/context" },
       { text: "Use and manage skills", route: "guide/skills" },
+      { text: "Coding workspace", route: "guide/coding" },
+      { text: "Automation and to-dos", route: "guide/automation" },
+      { text: "Messaging channels and email", route: "guide/channels" },
+      { text: "Settings", route: "guide/settings" },
     ],
   },
   {

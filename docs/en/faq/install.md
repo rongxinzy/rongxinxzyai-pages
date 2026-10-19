@@ -12,7 +12,7 @@ Download the version for your operating system from the homepage of the official
 
 macOS and Linux have no lite edition. Every edition bundles its components offline, so installation downloads nothing extra.
 
-The homepage download section offers all three Windows installers (lite, CPU and CUDA); switch editions on the Windows card. macOS and Linux get the CPU edition there, and the Linux CUDA edition is available under “Release notes”. The CUDA edition is for PCs with an RTX 40-series GPU and falls back to the CPU when the GPU is unavailable. Per-edition installers are available starting with the first release built with edition support; earlier releases have a single installer per platform.
+The homepage download section offers the Windows lite, CPU and CUDA installers; switch editions on the Windows card to download. macOS and Linux get the CPU edition there, and the Linux CUDA edition is available under "Release notes". The CUDA edition is for PCs with an RTX 40-series GPU and falls back to the CPU when the GPU is unavailable. Per-edition installers are available starting with the first release built with edition support; earlier releases have a single installer per platform.
 
 ## Windows
 
@@ -24,6 +24,29 @@ Official Windows releases are signed with a Certum code-signing certificate. If 
 
 Signed builds are notarized by Apple and open normally once Gatekeeper verifies them. If macOS says it cannot verify the developer, open System Settings → Privacy & Security and choose "Open Anyway".
 
+## Updates
+
+ZhiYuan checks for updates from the Stable channel by default. Under **Settings → About** you can click **Check for Updates** or enable the **Beta update channel** to get test builds earlier. When a new version is found, the sidebar shows **New update**. Click **Download update**, and after the download finishes click **Install and Restart** to install it.
+
+## Uninstalling
+
+On Windows, uninstall ZhiYuan from the system's Settings → Apps. Uninstalling removes the program files and the current edition's offline runtime components, and keeps the following data by default, so it remains available after reinstalling:
+
+- `%APPDATA%\ZhiYuanAgent`: sessions, settings, memory, and Skills you created.
+- `%LOCALAPPDATA%\ZhiYuanAgent\models`: local model files.
+
+To remove everything, delete these two folders manually after uninstalling.
+
+## Data Locations
+
+| System | Application data |
+| --- | --- |
+| Windows | `%APPDATA%\ZhiYuanAgent` |
+| macOS | `~/Library/Application Support/ZhiYuanAgent` |
+| Linux | `~/.config/ZhiYuanAgent` |
+
+On macOS and Linux, local models are stored by default under `models/llamacpp` inside the application data.
+
 ## Troubleshooting
 
-If the app fails to start or the download fails, record your operating system, version, and the exact error message before contacting the project maintainers. You can also check downloaded files against the SHA-256 checksums on the release page.
+If the app fails to start or the download fails, record your operating system, version, and the exact error message before contacting the project maintainers. If the app opens, you can click **Export Logs** under **Settings → About** and attach the log archive to your report. After downloading, you can also check file integrity against the SHA-256 checksums on the release page.
