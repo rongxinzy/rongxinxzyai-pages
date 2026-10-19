@@ -13,6 +13,7 @@ const { onRequestGet } = await import(pathToFileURL(outfile).href);
 
 const EXT = { lite: ".exe", cuda: ".exe", cpu: ".dmg", default: ".dmg", "deb-cpu": ".deb", deb: ".deb", "appimage-cpu": ".AppImage", appimage: ".AppImage" };
 
+// `version` may be a string or a { platform: version } map for staged releases.
 function mockService(available, version = "2026.10.17") {
   const requested = [];
   globalThis.fetch = async (input) => {
@@ -21,7 +22,8 @@ function mockService(available, version = "2026.10.17") {
     requested.push(key);
     if (!available.has(key)) return new Response("bad variant", { status: 400 });
     const variant = url.searchParams.get("variant");
-    const payload = { version, artifact: { url: `https://downloads.rongxzyai.com/${key.replaceAll(":", "-")}${url.searchParams.get("platform") === "win32" ? ".exe" : EXT[variant]}`, size: 1024 } };
+    const platformVersion = typeof version === "string" ? version : version[url.searchParams.get("platform")];
+    const payload = { version: platformVersion, artifact: { url: `https://downloads.rongxzyai.com/${key.replaceAll(":", "-")}${url.searchParams.get("platform") === "win32" ? ".exe" : EXT[variant]}`, size: 1024 } };
     const encoded = Buffer.from(JSON.stringify(payload)).toString("base64url");
     return new Response(JSON.stringify({ payload: encoded }), { status: 200 });
   };
@@ -56,8 +58,37 @@ test("older releases fall back to default, deb and appimage", async () => {
   assert.match(body.artifacts.linuxAppImage.url, /linux-x64-appimage\.AppImage$/);
 });
 
-test("missing required macOS release still fails with 502", async () => {
-  mockService(new Set(["win32:x64:lite"]));
+test("staged releases serve each platform's own stable version", async () => {
+  mockService(
+    new Set(["win32:x64:lite", "win32:x64:cpu", "win32:x64:cuda", "darwin:arm64:cpu", "darwin:x64:cpu", "linux:x64:deb-cpu", "linux:x64:appimage-cpu"]),
+    { win32: "2026.10.19-build.6", darwin: "2026.10.15-build.1", linux: "2026.10.15-build.1" },
+  );
+  const response = await onRequestGet();
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.version, "2026.10.19-build.6");
+  assert.equal(body.artifacts.windows.version, "2026.10.19-build.6");
+  assert.equal(body.artifacts.windowsCpu.version, "2026.10.19-build.6");
+  assert.equal(body.artifacts.windowsCuda.version, "2026.10.19-build.6");
+  assert.equal(body.artifacts.macos.version, "2026.10.15-build.1");
+  assert.match(body.artifacts.macos.url, /darwin-arm64-cpu\.dmg$/);
+  assert.equal(body.artifacts.macosIntel.version, "2026.10.15-build.1");
+  assert.equal(body.artifacts.linux.version, "2026.10.15-build.1");
+  assert.match(body.artifacts.linux.url, /linux-x64-deb-cpu\.deb$/);
+  assert.equal(body.artifacts.linuxAppImage.version, "2026.10.15-build.1");
+});
+
+test("a missing platform is left out instead of failing the whole API", async () => {
+  mockService(new Set(["win32:x64:lite", "linux:x64:deb-cpu"]), { win32: "2026.10.19-build.6", linux: "2026.10.15-build.1" });
+  const response = await onRequestGet();
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.deepEqual(Object.keys(body.artifacts).sort(), ["linux", "windows"]);
+  assert.equal(body.artifacts.macos, undefined);
+});
+
+test("missing Windows release still fails with 502", async () => {
+  mockService(new Set(["darwin:arm64:cpu", "linux:x64:deb-cpu"]));
   assert.equal((await onRequestGet()).status, 502);
 });
 

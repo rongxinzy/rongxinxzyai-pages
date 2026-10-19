@@ -20,7 +20,7 @@ export type SiteRelease = {
     windows: SiteReleaseArtifact;
     windowsCpu?: SiteReleaseArtifact;
     windowsCuda?: SiteReleaseArtifact;
-    macos: SiteReleaseArtifact;
+    macos?: SiteReleaseArtifact;
     macosIntel?: SiteReleaseArtifact;
     linux?: SiteReleaseArtifact;
     linuxAppImage?: SiteReleaseArtifact;
