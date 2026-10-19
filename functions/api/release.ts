@@ -147,19 +147,18 @@ export async function onRequestGet(): Promise<Response> {
       fetchRelease(ARTIFACT_TARGETS[0]),
       fetchRelease(ARTIFACT_TARGETS[1]).catch(() => null),
       fetchRelease(ARTIFACT_TARGETS[2]).catch(() => null),
-      fetchRelease(ARTIFACT_TARGETS[3]),
+      fetchRelease(ARTIFACT_TARGETS[3]).catch(() => null),
       fetchRelease(ARTIFACT_TARGETS[4]).catch(() => null),
       fetchRelease(ARTIFACT_TARGETS[5]).catch(() => null),
       fetchRelease(ARTIFACT_TARGETS[6]).catch(() => null),
     ]);
-    if (windows.version !== macos.version) {
-      throw new Error("The platform manifests point to different versions.");
-    }
-
+    // Windows is the anchor platform. A release may ship Windows alone (e.g.
+    // v2026.10.19-build.5); other platforms are listed only when the stable
+    // manifest carries the same version, so the page never mixes releases.
     const artifacts: Record<string, ReleaseArtifact> = {
       windows: windows.artifact,
-      macos: macos.artifact,
     };
+    if (macos?.version === windows.version) artifacts.macos = macos.artifact;
     // Releases before the inference editions only publish the lite installer.
     if (windowsCpu?.version === windows.version) artifacts.windowsCpu = windowsCpu.artifact;
     if (windowsCuda?.version === windows.version) artifacts.windowsCuda = windowsCuda.artifact;

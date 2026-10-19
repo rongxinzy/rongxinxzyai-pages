@@ -56,8 +56,20 @@ test("older releases fall back to default, deb and appimage", async () => {
   assert.match(body.artifacts.linuxAppImage.url, /linux-x64-appimage\.AppImage$/);
 });
 
-test("missing required macOS release still fails with 502", async () => {
-  mockService(new Set(["win32:x64:lite"]));
+test("a Windows-only release serves the three Windows editions without macOS or Linux", async () => {
+  mockService(new Set(["win32:x64:lite", "win32:x64:cpu", "win32:x64:cuda"]), "2026.10.19-build.5");
+  const response = await onRequestGet();
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.version, "2026.10.19-build.5");
+  assert.match(body.artifacts.windows.url, /win32-x64-lite\.exe$/);
+  assert.match(body.artifacts.windowsCpu.url, /win32-x64-cpu\.exe$/);
+  assert.match(body.artifacts.windowsCuda.url, /win32-x64-cuda\.exe$/);
+  assert.deepEqual(Object.keys(body.artifacts).sort(), ["windows", "windowsCpu", "windowsCuda"]);
+});
+
+test("missing required Windows release still fails with 502", async () => {
+  mockService(new Set(["darwin:arm64:cpu"]));
   assert.equal((await onRequestGet()).status, 502);
 });
 
