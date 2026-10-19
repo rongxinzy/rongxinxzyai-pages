@@ -1,8 +1,8 @@
 # 使用云端模型（以 DeepSeek 为例）
 
-知远可以连接云端模型来处理任务。云端模型在「设置 → 模型」的「渠道」页管理。添加渠道时，「常用预设」提供 DeepSeek 官方、OpenAI (Official)、Anthropic 官方原生、Google Gemini、Ollama 本地服务和自定义 OpenAI 兼容。协议类型支持 OpenAI Chat Completions、Anthropic Messages 和 OpenAI Responses。
+知远可以连接云端模型来处理任务。云端模型在「设置 → 模型」的「渠道」页管理。添加渠道时，「常用预设」提供 OpenAI 官方、Anthropic 官方原生、Google Gemini、DeepSeek 官方、月之暗面 Kimi、阿里云百炼（通义千问）、智谱 BigModel（GLM）、MiniMax 稀宇科技、火山方舟（豆包）、百度千帆（文心）、阶跃星辰 StepFun、小米 MiMo、xAI Grok、OpenRouter、Ollama 本地服务和自定义 OpenAI 兼容。选择预设后，接口地址和常用模型会自动填好。协议类型支持 OpenAI Chat Completions、Anthropic Messages 和 OpenAI Responses。
 
-预设之外的服务，例如 Kimi、通义千问、智谱、豆包，选择「自定义 OpenAI 兼容」，填写服务商提供的接口地址、API Key 和模型名称即可。
+预设之外的服务，选择「自定义 OpenAI 兼容」，填写服务商提供的接口地址、API Key 和模型名称即可。
 
 ## 添加 DeepSeek
 

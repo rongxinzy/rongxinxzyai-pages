@@ -1,8 +1,8 @@
 # Using Cloud Models (DeepSeek as an Example)
 
-ZhiYuan can connect to cloud models to process tasks. Cloud models are managed on the **Providers** page under **Settings → Model**. When adding a provider, the **Preset** list offers DeepSeek, OpenAI (Official), Anthropic Native, Google Gemini, Ollama Local, and Custom OpenAI-Compatible. Supported protocol types are OpenAI Chat Completions, Anthropic Messages, and OpenAI Responses.
+ZhiYuan can connect to cloud models to process tasks. Cloud models are managed on the **Providers** page under **Settings → Model**. When adding a provider, the **Preset** list offers OpenAI (Official), Anthropic Native, Google Gemini, DeepSeek, Moonshot AI (Kimi), Alibaba Cloud Model Studio (Qwen), Zhipu BigModel (GLM), MiniMax, Volcengine Ark (Doubao), Baidu Qianfan (ERNIE), StepFun, Xiaomi MiMo, xAI Grok, OpenRouter, Ollama Local, and Custom OpenAI-Compatible. Picking a preset fills in the endpoint and common models. Supported protocol types are OpenAI Chat Completions, Anthropic Messages, and OpenAI Responses.
 
-For services outside the presets, such as Kimi, Qwen, Zhipu, or Doubao, choose **Custom OpenAI-Compatible** and enter the endpoint, API Key, and model names provided by the service.
+For services outside the presets, choose **Custom OpenAI-Compatible** and enter the endpoint, API Key, and model names provided by the service.
 
 ## Adding DeepSeek
 
