@@ -280,9 +280,9 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     loading: "正在获取版本信息…",
     unavailable: "未能获取版本信息。请刷新页面，或前往 GitHub Releases 下载。",
     noLinux: "当前版本未提供该平台安装包。",
-    windowsNoteTitle: "Windows 本地推理说明：",
+    windowsNoteTitle: "Windows 版本说明：",
     windowsNote:
-      "首页提供的 Windows 安装包是轻量版，不含本地推理。如需在本机运行 GGUF 模型，请在版本记录中选择 CPU 版（内置 CPU 与 Vulkan 推理），或适用于 RTX 40 系列显卡的 CUDA 版（显卡不可用时回退到 CPU），同样离线安装。",
+      "Windows 提供三个版本：轻量版不含本地推理，体积最小；CPU 版内置 CPU 与 Vulkan 推理；CUDA 版适用于配备 RTX 40 系列显卡的电脑（显卡不可用时回退到 CPU）。如需在本机运行 GGUF 模型，请选择 CPU 版或 CUDA 版。三个版本均可离线安装。",
     windowsGuide: "查看 Windows 安装指南",
     signingNote:
       "Windows 安装包经 Certum 代码签名，macOS 签名版本通过 Apple 公证。更新清单附带签名与 SHA-256 校验值。",
@@ -549,9 +549,9 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     loading: "Loading release info…",
     unavailable: "Unable to load release info. Refresh the page or download from GitHub Releases.",
     noLinux: "No installer for this platform in the current release.",
-    windowsNoteTitle: "Windows local inference: ",
+    windowsNoteTitle: "Windows editions: ",
     windowsNote:
-      "The Windows installer offered here is the lite edition, without local inference. To run GGUF models locally, pick the CPU edition (CPU and Vulkan inference) or the CUDA edition for RTX 40-series GPUs (with a CPU fallback) under “Release notes”; both install offline.",
+      "Windows comes in three editions: Lite is the smallest and has no local inference; CPU bundles CPU and Vulkan inference; CUDA is for PCs with an RTX 40-series GPU (with a CPU fallback). To run GGUF models locally, pick CPU or CUDA. All three install offline.",
     windowsGuide: "Windows setup guide",
     signingNote:
       "Windows installers are Certum code-signed, and signed macOS builds are notarized by Apple. Update manifests include signatures and SHA-256 checksums.",

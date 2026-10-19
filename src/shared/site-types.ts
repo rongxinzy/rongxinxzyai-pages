@@ -18,6 +18,8 @@ export type SiteRelease = {
   version: string;
   artifacts: {
     windows: SiteReleaseArtifact;
+    windowsCpu?: SiteReleaseArtifact;
+    windowsCuda?: SiteReleaseArtifact;
     macos: SiteReleaseArtifact;
     macosIntel?: SiteReleaseArtifact;
     linux?: SiteReleaseArtifact;
