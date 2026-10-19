@@ -189,6 +189,12 @@
           "text": "llama.cpp 的管理、后端和 IPC 大文件按职责拆成小模块，行为不变。至此超过一千行的源文件已全部拆完，CI 也不再允许新增。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1116",
           "done": true
+        },
+        {
+          "date": "2026-10-18",
+          "text": "llama.cpp 着手从每模型独立进程收敛到统一路由模式：先落地按模型配置 GPU、按模型拆分日志与查询加载状态，现有运行方式暂不改变。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1141",
+          "done": true
         }
       ]
     },
@@ -266,6 +272,12 @@
           "text": "删掉已没有界面入口的按提供商 API 配置通道和对应密钥文件读写，模型设置只保留统一网关。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1070",
           "done": true
+        },
+        {
+          "date": "2026-10-18",
+          "text": "设置页重做：模型服务与网关管理并入应用内设置，改动即时保存；模型页按服务、提供商、模型等分段重排，外部编程工具接入改为独立分段并补上确认。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1126",
+          "done": true
         }
       ]
     },
@@ -333,6 +345,48 @@
           "text": "修正显式保存的记忆在召回时被过滤掉的问题，注入的上下文不再为空。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1073",
           "done": true
+        },
+        {
+          "date": "2026-10-18",
+          "text": "流式中被删除的回复不再残留成多余气泡，也不再触发多余的重新同步；自动重试气泡与工具调用显示的同步问题一并修正。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1127",
+          "done": true
+        },
+        {
+          "date": "2026-10-18",
+          "text": "制品改为在事件发生时登记到统一账本，文件编辑和命令生成的文件也能被识别；任务交付与编程模式共用同一套结果，历史会话的制品保留，编程页只在声明交付物时自动打开面板。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1131",
+          "done": true
+        },
+        {
+          "date": "2026-10-18",
+          "text": "聊天里的本地文件路径改由主进程按文件系统核实，只有真实存在的路径才可点击；正文里的裸文件名不再自动变成链接。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1135",
+          "done": true
+        },
+        {
+          "date": "2026-10-18",
+          "text": "定时任务的下次运行时间修正：跨夏令时不再偏一小时，支持带星期、月份缩写的表达式。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1138",
+          "done": true
+        },
+        {
+          "date": "2026-10-18",
+          "text": "会话在重启、回收或切换模型后改为打开落盘的会话文件、只补发新消息，不再把历史压成一段文本塞进提示词，工具调用与图片在恢复后保留。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1140",
+          "done": true
+        },
+        {
+          "date": "2026-10-18",
+          "text": "聊天窗口的滚动改由一处统一控制，流式输出时页面不再来回抖动；输出过程中向上滚动会停在原地，不再被拉回底部。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1142",
+          "done": true
+        },
+        {
+          "date": "2026-10-18",
+          "text": "制品、技能文档、活动记录等处的只读 Markdown 统一为一套渲染和代码高亮，样式与行为一致，多余的渲染依赖一并移除。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1143",
+          "done": true
         }
       ]
     },
@@ -345,6 +399,19 @@
           "date": "2026-10-17",
           "text": "专家页拆成专家、技能、连接器三部分，支持创建自定义专家并绑定系统提示词、技能与连接器，连接器可粘贴或上传 JSON 导入。会话启动时自动装载专家绑定的技能，只启用其绑定的连接器。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1038",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "stability-and-refactor",
+      "title": "稳定性与底层重构",
+      "titleEn": "Stability and internal refactors",
+      "items": [
+        {
+          "date": "2026-10-18",
+          "text": "本地数据库改为带版本号的事务式迁移，失败的步骤会回滚并报错，不再被静默跳过；初始化失败时弹出错误提示，不再留下没有窗口的进程。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1137",
           "done": true
         }
       ]
