@@ -152,23 +152,20 @@ export async function onRequestGet(): Promise<Response> {
       fetchRelease(ARTIFACT_TARGETS[5]).catch(() => null),
       fetchRelease(ARTIFACT_TARGETS[6]).catch(() => null),
     ]);
-    // Windows is the anchor platform. A release may ship Windows alone (e.g.
-    // v2026.10.19-build.5); other platforms are listed only when the stable
-    // manifest carries the same version, so the page never mixes releases.
-    const artifacts: Record<string, ReleaseArtifact> = {
-      windows: windows.artifact,
+
+    const withVersion = (release: ReleasePayload) => ({ ...release.artifact, version: release.version });
+    const artifacts: Record<string, ReleaseArtifact & { version: string }> = {
+      windows: withVersion(windows),
     };
-    if (macos?.version === windows.version) artifacts.macos = macos.artifact;
     // Releases before the inference editions only publish the lite installer.
-    if (windowsCpu?.version === windows.version) artifacts.windowsCpu = windowsCpu.artifact;
-    if (windowsCuda?.version === windows.version) artifacts.windowsCuda = windowsCuda.artifact;
-    if (macosIntel?.version === windows.version) {
-      artifacts.macosIntel = macosIntel.artifact;
-    }
-    if (linux?.version === windows.version) artifacts.linux = linux.artifact;
-    if (linuxAppImage?.version === windows.version) {
-      artifacts.linuxAppImage = linuxAppImage.artifact;
-    }
+    if (windowsCpu?.version === windows.version) artifacts.windowsCpu = withVersion(windowsCpu);
+    if (windowsCuda?.version === windows.version) artifacts.windowsCuda = withVersion(windowsCuda);
+    // Platforms ship in stages (Windows, then macOS, then Linux), so each one
+    // serves its own latest stable release; a missing platform is left out.
+    if (macos) artifacts.macos = withVersion(macos);
+    if (macosIntel) artifacts.macosIntel = withVersion(macosIntel);
+    if (linux) artifacts.linux = withVersion(linux);
+    if (linuxAppImage) artifacts.linuxAppImage = withVersion(linuxAppImage);
 
     return json({
       version: windows.version,
