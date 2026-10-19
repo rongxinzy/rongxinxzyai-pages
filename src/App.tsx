@@ -44,7 +44,7 @@ function isRelease(value: unknown): value is SiteRelease {
       isReleaseArtifact(artifacts.windowsCpu)) &&
     (artifacts.windowsCuda === undefined ||
       isReleaseArtifact(artifacts.windowsCuda)) &&
-    (artifacts.macos === undefined || isReleaseArtifact(artifacts.macos)) &&
+    isReleaseArtifact(artifacts.macos) &&
     (artifacts.macosIntel === undefined ||
       isReleaseArtifact(artifacts.macosIntel)) &&
     (artifacts.linux === undefined || isReleaseArtifact(artifacts.linux)) &&
