@@ -22,6 +22,26 @@ const PLATFORM_ICONS: Record<
   linuxAppImage: "linux",
 };
 
+type WindowsEdition = "lite" | "cpu" | "cuda";
+
+const WINDOWS_EDITIONS: WindowsEdition[] = ["lite", "cpu", "cuda"];
+
+const WINDOWS_EDITION_LABELS: Record<
+  SiteLocale,
+  Record<WindowsEdition, { name: string; note: string }>
+> = {
+  "zh-CN": {
+    lite: { name: "轻量版", note: "不含本地推理" },
+    cpu: { name: "CPU 版", note: "内置 CPU / Vulkan 本地推理" },
+    cuda: { name: "CUDA 版", note: "RTX 40 系列显卡加速，显卡不可用时回退 CPU" },
+  },
+  en: {
+    lite: { name: "Lite", note: "No local inference" },
+    cpu: { name: "CPU", note: "CPU / Vulkan local inference built in" },
+    cuda: { name: "CUDA", note: "RTX 40-series GPU acceleration, CPU fallback" },
+  },
+};
+
 function detectMacArch(): "arm64" | "x64" {
   if (typeof window === "undefined") return "arm64";
   try {
@@ -57,6 +77,22 @@ export function Downloads({
   preferredPlatform?: Exclude<SitePlatform, "linuxAppImage" | "macosIntel">;
 }) {
   const [macArch, setMacArch] = useState<"arm64" | "x64">(detectMacArch);
+  const [windowsEdition, setWindowsEdition] = useState<WindowsEdition>("lite");
+  const editionLabels = WINDOWS_EDITION_LABELS[locale];
+
+  function windowsArtifactOf(edition: WindowsEdition) {
+    if (!release) return undefined;
+    if (edition === "cpu") return release.artifacts.windowsCpu;
+    if (edition === "cuda") return release.artifacts.windowsCuda;
+    return release.artifacts.windows;
+  }
+
+  const windowsEditions = WINDOWS_EDITIONS.filter(
+    (edition) => edition === "lite" || windowsArtifactOf(edition) !== undefined,
+  );
+  const activeWindowsEdition = windowsEditions.includes(windowsEdition)
+    ? windowsEdition
+    : "lite";
 
   const platforms: Array<{
     id: DownloadPlatform;
@@ -84,7 +120,7 @@ export function Downloads({
       detail: "x64",
       meta: [
         ".exe",
-        locale === "en" ? "Lite · no local inference" : "轻量版 · 不含本地推理",
+        `${editionLabels[activeWindowsEdition].name} · ${editionLabels[activeWindowsEdition].note}`,
       ],
     },
     {
@@ -104,6 +140,7 @@ export function Downloads({
   function artifactOf(id: DownloadPlatform) {
     if (!release) return undefined;
     if (id === "linuxAppImage") return release.artifacts.linuxAppImage;
+    if (id === "windows") return windowsArtifactOf(activeWindowsEdition);
     if (id === "macos") {
       return macArch === "x64"
         ? (release.artifacts.macosIntel ?? release.artifacts.macos)
@@ -255,6 +292,33 @@ export function Downloads({
                       </button>
                     </div>
                   </div>
+                ) : platform.id === "windows" && windowsEditions.length > 1 ? (
+                  <div className="mt-2">
+                    <div
+                      role="group"
+                      aria-label={
+                        locale === "en" ? "Windows edition" : "Windows 版本"
+                      }
+                      className="inline-flex rounded-lg border border-hairline bg-mist p-0.5 text-xs font-medium"
+                    >
+                      {windowsEditions.map((edition) => (
+                        <button
+                          key={edition}
+                          type="button"
+                          aria-pressed={activeWindowsEdition === edition}
+                          onClick={() => setWindowsEdition(edition)}
+                          className={cn(
+                            "rounded-md px-2.5 py-1 text-xs transition-colors",
+                            activeWindowsEdition === edition
+                              ? "bg-white font-medium text-ink shadow-sm"
+                              : "text-muted hover:text-ink",
+                          )}
+                        >
+                          {editionLabels[edition].name}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 ) : (
                   <p className="mt-1 text-sm text-muted">{platform.detail}</p>
                 )}
@@ -267,7 +331,9 @@ export function Downloads({
                       key={line}
                       className={cn(
                         "block text-[13px]",
-                        platform.id === "windows" && index === 1
+                        platform.id === "windows" &&
+                          index === 1 &&
+                          activeWindowsEdition === "lite"
                           ? "text-amber-700"
                           : "text-muted",
                       )}
@@ -298,8 +364,8 @@ export function Downloads({
                             : `下载 .dmg · ${macArch === "arm64" ? "Apple Silicon" : "Intel"}`
                           : platform.id === "windows"
                             ? locale === "en"
-                              ? "Download .exe"
-                              : "下载 .exe"
+                              ? `Download .exe · ${editionLabels[activeWindowsEdition].name}`
+                              : `下载 .exe · ${editionLabels[activeWindowsEdition].name}`
                             : platform.id === "linux"
                               ? locale === "en"
                                 ? "Download .deb"
@@ -325,6 +391,26 @@ export function Downloads({
                         </a>
                       </p>
                     ) : null}
+                    {platform.id === "windows"
+                      ? windowsEditions
+                          .filter((edition) => edition !== activeWindowsEdition)
+                          .map((edition) => {
+                            const other = windowsArtifactOf(edition);
+                            if (!other) return null;
+                            return (
+                              <p className="mt-2 text-center" key={edition}>
+                                <a
+                                  className="text-[12px] text-muted transition-colors hover:text-ink hover:underline"
+                                  href={other.url}
+                                >
+                                  {locale === "en"
+                                    ? `Download ${editionLabels[edition].name} edition · .exe · ${(other.size / 1_000_000).toFixed(0)} MB`
+                                    : `下载${/^[A-Za-z]/.test(editionLabels[edition].name) ? " " : ""}${editionLabels[edition].name} · .exe · ${(other.size / 1_000_000).toFixed(0)} MB`}
+                                </a>
+                              </p>
+                            );
+                          })
+                      : null}
                   </>
                 ) : status === "loading" ? (
                   <span

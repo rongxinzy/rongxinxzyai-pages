@@ -12,7 +12,7 @@ Download the version for your operating system from the homepage of the official
 
 macOS and Linux have no lite edition. Every edition bundles its components offline, so installation downloads nothing extra.
 
-The homepage download section offers the Windows lite edition and the CPU edition for macOS and Linux. The Windows CPU edition and the CUDA edition (Windows and Linux) are available under “Release notes” in the download section. The CUDA edition is for PCs with an RTX 40-series GPU and falls back to the CPU when the GPU is unavailable. Per-edition installers are available starting with the first release built with edition support; earlier releases have a single installer per platform.
+The homepage download section offers all three Windows installers (lite, CPU and CUDA); switch editions on the Windows card. macOS and Linux get the CPU edition there, and the Linux CUDA edition is available under “Release notes”. The CUDA edition is for PCs with an RTX 40-series GPU and falls back to the CPU when the GPU is unavailable. Per-edition installers are available starting with the first release built with edition support; earlier releases have a single installer per platform.
 
 ## Windows
 

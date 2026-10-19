@@ -6,12 +6,12 @@ The ZhiYuan agent is a desktop application. On first use, prepare it in this ord
 
 Select the installer matching your system from the [download section on the official website homepage](https://www.rongxzyai.com/#download). The download section reads the latest stable release and provides:
 
-- Windows x64 installer (lite edition, without local inference).
+- Windows x64 installers: lite (without local inference), CPU and CUDA.
 - macOS installer (available for both Apple Silicon and Intel).
 - Ubuntu x64 `.deb` package.
 - x64 AppImage for other Linux distributions.
 
-The version number, file size, and download URLs shown in the download section update automatically with the current stable release. Users who need local inference can pick the CPU edition (Windows) or the CUDA edition for RTX 40-series PCs (Windows and Linux, with a CPU fallback) under “Release notes”. Per-edition installers are available starting with the first release built with edition support. See [Installation and Updates](../faq/install.md) for the differences between editions.
+The version number, file size, and download URLs shown in the download section update automatically with the current stable release. Windows users who need local inference can pick the CPU edition or the CUDA edition for RTX 40-series PCs (with a CPU fallback) right in the download section; the Linux CUDA edition is under “Release notes”. Per-edition installers are available starting with the first release built with edition support. See [Installation and Updates](../faq/install.md) for the differences between editions.
 
 ## Installation
 

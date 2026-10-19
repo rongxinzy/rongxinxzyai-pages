@@ -40,6 +40,10 @@ function isRelease(value: unknown): value is SiteRelease {
   const artifacts = release.artifacts as Record<string, unknown>;
   return (
     isReleaseArtifact(artifacts.windows) &&
+    (artifacts.windowsCpu === undefined ||
+      isReleaseArtifact(artifacts.windowsCpu)) &&
+    (artifacts.windowsCuda === undefined ||
+      isReleaseArtifact(artifacts.windowsCuda)) &&
     isReleaseArtifact(artifacts.macos) &&
     (artifacts.macosIntel === undefined ||
       isReleaseArtifact(artifacts.macosIntel)) &&

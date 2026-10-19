@@ -3,7 +3,7 @@ const DOWNLOAD_HOST = "downloads.rongxzyai.com";
 const SUCCESS_CACHE_CONTROL = "public, max-age=300, s-maxage=300, stale-while-revalidate=86400";
 
 type ArtifactTarget = {
-  name: "linux" | "linuxAppImage" | "macos" | "macosIntel" | "windows";
+  name: "linux" | "linuxAppImage" | "macos" | "macosIntel" | "windows" | "windowsCpu" | "windowsCuda";
   platform: "darwin" | "linux" | "win32";
   arch: "arm64" | "x64";
   /** Variants to request in order; later entries are fallbacks for older releases. */
@@ -28,6 +28,8 @@ type ReleasePayload = {
 
 const ARTIFACT_TARGETS: ArtifactTarget[] = [
   { name: "windows", platform: "win32", arch: "x64", variants: ["lite"], extension: ".exe" },
+  { name: "windowsCpu", platform: "win32", arch: "x64", variants: ["cpu"], extension: ".exe" },
+  { name: "windowsCuda", platform: "win32", arch: "x64", variants: ["cuda"], extension: ".exe" },
   { name: "macos", platform: "darwin", arch: "arm64", variants: ["cpu", "default"], extension: ".dmg" },
   { name: "macosIntel", platform: "darwin", arch: "x64", variants: ["cpu", "default"], extension: ".dmg" },
   { name: "linux", platform: "linux", arch: "x64", variants: ["deb-cpu", "deb"], extension: ".deb" },
@@ -141,12 +143,14 @@ async function fetchReleaseVariant(target: ArtifactTarget, variant: string): Pro
 
 export async function onRequestGet(): Promise<Response> {
   try {
-    const [windows, macos, macosIntel, linux, linuxAppImage] = await Promise.all([
+    const [windows, windowsCpu, windowsCuda, macos, macosIntel, linux, linuxAppImage] = await Promise.all([
       fetchRelease(ARTIFACT_TARGETS[0]),
-      fetchRelease(ARTIFACT_TARGETS[1]),
+      fetchRelease(ARTIFACT_TARGETS[1]).catch(() => null),
       fetchRelease(ARTIFACT_TARGETS[2]).catch(() => null),
-      fetchRelease(ARTIFACT_TARGETS[3]).catch(() => null),
+      fetchRelease(ARTIFACT_TARGETS[3]),
       fetchRelease(ARTIFACT_TARGETS[4]).catch(() => null),
+      fetchRelease(ARTIFACT_TARGETS[5]).catch(() => null),
+      fetchRelease(ARTIFACT_TARGETS[6]).catch(() => null),
     ]);
     if (windows.version !== macos.version) {
       throw new Error("The platform manifests point to different versions.");
@@ -156,6 +160,9 @@ export async function onRequestGet(): Promise<Response> {
       windows: windows.artifact,
       macos: macos.artifact,
     };
+    // Releases before the inference editions only publish the lite installer.
+    if (windowsCpu?.version === windows.version) artifacts.windowsCpu = windowsCpu.artifact;
+    if (windowsCuda?.version === windows.version) artifacts.windowsCuda = windowsCuda.artifact;
     if (macosIntel?.version === windows.version) {
       artifacts.macosIntel = macosIntel.artifact;
     }
