@@ -1,15 +1,22 @@
 # Using Cloud Models (DeepSeek as an Example)
 
-ZhiYuan can connect to cloud models to process tasks. Besides the built-in free ZhiYuan model, the app supports providers including DeepSeek, OpenAI, Anthropic, Gemini, Moonshot, and Qwen, and you can also add a custom endpoint.
+ZhiYuan can connect to cloud models to process tasks. Cloud models are managed on the **Providers** page under **Settings → Model**. When adding a provider, the **Preset** list offers DeepSeek, OpenAI (Official), Anthropic Native, Google Gemini, Ollama Local, and Custom OpenAI-Compatible. Supported protocol types are OpenAI Chat Completions, Anthropic Messages, and OpenAI Responses.
 
-Taking DeepSeek as an example:
+For services outside the presets, such as Kimi, Qwen, Zhipu, or Doubao, choose **Custom OpenAI-Compatible** and enter the endpoint, API Key, and model names provided by the service.
 
-1. Create an API Key on the [DeepSeek Open Platform](https://platform.deepseek.com/api_keys). Copy and store it properly immediately after creation; the API Key is usually only shown in full at creation time.
-2. Open "Settings → Model" in ZhiYuan and select DeepSeek in the model provider list.
-3. Paste the API Key and save. The settings page also provides a "Get API Key" link that takes you to the provider's key page.
+## Adding DeepSeek
 
-![Configuring the DeepSeek provider in Settings](../../assets/guide/model/provider-settings.png)
+1. Create an API Key on the [DeepSeek Open Platform](https://platform.deepseek.com/api_keys). The API Key is usually only shown in full at creation time; copy and store it immediately.
+2. Open **Settings → Model** in ZhiYuan, switch to the **Providers** page, and click **Add Provider**.
+3. Select DeepSeek in **Preset**; the provider name, protocol type, endpoint, and model list are filled in automatically.
+4. Paste the API Key into **API Key**, click **Test Connection** to confirm it works, and save.
+
+![Adding a DeepSeek provider in Settings](../../assets/guide/model/provider-settings.png)
+
+**Fallback Model IDs** can hold alternative models used when the primary model is rate-limited.
+
+## Setting the Default Model
+
+After saving the provider, switch to the **Models** page under **Settings → Model**, refresh the catalog, and select the model to use in **Default model**. New sessions use the default model, and you can switch temporarily in the model selector of the task input area.
 
 After configuration, confirm the model responds normally with a simple task before moving on to complex tasks.
-
-The supported providers, fields, and parameters are subject to the app settings of the current version.

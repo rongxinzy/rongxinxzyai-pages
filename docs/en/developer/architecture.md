@@ -1,16 +1,20 @@
 # Project Structure
 
-The ZhiYuan agent consists of a desktop application, agent execution capabilities, local inference, Skill management, MCP configuration, and result preview.
+The ZhiYuan agent consists of a renderer process, a preload script, and a main process. The renderer process only handles the interface and orchestration; the main process owns SQLite, the Pi execution kernel, the local inference process, and IPC handling.
 
-When developing, focus on:
+| Path | Responsibility |
+| --- | --- |
+| `src/main/` | Main process: windows and lifecycle, session execution, storage, Skills and MCP, messaging channels, local inference. The entry `src/main/main.ts` only orchestrates; startup sequencing and IPC registration live in `src/main/appBootstrap/` |
+| `src/main/libs/agentEngine/` | The Pi execution kernel. Work, conversations, messaging channels, and scheduled tasks share the same execution path |
+| `src/main/libs/llamacppManager/` etc. | Lifecycle of the llama.cpp service, backends, and models |
+| `src/main/artifactLedger/` | Artifact ledger: records files produced by tasks from tool execution events and per-turn workspace changes |
+| `src/main/sqliteStore.ts` | The application database `zhiyuan.sqlite`, with versioned migrations using `user_version` |
+| `src/main/preload.ts`, `src/main/preload/` | Controlled IPC exposed through `contextBridge`, split by domain |
+| `src/shared/ipc/` | IPC contracts: each channel defines its parameters and return values with zod. The main process validates inputs when registering, and renderer types are derived from the contracts |
+| `src/renderer/` | The React interface and renderer-side services |
+| `SKILLs/`, `MCPs/` | Built-in Skills and built-in MCP integrations |
 
-- `src/main/`: the desktop main process and local capabilities. The entry `src/main/main.ts` only orchestrates; IPC registration, runtime setup, window creation and startup sequencing live in `src/main/appBootstrap/`.
-- `src/main/magpie/`: management and model service for the Magpie model gateway. Magpie is a bundled binary built from a pinned upstream commit and wired in by `src/main/appBootstrap/magpieRuntime.ts`; model configuration for conversations (Pi) and coding agents (ACP) goes through it.
-- `src/main/preload.ts` and `src/main/preload/`: controlled IPC exposed through `contextBridge`, split by domain (sessions, skills and MCP, local inference, messaging channels, and so on).
-- `src/renderer/types/electron.d.ts` and `src/renderer/types/electron/`: the IPC types visible to the renderer, split by the same domains.
-- `src/renderer/`: the interface and user interactions.
-- `SKILLs/`: reusable Skill definitions.
-- `resources/magpie/`: Magpie's upstream pin and build notes.
+See `docs/architecture/` in the repository for a more complete description: `overview.zh-CN.md` covers process boundaries, directories, and code gates; `streaming.md` covers the conversation streaming pipeline.
 
 ## Enterprise architecture boundary
 
