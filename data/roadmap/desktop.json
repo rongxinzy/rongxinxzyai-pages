@@ -65,6 +65,18 @@
           "text": "打 tag 发布前先编译并校验模型网关，再进入各平台打包，发布任务不再因缺少网关失败。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1122",
           "done": true
+        },
+        {
+          "date": "2026-10-19",
+          "text": "发版流程连续修补：beta 发布的冒烟检查改查本渠道的更新源；macOS 打包时 llama.cpp 的符号链接保持相对路径，签名不再失败；晋升稳定版时带上全部推理版本的更新元数据；Windows 上模型网关的签名顺序和签名环境也已修正。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1162",
+          "done": true
+        },
+        {
+          "date": "2026-10-19",
+          "text": "发布改为按平台分阶段：Windows、macOS、Linux 各自构建和发布，一个平台失败不会取消其他平台。Windows 三个版本共用一次编译和签名，再分别组装安装包。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1167",
+          "done": true
         }
       ]
     },
@@ -195,6 +207,24 @@
           "text": "llama.cpp 着手从每模型独立进程收敛到统一路由模式：先落地按模型配置 GPU、按模型拆分日志与查询加载状态，现有运行方式暂不改变。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1141",
           "done": true
+        },
+        {
+          "date": "2026-10-19",
+          "text": "llama.cpp 默认改用统一路由模式加载模型：超过同时加载上限时按最久未用卸载空闲模型，正在使用的不动；应用退出时卸载全部模型并结束进程，不留后台进程占用显存。旧方式暂时保留作回退。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1148",
+          "done": true
+        },
+        {
+          "date": "2026-10-19",
+          "text": "局域网访问改由内置模型网关提供：打开局域网开关会自动启动网关，不要求先开启统一模型管理；原有局域网令牌自动导入为网关密钥，老的局域网客户端不用改配置。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1151",
+          "done": true
+        },
+        {
+          "date": "2026-10-19",
+          "text": "修复本地推理上下文提示的中文乱码，本地模型不可用时的原因说明恢复可读。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1173",
+          "done": true
         }
       ]
     },
@@ -234,6 +264,12 @@
           "date": "2026-10-16",
           "text": "删掉 28 个没有任何代码引用的依赖，shiki、esbuild 和 mermaid 各只保留一个版本。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1052",
+          "done": true
+        },
+        {
+          "date": "2026-10-19",
+          "text": "CPU 和 CUDA 版的 Windows 安装包补齐完整的本地推理运行时，修复 CUDA 版全新安装失败、自动更新后可能丢失推理运行时的问题。安装包体积改为只记录、不设上限，组件完整性和签名校验仍会拦住有问题的发布。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1189",
           "done": true
         }
       ]
@@ -277,6 +313,12 @@
           "date": "2026-10-18",
           "text": "设置页重做：模型服务与网关管理并入应用内设置，改动即时保存；模型页按服务、提供商、模型等分段重排，外部编程工具接入改为独立分段并补上确认。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1126",
+          "done": true
+        },
+        {
+          "date": "2026-10-19",
+          "text": "「添加渠道」的常用预设恢复到 15 个，中英文名称统一，各家地址与默认模型按官方文档更新；新增 MiniMax、小米 MiMo、阶跃星辰三个套餐预设，与按量计费预设分开，需要使用各自套餐专用的 Key。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1177",
           "done": true
         }
       ]
@@ -387,6 +429,18 @@
           "text": "制品、技能文档、活动记录等处的只读 Markdown 统一为一套渲染和代码高亮，样式与行为一致，多余的渲染依赖一并移除。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1143",
           "done": true
+        },
+        {
+          "date": "2026-10-19",
+          "text": "聊天滚动区关闭浏览器的滚动锚定：流式输出时代码块异步高亮完成，视图不再被顶起，也不会因此停止跟随最新输出。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1149",
+          "done": true
+        },
+        {
+          "date": "2026-10-19",
+          "text": "定时任务改由应用主进程计时，界面显示的下次运行时间与实际触发一致；后台消息服务没启动或正在重启时，本地定时任务照常触发。应用退出时会话状态直接落为空闲，残留的「运行中」记录不再卡住工作区迁移。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1193",
+          "done": true
         }
       ]
     },
@@ -412,6 +466,24 @@
           "date": "2026-10-18",
           "text": "本地数据库改为带版本号的事务式迁移，失败的步骤会回滚并报错，不再被静默跳过；初始化失败时弹出错误提示，不再留下没有窗口的进程。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1137",
+          "done": true
+        },
+        {
+          "date": "2026-10-19",
+          "text": "技能依赖安装和系统路径探测改为异步执行，安装依赖时主窗口不再被卡住（此前最长可达两分钟）。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1165",
+          "done": true
+        },
+        {
+          "date": "2026-10-19",
+          "text": "删除几层没有用户入口的旧代码，包括已停用的模型分诊；聊天渠道里的提醒改由智能体自带的定时任务工具创建，不再先做关键词匹配再额外调用一次模型。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1166",
+          "done": true
+        },
+        {
+          "date": "2026-10-19",
+          "text": "流式输出链路收敛：长回复期间的数据库写入减少约九成，渲染端收到内容立即应用、每帧合并刷新一次；几套重叠的断流恢复机制合并为一条，切回窗口时不再整段重载会话。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1190",
           "done": true
         }
       ]
