@@ -77,6 +77,12 @@
           "text": "发布改为按平台分阶段：Windows、macOS、Linux 各自构建和发布，一个平台失败不会取消其他平台。Windows 三个版本共用一次编译和签名，再分别组装安装包。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1167",
           "done": true
+        },
+        {
+          "date": "2026-10-20",
+          "text": "发布流程连续修补：Windows 三个版本一次编译后分别签名、各自校验；发布附件按版本独立命名，不再互相覆盖；更新元数据校验只查本次发布的平台；签名更稳定，缓存命中减少构建时间。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1225",
+          "done": true
         }
       ]
     },
@@ -225,6 +231,12 @@
           "text": "修复本地推理上下文提示的中文乱码，本地模型不可用时的原因说明恢复可读。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1173",
           "done": true
+        },
+        {
+          "date": "2026-10-20",
+          "text": "MoE 模型在自动模式下交给 llama.cpp 按显存自动安排专家层的放置；也可以按模型手动指定放到 CPU 的专家层数。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1221",
+          "done": true
         }
       ]
     },
@@ -270,6 +282,12 @@
           "date": "2026-10-19",
           "text": "CPU 和 CUDA 版的 Windows 安装包补齐完整的本地推理运行时，修复 CUDA 版全新安装失败、自动更新后可能丢失推理运行时的问题。安装包体积改为只记录、不设上限，组件完整性和签名校验仍会拦住有问题的发布。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1189",
+          "done": true
+        },
+        {
+          "date": "2026-10-20",
+          "text": "安装或更新中途被打断后不再丢失自定义安装位置，下次安装仍会装回原目录（之前会悄悄装回 C 盘默认目录）。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1230",
           "done": true
         }
       ]
@@ -319,6 +337,24 @@
           "date": "2026-10-19",
           "text": "「添加渠道」的常用预设恢复到 15 个，中英文名称统一，各家地址与默认模型按官方文档更新；新增 MiniMax、小米 MiMo、阶跃星辰三个套餐预设，与按量计费预设分开，需要使用各自套餐专用的 Key。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1177",
+          "done": true
+        },
+        {
+          "date": "2026-10-20",
+          "text": "模型服务设置新增路由分组和用量页面，可编辑分组成员、查看调用记录、配额和预算；渠道页恢复显示模型列表与密钥状态。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1255",
+          "done": true
+        },
+        {
+          "date": "2026-10-20",
+          "text": "编辑渠道时保留原有密钥和已选模型，只改名称或地址不会再把密钥清空；免密的局域网服务可以重新正常添加。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1281",
+          "done": true
+        },
+        {
+          "date": "2026-10-20",
+          "text": "清理模型服务界面：删掉设置里多余的「关于」页，只保留应用本身的关于页；界面和报错不再出现内部组件名称，编程页外部 Agent 标签不再显示原始文案键。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1286",
           "done": true
         }
       ]
@@ -441,6 +477,18 @@
           "text": "定时任务改由应用主进程计时，界面显示的下次运行时间与实际触发一致；后台消息服务没启动或正在重启时，本地定时任务照常触发。应用退出时会话状态直接落为空闲，残留的「运行中」记录不再卡住工作区迁移。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1193",
           "done": true
+        },
+        {
+          "date": "2026-10-20",
+          "text": "新增桌面伙伴「小远」，默认关闭，可在通用设置开启；点击角色可直达待处理任务，支持免打扰与应用全屏时自动隐藏。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1170",
+          "done": true
+        },
+        {
+          "date": "2026-10-20",
+          "text": "编程模式流式回复改为增量渲染，长回复不再逐字整段重解析，输出更流畅；回复中的本地文件路径可点击打开。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1282",
+          "done": true
         }
       ]
     },
@@ -484,6 +532,24 @@
           "date": "2026-10-19",
           "text": "流式输出链路收敛：长回复期间的数据库写入减少约九成，渲染端收到内容立即应用、每帧合并刷新一次；几套重叠的断流恢复机制合并为一条，切回窗口时不再整段重载会话。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1190",
+          "done": true
+        },
+        {
+          "date": "2026-10-20",
+          "text": "主线程卡顿治理：技能安全扫描、数据库备份校验与哈希、办公文件校验移到后台执行，环境探测全面异步化，安装技能或处理大文件时界面不再被卡住。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1241",
+          "done": true
+        },
+        {
+          "date": "2026-10-20",
+          "text": "日志导出自动附带系统与硬件诊断信息（系统版本、CPU、内存、显卡等），网络报错展开底层原因；超大工具输出改为安全截断，不再中断会话。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1184",
+          "done": true
+        },
+        {
+          "date": "2026-10-20",
+          "text": "工作区 Python 改用安装包自带的运行时，首次使用不再额外下载。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1198",
           "done": true
         }
       ]
