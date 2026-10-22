@@ -356,6 +356,12 @@
           "text": "清理模型服务界面：删掉设置里多余的「关于」页，只保留应用本身的关于页；界面和报错不再出现内部组件名称，编程页外部 Agent 标签不再显示原始文案键。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1286",
           "done": true
+        },
+        {
+          "date": "2026-10-21",
+          "text": "添加或编辑模型服务商时，测试连通后自动填入发现的模型；已手动改过的模型列表可选择全部替换、追加或保留。模型以标签形式展示，可设为主力或回退，未填密钥时给出提示。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1292",
+          "done": true
         }
       ]
     },
@@ -488,6 +494,12 @@
           "date": "2026-10-20",
           "text": "编程模式流式回复改为增量渲染，长回复不再逐字整段重解析，输出更流畅；回复中的本地文件路径可点击打开。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1282",
+          "done": true
+        },
+        {
+          "date": "2026-10-21",
+          "text": "界面外观整体重做：中性灰阶为主，字号与控件尺寸统一，明暗主题成套；品牌蓝只出现在主操作上，主界面和各功能页面同步更新。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1291",
           "done": true
         }
       ]
