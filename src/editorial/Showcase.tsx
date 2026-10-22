@@ -1,8 +1,9 @@
-import { useLayoutEffect, useMemo, useRef } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
+import { fitSnapshots } from "../lib/appSnapshot";
 import { useReducedMotion } from "../lib/useReducedMotion";
 import type { SiteLocale } from "../shared/site-types";
 import type { EditorialCopy } from "./copy";
@@ -18,17 +19,20 @@ function srcSet(name: string, widths: number[]) {
 type Shot = {
   srcSet: string;
   fallback: string;
+  snapshot: string;
   width: number;
   height: number;
 };
 
 // 英文页使用英文界面截图（-en 后缀），其余与中文版同规格。
+// snapshot 是同一画面的静态 HTML 快照；webp 作为加载前的底图与降级。
 // 牌序：任务对话 → 模型市场 → 专家与技能 → 本机工作区，与 showcaseCards 一一对应。
 function shots(locale: SiteLocale): Shot[] {
   const en = locale === "en" ? "-en" : "";
   const card = (name: string, widths: number[], width: number, height: number) => ({
     srcSet: srcSet(name, widths),
     fallback: `/product/${name}-${widths[1]}.webp`,
+    snapshot: `/product/${name}.html`,
     width,
     height,
   });
@@ -83,6 +87,32 @@ function cardOpacity(index: number, ff: number) {
   return clamp(Math.min(1 - 0.2 * Math.max(0, c - 1.4), 1 - t / 0.5), 0, 1);
 }
 
+function ShotFrame({ shot, alt }: { shot: Shot; alt: string }) {
+  return (
+    <div className="app-snapshot h-full w-full">
+      <img
+        src={shot.fallback}
+        srcSet={shot.srcSet}
+        sizes={CARD_SIZES}
+        alt={alt}
+        width={shot.width}
+        height={shot.height}
+        loading="lazy"
+        decoding="async"
+      />
+      <iframe
+        src={shot.snapshot}
+        title={alt}
+        sandbox=""
+        loading="lazy"
+        tabIndex={-1}
+        scrolling="no"
+        referrerPolicy="no-referrer"
+      />
+    </div>
+  );
+}
+
 export function Showcase({
   copy,
   locale,
@@ -94,6 +124,8 @@ export function Showcase({
   const section = useRef<HTMLElement>(null);
   const assets = useMemo(() => shots(locale), [locale]);
   const cards = copy.showcaseCards;
+
+  useEffect(() => fitSnapshots(section.current), [reduce, locale]);
 
   useLayoutEffect(() => {
     if (reduce) return;
@@ -218,17 +250,7 @@ export function Showcase({
           {assets.map((shot, index) => (
             <figure key={shot.fallback}>
               <div className="overflow-hidden rounded-2xl border border-hairline bg-white shadow-[0_20px_60px_rgb(12_18_34/0.10)]">
-                <img
-                  src={shot.fallback}
-                  srcSet={shot.srcSet}
-                  sizes={CARD_SIZES}
-                  alt={cards[index].alt}
-                  width={shot.width}
-                  height={shot.height}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-auto w-full"
-                />
+                <ShotFrame shot={shot} alt={cards[index].alt} />
               </div>
               <figcaption className="mt-3">
                 <h3 className="text-sm font-semibold text-ink">
@@ -251,17 +273,7 @@ export function Showcase({
                   className="deck-card absolute inset-0 overflow-hidden rounded-2xl border border-hairline bg-white shadow-[0_24px_70px_rgb(12_18_34/0.12)]"
                   style={{ zIndex: 40 - index }}
                 >
-                  <img
-                    src={shot.fallback}
-                    srcSet={shot.srcSet}
-                    sizes={CARD_SIZES}
-                    alt={cards[index].alt}
-                    width={shot.width}
-                    height={shot.height}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-full w-full object-cover object-top"
-                  />
+                  <ShotFrame shot={shot} alt={cards[index].alt} />
                 </div>
               ))}
             </div>

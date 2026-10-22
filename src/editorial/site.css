@@ -396,3 +396,35 @@
     background-position: -18% 0, 0 0;
   }
 }
+
+/* 产品界面快照：底图是同一画面的 2x 截图，iframe 加载后覆盖其上。
+   iframe 固定 1280×800 排版，按容器宽度等比缩放（--snap-scale 由 fitSnapshots 写入，
+   测量前为 0，只显示底图）。快照不可交互，也不参与键盘焦点。 */
+.app-snapshot {
+  position: relative;
+  aspect-ratio: 8 / 5;
+  overflow: hidden;
+  background: #f4f5f7;
+}
+
+.app-snapshot > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: cover;
+  object-position: top;
+}
+
+.app-snapshot > iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1280px;
+  height: 800px;
+  border: 0;
+  transform-origin: 0 0;
+  transform: scale(var(--snap-scale, 0));
+  pointer-events: none;
+}

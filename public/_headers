@@ -3,3 +3,9 @@
 
 /robots.txt
   Content-Type: text/plain; charset=utf-8
+
+/product/*
+  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src data:; font-src data:; frame-ancestors 'self'
+
+/docs-assets/*
+  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src data: 'self'; font-src data:; frame-ancestors 'self'

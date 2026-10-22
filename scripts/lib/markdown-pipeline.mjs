@@ -34,9 +34,44 @@ export function stripShikiPreBackground(node) {
   });
 }
 
+// 单独成段的截图若有对应 HTML 快照，段落改成 figure.app-snapshot：
+// 截图保留为底图与降级，其上叠一个无脚本的 sandbox iframe（缩放见 src/lib/appSnapshot.ts）。
+function embedSnapshots(hast, snapshotFor) {
+  walk(hast, (node) => {
+    if (node.type !== "element" || node.tagName !== "p") return;
+    const kids = node.children.filter((c) => !(c.type === "text" && !c.value.trim()));
+    const img = kids[0];
+    if (kids.length !== 1 || img.type !== "element" || img.tagName !== "img") return;
+    const snapshot = snapshotFor(String(img.properties?.src ?? ""));
+    if (!snapshot) return;
+    const alt = String(img.properties?.alt ?? "");
+    node.tagName = "figure";
+    node.properties = { className: ["app-snapshot"] };
+    img.properties = { ...img.properties, width: 1280, height: 800, loading: "lazy", decoding: "async" };
+    node.children = [
+      img,
+      {
+        type: "element",
+        tagName: "iframe",
+        properties: {
+          src: snapshot,
+          title: alt,
+          sandbox: "",
+          loading: "lazy",
+          tabIndex: -1,
+          scrolling: "no",
+          referrerPolicy: "no-referrer",
+        },
+        children: [],
+      },
+    ];
+  });
+}
+
 // 把 markdown 正文渲染为 HTML，并收集 h2/h3 目录。
 // rewriteHref / rewriteImageSrc 可选，用于改写文内相对链接与图片路径。
-export async function renderMarkdown(body, { rewriteHref, rewriteImageSrc } = {}) {
+// snapshotFor 可选：给定（改写后的）图片地址，返回同一画面的 HTML 快照地址或 null。
+export async function renderMarkdown(body, { rewriteHref, rewriteImageSrc, snapshotFor } = {}) {
   const processor = unified()
     .use(remarkParse)
     .use(remarkGfm)
@@ -64,6 +99,7 @@ export async function renderMarkdown(body, { rewriteHref, rewriteImageSrc } = {}
       node.properties.src = rewriteImageSrc(node.properties.src);
     }
   });
+  if (snapshotFor) embedSnapshots(hast, snapshotFor);
   stripShikiPreBackground(hast);
 
   return { html: processor.stringify(hast), headings, hast };
