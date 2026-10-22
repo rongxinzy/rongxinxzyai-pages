@@ -81,6 +81,16 @@
   border-radius: 12px;
 }
 
+.docs-prose :where(.app-snapshot) {
+  border: 1px solid var(--color-hairline);
+  border-radius: 12px;
+}
+
+.docs-prose :where(.app-snapshot > img) {
+  border: 0;
+  border-radius: 0;
+}
+
 .docs-prose :where(table) {
   font-variant-numeric: tabular-nums;
 }

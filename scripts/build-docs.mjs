@@ -1,6 +1,7 @@
 // 构建期文档内容管线：把 docs/**/*.md 转成 src/docs/generated/content.json（中文），
 // docs/en/**/*.md 转成 content-en.json（英文）；并把 docs/assets 平移到 public/docs-assets。
 // 中文文档直接放在 docs/ 下，docs/en/ 子树只放英文版，两种语言路由一一对应。
+import { existsSync } from "node:fs";
 import { cp, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, posix, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -72,6 +73,13 @@ function rewriteImageSrc(src, assetsBase) {
   return match ? `${assetsBase}${match[1]}` : src;
 }
 
+// 截图旁若有同名 .html 快照（由 RongxinAI 的 site:snapshots 生成），返回其公开地址。
+function snapshotFor(src, srcDir, assetsBase) {
+  if (!src.startsWith(assetsBase) || !src.endsWith(".png")) return null;
+  const rest = src.slice(assetsBase.length).replace(/\.png$/, ".html");
+  return existsSync(join(srcDir, "assets", rest)) ? `${assetsBase}${rest}` : null;
+}
+
 async function buildLocale({ srcDir, outFile, base, assetsBase }) {
   let files;
   try {
@@ -101,6 +109,7 @@ async function buildLocale({ srcDir, outFile, base, assetsBase }) {
     const { html, headings, hast } = await renderMarkdown(body, {
       rewriteHref: (href) => rewriteHref(href, fromDir, new Set(routes.keys()), base),
       rewriteImageSrc: (src) => rewriteImageSrc(src, assetsBase),
+      snapshotFor: (src) => snapshotFor(src, srcDir, assetsBase),
     });
 
     let title = typeof data.title === "string" ? data.title : "";

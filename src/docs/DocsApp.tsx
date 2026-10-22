@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Header, Footer } from "../editorial/SiteChrome";
 import { COPY } from "../editorial/copy";
 import { cn } from "../lib/utils";
+import { fitSnapshots } from "../lib/appSnapshot";
 import { findFragmentTarget } from "../shared/site-navigation";
 import {
   DOCS_NAV,
@@ -339,6 +340,8 @@ export function DocsApp() {
   useEffect(() => {
     findFragmentTarget()?.scrollIntoView();
   }, [route]);
+
+  useEffect(() => fitSnapshots(main.current), [page]);
 
   useEffect(() => {
     if (!menuOpen) return;
