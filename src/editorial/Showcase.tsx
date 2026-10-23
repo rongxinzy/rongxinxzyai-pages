@@ -12,6 +12,8 @@ export function Showcase({ copy, locale }: { copy: EditorialCopy; locale: SiteLo
   const [ready, setReady] = useState(false);
   const [booting, setBooting] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [slow, setSlow] = useState(false);
+  const [warning, setWarning] = useState(false);
   const [revision, setRevision] = useState(0);
 
   function send(type: string) {
@@ -27,11 +29,17 @@ export function Showcase({ copy, locale }: { copy: EditorialCopy; locale: SiteLo
         setBooting(true);
         setReady(false);
         setFailed(false);
+        setSlow(false);
+        setWarning(false);
       } else if (message?.type === DemoMessage.Ready) {
         setReady(true);
         setFailed(false);
+        setSlow(false);
+        setWarning(false);
       } else if (message?.type === DemoMessage.Error) {
         setFailed(true);
+      } else if (message?.type === DemoMessage.Warning) {
+        setWarning(true);
       }
     }
     window.addEventListener('message', receive);
@@ -55,7 +63,7 @@ export function Showcase({ copy, locale }: { copy: EditorialCopy; locale: SiteLo
 
   useEffect(() => {
     if (!started || ready || failed) return;
-    const timeout = window.setTimeout(() => setFailed(true), 20000);
+    const timeout = window.setTimeout(() => setSlow(true), 20000);
     return () => window.clearTimeout(timeout);
   }, [started, ready, failed, revision]);
 
@@ -77,6 +85,8 @@ export function Showcase({ copy, locale }: { copy: EditorialCopy; locale: SiteLo
     setReady(false);
     setBooting(false);
     setFailed(false);
+    setSlow(false);
+    setWarning(false);
     setRevision(value => value + 1);
   }
 
@@ -101,6 +111,16 @@ export function Showcase({ copy, locale }: { copy: EditorialCopy; locale: SiteLo
               <span className="text-[length:var(--fs-micro)] text-muted">{text.sample}</span>
             </div>
             <div className="flex items-center gap-1">
+              {!failed && (slow || warning) && (
+                <span role="status" className="text-[length:var(--fs-micro)] text-muted">
+                  {slow ? text.slowLoading : text.runtimeIssue}
+                </span>
+              )}
+              {slow && !failed && (
+                <button type="button" className="demo-control" onClick={retry}>
+                  {text.retry}
+                </button>
+              )}
               {started && (
                 <button
                   type="button"

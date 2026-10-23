@@ -28,6 +28,7 @@ import {
   sessionSamples,
 } from './sample-data';
 import { codingTurnEvents } from './coding-events';
+import { desktopOnly } from './boundary-notice';
 
 type Handler = (...args: unknown[]) => unknown;
 type Register = (prefix: string, methods: Record<string, Handler>) => void;
@@ -424,6 +425,7 @@ export function installFeatureMocks(
       isBuiltIn: false,
     },
   ];
+  const serverTemplate = structuredClone(servers[0]);
   register('mcp', {
     list: () => ({ ...ok, servers }),
     fetchMarketplace: () => ({ ...ok, servers: [], categories: [] }),
@@ -432,11 +434,15 @@ export function installFeatureMocks(
       if (server) server.enabled = Boolean(object(input).enabled);
       return { ...ok, servers };
     },
-    testConnection: () => ({ ...ok, tools: [{ name: 'read_file', description: words.reasoning }] }),
+    testConnection: () => ({ success: false, error: desktopOnly(), tools: [] }),
     refreshBridge: () => ok,
     getFeishuCliStatus: () => ({ installed: false, authenticated: false }),
     create: input => {
-      servers.push({ ...servers[0], ...object(input), id: crypto.randomUUID() });
+      servers.push({
+        ...structuredClone(serverTemplate),
+        ...object(input),
+        id: crypto.randomUUID(),
+      });
       return { ...ok, servers };
     },
     update: (id, input) => {

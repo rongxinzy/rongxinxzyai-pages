@@ -10,6 +10,8 @@
     "demo:test": "node scripts/build-client-demo.mjs --test",
     "demo:verify:boundaries": "node scripts/check-demo-boundaries.mjs",
     "demo:verify:entry": "node scripts/check-demo-entry.mjs",
+    "demo:verify:models": "node scripts/check-demo-model-lifecycle.mjs",
+    "demo:verify:resilience": "node scripts/check-demo-resilience.mjs",
     "demo:dev": "node scripts/build-client-demo.mjs --serve",
     "lint": "node scripts/build-client-demo.mjs --lint",
     "dev": "npm run generate:marketing && npm run docs:content && npm run blog:content && vite",

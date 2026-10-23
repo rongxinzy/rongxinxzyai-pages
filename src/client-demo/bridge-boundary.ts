@@ -1,6 +1,8 @@
 export type DemoHandler = (...args: unknown[]) => unknown;
 type BridgeObject = Record<string, unknown>;
 
+export class DemoOperationUnavailable extends Error {}
+
 export const DemoOperation = {
   Mock: 'mock',
   Read: 'read',
@@ -57,9 +59,16 @@ const desktopReadPaths = new Set([
   'codingAgent.readWorkspaceFile',
   'shell.resolveLocalPath',
 ]);
+const accountTransitions = new Set([
+  'auth.communityLogin',
+  'auth.communityLogout',
+  'enterprise.session.login',
+  'enterprise.session.logout',
+]);
 
 export function classifyDemoOperation(path: string, implemented: boolean): DemoOperation {
   if (/^on[A-Z]/.test(path.split('.').at(-1) ?? '')) return DemoOperation.Event;
+  if (accountTransitions.has(path)) return DemoOperation.Blocked;
   if (implemented) return DemoOperation.Mock;
   if (lifecyclePaths.has(path)) return DemoOperation.Lifecycle;
   if (desktopReadPaths.has(path)) return DemoOperation.Blocked;
@@ -132,7 +141,19 @@ export function createDemoBridge(options: {
         } catch (error) {
           // Guard the IPC replacement itself; never suppress renderer crashes
           // or arbitrary global rejections to keep a broken App looking healthy.
-          return failedDemoResult(undefined, options.failed(path, error));
+          const message =
+            error instanceof DemoOperationUnavailable
+              ? options.unsupported(path)
+              : options.failed(path, error);
+          // Preserve the declared response shape even when a custom handler
+          // fails. Renderer consumers may use arrays before checking success.
+          let value: unknown;
+          try {
+            value = await fallback(...args);
+          } catch {
+            /* No usable default. */
+          }
+          return failedDemoResult(value, message);
         }
       });
     });
