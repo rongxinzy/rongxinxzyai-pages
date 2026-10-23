@@ -4,7 +4,7 @@
   "sourceTreeHasLocalChanges": false,
   "version": "2026.7.16",
   "generatedBy": "scripts/build-client-demo.mjs",
-  "interface": "Client React components with recorded sidebar and loading patches; browser-only mock bridge",
+  "interface": "Client React components with recorded renderer patches; browser-only mock bridge",
   "patches": [
     {
       "id": "sidebar-timestamp-flow-v1",
@@ -17,6 +17,42 @@
       "file": "src/renderer/components/cowork/CoworkView.tsx",
       "description": "Use the native session skeleton after particle boot instead of a second logo loader",
       "sha256": "27a5646b8dd390ad5136e3ec8a193b622b819fd7aaa9cec464bcd9584634a194"
+    },
+    {
+      "id": "preview-account-menu-v1",
+      "file": "src/renderer/components/LoginButton.tsx",
+      "description": "Omit account logout from the fixed browser sample identity",
+      "sha256": "651a9f7de32955f78e8c0d4e2dcb1993844a8965bc853dd9453ae24b7fab365e"
+    },
+    {
+      "id": "preview-wecom-cancellation-v1",
+      "file": "src/renderer/components/im/IMSettings.tsx",
+      "description": "Treat browser-only authorization refusal as cancellation without credentials or a rejection",
+      "sha256": "098609aff64e0ac3006207efcb1e0242655f68267eb8334dafa19ec637cff366"
+    },
+    {
+      "id": "preview-schedule-actions-translation-v1",
+      "file": "src/renderer/services/i18n/translations.ts",
+      "description": "Supply the missing automation actions label in both native locales",
+      "sha256": "c78e721f45cd28eff4115c195166444e1b3ffa4abaa31e00287f68cf5d89457c"
+    },
+    {
+      "id": "preview-window-controls-v1",
+      "file": "src/renderer/components/window/WindowTitleBar.tsx",
+      "description": "Omit operating-system window controls inside the embedded webpage",
+      "sha256": "3ef21b3407497012d6c9e99d13c5a7760fbbee97063e94c04b8428a376ab9358"
+    },
+    {
+      "id": "preview-general-settings-v1",
+      "file": "src/renderer/components/settings/general/GeneralSettingsPanel.tsx",
+      "description": "Omit OS startup, sleep, proxy, database backup and desktop-pet controls",
+      "sha256": "beb1abf4bf824d07ad78746fc112252a60c159133bc0dffde4ebbfae9d4347c2"
+    },
+    {
+      "id": "preview-inference-settings-v1",
+      "file": "src/renderer/components/localInference/components/LocalInferenceSettingsMenu.tsx",
+      "description": "Retain memory settings; omit native runtime, network and filesystem menus",
+      "sha256": "f15a3fe503335fc180527df678684999b94aee6ca79dce6a3f3e584b69376629"
     }
   ]
 }

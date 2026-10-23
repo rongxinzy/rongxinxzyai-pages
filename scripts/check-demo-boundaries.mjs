@@ -27,7 +27,8 @@ try {
     let popups = 0;
     page.on('pageerror', error => errors.push(error.stack));
     page.on('console', message => {
-      if (message.type() === 'error') errors.push(message.text());
+      if (message.type() === 'error' || /Translation missing/.test(message.text()))
+        errors.push(message.text());
     });
     page.on('popup', popup => {
       popups++;
@@ -168,6 +169,7 @@ try {
         visitedSettings.push(name);
         if (name === '通用' || name === 'General') {
           const switches = frame.getByRole('region', { name, exact: true }).getByRole('switch');
+          assert.equal(await switches.count(), 1, 'Desktop-only settings leaked into the preview');
           for (let index = 0; index < (await switches.count()); index++) {
             if (await switches.nth(index).isEnabled()) {
               await click(switches.nth(index));
@@ -205,6 +207,7 @@ try {
             'im.weixinLoginStart',
             'im.startGateway',
             'auth.communityLogin',
+            'auth.communityLogout',
             'shell.openPath',
             'log.exportZip',
           ]),
@@ -229,6 +232,23 @@ try {
         assert.notEqual(value.ok, true, `${value.path} claims success`);
       }
       assert.ok(blocked.length > 100, 'Unimplemented desktop APIs were not audited');
+      const unchanged = await clientFrame.evaluate(async () => {
+        const api = window.electron;
+        const before = await api.llamacpp.getServiceConfig();
+        const refused = await api.llamacpp.setServiceConfig({ host: '0.0.0.0', port: 8080 });
+        return {
+          before,
+          after: await api.llamacpp.getServiceConfig(),
+          refused,
+          user: await api.auth.getCommunityUser(),
+          connection: await api.mcp.testConnection({ command: 'arbitrary-command' }),
+        };
+      });
+      assert.deepEqual(unchanged.after, unchanged.before);
+      assert.equal(unchanged.refused.success, false);
+      assert.equal(unchanged.user.user.email, 'visitor@zhiyuan.local');
+      assert.equal(unchanged.connection.success, false);
+      assert.deepEqual(unchanged.connection.tools, []);
       await healthy();
       // Deleting every sample must not remove the templates used by creation.
       const emptyState = await clientFrame.evaluate(async () => {
@@ -249,12 +269,17 @@ try {
         const scheduled = await api.scheduledTasks.list();
         for (const task of scheduled.tasks) await api.scheduledTasks.delete(task.id);
         const newTask = await api.scheduledTasks.create({ name: 'Fresh schedule' });
-        return { session: created.session, empty, recreated, newTask };
+        const mcp = await api.mcp.list();
+        for (const server of mcp.servers) await api.mcp.delete(server.id);
+        const newServer = await api.mcp.create({ name: 'Fresh server' });
+        return { session: created.session, empty, recreated, newTask, newServer };
       });
       assert.ok(emptyState.session.id);
       assert.equal(emptyState.empty.success, false);
       assert.ok(emptyState.recreated.workspaces[0].sources.length);
       assert.ok(emptyState.newTask.task.schedule);
+      assert.equal(emptyState.newServer.servers[0].transportType, 'stdio');
+      assert.deepEqual(emptyState.newServer.servers[0].args, ['/workspace/q3-sales']);
       await page.waitForTimeout(1000);
       await healthy();
       const operations = await clientFrame.evaluate(() => window.demoOperations);

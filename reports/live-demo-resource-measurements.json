@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-10-23T11:22:07.564Z",
+  "measuredAt": "2026-10-23T12:22:49.903Z",
   "browser": "149.0.7827.55",
   "viewport": "1440x1000, DPR 1",
   "cache": "disabled",
@@ -9,37 +9,37 @@
   "sites": [
     {
       "url": "https://www.rongxzyai.com/",
-      "interactive": false,
+      "interactive": true,
       "phases": {
         "initial": {
-          "requests": 26,
-          "transferred": 1001499,
-          "decoded": 2326743,
+          "requests": 12,
+          "transferred": 411186,
+          "decoded": 897702,
           "byType": {
             "document": {
-              "requests": 9,
-              "transferred": 422184,
-              "decoded": 1228119
+              "requests": 1,
+              "transferred": 2490,
+              "decoded": 5267
             },
             "script": {
-              "requests": 4,
-              "transferred": 216632,
-              "decoded": 633151
+              "requests": 3,
+              "transferred": 164887,
+              "decoded": 499595
             },
             "stylesheet": {
-              "requests": 2,
-              "transferred": 16853,
-              "decoded": 72401
+              "requests": 1,
+              "transferred": 23849,
+              "decoded": 123944
             },
             "font": {
               "requests": 3,
-              "transferred": 84273,
+              "transferred": 84207,
               "decoded": 83104
             },
             "image": {
-              "requests": 5,
-              "transferred": 227449,
-              "decoded": 263968
+              "requests": 1,
+              "transferred": 101638,
+              "decoded": 139792
             },
             "fetch": {
               "requests": 1,
@@ -48,13 +48,67 @@
             },
             "xhr": {
               "requests": 1,
-              "transferred": 413,
+              "transferred": 407,
               "decoded": 0
             },
             "other": {
               "requests": 1,
-              "transferred": 32992,
+              "transferred": 33005,
               "decoded": 44423
+            }
+          }
+        },
+        "workbench": {
+          "requests": 56,
+          "transferred": 1364566,
+          "decoded": 3945537,
+          "byType": {
+            "document": {
+              "requests": 2,
+              "transferred": 1133,
+              "decoded": 1178
+            },
+            "image": {
+              "requests": 4,
+              "transferred": 448961,
+              "decoded": 519622
+            },
+            "script": {
+              "requests": 47,
+              "transferred": 821397,
+              "decoded": 2744648
+            },
+            "stylesheet": {
+              "requests": 1,
+              "transferred": 51800,
+              "decoded": 486975
+            },
+            "fetch": {
+              "requests": 2,
+              "transferred": 41275,
+              "decoded": 193114
+            }
+          }
+        },
+        "navigation": {
+          "requests": 43,
+          "transferred": 884733,
+          "decoded": 2794521,
+          "byType": {
+            "script": {
+              "requests": 41,
+              "transferred": 755821,
+              "decoded": 2666289
+            },
+            "stylesheet": {
+              "requests": 1,
+              "transferred": 707,
+              "decoded": 717
+            },
+            "image": {
+              "requests": 1,
+              "transferred": 128205,
+              "decoded": 127515
             }
           }
         }
@@ -64,53 +118,35 @@
           "phase": "initial",
           "url": "https://www.rongxzyai.com/",
           "type": "document",
-          "transferred": 2526,
-          "decoded": 5426,
+          "transferred": 2490,
+          "decoded": 5267,
           "status": 200,
           "encoding": "br"
         },
         {
           "phase": "initial",
-          "url": "https://www.rongxzyai.com/assets/site-navigation-dwv4qRfe.js",
+          "url": "https://www.rongxzyai.com/assets/site-navigation-B_TZTFZv.js",
           "type": "script",
-          "transferred": 93987,
-          "decoded": 290206,
+          "transferred": 95300,
+          "decoded": 293038,
           "status": 200,
           "encoding": "br"
         },
         {
           "phase": "initial",
-          "url": "https://www.rongxzyai.com/assets/appSnapshot-HYUqu9DL.js",
+          "url": "https://www.rongxzyai.com/assets/main-DvXZj0_Z.js",
           "type": "script",
-          "transferred": 576,
-          "decoded": 289,
+          "transferred": 59109,
+          "decoded": 174704,
           "status": 200,
           "encoding": "br"
         },
         {
           "phase": "initial",
-          "url": "https://www.rongxzyai.com/assets/main-zSjZ5CHK.js",
-          "type": "script",
-          "transferred": 111580,
-          "decoded": 310803,
-          "status": 200,
-          "encoding": "br"
-        },
-        {
-          "phase": "initial",
-          "url": "https://www.rongxzyai.com/assets/site-navigation-BcbiQd_t.css",
+          "url": "https://www.rongxzyai.com/assets/site-navigation-BE00G-T2.css",
           "type": "stylesheet",
-          "transferred": 16354,
-          "decoded": 71944,
-          "status": 200,
-          "encoding": "br"
-        },
-        {
-          "phase": "initial",
-          "url": "https://www.rongxzyai.com/assets/main-BNWJ7Zcm.css",
-          "type": "stylesheet",
-          "transferred": 499,
-          "decoded": 457,
+          "transferred": 23849,
+          "decoded": 123944,
           "status": 200,
           "encoding": "br"
         },
@@ -118,7 +154,7 @@
           "phase": "initial",
           "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
           "type": "script",
-          "transferred": 10489,
+          "transferred": 10478,
           "decoded": 31853,
           "status": 200,
           "encoding": "gzip"
@@ -136,7 +172,7 @@
           "phase": "initial",
           "url": "https://www.rongxzyai.com/zhiyuan-logo.svg",
           "type": "image",
-          "transferred": 101652,
+          "transferred": 101638,
           "decoded": 139792,
           "status": 200,
           "encoding": "br"
@@ -145,7 +181,7 @@
           "phase": "initial",
           "url": "https://www.rongxzyai.com/fonts/songti-bold.woff2",
           "type": "font",
-          "transferred": 13744,
+          "transferred": 13605,
           "decoded": 13300,
           "status": 200,
           "encoding": "identity"
@@ -154,122 +190,10 @@
           "phase": "initial",
           "url": "https://www.rongxzyai.com/assets/jetbrains-mono-latin-wght-normal-B9CIFXIH.woff2",
           "type": "font",
-          "transferred": 40792,
+          "transferred": 40865,
           "decoded": 40404,
           "status": 200,
           "encoding": "identity"
-        },
-        {
-          "phase": "initial",
-          "url": "https://www.rongxzyai.com/product/zhiyuan-skills.html",
-          "type": "document",
-          "transferred": 0,
-          "decoded": 0,
-          "status": 308,
-          "encoding": "identity",
-          "bodyUnavailable": true
-        },
-        {
-          "phase": "initial",
-          "url": "https://www.rongxzyai.com/product/zhiyuan-model-market.html",
-          "type": "document",
-          "transferred": 0,
-          "decoded": 0,
-          "status": 308,
-          "encoding": "identity",
-          "bodyUnavailable": true
-        },
-        {
-          "phase": "initial",
-          "url": "https://www.rongxzyai.com/product/zhiyuan-conversation.html",
-          "type": "document",
-          "transferred": 0,
-          "decoded": 0,
-          "status": 308,
-          "encoding": "identity",
-          "bodyUnavailable": true
-        },
-        {
-          "phase": "initial",
-          "url": "https://www.rongxzyai.com/product/zhiyuan-workspace.html",
-          "type": "document",
-          "transferred": 0,
-          "decoded": 0,
-          "status": 308,
-          "encoding": "identity",
-          "bodyUnavailable": true
-        },
-        {
-          "phase": "initial",
-          "url": "https://www.rongxzyai.com/product/zhiyuan-conversation-976.webp",
-          "type": "image",
-          "transferred": 28587,
-          "decoded": 28116,
-          "status": 200,
-          "encoding": "identity"
-        },
-        {
-          "phase": "initial",
-          "url": "https://www.rongxzyai.com/product/zhiyuan-model-market-976.webp",
-          "type": "image",
-          "transferred": 34480,
-          "decoded": 34050,
-          "status": 200,
-          "encoding": "identity"
-        },
-        {
-          "phase": "initial",
-          "url": "https://www.rongxzyai.com/product/zhiyuan-skills-1184.webp",
-          "type": "image",
-          "transferred": 39095,
-          "decoded": 38700,
-          "status": 200,
-          "encoding": "identity"
-        },
-        {
-          "phase": "initial",
-          "url": "https://www.rongxzyai.com/product/zhiyuan-workspace-1184.webp",
-          "type": "image",
-          "transferred": 23635,
-          "decoded": 23310,
-          "status": 200,
-          "encoding": "identity"
-        },
-        {
-          "phase": "initial",
-          "url": "https://www.rongxzyai.com/product/zhiyuan-model-market",
-          "type": "document",
-          "transferred": 108926,
-          "decoded": 358961,
-          "status": 200,
-          "encoding": "br"
-        },
-        {
-          "phase": "initial",
-          "url": "https://www.rongxzyai.com/product/zhiyuan-skills",
-          "type": "document",
-          "transferred": 116756,
-          "decoded": 324693,
-          "status": 200,
-          "encoding": "br"
-        },
-        {
-          "phase": "initial",
-          "url": "https://www.rongxzyai.com/product/zhiyuan-conversation",
-          "type": "document",
-          "transferred": 114771,
-          "decoded": 307769,
-          "status": 200,
-          "encoding": "br"
-        },
-        {
-          "phase": "initial",
-          "url": "https://www.rongxzyai.com/product/zhiyuan-workspace",
-          "type": "document",
-          "transferred": 79205,
-          "decoded": 231270,
-          "status": 200,
-          "encoding": "br"
         },
         {
           "phase": "initial",
@@ -284,7 +208,7 @@
           "phase": "initial",
           "url": "https://www.rongxzyai.com/cdn-cgi/rum?",
           "type": "xhr",
-          "transferred": 413,
+          "transferred": 407,
           "decoded": 0,
           "status": 204,
           "encoding": "identity"
@@ -293,8 +217,900 @@
           "phase": "initial",
           "url": "https://www.rongxzyai.com/favicon-light.svg",
           "type": "other",
-          "transferred": 32992,
+          "transferred": 33005,
           "decoded": 44423,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/index.html?locale=zh-CN",
+          "type": "document",
+          "transferred": 0,
+          "decoded": 0,
+          "status": 308,
+          "encoding": "identity",
+          "bodyUnavailable": true
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/zhiyuan-logo-light-1600.png",
+          "type": "image",
+          "transferred": 128237,
+          "decoded": 127515,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/?locale=zh-CN",
+          "type": "document",
+          "transferred": 1133,
+          "decoded": 1178,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/client.js",
+          "type": "script",
+          "transferred": 492155,
+          "decoded": 1787506,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/index-kjX8ahOs.css",
+          "type": "stylesheet",
+          "transferred": 51800,
+          "decoded": 486975,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+          "type": "script",
+          "transferred": 0,
+          "decoded": 0,
+          "status": 0,
+          "failure": "csp"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/index-sMJJjYMr.js",
+          "type": "script",
+          "transferred": 29254,
+          "decoded": 87349,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/coworkQueue-Dsp2EZ6y.js",
+          "type": "script",
+          "transferred": 8252,
+          "decoded": 19289,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/button-BORBC6hD.js",
+          "type": "script",
+          "transferred": 3170,
+          "decoded": 7341,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/plus-B-RJtoTP.js",
+          "type": "script",
+          "transferred": 561,
+          "decoded": 351,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/popover-C2AL9rmd.js",
+          "type": "script",
+          "transferred": 4560,
+          "decoded": 10479,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/ZhipuIcon-BMDlGEIe.js",
+          "type": "script",
+          "transferred": 7530,
+          "decoded": 21010,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/wrench-CiLNWxvF.js",
+          "type": "script",
+          "transferred": 1023,
+          "decoded": 2089,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/skill-DeRruM0b.js",
+          "type": "script",
+          "transferred": 1881,
+          "decoded": 5774,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/mcp-C0_6Nwna.js",
+          "type": "script",
+          "transferred": 2314,
+          "decoded": 5588,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/server-C8yAOn70.js",
+          "type": "script",
+          "transferred": 679,
+          "decoded": 536,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/expertAvatars-qDZ7nJtK.js",
+          "type": "script",
+          "transferred": 7398,
+          "decoded": 34667,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/plusMenuIcons-DC-hVXmt.js",
+          "type": "script",
+          "transferred": 2185,
+          "decoded": 4304,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/database-D0uWb1yy.js",
+          "type": "script",
+          "transferred": 918,
+          "decoded": 757,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/sparkles--jLtFVIJ.js",
+          "type": "script",
+          "transferred": 705,
+          "decoded": 710,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/brain-DWGf5Gjs.js",
+          "type": "script",
+          "transferred": 723,
+          "decoded": 770,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/CoworkInlineAttachments-xjKTXo_m.js",
+          "type": "script",
+          "transferred": 1710,
+          "decoded": 2884,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/agentModelRef-CTcNCext.js",
+          "type": "script",
+          "transferred": 2677,
+          "decoded": 6224,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/hover-card-BEjg5M2K.js",
+          "type": "script",
+          "transferred": 3993,
+          "decoded": 8704,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/localfileUrl-DLLOgTDj.js",
+          "type": "script",
+          "transferred": 609,
+          "decoded": 272,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/shield-check-5z3sdgqA.js",
+          "type": "script",
+          "transferred": 674,
+          "decoded": 518,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/shield-alert-BfKRG0V2.js",
+          "type": "script",
+          "transferred": 691,
+          "decoded": 551,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/badge-BfHQYFpx.js",
+          "type": "script",
+          "transferred": 914,
+          "decoded": 733,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/rotate-ccw-DlUq2-_0.js",
+          "type": "script",
+          "transferred": 710,
+          "decoded": 398,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/maximize-2-D0HY4dvW.js",
+          "type": "script",
+          "transferred": 663,
+          "decoded": 436,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/PageHeader-DS2za_Vh.js",
+          "type": "script",
+          "transferred": 1586,
+          "decoded": 2392,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/skeleton-BlugIzN6.js",
+          "type": "script",
+          "transferred": 692,
+          "decoded": 169,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/zhiyuan-logo-light-1600.png",
+          "type": "image",
+          "transferred": 127963,
+          "decoded": 127515,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/CoworkSessionDetail-BG0zHX8i.js",
+          "type": "script",
+          "transferred": 22865,
+          "decoded": 73240,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/artifactPanelResize-sBOVJG5f.js",
+          "type": "script",
+          "transferred": 4315,
+          "decoded": 9292,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/UserBubble-mVYMtrqP.js",
+          "type": "script",
+          "transferred": 11311,
+          "decoded": 28743,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/CopyButton-DXPgPkEB.js",
+          "type": "script",
+          "transferred": 7295,
+          "decoded": 17522,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/collapsible-Bwq0bONU.js",
+          "type": "script",
+          "transferred": 3037,
+          "decoded": 6725,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/chunk-D32TOXHM-DNVw960F.js",
+          "type": "script",
+          "transferred": 154200,
+          "decoded": 498989,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/code-block-BYE3wwj2.js",
+          "type": "script",
+          "transferred": 9463,
+          "decoded": 31111,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/copy-BDOGl3RJ.js",
+          "type": "script",
+          "transferred": 735,
+          "decoded": 429,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/scroll-area-B31WY9wZ.js",
+          "type": "script",
+          "transferred": 5699,
+          "decoded": 14947,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/useResolvedLocalPath-DiGCEQhK.js",
+          "type": "script",
+          "transferred": 821,
+          "decoded": 975,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/alert-CXxPb0P6.js",
+          "type": "script",
+          "transferred": 1250,
+          "decoded": 1437,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/index-nvuA1Igh.js",
+          "type": "script",
+          "transferred": 7951,
+          "decoded": 23714,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/page-tabs-CTeYkV6v.js",
+          "type": "script",
+          "transferred": 2004,
+          "decoded": 3410,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/TabsList-BAIBQ9pX.js",
+          "type": "script",
+          "transferred": 4478,
+          "decoded": 10050,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/radio-group-C5_8alFE.js",
+          "type": "script",
+          "transferred": 3524,
+          "decoded": 6847,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/message-square-DUdjTPhb.js",
+          "type": "script",
+          "transferred": 728,
+          "decoded": 431,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/external-link-DdPbsAao.js",
+          "type": "script",
+          "transferred": 606,
+          "decoded": 449,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/pause-CtSejPdZ.js",
+          "type": "script",
+          "transferred": 641,
+          "decoded": 409,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/assets/index-CuDjsD5U.js",
+          "type": "script",
+          "transferred": 2247,
+          "decoded": 4127,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/zhiyuan-logo-light.svg",
+          "type": "image",
+          "transferred": 101878,
+          "decoded": 139792,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/zhiyuan-logo-dark.svg",
+          "type": "image",
+          "transferred": 90883,
+          "decoded": 124800,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/quick-actions.json",
+          "type": "fetch",
+          "transferred": 1552,
+          "decoded": 9395,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "workbench",
+          "url": "https://www.rongxzyai.com/client-demo/quick-actions-i18n.json",
+          "type": "fetch",
+          "transferred": 39723,
+          "decoded": 183719,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/index-Cno1Ll53.js",
+          "type": "script",
+          "transferred": 82516,
+          "decoded": 259495,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/layered-tabs-content-Cj7ZSvA4.js",
+          "type": "script",
+          "transferred": 1088,
+          "decoded": 1102,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/lock-DakMqSYW.js",
+          "type": "script",
+          "transferred": 806,
+          "decoded": 1274,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/Modal-DBGSmxk1.js",
+          "type": "script",
+          "transferred": 1807,
+          "decoded": 3047,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/fluid-tabs-85bL8O2F.js",
+          "type": "script",
+          "transferred": 1232,
+          "decoded": 1745,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/card-BbNUjna-.js",
+          "type": "script",
+          "transferred": 946,
+          "decoded": 1244,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/circle-check-BsQB5XxM.js",
+          "type": "script",
+          "transferred": 636,
+          "decoded": 408,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/ListPagination-Czc_YGg9.js",
+          "type": "script",
+          "transferred": 772,
+          "decoded": 973,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/chevron-left-BcL6X2Bu.js",
+          "type": "script",
+          "transferred": 550,
+          "decoded": 328,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/clock-3-DIdZ9gJf.js",
+          "type": "script",
+          "transferred": 614,
+          "decoded": 367,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/index-BCiE__Fz.css",
+          "type": "stylesheet",
+          "transferred": 707,
+          "decoded": 717,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/index-2Q5dnFnq.js",
+          "type": "script",
+          "transferred": 49131,
+          "decoded": 165336,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/runtimeNameNeutralizer-CiPR3fRf.js",
+          "type": "script",
+          "transferred": 428,
+          "decoded": 168,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/sliders-horizontal-kdAsuZVF.js",
+          "type": "script",
+          "transferred": 731,
+          "decoded": 622,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/sheet-Bb24voxa.js",
+          "type": "script",
+          "transferred": 1011,
+          "decoded": 1681,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/ArtifactPanelResizeHandle-CLCIgPjo.js",
+          "type": "script",
+          "transferred": 1758,
+          "decoded": 3350,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/StaticMarkdownContent-D3KB8IFr.js",
+          "type": "script",
+          "transferred": 2260,
+          "decoded": 4221,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/mermaid-MCJ5UELQ-DhBo27AF.js",
+          "type": "script",
+          "transferred": 30522,
+          "decoded": 93325,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/file-CoD5uNlz.js",
+          "type": "script",
+          "transferred": 631,
+          "decoded": 468,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/zhiyuan-logo-light-1600.png",
+          "type": "image",
+          "transferred": 128205,
+          "decoded": 127515,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/richMessageResponse-DEwM5yKD.js",
+          "type": "script",
+          "transferred": 954,
+          "decoded": 1093,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/streamdown-code-block-nLIhMUVc.js",
+          "type": "script",
+          "transferred": 82752,
+          "decoded": 276452,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/index-D5-2KuYa.js",
+          "type": "script",
+          "transferred": 27164,
+          "decoded": 77119,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/mermaid.core-PE90zY9I.js",
+          "type": "script",
+          "transferred": 137364,
+          "decoded": 593325,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/purify.es-DowdsyMd.js",
+          "type": "script",
+          "transferred": 12388,
+          "decoded": 30463,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/highlighted-body-KQOG7T2V-DIxgyX5j.js",
+          "type": "script",
+          "transferred": 763,
+          "decoded": 564,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/wasm-CG6Dc4jp.js",
+          "type": "script",
+          "transferred": 188072,
+          "decoded": 622336,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/python-B6aJPvgy.js",
+          "type": "script",
+          "transferred": 10171,
+          "decoded": 69952,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/TodoView-L9Hh-5y1.js",
+          "type": "script",
+          "transferred": 8966,
+          "decoded": 28298,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/index-CALJ2pKH.js",
+          "type": "script",
+          "transferred": 61540,
+          "decoded": 290904,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/compactMarkdownClass-DvCa2vMg.js",
+          "type": "script",
+          "transferred": 946,
+          "decoded": 1575,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/constants-WbnQHWlU.js",
+          "type": "script",
+          "transferred": 886,
+          "decoded": 1539,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/circle-alert-Ch77gWud.js",
+          "type": "script",
+          "transferred": 612,
+          "decoded": 468,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/ellipsis-vertical-CAupHBnc.js",
+          "type": "script",
+          "transferred": 662,
+          "decoded": 459,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/index-DEfYWuBL.js",
+          "type": "script",
+          "transferred": 4157,
+          "decoded": 10031,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/imLogos-ClnssnP1.js",
+          "type": "script",
+          "transferred": 1617,
+          "decoded": 2234,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/ExpertView-BOzcGgwK.js",
+          "type": "script",
+          "transferred": 8377,
+          "decoded": 26351,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/McpManager-Cm0Pj7yd.js",
+          "type": "script",
+          "transferred": 14303,
+          "decoded": 46955,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/ErrorMessage-LjFAxjAN.js",
+          "type": "script",
+          "transferred": 549,
+          "decoded": 245,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/eye-CPmI2P9u.js",
+          "type": "script",
+          "transferred": 772,
+          "decoded": 1040,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/upload-B-XvsSQU.js",
+          "type": "script",
+          "transferred": 821,
+          "decoded": 428,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/SkillsManager-BjK3lnfk.js",
+          "type": "script",
+          "transferred": 13875,
+          "decoded": 44831,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "navigation",
+          "url": "https://www.rongxzyai.com/client-demo/assets/funnel-DFmLEVsk.js",
+          "type": "script",
+          "transferred": 671,
+          "decoded": 473,
           "status": 200,
           "encoding": "br"
         }
@@ -306,23 +1122,23 @@
       "phases": {
         "initial": {
           "requests": 10,
-          "transferred": 398777,
-          "decoded": 865488,
+          "transferred": 398978,
+          "decoded": 866007,
           "byType": {
             "document": {
               "requests": 1,
-              "transferred": 2041,
+              "transferred": 2038,
               "decoded": 4900
             },
             "script": {
               "requests": 2,
-              "transferred": 152645,
-              "decoded": 467742
+              "transferred": 152839,
+              "decoded": 468370
             },
             "stylesheet": {
               "requests": 1,
               "transferred": 25148,
-              "decoded": 123944
+              "decoded": 123835
             },
             "font": {
               "requests": 3,
@@ -336,7 +1152,7 @@
             },
             "fetch": {
               "requests": 1,
-              "transferred": 1083,
+              "transferred": 1093,
               "decoded": 1577
             },
             "other": {
@@ -348,8 +1164,8 @@
         },
         "workbench": {
           "requests": 54,
-          "transferred": 1370819,
-          "decoded": 3945170,
+          "transferred": 1370889,
+          "decoded": 3943672,
           "byType": {
             "document": {
               "requests": 1,
@@ -363,8 +1179,8 @@
             },
             "script": {
               "requests": 46,
-              "transferred": 830359,
-              "decoded": 2744648
+              "transferred": 830429,
+              "decoded": 2743150
             },
             "stylesheet": {
               "requests": 1,
@@ -380,13 +1196,13 @@
         },
         "navigation": {
           "requests": 43,
-          "transferred": 927869,
-          "decoded": 2794521,
+          "transferred": 927004,
+          "decoded": 2789788,
           "byType": {
             "script": {
               "requests": 41,
-              "transferred": 799054,
-              "decoded": 2666289
+              "transferred": 798189,
+              "decoded": 2661556
             },
             "stylesheet": {
               "requests": 1,
@@ -406,35 +1222,35 @@
           "phase": "initial",
           "url": "http://127.0.0.1:5187/",
           "type": "document",
-          "transferred": 2041,
+          "transferred": 2038,
           "decoded": 4900,
           "status": 200,
           "encoding": "gzip"
         },
         {
           "phase": "initial",
-          "url": "http://127.0.0.1:5187/assets/site-navigation-B_TZTFZv.js",
+          "url": "http://127.0.0.1:5187/assets/site-navigation-BoyKsoqh.js",
           "type": "script",
-          "transferred": 95136,
-          "decoded": 293038,
+          "transferred": 95254,
+          "decoded": 293285,
           "status": 200,
           "encoding": "gzip"
         },
         {
           "phase": "initial",
-          "url": "http://127.0.0.1:5187/assets/main-DvXZj0_Z.js",
+          "url": "http://127.0.0.1:5187/assets/main-BJBAg-8w.js",
           "type": "script",
-          "transferred": 57509,
-          "decoded": 174704,
+          "transferred": 57585,
+          "decoded": 175085,
           "status": 200,
           "encoding": "gzip"
         },
         {
           "phase": "initial",
-          "url": "http://127.0.0.1:5187/assets/site-navigation-BE00G-T2.css",
+          "url": "http://127.0.0.1:5187/assets/site-navigation-Bcs6Dydb.css",
           "type": "stylesheet",
           "transferred": 25148,
-          "decoded": 123944,
+          "decoded": 123835,
           "status": 200,
           "encoding": "gzip"
         },
@@ -478,7 +1294,7 @@
           "phase": "initial",
           "url": "http://127.0.0.1:5187/api/release",
           "type": "fetch",
-          "transferred": 1083,
+          "transferred": 1093,
           "decoded": 1577,
           "status": 200,
           "encoding": "br"
@@ -514,8 +1330,8 @@
           "phase": "workbench",
           "url": "http://127.0.0.1:5187/client-demo/client.js",
           "type": "script",
-          "transferred": 499627,
-          "decoded": 1787506,
+          "transferred": 499703,
+          "decoded": 1786008,
           "status": 200,
           "encoding": "gzip"
         },
@@ -530,9 +1346,9 @@
         },
         {
           "phase": "workbench",
-          "url": "http://127.0.0.1:5187/client-demo/assets/index-sMJJjYMr.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-DLrsu5up.js",
           "type": "script",
-          "transferred": 28790,
+          "transferred": 28788,
           "decoded": 87349,
           "status": 200,
           "encoding": "gzip"
@@ -773,9 +1589,9 @@
         },
         {
           "phase": "workbench",
-          "url": "http://127.0.0.1:5187/client-demo/assets/CoworkSessionDetail-BG0zHX8i.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/CoworkSessionDetail-Dd2mevgm.js",
           "type": "script",
-          "transferred": 22615,
+          "transferred": 22614,
           "decoded": 73240,
           "status": 200,
           "encoding": "gzip"
@@ -791,18 +1607,18 @@
         },
         {
           "phase": "workbench",
-          "url": "http://127.0.0.1:5187/client-demo/assets/UserBubble-mVYMtrqP.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/UserBubble-D7XR8JZY.js",
           "type": "script",
-          "transferred": 10932,
+          "transferred": 10933,
           "decoded": 28743,
           "status": 200,
           "encoding": "gzip"
         },
         {
           "phase": "workbench",
-          "url": "http://127.0.0.1:5187/client-demo/assets/CopyButton-DXPgPkEB.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/CopyButton-BQLXhz2A.js",
           "type": "script",
-          "transferred": 7136,
+          "transferred": 7133,
           "decoded": 17522,
           "status": 200,
           "encoding": "gzip"
@@ -818,16 +1634,16 @@
         },
         {
           "phase": "workbench",
-          "url": "http://127.0.0.1:5187/client-demo/assets/chunk-D32TOXHM-DNVw960F.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/chunk-D32TOXHM-0-NFDDaC.js",
           "type": "script",
-          "transferred": 155723,
+          "transferred": 155722,
           "decoded": 498989,
           "status": 200,
           "encoding": "gzip"
         },
         {
           "phase": "workbench",
-          "url": "http://127.0.0.1:5187/client-demo/assets/code-block-BYE3wwj2.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/code-block-B5eX1csQ.js",
           "type": "script",
           "transferred": 9438,
           "decoded": 31111,
@@ -980,10 +1796,10 @@
         },
         {
           "phase": "navigation",
-          "url": "http://127.0.0.1:5187/client-demo/assets/index-Cno1Ll53.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-Bdnuvqn-.js",
           "type": "script",
-          "transferred": 82002,
-          "decoded": 259495,
+          "transferred": 81139,
+          "decoded": 254762,
           "status": 200,
           "encoding": "gzip"
         },
@@ -1079,7 +1895,7 @@
         },
         {
           "phase": "navigation",
-          "url": "http://127.0.0.1:5187/client-demo/assets/index-2Q5dnFnq.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-rlqAdlqU.js",
           "type": "script",
           "transferred": 48266,
           "decoded": 165336,
@@ -1124,18 +1940,18 @@
         },
         {
           "phase": "navigation",
-          "url": "http://127.0.0.1:5187/client-demo/assets/StaticMarkdownContent-D3KB8IFr.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/StaticMarkdownContent-CAl-HiyX.js",
           "type": "script",
-          "transferred": 2322,
+          "transferred": 2318,
           "decoded": 4221,
           "status": 200,
           "encoding": "gzip"
         },
         {
           "phase": "navigation",
-          "url": "http://127.0.0.1:5187/client-demo/assets/mermaid-MCJ5UELQ-DhBo27AF.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/mermaid-MCJ5UELQ-Dzoj11rN.js",
           "type": "script",
-          "transferred": 29966,
+          "transferred": 29964,
           "decoded": 93325,
           "status": 200,
           "encoding": "gzip"
@@ -1160,16 +1976,16 @@
         },
         {
           "phase": "navigation",
-          "url": "http://127.0.0.1:5187/client-demo/assets/richMessageResponse-DEwM5yKD.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/richMessageResponse-B16srIHx.js",
           "type": "script",
-          "transferred": 1026,
+          "transferred": 1023,
           "decoded": 1093,
           "status": 200,
           "encoding": "gzip"
         },
         {
           "phase": "navigation",
-          "url": "http://127.0.0.1:5187/client-demo/assets/streamdown-code-block-nLIhMUVc.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/streamdown-code-block-CofmyIJx.js",
           "type": "script",
           "transferred": 84062,
           "decoded": 276452,
@@ -1178,18 +1994,18 @@
         },
         {
           "phase": "navigation",
-          "url": "http://127.0.0.1:5187/client-demo/assets/index-D5-2KuYa.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-Bj5SMtMF.js",
           "type": "script",
-          "transferred": 26621,
+          "transferred": 26620,
           "decoded": 77119,
           "status": 200,
           "encoding": "gzip"
         },
         {
           "phase": "navigation",
-          "url": "http://127.0.0.1:5187/client-demo/assets/mermaid.core-PE90zY9I.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/mermaid.core-B9IbwFgA.js",
           "type": "script",
-          "transferred": 138934,
+          "transferred": 138944,
           "decoded": 593325,
           "status": 200,
           "encoding": "gzip"
@@ -1205,7 +2021,7 @@
         },
         {
           "phase": "navigation",
-          "url": "http://127.0.0.1:5187/client-demo/assets/highlighted-body-KQOG7T2V-DIxgyX5j.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/highlighted-body-KQOG7T2V-DwfFJjsy.js",
           "type": "script",
           "transferred": 885,
           "decoded": 564,
@@ -1241,9 +2057,9 @@
         },
         {
           "phase": "navigation",
-          "url": "http://127.0.0.1:5187/client-demo/assets/index-CALJ2pKH.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-UZFAjPtc.js",
           "type": "script",
-          "transferred": 62014,
+          "transferred": 62015,
           "decoded": 290904,
           "status": 200,
           "encoding": "gzip"
@@ -1286,9 +2102,9 @@
         },
         {
           "phase": "navigation",
-          "url": "http://127.0.0.1:5187/client-demo/assets/index-DEfYWuBL.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-CKOJlFth.js",
           "type": "script",
-          "transferred": 4010,
+          "transferred": 4009,
           "decoded": 10031,
           "status": 200,
           "encoding": "gzip"
@@ -1304,9 +2120,9 @@
         },
         {
           "phase": "navigation",
-          "url": "http://127.0.0.1:5187/client-demo/assets/ExpertView-BOzcGgwK.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/ExpertView-HIzMYEHi.js",
           "type": "script",
-          "transferred": 8274,
+          "transferred": 8273,
           "decoded": 26351,
           "status": 200,
           "encoding": "gzip"
@@ -1349,9 +2165,9 @@
         },
         {
           "phase": "navigation",
-          "url": "http://127.0.0.1:5187/client-demo/assets/SkillsManager-BjK3lnfk.js",
+          "url": "http://127.0.0.1:5187/client-demo/assets/SkillsManager-DXnHQZn_.js",
           "type": "script",
-          "transferred": 13611,
+          "transferred": 13610,
           "decoded": 44831,
           "status": 200,
           "encoding": "gzip"

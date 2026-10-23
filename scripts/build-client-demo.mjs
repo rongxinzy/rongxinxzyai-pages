@@ -16,6 +16,10 @@ import { execFileSync } from 'node:child_process';
 import { client, clientPackage, clientSource } from './client-demo-source.mjs';
 import { clientLayoutPatches, clientSidebarLayoutPlugin } from './client-demo-layout-patch.mjs';
 import { clientLoadingPatches, clientLoadingPlugin } from './client-demo-loading-patch.mjs';
+import {
+  clientCapabilityPatches,
+  clientCapabilityPlugin,
+} from './client-demo-capability-patch.mjs';
 
 const site = fileURLToPath(new URL('../', import.meta.url));
 const clientRequire = createRequire(path.join(client, 'package.json'));
@@ -32,6 +36,9 @@ if (process.argv.includes('--lint')) {
       'scripts/check-demo-sidebar.mjs',
       'scripts/client-demo-layout-patch.mjs',
       'scripts/client-demo-loading-patch.mjs',
+      'scripts/client-demo-capability-patch.mjs',
+      'scripts/check-demo-model-lifecycle.mjs',
+      'scripts/check-demo-resilience.mjs',
       'scripts/client-demo-source.mjs',
       'scripts/measure-demo-resources.mjs',
       'scripts/vitest.demo.config.mjs',
@@ -135,7 +142,13 @@ const config = {
   root: path.join(site, 'src/client-demo'),
   base: '/client-demo/',
   publicDir: process.argv.includes('--serve') ? path.join(client, 'public') : false,
-  plugins: [clientSidebarLayoutPlugin, clientLoadingPlugin, react(), tailwindcss()],
+  plugins: [
+    clientSidebarLayoutPlugin,
+    clientLoadingPlugin,
+    clientCapabilityPlugin,
+    react(),
+    tailwindcss(),
+  ],
   // Like the client Vite config, this constant belongs to the KaTeX ESM bundle.
   define: {
     'process.env.NODE_ENV': '"production"',
@@ -180,6 +193,18 @@ if (process.argv.includes('--serve')) {
     'quick-actions-i18n.json',
   ])
     copyFileSync(path.join(client, 'public', asset), path.join(output, asset));
+  // Copy only previews referenced by the native catalog, preserving relative
+  // URLs and native loading="lazy". Missing sources fail the build, not the UI.
+  const actions = JSON.parse(readFileSync(path.join(client, 'public/quick-actions.json'), 'utf8'));
+  const previews = new Set(
+    actions.actions.flatMap(action => action.prompts.map(prompt => prompt.preview).filter(Boolean)),
+  );
+  mkdirSync(path.join(output, 'case-previews'), { recursive: true });
+  for (const preview of previews) {
+    if (!/^\.\/case-previews\/[\w-]+\.webp$/.test(preview))
+      throw new Error(`Unexpected client case preview path: ${preview}`);
+    copyFileSync(path.join(client, 'public', preview), path.join(output, preview));
+  }
   // Stable entry URL, independent of the source directory layout.
   writeFileSync(
     path.join(output, 'source.json'),
@@ -191,8 +216,8 @@ if (process.argv.includes('--serve')) {
         version: clientPackage.version,
         generatedBy: 'scripts/build-client-demo.mjs',
         interface:
-          'Client React components with recorded sidebar and loading patches; browser-only mock bridge',
-        patches: [...clientLayoutPatches, ...clientLoadingPatches],
+          'Client React components with recorded renderer patches; browser-only mock bridge',
+        patches: [...clientLayoutPatches, ...clientLoadingPatches, ...clientCapabilityPatches],
       },
       null,
       2,

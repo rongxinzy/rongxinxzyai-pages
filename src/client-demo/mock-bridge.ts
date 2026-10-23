@@ -4,7 +4,6 @@ import { CoworkSessionStatusValue } from '@client/types/cowork';
 import type { CoworkSession } from '@client/types/cowork';
 import { TodoStatus, TodoView } from '@shared/todo';
 import type { Todo, TodoList, TodoStep } from '@shared/todo';
-import type { LlamaCppModel } from '@shared/llamacpp';
 import { createGeneratedSurface } from '@client/browserMock/generated/surface';
 import { createBrowserMockRuntime } from '@client/browserMock/runtime';
 import { PiUiEventSequencer, PiUiEventType } from '@shared/cowork/piUiEvent';
@@ -30,6 +29,7 @@ import { createDemoBridge, type DemoOperation } from './bridge-boundary';
 import { desktopOnly, operationFailed } from './boundary-notice';
 import { installImMocks } from './im-mocks';
 import { chatSamples, replyForChat } from './chat-samples';
+import { createLocalInferenceMocks } from './local-inference-mocks';
 
 type Handler = (...args: unknown[]) => unknown;
 type Data = Record<string, unknown>;
@@ -79,20 +79,6 @@ let coworkConfig = {
   permissionMode: CoworkPermissionMode.Ask,
   embeddingEnabled: false,
 };
-const localModels: LlamaCppModel[] = [
-  {
-    name: 'Qwen3-8B',
-    path: '/models/Qwen3-8B.gguf',
-    size: 4_900_000_000,
-    status: 'loaded',
-    details: {
-      format: 'gguf',
-      parameter_size: '8B',
-      quantization_level: 'Q4_K_M',
-      context_length: 32768,
-    },
-  },
-];
 const register = (prefix: string, methods: Record<string, Handler>) =>
   Object.entries(methods).forEach(([name, handler]) => {
     const path = `${prefix}.${name}`;
@@ -169,7 +155,6 @@ register('auth', {
   }),
   getToken: () => null,
   getState: () => null,
-  communityLogout: () => ok,
 });
 register('agents', {
   list: () => agents,
@@ -203,13 +188,8 @@ handlers.getRecentCwds = () => [workspace.path];
 handlers.generateSessionTitle = input => String(input).slice(0, 40);
 register('theme', { updateTitleBar: () => undefined });
 for (const name of ['autoLaunch', 'preventSleep']) {
-  let enabled = false;
   register(name, {
-    get: () => ({ enabled }),
-    set: value => {
-      enabled = Boolean(value);
-      return ok;
-    },
+    get: () => ({ enabled: false }),
   });
 }
 register('openaiCodexOAuth', { status: () => ({ loggedIn: false }) });
@@ -560,63 +540,14 @@ register('skills', {
   getContent: () => ({ ...ok, content: words.draft }),
 });
 register('activity', { list: () => ({ ...ok, runs: activityRuns }) });
-register('llamacpp', {
-  status: () => ({ status: 'running', checkedAt: new Date().toISOString(), managedByApp: true }),
-  listLocalModels: () => localModels,
-  listRunningModels: () => localModels.filter(model => model.status === 'loaded'),
-  modelsDir: () => '/models',
-  getModelPreferences: () => ({}),
-  getServiceConfig: () => ({}),
-  getAccessSettings: () => ({ enabled: false, host: '127.0.0.1', port: 8080 }),
-  listBackends: () => ({ ...ok, backends: [] }),
-  listDevices: () => ({ ...ok, devices: [] }),
-  getRuntimeCapabilities: () => ({ ...ok, flags: [], supports: {}, devices: [] }),
-  installModel: async input => {
-    const model = models.find(item => item.repoId === object(input).modelId) ?? models[0];
-    emit('llamacpp.onPullProgress', {
-      name: model.repoId,
-      chunk: { phase: 'downloading', modelId: model.repoId, percent: 35 },
-    });
-    await new Promise(resolve => window.setTimeout(resolve, 800));
-    model.installed = true;
-    if (!localModels.some(item => item.name === model.name))
-      localModels.push({
-        name: model.name,
-        path: `/models/${model.filePath}`,
-        size: 4_900_000_000,
-        status: 'unloaded',
-      });
-    emit('llamacpp.onPullProgress', {
-      name: model.repoId,
-      chunk: {
-        phase: 'done',
-        modelId: model.repoId,
-        percent: 100,
-        targetPath: localModels.find(item => item.name === model.name)?.path,
-      },
-    });
-    return { ...ok, name: model.name, model: model.name };
-  },
-  loadModel: input => {
-    const model = localModels.find(item => item.name === object(input).model);
-    if (model) model.status = 'loaded';
-    return ok;
-  },
-  unloadModel: name => {
-    const model = localModels.find(item => item.name === name);
-    if (model) model.status = 'unloaded';
-    return ok;
-  },
-  deleteModel: name => {
-    const index = localModels.findIndex(item => item.name === name);
-    if (index >= 0) localModels.splice(index, 1);
-    return { ...ok, deleted: true };
-  },
-  setModelPreference: () => ({}),
-  setModelsDir: input => String(input),
-  getLaunchLogs: () => ({ ...ok, sessions: [] }),
-  getRuntimeInstallSnapshot: () => ({ active: false }),
+const inferenceMocks = createLocalInferenceMocks({
+  catalog: models,
+  emit,
+  unavailable: words.desktopOnly,
 });
+// The generic bridge widens IPC arguments; each handler above is checked
+// against the client's exact preload signature before this adaptation.
+register('llamacpp', inferenceMocks as unknown as Record<string, Handler>);
 register('marketplace', {
   cancelSearch: () => undefined,
   search: input => {

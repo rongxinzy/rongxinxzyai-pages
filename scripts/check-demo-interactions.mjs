@@ -8,6 +8,8 @@ import { client, clientSource } from './client-demo-source.mjs';
 import { checkDemoSidebar } from './check-demo-sidebar.mjs';
 import { clientLayoutPatches } from './client-demo-layout-patch.mjs';
 import { clientLoadingPatches } from './client-demo-loading-patch.mjs';
+import { clientCapabilityPatches } from './client-demo-capability-patch.mjs';
+import { DemoMessage } from '../src/live-demo/constants.ts';
 
 const requireClient = createRequire(path.join(client, 'package.json'));
 const { chromium } = requireClient('playwright');
@@ -98,7 +100,7 @@ try {
       assert.equal(provenance.sourceTreeHasLocalChanges, false);
       assert.deepEqual(
         provenance.patches,
-        [...clientLayoutPatches, ...clientLoadingPatches],
+        [...clientLayoutPatches, ...clientLoadingPatches, ...clientCapabilityPatches],
         'Preview renderer patches are stale',
       );
       const thinking = frame.getByRole('button', { name: /思考了 7 秒/ });
@@ -229,7 +231,7 @@ try {
         assert.equal(await frame.getByText('（演示）', { exact: false }).count(), 0);
       }
 
-      // Actual exceptions still reach the parent failure UI; retry must recover.
+      // An operational error must not cover an App that remains interactive.
       await embedded.evaluate(() => {
         window.dispatchEvent(
           new ErrorEvent('error', {
@@ -238,6 +240,12 @@ try {
           }),
         );
       });
+      await page.getByText('部分操作未完成，可继续使用或重置演示。', { exact: true }).waitFor();
+      await healthy();
+      // Only an explicit fatal renderer/startup message triggers host recovery.
+      await embedded.evaluate(type => {
+        window.parent.postMessage({ type }, location.origin);
+      }, DemoMessage.Error);
       await page.getByText('演示加载失败，请重试。', { exact: true }).waitFor();
       await page.getByRole('button', { name: '重新加载', exact: true }).click();
       await frame.getByRole('button', { name: /思考了 7 秒/ }).waitFor({ timeout: 25000 });

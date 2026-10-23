@@ -1,5 +1,10 @@
 import { expect, test, vi } from 'vitest';
-import { classifyDemoOperation, createDemoBridge, DemoOperation } from './bridge-boundary';
+import {
+  classifyDemoOperation,
+  createDemoBridge,
+  DemoOperation,
+  DemoOperationUnavailable,
+} from './bridge-boundary';
 
 test('blocks unimplemented mutations without reporting success or losing result fields', async () => {
   const unsupported = vi.fn(() => 'Desktop required');
@@ -85,4 +90,27 @@ test('classifies external effects separately from reads and log export separatel
     expect(classifyDemoOperation(path, false)).toBe(DemoOperation.Read);
   }
   expect(classifyDemoOperation('log.fromRenderer', false)).toBe(DemoOperation.Lifecycle);
+  expect(classifyDemoOperation('auth.communityLogout', true)).toBe(DemoOperation.Blocked);
+});
+
+test('controlled mock refusals retain native response arrays without logging a renderer failure', async () => {
+  const failed = vi.fn(() => 'Unexpected failure');
+  const bridge = createDemoBridge({
+    defaults: { unload: async () => ({ success: true, runningModels: [], confirmed: false }) },
+    handlers: {
+      unload: () => {
+        throw new DemoOperationUnavailable('Unknown model');
+      },
+    },
+    subscribe: () => () => undefined,
+    unsupported: () => 'Desktop required',
+    failed,
+  });
+  expect(await (bridge.unload as () => Promise<unknown>)()).toMatchObject({
+    success: false,
+    runningModels: [],
+    confirmed: false,
+    error: 'Desktop required',
+  });
+  expect(failed).not.toHaveBeenCalled();
 });

@@ -14,6 +14,7 @@ export const DemoMessage = {
   Changed: 'zhiyuan-demo:changed',
   Reset: 'zhiyuan-demo:reset',
   Error: 'zhiyuan-demo:error',
+  Warning: 'zhiyuan-demo:warning',
 } as const;
 
 export function isDemoScene(value: unknown): value is DemoScene {

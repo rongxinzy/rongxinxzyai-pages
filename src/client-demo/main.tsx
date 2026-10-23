@@ -27,7 +27,14 @@ bootObserver.observe(document.getElementById('root')!, { childList: true, subtre
 
 // The first post-boot view is the native session skeleton, never the empty home.
 store.dispatch(setLoadingSessionId(sessions[0].id));
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById('root')!, {
+  // Only an uncaught React render failure means the App itself is unusable.
+  // Native lazy-view boundaries retain their own localized retry controls.
+  onUncaughtError: error => {
+    console.error('[ClientDemo] Uncaught render error:', error);
+    notify(DemoMessage.Error);
+  },
+}).render(
   <Provider store={store}>
     <App />
   </Provider>,
@@ -108,6 +115,8 @@ window.addEventListener('error', event => {
       event.message === 'ResizeObserver loop limit exceeded')
   )
     return;
-  notify(DemoMessage.Error);
+  notify(DemoMessage.Warning);
 });
-window.addEventListener('unhandledrejection', () => notify(DemoMessage.Error));
+// Keep operational errors observable without covering a functioning App.
+// Do not preventDefault: browser diagnostics and regression failures remain.
+window.addEventListener('unhandledrejection', () => notify(DemoMessage.Warning));
