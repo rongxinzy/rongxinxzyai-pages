@@ -1,4 +1,34 @@
 import type { SiteLocale } from "../shared/site-types";
+// Demo-only copy. Product content and labels come from the existing client exports.
+const demoZh = {
+  title: '交互演示', sample: '示例数据 · 连接账号、启动机器人及访问本机资源需桌面客户端',
+  desktopOnly: '当前体验仅使用示例数据。连接账号、启动机器人和访问本机资源请使用桌面客户端。',
+  operationFailed: '操作未完成，请重置工作台后重试。',
+  start: '开始体验', hint: '点击侧栏、搜索模型，或发送一条任务。',
+  reset: '重置演示', expand: '全屏体验', collapse: '退出全屏',
+  loading: '正在加载工作台…', error: '演示加载失败，请重试。', retry: '重新加载',
+  scenes: '选择演示场景', mobile: '左右滑动查看工作台，通过侧栏切换页面。',
+  draft: '根据 sales_q3.xlsx 和 7 月以来的周报写第三季度销售分析报告，指出主要问题并给出建议，输出 Word 文档。',
+  reasoning: '读取季度销售表和周报，对比分区域营收、毛利率与预算执行情况，整理报告与建议。',
+  tools: ['data/sales_q3.xlsx', 'weekly-reports/', 'python analyze_q3.py --by region --compare 2025Q3', 'output/Q3-sales-report.docx'],
+  report: '第三季度销售分析报告\n\n营收：4,826 万元，同比增长 9.8%。\n毛利率：31.2%，环比下降 1.4 个百分点。\n\n主要问题\n1. 华北渠道库存积压。\n2. 9 月集中促销影响毛利。\n3. 新客占比下滑。\n\n建议\n按区域跟进库存与预算执行，调整促销节奏，并持续追踪新客转化。',
+};
+type DemoCopy = { [Key in keyof typeof demoZh]: (typeof demoZh)[Key] extends string[] ? string[] : string };
+const demoEn: DemoCopy = {
+  title: 'Live demo', sample: 'Sample data · Accounts, bots and local resources require the desktop app',
+  desktopOnly: 'This preview uses sample data. Use the desktop app to connect accounts, start bots, or access local resources.',
+  operationFailed: 'The operation could not finish. Reset the workbench and try again.',
+  start: 'Explore the workspace', hint: 'Use the sidebar, search models, or send a task.',
+  reset: 'Reset demo', expand: 'Enter fullscreen', collapse: 'Exit fullscreen',
+  loading: 'Loading the workspace…', error: 'The demo could not load. Please retry.', retry: 'Retry',
+  scenes: 'Choose a demo scene', mobile: 'Swipe horizontally to explore and use the sidebar to switch pages.',
+  draft: 'Write a Q3 sales analysis from sales_q3.xlsx and weekly reports since July. Identify problems, recommend actions, and produce a Word document.',
+  reasoning: 'Read the sales workbook and weekly reports, compare regional revenue, margins, and budget execution, then prepare the report.',
+  tools: demoZh.tools,
+  report: 'Q3 Sales Analysis\n\nRevenue: CNY 48.26 million, up 9.8% year over year.\nGross margin: 31.2%, down 1.4 percentage points quarter over quarter.\n\nKey issues\n1. Excess inventory in North China.\n2. September promotions reduced margins.\n3. A declining share of new customers.\n\nRecommendations\nTrack inventory and budgets by region, adjust promotion timing, and monitor new customer conversion.',
+};
+
+export function demoCopy(locale: SiteLocale): DemoCopy { return locale === 'en' ? demoEn : demoZh; }
 
 export const GITHUB = "https://github.com/rongxinzy/RongxinAI";
 export const isEnglish = (locale: SiteLocale) => locale === "en";

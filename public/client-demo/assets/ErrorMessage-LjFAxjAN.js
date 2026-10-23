@@ -1,0 +1,1 @@
+import{R as o,r as n,s as a}from"../client.js";const c=({message:r,onClose:e})=>{const s=o.useRef(e);return s.current=e,o.useEffect(()=>{const t=n(r);a({message:t,isError:!0,durationMs:5e3,onClose:()=>s.current?.()})},[r]),null};export{c as E};

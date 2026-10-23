@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useLayoutEffect } from "react";
 import type { SiteSiteProps } from "../shared/site-types";
 import { COPY } from "./copy";
 import { Header, Footer } from "./SiteChrome";
@@ -16,16 +16,18 @@ const RoadmapPage = lazy(() =>
 
 export function EditorialSite(props: SiteSiteProps) {
   const copy = COPY[props.locale];
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Enterprise handles its fragment after the lazy-loaded page has mounted.
     if (props.page !== "home") return;
-    const frame = requestAnimationFrame(() => {
-      findFragmentTarget()?.scrollIntoView({
+    const target = findFragmentTarget();
+    if (target) {
+      target.scrollIntoView({
         behavior: "instant",
         block: "start",
       });
-    });
-    return () => cancelAnimationFrame(frame);
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
   }, [props.page, props.locale]);
   return (
     <div

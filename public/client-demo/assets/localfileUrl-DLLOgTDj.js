@@ -1,0 +1,1 @@
+function e(t){if(!t||t.startsWith("inline:"))return"";if(/^localfile:/i.test(t)||/^data:/i.test(t))return t;if(/^file:/i.test(t))return t.replace(/^file:\/\//i,"localfile://");const r=t.replace(/\\/g,"/");return`localfile://${r.startsWith("/")?r:`/${r}`}`}export{e as t};

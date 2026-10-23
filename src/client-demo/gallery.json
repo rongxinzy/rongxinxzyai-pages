@@ -1,0 +1,254 @@
+{
+  "zh": {
+    "models": [
+      {
+        "name": "Qwen3-8B",
+        "description": "通用对话与写作，中英双语表现均衡。",
+        "publisher": "Qwen",
+        "format": "GGUF · 对话 · 推理",
+        "variant": "Q4_K_M · 5.0 GB",
+        "file": "qwen3-8b-q4_k_m.gguf"
+      },
+      {
+        "name": "Qwen3-14B",
+        "description": "更强的推理与长文写作能力。",
+        "publisher": "Qwen",
+        "format": "GGUF · 对话 · 推理",
+        "variant": "Q4_K_M · 9.0 GB",
+        "file": "qwen3-14b-q4_k_m.gguf"
+      },
+      {
+        "name": "Qwen2.5-Coder-7B-Instruct",
+        "description": "代码补全、解释与重构。",
+        "publisher": "Qwen",
+        "format": "GGUF · 代码",
+        "variant": "Q4_K_M · 4.7 GB",
+        "file": "qwen2.5-coder-7b-q4_k_m.gguf"
+      },
+      {
+        "name": "DeepSeek-R1-Distill-Qwen-7B",
+        "description": "蒸馏推理模型，适合数学与逻辑问题。",
+        "publisher": "deepseek-ai",
+        "format": "GGUF · 推理",
+        "variant": "Q4_K_M · 4.7 GB",
+        "file": "deepseek-r1-distill-7b-q4_k_m.gguf"
+      },
+      {
+        "name": "gemma-3-12b-it",
+        "description": "支持图像输入的多模态模型。",
+        "publisher": "google",
+        "format": "GGUF · 对话 · 视觉",
+        "variant": "Q4_K_M · 7.3 GB",
+        "file": "gemma-3-12b-q4_k_m.gguf"
+      },
+      {
+        "name": "GLM-4-9B-0414",
+        "description": "中文对话与写作。",
+        "publisher": "THUDM",
+        "format": "GGUF · 对话",
+        "variant": "Q4_K_M · 5.7 GB",
+        "file": "glm-4-9b-q4_k_m.gguf"
+      },
+      {
+        "name": "Qwen2.5-VL-7B-Instruct",
+        "description": "图表、截图与文档理解。",
+        "publisher": "Qwen",
+        "format": "GGUF · 视觉",
+        "variant": "Q4_K_M · 4.7 GB",
+        "file": "qwen2.5-vl-7b-q4_k_m.gguf"
+      },
+      {
+        "name": "Phi-4-mini-instruct",
+        "description": "小参数量下的指令遵循与推理。",
+        "publisher": "microsoft",
+        "format": "GGUF · 对话 · 推理",
+        "variant": "Q4_K_M · 2.5 GB",
+        "file": "phi-4-mini-q4_k_m.gguf"
+      },
+      {
+        "name": "Qwen3-Embedding-0.6B",
+        "description": "文本向量化，用于本地知识检索。",
+        "publisher": "Qwen",
+        "format": "GGUF · 嵌入",
+        "variant": "Q4_K_M · 614.4 MB",
+        "file": "qwen3-embedding-0.6b-q4_k_m.gguf"
+      },
+      {
+        "name": "Mistral-Small-3.1-24B-Instruct",
+        "description": "长上下文与工具调用。",
+        "publisher": "mistralai",
+        "format": "GGUF · 对话",
+        "variant": "Q4_K_M · 14.3 GB",
+        "file": "mistral-small-3.1-24b-q4_k_m.gguf"
+      }
+    ],
+    "skills": [
+      {
+        "name": "Word 文档",
+        "description": "创建、编辑和排版 Word 文档，支持修订与批注。"
+      },
+      {
+        "name": "电子表格",
+        "description": "读取、清洗和分析 Excel 数据，生成透视表与图表。"
+      },
+      {
+        "name": "演示文稿",
+        "description": "根据大纲生成演示文稿，统一版式与配色。"
+      },
+      {
+        "name": "PDF 处理",
+        "description": "提取 PDF 文字与表格，合并、拆分和填写表单。"
+      },
+      {
+        "name": "周报撰写",
+        "description": "汇总本周任务与数据，按模板生成周报。"
+      },
+      {
+        "name": "数据清洗",
+        "description": "去重、补全缺失值并统一字段格式。"
+      },
+      {
+        "name": "代码审查",
+        "description": "审查改动的正确性、风格与测试覆盖。"
+      },
+      {
+        "name": "联网调研",
+        "description": "检索公开资料并整理成带来源的摘要。"
+      },
+      {
+        "name": "会议纪要",
+        "description": "把转写文本整理为纪要、决议与待办。"
+      },
+      {
+        "name": "合同审阅",
+        "description": "标出合同中的风险条款并给出修改建议。"
+      }
+    ]
+  },
+  "en": {
+    "models": [
+      {
+        "name": "Qwen3-8B",
+        "description": "General chat and writing, strong in Chinese and English.",
+        "publisher": "Qwen",
+        "format": "GGUF · Chat · Reasoning",
+        "variant": "Q4_K_M · 5.0 GB",
+        "file": "qwen3-8b-q4_k_m.gguf"
+      },
+      {
+        "name": "Qwen3-14B",
+        "description": "Stronger reasoning and long-form writing.",
+        "publisher": "Qwen",
+        "format": "GGUF · Chat · Reasoning",
+        "variant": "Q4_K_M · 9.0 GB",
+        "file": "qwen3-14b-q4_k_m.gguf"
+      },
+      {
+        "name": "Qwen2.5-Coder-7B-Instruct",
+        "description": "Code completion, explanation and refactoring.",
+        "publisher": "Qwen",
+        "format": "GGUF · Code",
+        "variant": "Q4_K_M · 4.7 GB",
+        "file": "qwen2.5-coder-7b-q4_k_m.gguf"
+      },
+      {
+        "name": "DeepSeek-R1-Distill-Qwen-7B",
+        "description": "Distilled reasoning model for math and logic.",
+        "publisher": "deepseek-ai",
+        "format": "GGUF · Reasoning",
+        "variant": "Q4_K_M · 4.7 GB",
+        "file": "deepseek-r1-distill-7b-q4_k_m.gguf"
+      },
+      {
+        "name": "gemma-3-12b-it",
+        "description": "Multimodal model with image input.",
+        "publisher": "google",
+        "format": "GGUF · Chat · Vision",
+        "variant": "Q4_K_M · 7.3 GB",
+        "file": "gemma-3-12b-q4_k_m.gguf"
+      },
+      {
+        "name": "GLM-4-9B-0414",
+        "description": "Chinese chat and writing.",
+        "publisher": "THUDM",
+        "format": "GGUF · Chat",
+        "variant": "Q4_K_M · 5.7 GB",
+        "file": "glm-4-9b-q4_k_m.gguf"
+      },
+      {
+        "name": "Qwen2.5-VL-7B-Instruct",
+        "description": "Understands charts, screenshots and documents.",
+        "publisher": "Qwen",
+        "format": "GGUF · Vision",
+        "variant": "Q4_K_M · 4.7 GB",
+        "file": "qwen2.5-vl-7b-q4_k_m.gguf"
+      },
+      {
+        "name": "Phi-4-mini-instruct",
+        "description": "Instruction following and reasoning at a small size.",
+        "publisher": "microsoft",
+        "format": "GGUF · Chat · Reasoning",
+        "variant": "Q4_K_M · 2.5 GB",
+        "file": "phi-4-mini-q4_k_m.gguf"
+      },
+      {
+        "name": "Qwen3-Embedding-0.6B",
+        "description": "Text embeddings for local retrieval.",
+        "publisher": "Qwen",
+        "format": "GGUF · Embedding",
+        "variant": "Q4_K_M · 614.4 MB",
+        "file": "qwen3-embedding-0.6b-q4_k_m.gguf"
+      },
+      {
+        "name": "Mistral-Small-3.1-24B-Instruct",
+        "description": "Long context and tool calling.",
+        "publisher": "mistralai",
+        "format": "GGUF · Chat",
+        "variant": "Q4_K_M · 14.3 GB",
+        "file": "mistral-small-3.1-24b-q4_k_m.gguf"
+      }
+    ],
+    "skills": [
+      {
+        "name": "Word documents",
+        "description": "Create, edit and format Word documents with tracked changes and comments."
+      },
+      {
+        "name": "Spreadsheets",
+        "description": "Read, clean and analyze Excel data; build pivot tables and charts."
+      },
+      {
+        "name": "Presentations",
+        "description": "Generate slide decks from an outline with consistent layouts."
+      },
+      {
+        "name": "PDF tools",
+        "description": "Extract text and tables, merge, split and fill PDF forms."
+      },
+      {
+        "name": "Weekly reports",
+        "description": "Compile the week's tasks and metrics into a report template."
+      },
+      {
+        "name": "Data cleaning",
+        "description": "Deduplicate, fill missing values and normalize fields."
+      },
+      {
+        "name": "Code review",
+        "description": "Review changes for correctness, style and test coverage."
+      },
+      {
+        "name": "Web research",
+        "description": "Search public sources and summarize them with citations."
+      },
+      {
+        "name": "Meeting notes",
+        "description": "Turn transcripts into notes, decisions and action items."
+      },
+      {
+        "name": "Contract review",
+        "description": "Flag risky clauses in contracts and suggest edits."
+      }
+    ]
+  }
+}
