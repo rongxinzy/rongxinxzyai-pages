@@ -428,3 +428,32 @@
   transform: scale(var(--snap-scale, 0));
   pointer-events: none;
 }
+
+/* Interactive showcase; the embedded canvas retains the client's own tokens. */
+.demo-window { scroll-margin-top: 88px; }
+.demo-stage {
+  --demo-canvas-width: 1280px;
+  --demo-scale: 1;
+  --demo-height: 800px;
+  position: relative;
+  height: var(--demo-height);
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior: contain;
+  background: var(--color-mist);
+}
+.demo-frame { display: block; width: 1280px; height: 800px; border: 0; transform: scale(var(--demo-scale)); transform-origin: top left; }
+.demo-canvas { width: var(--demo-canvas-width); height: var(--demo-height); overflow: hidden; }
+.demo-stage::after { content: ''; display: block; position: absolute; top: 0; left: 0; width: var(--demo-canvas-width); height: 1px; pointer-events: none; }
+.demo-control {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 36px; padding: 8px 12px; border-radius: 8px;
+  color: var(--color-muted); font-size: 14px; cursor: pointer;
+  transition: color 150ms ease-out, background-color 150ms ease-out;
+}
+.demo-control:hover { background: var(--color-mist); color: var(--color-ink); }
+.demo-control:active { transform: translateY(1px); }
+.demo-control:disabled { opacity: 0.5; cursor: not-allowed; }
+.demo-loading { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 16px; justify-content: center; align-items: center; background: var(--color-ground); color: var(--color-muted); }
+.demo-boot-logo { width: 42%; max-width: 440px; height: auto; }
+@media (prefers-reduced-motion: reduce) { .demo-control { transition: none; } }

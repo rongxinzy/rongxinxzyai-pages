@@ -1,0 +1,1371 @@
+{
+  "measuredAt": "2026-10-23T11:22:07.564Z",
+  "browser": "149.0.7827.55",
+  "viewport": "1440x1000, DPR 1",
+  "cache": "disabled",
+  "reducedMotion": true,
+  "samplesPerSite": 1,
+  "clientRevision": "7a648be8f3562757f14d944c6726ea16bedfe119",
+  "sites": [
+    {
+      "url": "https://www.rongxzyai.com/",
+      "interactive": false,
+      "phases": {
+        "initial": {
+          "requests": 26,
+          "transferred": 1001499,
+          "decoded": 2326743,
+          "byType": {
+            "document": {
+              "requests": 9,
+              "transferred": 422184,
+              "decoded": 1228119
+            },
+            "script": {
+              "requests": 4,
+              "transferred": 216632,
+              "decoded": 633151
+            },
+            "stylesheet": {
+              "requests": 2,
+              "transferred": 16853,
+              "decoded": 72401
+            },
+            "font": {
+              "requests": 3,
+              "transferred": 84273,
+              "decoded": 83104
+            },
+            "image": {
+              "requests": 5,
+              "transferred": 227449,
+              "decoded": 263968
+            },
+            "fetch": {
+              "requests": 1,
+              "transferred": 703,
+              "decoded": 1577
+            },
+            "xhr": {
+              "requests": 1,
+              "transferred": 413,
+              "decoded": 0
+            },
+            "other": {
+              "requests": 1,
+              "transferred": 32992,
+              "decoded": 44423
+            }
+          }
+        }
+      },
+      "requests": [
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/",
+          "type": "document",
+          "transferred": 2526,
+          "decoded": 5426,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/assets/site-navigation-dwv4qRfe.js",
+          "type": "script",
+          "transferred": 93987,
+          "decoded": 290206,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/assets/appSnapshot-HYUqu9DL.js",
+          "type": "script",
+          "transferred": 576,
+          "decoded": 289,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/assets/main-zSjZ5CHK.js",
+          "type": "script",
+          "transferred": 111580,
+          "decoded": 310803,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/assets/site-navigation-BcbiQd_t.css",
+          "type": "stylesheet",
+          "transferred": 16354,
+          "decoded": 71944,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/assets/main-BNWJ7Zcm.css",
+          "type": "stylesheet",
+          "transferred": 499,
+          "decoded": 457,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "initial",
+          "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+          "type": "script",
+          "transferred": 10489,
+          "decoded": 31853,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/assets/geist-latin-wght-normal-BgDaEnEv.woff2",
+          "type": "font",
+          "transferred": 29737,
+          "decoded": 29400,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/zhiyuan-logo.svg",
+          "type": "image",
+          "transferred": 101652,
+          "decoded": 139792,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/fonts/songti-bold.woff2",
+          "type": "font",
+          "transferred": 13744,
+          "decoded": 13300,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/assets/jetbrains-mono-latin-wght-normal-B9CIFXIH.woff2",
+          "type": "font",
+          "transferred": 40792,
+          "decoded": 40404,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/product/zhiyuan-skills.html",
+          "type": "document",
+          "transferred": 0,
+          "decoded": 0,
+          "status": 308,
+          "encoding": "identity",
+          "bodyUnavailable": true
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/product/zhiyuan-model-market.html",
+          "type": "document",
+          "transferred": 0,
+          "decoded": 0,
+          "status": 308,
+          "encoding": "identity",
+          "bodyUnavailable": true
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/product/zhiyuan-conversation.html",
+          "type": "document",
+          "transferred": 0,
+          "decoded": 0,
+          "status": 308,
+          "encoding": "identity",
+          "bodyUnavailable": true
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/product/zhiyuan-workspace.html",
+          "type": "document",
+          "transferred": 0,
+          "decoded": 0,
+          "status": 308,
+          "encoding": "identity",
+          "bodyUnavailable": true
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/product/zhiyuan-conversation-976.webp",
+          "type": "image",
+          "transferred": 28587,
+          "decoded": 28116,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/product/zhiyuan-model-market-976.webp",
+          "type": "image",
+          "transferred": 34480,
+          "decoded": 34050,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/product/zhiyuan-skills-1184.webp",
+          "type": "image",
+          "transferred": 39095,
+          "decoded": 38700,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/product/zhiyuan-workspace-1184.webp",
+          "type": "image",
+          "transferred": 23635,
+          "decoded": 23310,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/product/zhiyuan-model-market",
+          "type": "document",
+          "transferred": 108926,
+          "decoded": 358961,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/product/zhiyuan-skills",
+          "type": "document",
+          "transferred": 116756,
+          "decoded": 324693,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/product/zhiyuan-conversation",
+          "type": "document",
+          "transferred": 114771,
+          "decoded": 307769,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/product/zhiyuan-workspace",
+          "type": "document",
+          "transferred": 79205,
+          "decoded": 231270,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/api/release",
+          "type": "fetch",
+          "transferred": 703,
+          "decoded": 1577,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/cdn-cgi/rum?",
+          "type": "xhr",
+          "transferred": 413,
+          "decoded": 0,
+          "status": 204,
+          "encoding": "identity"
+        },
+        {
+          "phase": "initial",
+          "url": "https://www.rongxzyai.com/favicon-light.svg",
+          "type": "other",
+          "transferred": 32992,
+          "decoded": 44423,
+          "status": 200,
+          "encoding": "br"
+        }
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:5187/",
+      "interactive": true,
+      "phases": {
+        "initial": {
+          "requests": 10,
+          "transferred": 398777,
+          "decoded": 865488,
+          "byType": {
+            "document": {
+              "requests": 1,
+              "transferred": 2041,
+              "decoded": 4900
+            },
+            "script": {
+              "requests": 2,
+              "transferred": 152645,
+              "decoded": 467742
+            },
+            "stylesheet": {
+              "requests": 1,
+              "transferred": 25148,
+              "decoded": 123944
+            },
+            "font": {
+              "requests": 3,
+              "transferred": 84064,
+              "decoded": 83104
+            },
+            "image": {
+              "requests": 1,
+              "transferred": 100851,
+              "decoded": 139795
+            },
+            "fetch": {
+              "requests": 1,
+              "transferred": 1083,
+              "decoded": 1577
+            },
+            "other": {
+              "requests": 1,
+              "transferred": 32945,
+              "decoded": 44426
+            }
+          }
+        },
+        "workbench": {
+          "requests": 54,
+          "transferred": 1370819,
+          "decoded": 3945170,
+          "byType": {
+            "document": {
+              "requests": 1,
+              "transferred": 1088,
+              "decoded": 811
+            },
+            "image": {
+              "requests": 4,
+              "transferred": 446382,
+              "decoded": 519622
+            },
+            "script": {
+              "requests": 46,
+              "transferred": 830359,
+              "decoded": 2744648
+            },
+            "stylesheet": {
+              "requests": 1,
+              "transferred": 52061,
+              "decoded": 486975
+            },
+            "fetch": {
+              "requests": 2,
+              "transferred": 40929,
+              "decoded": 193114
+            }
+          }
+        },
+        "navigation": {
+          "requests": 43,
+          "transferred": 927869,
+          "decoded": 2794521,
+          "byType": {
+            "script": {
+              "requests": 41,
+              "transferred": 799054,
+              "decoded": 2666289
+            },
+            "stylesheet": {
+              "requests": 1,
+              "transferred": 1031,
+              "decoded": 717
+            },
+            "image": {
+              "requests": 1,
+              "transferred": 127784,
+              "decoded": 127515
+            }
+          }
+        }
+      },
+      "requests": [
+        {
+          "phase": "initial",
+          "url": "http://127.0.0.1:5187/",
+          "type": "document",
+          "transferred": 2041,
+          "decoded": 4900,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "initial",
+          "url": "http://127.0.0.1:5187/assets/site-navigation-B_TZTFZv.js",
+          "type": "script",
+          "transferred": 95136,
+          "decoded": 293038,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "initial",
+          "url": "http://127.0.0.1:5187/assets/main-DvXZj0_Z.js",
+          "type": "script",
+          "transferred": 57509,
+          "decoded": 174704,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "initial",
+          "url": "http://127.0.0.1:5187/assets/site-navigation-BE00G-T2.css",
+          "type": "stylesheet",
+          "transferred": 25148,
+          "decoded": 123944,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "initial",
+          "url": "http://127.0.0.1:5187/assets/geist-latin-wght-normal-BgDaEnEv.woff2",
+          "type": "font",
+          "transferred": 29720,
+          "decoded": 29400,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "initial",
+          "url": "http://127.0.0.1:5187/zhiyuan-logo.svg",
+          "type": "image",
+          "transferred": 100851,
+          "decoded": 139795,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "initial",
+          "url": "http://127.0.0.1:5187/fonts/songti-bold.woff2",
+          "type": "font",
+          "transferred": 13620,
+          "decoded": 13300,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "initial",
+          "url": "http://127.0.0.1:5187/assets/jetbrains-mono-latin-wght-normal-B9CIFXIH.woff2",
+          "type": "font",
+          "transferred": 40724,
+          "decoded": 40404,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "initial",
+          "url": "http://127.0.0.1:5187/api/release",
+          "type": "fetch",
+          "transferred": 1083,
+          "decoded": 1577,
+          "status": 200,
+          "encoding": "br"
+        },
+        {
+          "phase": "initial",
+          "url": "http://127.0.0.1:5187/favicon-light.svg",
+          "type": "other",
+          "transferred": 32945,
+          "decoded": 44426,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/index.html?locale=zh-CN",
+          "type": "document",
+          "transferred": 1088,
+          "decoded": 811,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/zhiyuan-logo-light-1600.png",
+          "type": "image",
+          "transferred": 127784,
+          "decoded": 127515,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/client.js",
+          "type": "script",
+          "transferred": 499627,
+          "decoded": 1787506,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-kjX8ahOs.css",
+          "type": "stylesheet",
+          "transferred": 52061,
+          "decoded": 486975,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-sMJJjYMr.js",
+          "type": "script",
+          "transferred": 28790,
+          "decoded": 87349,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/coworkQueue-Dsp2EZ6y.js",
+          "type": "script",
+          "transferred": 8254,
+          "decoded": 19289,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/button-BORBC6hD.js",
+          "type": "script",
+          "transferred": 3215,
+          "decoded": 7341,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/plus-B-RJtoTP.js",
+          "type": "script",
+          "transferred": 672,
+          "decoded": 351,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/popover-C2AL9rmd.js",
+          "type": "script",
+          "transferred": 4414,
+          "decoded": 10479,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/ZhipuIcon-BMDlGEIe.js",
+          "type": "script",
+          "transferred": 7557,
+          "decoded": 21010,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/wrench-CiLNWxvF.js",
+          "type": "script",
+          "transferred": 1109,
+          "decoded": 2089,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/skill-DeRruM0b.js",
+          "type": "script",
+          "transferred": 1938,
+          "decoded": 5774,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/mcp-C0_6Nwna.js",
+          "type": "script",
+          "transferred": 2140,
+          "decoded": 5588,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/server-C8yAOn70.js",
+          "type": "script",
+          "transferred": 857,
+          "decoded": 536,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/expertAvatars-qDZ7nJtK.js",
+          "type": "script",
+          "transferred": 7408,
+          "decoded": 34667,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/plusMenuIcons-DC-hVXmt.js",
+          "type": "script",
+          "transferred": 2239,
+          "decoded": 4304,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/database-D0uWb1yy.js",
+          "type": "script",
+          "transferred": 1078,
+          "decoded": 757,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/sparkles--jLtFVIJ.js",
+          "type": "script",
+          "transferred": 1031,
+          "decoded": 710,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/brain-DWGf5Gjs.js",
+          "type": "script",
+          "transferred": 1091,
+          "decoded": 770,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/CoworkInlineAttachments-xjKTXo_m.js",
+          "type": "script",
+          "transferred": 1745,
+          "decoded": 2884,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/agentModelRef-CTcNCext.js",
+          "type": "script",
+          "transferred": 2750,
+          "decoded": 6224,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/hover-card-BEjg5M2K.js",
+          "type": "script",
+          "transferred": 3857,
+          "decoded": 8704,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/localfileUrl-DLLOgTDj.js",
+          "type": "script",
+          "transferred": 593,
+          "decoded": 272,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/shield-check-5z3sdgqA.js",
+          "type": "script",
+          "transferred": 839,
+          "decoded": 518,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/shield-alert-BfKRG0V2.js",
+          "type": "script",
+          "transferred": 872,
+          "decoded": 551,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/badge-BfHQYFpx.js",
+          "type": "script",
+          "transferred": 1054,
+          "decoded": 733,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/rotate-ccw-DlUq2-_0.js",
+          "type": "script",
+          "transferred": 719,
+          "decoded": 398,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/maximize-2-D0HY4dvW.js",
+          "type": "script",
+          "transferred": 757,
+          "decoded": 436,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/PageHeader-DS2za_Vh.js",
+          "type": "script",
+          "transferred": 1545,
+          "decoded": 2392,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/skeleton-BlugIzN6.js",
+          "type": "script",
+          "transferred": 490,
+          "decoded": 169,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/zhiyuan-logo-light-1600.png",
+          "type": "image",
+          "transferred": 127784,
+          "decoded": 127515,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/CoworkSessionDetail-BG0zHX8i.js",
+          "type": "script",
+          "transferred": 22615,
+          "decoded": 73240,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/artifactPanelResize-sBOVJG5f.js",
+          "type": "script",
+          "transferred": 4268,
+          "decoded": 9292,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/UserBubble-mVYMtrqP.js",
+          "type": "script",
+          "transferred": 10932,
+          "decoded": 28743,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/CopyButton-DXPgPkEB.js",
+          "type": "script",
+          "transferred": 7136,
+          "decoded": 17522,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/collapsible-Bwq0bONU.js",
+          "type": "script",
+          "transferred": 3066,
+          "decoded": 6725,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/chunk-D32TOXHM-DNVw960F.js",
+          "type": "script",
+          "transferred": 155723,
+          "decoded": 498989,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/code-block-BYE3wwj2.js",
+          "type": "script",
+          "transferred": 9438,
+          "decoded": 31111,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/copy-BDOGl3RJ.js",
+          "type": "script",
+          "transferred": 750,
+          "decoded": 429,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/scroll-area-B31WY9wZ.js",
+          "type": "script",
+          "transferred": 5620,
+          "decoded": 14947,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/useResolvedLocalPath-DiGCEQhK.js",
+          "type": "script",
+          "transferred": 1296,
+          "decoded": 975,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/alert-CXxPb0P6.js",
+          "type": "script",
+          "transferred": 1074,
+          "decoded": 1437,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-nvuA1Igh.js",
+          "type": "script",
+          "transferred": 7654,
+          "decoded": 23714,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/page-tabs-CTeYkV6v.js",
+          "type": "script",
+          "transferred": 1828,
+          "decoded": 3410,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/TabsList-BAIBQ9pX.js",
+          "type": "script",
+          "transferred": 4334,
+          "decoded": 10050,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/radio-group-C5_8alFE.js",
+          "type": "script",
+          "transferred": 3413,
+          "decoded": 6847,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/message-square-DUdjTPhb.js",
+          "type": "script",
+          "transferred": 752,
+          "decoded": 431,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/external-link-DdPbsAao.js",
+          "type": "script",
+          "transferred": 770,
+          "decoded": 449,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/pause-CtSejPdZ.js",
+          "type": "script",
+          "transferred": 730,
+          "decoded": 409,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-CuDjsD5U.js",
+          "type": "script",
+          "transferred": 2319,
+          "decoded": 4127,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/zhiyuan-logo-light.svg",
+          "type": "image",
+          "transferred": 100844,
+          "decoded": 139792,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/zhiyuan-logo-dark.svg",
+          "type": "image",
+          "transferred": 89970,
+          "decoded": 124800,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/quick-actions.json",
+          "type": "fetch",
+          "transferred": 1446,
+          "decoded": 9395,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "workbench",
+          "url": "http://127.0.0.1:5187/client-demo/quick-actions-i18n.json",
+          "type": "fetch",
+          "transferred": 39483,
+          "decoded": 183719,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-Cno1Ll53.js",
+          "type": "script",
+          "transferred": 82002,
+          "decoded": 259495,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/layered-tabs-content-Cj7ZSvA4.js",
+          "type": "script",
+          "transferred": 1024,
+          "decoded": 1102,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/lock-DakMqSYW.js",
+          "type": "script",
+          "transferred": 894,
+          "decoded": 1274,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/Modal-DBGSmxk1.js",
+          "type": "script",
+          "transferred": 1736,
+          "decoded": 3047,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/fluid-tabs-85bL8O2F.js",
+          "type": "script",
+          "transferred": 1256,
+          "decoded": 1745,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/card-BbNUjna-.js",
+          "type": "script",
+          "transferred": 794,
+          "decoded": 1244,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/circle-check-BsQB5XxM.js",
+          "type": "script",
+          "transferred": 729,
+          "decoded": 408,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/ListPagination-Czc_YGg9.js",
+          "type": "script",
+          "transferred": 1294,
+          "decoded": 973,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/chevron-left-BcL6X2Bu.js",
+          "type": "script",
+          "transferred": 649,
+          "decoded": 328,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/clock-3-DIdZ9gJf.js",
+          "type": "script",
+          "transferred": 688,
+          "decoded": 367,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-BCiE__Fz.css",
+          "type": "stylesheet",
+          "transferred": 1031,
+          "decoded": 717,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-2Q5dnFnq.js",
+          "type": "script",
+          "transferred": 48266,
+          "decoded": 165336,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/runtimeNameNeutralizer-CiPR3fRf.js",
+          "type": "script",
+          "transferred": 489,
+          "decoded": 168,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/sliders-horizontal-kdAsuZVF.js",
+          "type": "script",
+          "transferred": 943,
+          "decoded": 622,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/sheet-Bb24voxa.js",
+          "type": "script",
+          "transferred": 966,
+          "decoded": 1681,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/ArtifactPanelResizeHandle-CLCIgPjo.js",
+          "type": "script",
+          "transferred": 1808,
+          "decoded": 3350,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/StaticMarkdownContent-D3KB8IFr.js",
+          "type": "script",
+          "transferred": 2322,
+          "decoded": 4221,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/mermaid-MCJ5UELQ-DhBo27AF.js",
+          "type": "script",
+          "transferred": 29966,
+          "decoded": 93325,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/file-CoD5uNlz.js",
+          "type": "script",
+          "transferred": 789,
+          "decoded": 468,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/zhiyuan-logo-light-1600.png",
+          "type": "image",
+          "transferred": 127784,
+          "decoded": 127515,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/richMessageResponse-DEwM5yKD.js",
+          "type": "script",
+          "transferred": 1026,
+          "decoded": 1093,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/streamdown-code-block-nLIhMUVc.js",
+          "type": "script",
+          "transferred": 84062,
+          "decoded": 276452,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-D5-2KuYa.js",
+          "type": "script",
+          "transferred": 26621,
+          "decoded": 77119,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/mermaid.core-PE90zY9I.js",
+          "type": "script",
+          "transferred": 138934,
+          "decoded": 593325,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/purify.es-DowdsyMd.js",
+          "type": "script",
+          "transferred": 12096,
+          "decoded": 30463,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/highlighted-body-KQOG7T2V-DIxgyX5j.js",
+          "type": "script",
+          "transferred": 885,
+          "decoded": 564,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/wasm-CG6Dc4jp.js",
+          "type": "script",
+          "transferred": 230848,
+          "decoded": 622336,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/python-B6aJPvgy.js",
+          "type": "script",
+          "transferred": 9505,
+          "decoded": 69952,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/TodoView-L9Hh-5y1.js",
+          "type": "script",
+          "transferred": 8663,
+          "decoded": 28298,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-CALJ2pKH.js",
+          "type": "script",
+          "transferred": 62014,
+          "decoded": 290904,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/compactMarkdownClass-DvCa2vMg.js",
+          "type": "script",
+          "transferred": 981,
+          "decoded": 1575,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/constants-WbnQHWlU.js",
+          "type": "script",
+          "transferred": 934,
+          "decoded": 1539,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/circle-alert-Ch77gWud.js",
+          "type": "script",
+          "transferred": 789,
+          "decoded": 468,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/ellipsis-vertical-CAupHBnc.js",
+          "type": "script",
+          "transferred": 780,
+          "decoded": 459,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/index-DEfYWuBL.js",
+          "type": "script",
+          "transferred": 4010,
+          "decoded": 10031,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/imLogos-ClnssnP1.js",
+          "type": "script",
+          "transferred": 1431,
+          "decoded": 2234,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/ExpertView-BOzcGgwK.js",
+          "type": "script",
+          "transferred": 8274,
+          "decoded": 26351,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/McpManager-Cm0Pj7yd.js",
+          "type": "script",
+          "transferred": 14021,
+          "decoded": 46955,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/ErrorMessage-LjFAxjAN.js",
+          "type": "script",
+          "transferred": 566,
+          "decoded": 245,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/eye-CPmI2P9u.js",
+          "type": "script",
+          "transferred": 845,
+          "decoded": 1040,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/upload-B-XvsSQU.js",
+          "type": "script",
+          "transferred": 749,
+          "decoded": 428,
+          "status": 200,
+          "encoding": "identity"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/SkillsManager-BjK3lnfk.js",
+          "type": "script",
+          "transferred": 13611,
+          "decoded": 44831,
+          "status": 200,
+          "encoding": "gzip"
+        },
+        {
+          "phase": "navigation",
+          "url": "http://127.0.0.1:5187/client-demo/assets/funnel-DFmLEVsk.js",
+          "type": "script",
+          "transferred": 794,
+          "decoded": 473,
+          "status": 200,
+          "encoding": "identity"
+        }
+      ]
+    }
+  ]
+}

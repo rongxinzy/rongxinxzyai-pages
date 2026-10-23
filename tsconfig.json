@@ -17,5 +17,6 @@
     "jsx": "react-jsx"
   },
   "include": ["src", "data/roadmap/desktop.json"],
+  "exclude": ["src/client-demo"],
   "references": []
 }

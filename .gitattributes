@@ -1,0 +1,2 @@
+# Preserve generated bundle bytes, including whitespace inside third-party literals.
+public/client-demo/** -text -whitespace linguist-generated=true

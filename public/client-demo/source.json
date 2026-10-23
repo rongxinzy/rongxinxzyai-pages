@@ -1,0 +1,22 @@
+{
+  "repository": "https://github.com/rongxinzy/RongxinAI",
+  "revision": "7a648be8f3562757f14d944c6726ea16bedfe119",
+  "sourceTreeHasLocalChanges": false,
+  "version": "2026.7.16",
+  "generatedBy": "scripts/build-client-demo.mjs",
+  "interface": "Client React components with recorded sidebar and loading patches; browser-only mock bridge",
+  "patches": [
+    {
+      "id": "sidebar-timestamp-flow-v1",
+      "file": "src/renderer/components/agentSidebar/AgentTaskRow.tsx",
+      "description": "Reserve timestamp width in the title flex row before the existing action slot",
+      "sha256": "96c98cd7647207aab5683702d863e3b9c3558fe7909b388d25d00c06957680ef"
+    },
+    {
+      "id": "workbench-native-loading-skeleton-v1",
+      "file": "src/renderer/components/cowork/CoworkView.tsx",
+      "description": "Use the native session skeleton after particle boot instead of a second logo loader",
+      "sha256": "27a5646b8dd390ad5136e3ec8a193b622b819fd7aaa9cec464bcd9584634a194"
+    }
+  ]
+}

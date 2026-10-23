@@ -22,7 +22,15 @@ CloudShader（`src/effects/CloudShader.tsx`）：零依赖原生 WebGL 云层 sh
 
 ## 组件语法（`src/effects/`）
 
-TextGenerateEffect（首屏大标题逐词浮现）、MovingBorderButton（主 CTA 边框光束）、Showcase（第二屏产品截图手牌翻页，GSAP ScrollTrigger + Lenis）、CardSpotlight（模型/原则卡 hover 光斑）、TracingBeam（企业页交付流程）、BackgroundBeams（OSS/联系区衬底）、InfiniteMovingCards、AuroraBackground、BentoGrid。
+TextGenerateEffect（首屏大标题逐词浮现）、MovingBorderButton（主 CTA 边框光束）、Showcase（第二屏客户端交互演示）、CardSpotlight（模型/原则卡 hover 光斑）、TracingBeam（企业页交付流程）、BackgroundBeams（OSS/联系区衬底）、InfiniteMovingCards、AuroraBackground、BentoGrid。
+
+### 客户端交互演示
+
+- 官网外壳继续使用本站 token；iframe 内运行真实客户端 App、共享组件、主题 CSS 和动效，通过浏览器 mock bridge 替换 Electron preload。禁止重新描画客户端或给静态 DOM 补点击脚本。
+- 演示使用一个 iframe，功能切换使用客户端侧栏，不增加外层场景标签页。滚动到演示窗口时自动启动客户端粒子动画，随后显示会话骨架与示例会话；不再显示开始或全屏按钮。重置恢复初始数据，加载失败可重试。
+- 演示有明确的示例数据标记。安装与任务回复在浏览器内模拟，不连接模型、账户或本地文件系统。
+- 手机不压缩客户端文字，窗口内部横向滚动。窗口下方说明在桌面端使用整行可用宽度，移动端自然换行。减少动态效果时仍提供全部交互。
+- 外壳文案集中在 `src/editorial/copy.ts`，客户端内部沿用客户端 i18n。原图集数据由构建脚本提取；操作结果使用正常产品文案，示例标记只放在 iframe 外。
 
 ## 规则
 
