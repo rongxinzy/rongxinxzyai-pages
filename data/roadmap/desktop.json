@@ -83,6 +83,12 @@
           "text": "发布流程连续修补：Windows 三个版本一次编译后分别签名、各自校验；发布附件按版本独立命名，不再互相覆盖；更新元数据校验只查本次发布的平台；签名更稳定，缓存命中减少构建时间。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1225",
           "done": true
+        },
+        {
+          "date": "2026-10-22",
+          "text": "应用内更新改为下载完成、校验通过后才提示可升级，进度不再回跳，点击升级后的卡顿减少；静默安装与卸载更可靠，失败时给出可读原因。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1293",
+          "done": true
         }
       ]
     },
@@ -237,6 +243,12 @@
           "text": "MoE 模型在自动模式下交给 llama.cpp 按显存自动安排专家层的放置；也可以按模型手动指定放到 CPU 的专家层数。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1221",
           "done": true
+        },
+        {
+          "date": "2026-10-22",
+          "text": "模型选择器的「使用本地模型」能正确列出正在运行的本地模型，不再一直显示暂无可用；本地模型上下文不足的校验也随之生效。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1306",
+          "done": true
         }
       ]
     },
@@ -288,6 +300,24 @@
           "date": "2026-10-20",
           "text": "安装或更新中途被打断后不再丢失自定义安装位置，下次安装仍会装回原目录（之前会悄悄装回 C 盘默认目录）。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1230",
+          "done": true
+        },
+        {
+          "date": "2026-10-22",
+          "text": "安装器窗口按屏幕可用空间自适应，小分辨率的笔记本上不再被裁掉内容、页面内出现滚动条。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1302",
+          "done": true
+        },
+        {
+          "date": "2026-10-22",
+          "text": "安装进度条只增不减，不再出现 100% 又回到 0%；安装路径完整换行显示；卸载和升级时旧版本缓存清理更可靠，不再残留半删的目录。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1301",
+          "done": true
+        },
+        {
+          "date": "2026-10-22",
+          "text": "技能自带的运行环境只内置常用办公与文档核心，安装包明显变小；不常用的大依赖改为首次使用时按需安装，较大的会先向用户确认。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1300",
           "done": true
         }
       ]
@@ -361,6 +391,12 @@
           "date": "2026-10-21",
           "text": "添加或编辑模型服务商时，测试连通后自动填入发现的模型；已手动改过的模型列表可选择全部替换、追加或保留。模型以标签形式展示，可设为主力或回退，未填密钥时给出提示。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1292",
+          "done": true
+        },
+        {
+          "date": "2026-10-22",
+          "text": "模型设置从多个标签收为 3 个：服务商与模型、路由与用量、高级；填密钥、浏览模型、切换默认模型不用来回翻页。编程页可直接管理本地智能体工具的接入与状态。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1298",
           "done": true
         }
       ]
@@ -501,6 +537,12 @@
           "text": "界面外观整体重做：中性灰阶为主，字号与控件尺寸统一，明暗主题成套；品牌蓝只出现在主操作上，主界面和各功能页面同步更新。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1291",
           "done": true
+        },
+        {
+          "date": "2026-10-22",
+          "text": "通用设置文案更通俗：去掉面向用户的内部桥接开关，「防止休眠」等说法改为更直白的描述并补充说明，术语更清楚。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1297",
+          "done": true
         }
       ]
     },
@@ -513,6 +555,18 @@
           "date": "2026-10-17",
           "text": "专家页拆成专家、技能、连接器三部分，支持创建自定义专家并绑定系统提示词、技能与连接器，连接器可粘贴或上传 JSON 导入。会话启动时自动装载专家绑定的技能，只启用其绑定的连接器。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1038",
+          "done": true
+        },
+        {
+          "date": "2026-10-22",
+          "text": "办公技能新增本地 OCR，可直接识别图片和扫描版 PDF 里的文字；Word 文档处理自带离线运行时，干净电脑上也能直接使用。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1300",
+          "done": true
+        },
+        {
+          "date": "2026-10-22",
+          "text": "内置专家头像和自定义专家的图标、配色整体换新风格，并清理掉过时的内置技能引用。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1299",
           "done": true
         }
       ]
@@ -562,6 +616,18 @@
           "date": "2026-10-20",
           "text": "工作区 Python 改用安装包自带的运行时，首次使用不再额外下载。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1198",
+          "done": true
+        },
+        {
+          "date": "2026-10-22",
+          "text": "底层智能体执行引擎与桌面运行环境升级；异常消息内容和上下文溢出时更不易中断，开机自启设置同步适配。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1296",
+          "done": true
+        },
+        {
+          "date": "2026-10-22",
+          "text": "修复残留的开始菜单快捷方式抢走任务栏图标和名称的问题：启动时自动清理失效快捷方式，任务栏恢复显示正确的图标与名称。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1307",
           "done": true
         }
       ]
