@@ -549,6 +549,12 @@
           "text": "通用设置文案更通俗：去掉面向用户的内部桥接开关，「防止休眠」等说法改为更直白的描述并补充说明，术语更清楚。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1297",
           "done": true
+        },
+        {
+          "date": "2026-10-24",
+          "text": "桌面伙伴扩展为七种官方形象：保留小远，新增游栗、团团、绵绵、竹栗、云墨、麦小；通用设置可选形象并自动保存，空闲时播放更长的观察、点头、伸展、庆祝、小憩序列。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1327",
+          "done": true
         }
       ]
     },
