@@ -430,24 +430,70 @@
 }
 
 /* Interactive showcase; the embedded canvas retains the client's own tokens. */
-.demo-window { scroll-margin-top: 88px; }
+.demo-window {
+  scroll-margin-top: 88px;
+  transition: box-shadow 200ms ease;
+}
+.demo-window:fullscreen,
+.demo-window.is-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100dvh;
+  max-width: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  background: var(--color-ground);
+  display: flex;
+  flex-direction: column;
+}
+.demo-window:fullscreen .demo-stage,
+.demo-window.is-fullscreen .demo-stage {
+  flex: 1 1 0%;
+  height: 100% !important;
+  max-height: none !important;
+  border-radius: 0;
+}
 .demo-stage {
   --demo-canvas-width: 1280px;
   --demo-scale: 1;
   --demo-height: 800px;
+  --demo-frame-height: 800px;
   position: relative;
   height: var(--demo-height);
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior: contain;
   background: var(--color-mist);
+  -webkit-overflow-scrolling: touch;
 }
-.demo-frame { display: block; width: 1280px; height: 800px; border: 0; transform: scale(var(--demo-scale)); transform-origin: top left; }
-.demo-canvas { width: var(--demo-canvas-width); height: var(--demo-height); overflow: hidden; }
-.demo-stage::after { content: ''; display: block; position: absolute; top: 0; left: 0; width: var(--demo-canvas-width); height: 1px; pointer-events: none; }
+.demo-frame {
+  display: block;
+  width: 1280px;
+  height: var(--demo-frame-height, 800px);
+  border: 0;
+  transform: scale(var(--demo-scale));
+  transform-origin: top left;
+}
+.demo-canvas {
+  width: var(--demo-canvas-width);
+  height: var(--demo-height);
+  overflow: hidden;
+}
+.demo-stage::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--demo-canvas-width);
+  height: 1px;
+  pointer-events: none;
+}
 .demo-control {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  min-height: 36px; padding: 8px 12px; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 36px; padding: 6px 12px; border-radius: 8px;
   color: var(--color-muted); font-size: 14px; cursor: pointer;
   transition: color 150ms ease-out, background-color 150ms ease-out;
 }
