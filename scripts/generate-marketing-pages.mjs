@@ -70,12 +70,12 @@ const pages = [
     page: "enterprise",
     path: "/enterprise/",
     alternatePath: "/en/enterprise/",
-    title: "知远企业版 — Persona Agent + 企业级治理",
+    title: "知远企业版 — 企业 AI 数字员工平台",
     description:
-      "知远企业版以个人搭档（Persona Agent）与部门数字员工支持日常工作，以企业级治理管理身份、模型授权与受管工具数据范围。按业务场景分阶段交付。",
-    heroTitle: "Persona Agent + 企业级治理",
+      "知远企业版是企业 AI 数字员工平台：岗位数字员工、对话内审批写回与个人搭档，在权限与审批边界内支持人 + AI 协作。支持私有化部署，按业务场景分阶段交付。",
+    heroTitle: "企业 AI 数字员工平台",
     heroLead:
-      "以个人搭档承接员工日常工作，以部门数字员工提供专业能力，通过企业身份、模型授权与受管工具数据范围支持协作。持续工作与多搭档能力按项目范围分阶段交付。",
+      "人在岗位上与 AI 协作，身份、数据访问与敏感操作由企业权限与审批约束。Web 对话与管理端支持私有化部署。",
     staticAction: "讨论企业试点",
     staticHref: "/enterprise/#contact",
     imageAlt: "知远桌面工作台界面",
@@ -88,12 +88,12 @@ const pages = [
     page: "enterprise",
     path: "/en/enterprise/",
     alternatePath: "/enterprise/",
-    title: "ZhiYuan Enterprise — Persona Agent + Enterprise Governance",
+    title: "ZhiYuan Enterprise — AI digital-employee platform",
     description:
-      "ZhiYuan Enterprise combines personal companions (Persona Agent), departmental digital employees and enterprise governance. Delivery is phased by project.",
-    heroTitle: "Persona Agent + Enterprise governance",
+      "ZhiYuan Enterprise is an AI digital-employee platform: role-based employees, in-chat approval write-back and personal companions within permission and approval boundaries. Private deployment supported; delivery is phased by use case.",
+    heroTitle: "Enterprise AI digital-employee platform",
     heroLead:
-      "Personal companions (Persona Agent), departmental digital employees and enterprise governance for daily work. Ongoing collaboration and multi-companion capabilities are delivered in phases, with scope confirmed per project.",
+      "People and AI work within job roles; identity, data access and sensitive actions stay inside enterprise permissions and approvals. Web chat and admin consoles support private deployment.",
     staticAction: "Discuss a pilot",
     staticHref: "/en/enterprise/#contact",
     imageAlt: "The ZhiYuan desktop workbench",
