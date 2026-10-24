@@ -126,6 +126,16 @@ const STROKE_ICONS: Record<string, ReactNode> = {
   ),
   menu: <path d="M4 7h16M4 12h16M4 17h16" />,
   close: <path d="m6 6 12 12M18 6 6 18" />,
+  maximize: (
+    <>
+      <path d="M8 3H3v5m0 8v5h5m8 0h5v-5m0-8V3h-5" />
+    </>
+  ),
+  minimize: (
+    <>
+      <path d="M3 8h5V3m8 0v5h5m0 8h-5v5m-8 0v-5H3" />
+    </>
+  ),
   globe: (
     <>
       <circle cx="12" cy="12" r="8.5" />
