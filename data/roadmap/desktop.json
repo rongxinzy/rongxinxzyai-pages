@@ -89,6 +89,12 @@
           "text": "应用内更新改为下载完成、校验通过后才提示可升级，进度不再回跳，点击升级后的卡顿减少；静默安装与卸载更可靠，失败时给出可读原因。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1293",
           "done": true
+        },
+        {
+          "date": "2026-10-23",
+          "text": "Windows 上点击「重启更新」后改为无窗口静默安装，不再弹出原生安装向导，装完自动重启到新版本。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1308",
+          "done": true
         }
       ]
     },
