@@ -205,7 +205,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     showcaseOverline: "DESKTOP WORKBENCH",
     showcaseTitle: "在一个工作区完成拆解、执行与交付。",
     showcaseLead:
-      "左侧栏集中切换会话、本地模型与技能。在模型库检索并下载 GGUF 权重，即可启动本地推理服务。",
+      "左侧栏集中切换会话、本地模型与技能。在模型库检索并下载 GGUF 权重，即可启动本地推理服务。通用设置可开启桌面伙伴，七种官方形象可选。",
     showcaseCards: [
       {
         title: "任务对话",
@@ -226,6 +226,11 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
         title: "本机工作区",
         desc: "知远仅在授权目录内读写文件，生成的结果直接写回本地文件夹。",
         alt: "工作台主界面与任务输入区",
+      },
+      {
+        title: "桌面伙伴",
+        desc: "可选的桌面角色只读展示任务状态，默认关闭。七种官方形象可在通用设置切换，含原有小远与六款新角色。",
+        alt: "通用设置中的桌面伙伴与官方形象选择",
       },
     ],
     modelsOverline: "LOCAL INFERENCE · POWERED BY LLAMA.CPP",
@@ -473,7 +478,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     showcaseOverline: "DESKTOP WORKBENCH",
     showcaseTitle: "From task breakdown to file delivery in one workspace.",
     showcaseLead:
-      "Switch between sessions, local models and skills from the sidebar. Search and download GGUF weights in the model library to start the local inference service.",
+      "Switch between sessions, local models and skills from the sidebar. Search and download GGUF weights in the model library to start the local inference service. Optional desktop companions with seven official appearances are configured under General settings.",
     showcaseCards: [
       {
         title: "Task chat",
@@ -494,6 +499,11 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
         title: "Local workspace",
         desc: "ZhiYuan reads and writes only within directories you authorize, saving generated files directly back to the local folder.",
         alt: "Main workbench window and task input area",
+      },
+      {
+        title: "Desktop companion",
+        desc: "An optional on-desktop character reflects task state read-only and stays off by default. General settings offer seven official appearances, including Xiaoyuan and six new characters.",
+        alt: "General settings for the desktop companion and appearance picker",
       },
     ],
     modelsOverline: "LOCAL INFERENCE · POWERED BY LLAMA.CPP",

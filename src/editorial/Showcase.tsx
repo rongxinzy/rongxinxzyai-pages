@@ -174,10 +174,17 @@ export function Showcase({ copy, locale }: { copy: EditorialCopy; locale: SiteLo
             )}
           </div>
         </div>
-        <div className="mx-auto mt-5 w-full text-center" aria-live="polite">
+        <div className="mx-auto mt-5 w-full max-w-3xl text-center" aria-live="polite">
           <p className="demo-description text-sm leading-6 text-muted">
             {copy.showcaseCards[0].desc}
           </p>
+          {copy.showcaseCards[4] ? (
+            <p className="mt-3 text-sm leading-6 text-muted">
+              <span className="font-medium text-ink">{copy.showcaseCards[4].title}</span>
+              {' · '}
+              {copy.showcaseCards[4].desc}
+            </p>
+          ) : null}
           <p className="mt-2 text-[length:var(--fs-micro)] text-muted md:hidden">{text.mobile}</p>
         </div>
       </div>
