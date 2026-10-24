@@ -32,7 +32,7 @@ A task usually goes through the following process:
 1. You describe the goal on the Work Page and provide the necessary materials and context.
 2. ZhiYuan selects models, Skills, and tools based on the task.
 3. ZhiYuan executes the task step by step, continuously showing progress and tool status.
-4. When the permission mode is **Ask for permission**, every tool operation pauses before it runs and waits for you to approve or deny it.
+4. When the permission mode is **Ask before sensitive actions**, sensitive actions pause before they run and wait for you to approve or deny them.
 5. After the task completes, the result stays on the Work Page and can also be delivered through configured messaging or email channels.
 
 ## Basic Concepts

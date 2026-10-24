@@ -13,10 +13,10 @@ A good task usually includes:
 
 In Work mode, the task input area has a permission mode menu with two modes:
 
-- **Allow all**: tool operations run without authorization, including irreversible operations such as deleting files and running commands. This is the default mode.
-- **Ask for permission**: every tool operation shows an authorization request before it runs, displaying the tool name and parameters, and you choose **Approve** or **Deny**. Commands that could cause data loss or change system state carry a risk warning.
+- **Ask before sensitive actions**: requests your approval before sensitive actions run, displaying the tool name and parameters, and you choose **Approve** or **Deny**. Commands that could cause data loss or change system state carry a risk warning. This is the default mode.
+- **Allow all**: runs without authorization, including irreversible operations such as deleting files and running commands.
 
-When working on important files or in an unfamiliar directory, switch to **Ask for permission** first.
+When working on important files or in an unfamiliar directory, keep **Ask before sensitive actions** selected.
 
 ## Execution Process
 

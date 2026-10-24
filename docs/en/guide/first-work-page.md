@@ -4,7 +4,7 @@ After completing the [Quick Start](./quick-start.md) and configuring a model, yo
 
 ## Understanding the Work Page
 
-The Work Page is where ZhiYuan starts working. The center of the page is the task input area, where you can select the project the task belongs to, the permission mode (**Ask for permission** or **Allow all**; the default is **Allow all**), and the model.
+The Work Page is where ZhiYuan starts working. The center of the page is the task input area, where you can select the project the task belongs to, the permission mode (**Ask before sensitive actions** or **Allow all**; the default is **Ask before sensitive actions**), and the model.
 
 ![ZhiYuan Work Page](../assets/guide/quick-start/work-page.png)
 
