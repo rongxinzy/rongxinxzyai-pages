@@ -109,10 +109,25 @@ export function Enterprise({
       </section>
 
       <section
-        aria-labelledby="enterprise-audience-title"
+        aria-labelledby="enterprise-vision-title"
         className="border-t border-hairline bg-mist"
       >
         <div className={`${sectionPad} pt-16 md:pt-20`}>
+          <span className={overline}>{copy.enterpriseVisionOverline}</span>
+          <h2 id="enterprise-vision-title" className={sectionTitle}>
+            {copy.enterpriseVisionTitle}
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-muted md:text-lg">
+            {copy.enterpriseVisionBody}
+          </p>
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="enterprise-audience-title"
+        className="bg-ground"
+      >
+        <div className={sectionPad}>
           <h2 id="enterprise-audience-title" className={sectionTitle}>
             {copy.enterpriseAudienceTitle}
           </h2>
@@ -124,7 +139,7 @@ export function Enterprise({
 
       <section
         aria-labelledby="enterprise-capabilities-title"
-        className="bg-ground"
+        className="border-t border-hairline bg-mist"
       >
         <div className={sectionPad}>
           <div className="grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
@@ -133,6 +148,9 @@ export function Enterprise({
               <h2 id="enterprise-capabilities-title" className={sectionTitle}>
                 {copy.enterpriseBenefitsTitle}
               </h2>
+              <p className="mt-4 max-w-md text-base leading-7 text-muted">
+                {copy.enterpriseCapabilitiesLead}
+              </p>
             </div>
             <ol className="divide-y divide-hairline border-y border-hairline">
               {copy.enterpriseBenefits.map((benefit, index) => (
@@ -158,7 +176,7 @@ export function Enterprise({
         </div>
       </section>
 
-      <section aria-labelledby="delivery-title" className="bg-mist">
+      <section aria-labelledby="delivery-title" className="bg-ground">
         <div className={sectionPad}>
           <span className={overline}>{copy.deliveryOverline}</span>
           <h2 id="delivery-title" className={sectionTitle}>

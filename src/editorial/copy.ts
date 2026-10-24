@@ -137,9 +137,13 @@ export type EditorialCopy = {
   enterpriseBadge: string;
   enterpriseTitle: string[];
   enterpriseStatus: string;
+  enterpriseVisionOverline: string;
+  enterpriseVisionTitle: string;
+  enterpriseVisionBody: string;
   enterpriseAudienceTitle: string;
   enterpriseAudienceBody: string;
   enterpriseCapabilitiesOverline: string;
+  enterpriseCapabilitiesLead: string;
   enterpriseBenefitsTitle: string;
   enterpriseBenefits: Array<{ title: string; body: string }>;
   enterpriseDocsAction: string;
@@ -375,28 +379,34 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     footerBoundary: `${DOC_BASE}faq/privacy`,
     copyright: "© 2026 北京容芯致远科技有限公司",
     enterpriseBadge: "ZHIYUAN ENTERPRISE",
-    enterpriseTitle: ["企业 AI", "数字员工平台"],
+    enterpriseTitle: ["AI Native", "经营底座"],
     enterpriseLead:
-      "人在岗位上与 AI 协作，身份、数据访问与敏感操作由企业权限与审批约束。Web 对话与管理端支持私有化部署。",
+      "知远企业版面向企业提供 AI Native 经营底座：用数字员工与人机协作，重塑组织怎么做决策、怎么落地、怎么持续运转。",
     enterpriseStatus:
-      "企业版按业务场景分阶段交付。对话内审批写回等能力可在演示与试点环境验收；生产可用范围、部署方式与验收标准在项目评估中逐项确认。",
+      "愿景按场景分阶段建设。当前以 Web 对话与管理端交付，支持私有化部署；可用能力、验收标准与生产范围在项目评估中确认。",
+    enterpriseVisionOverline: "AI NATIVE",
+    enterpriseVisionTitle: "AI Native 企业经营与组织协作",
+    enterpriseVisionBody:
+      "下一阶段的企业管理，不是把旧流程贴一层 AI 皮肤，而是以 AI 为默认生产力与协作单元：岗位有数字员工、个人有搭档、关键决策在权限与治理框架内发生。知远企业版要做的，是让企业用 AI Native 的方式重新组织经营——从试点岗位走向可复制的经营模式，而不是一次性的 demo。能被编制、能被问责、能被规模化的 AI，才会改变公司怎么打仗。",
     enterpriseAudienceTitle: "为谁而做",
     enterpriseAudienceBody:
-      "正在试点岗位制「人 + AI」协作、且需要合规与审批边界的团队。常见起点是销售、运营、客服等岗位的封闭试点，而非全员即时上线。",
-    enterpriseCapabilitiesOverline: "CAPABILITIES",
-    enterpriseBenefitsTitle: "三大能力",
+      "正在把 AI Native 协作纳入经营与运作、且需要权限与合规边界的团队。常见起点是销售、运营、客服等岗位的封闭试点，而非全员即时上线。",
+    enterpriseCapabilitiesOverline: "ON THE BASE",
+    enterpriseCapabilitiesLead:
+      "在 AI Native 底座上，你得到岗位劳动力、个人助手，以及让 AI 进入真实经营而不失控的治理机制。",
+    enterpriseBenefitsTitle: "能力路径",
     enterpriseBenefits: [
       {
-        title: "岗位数字员工",
-        body: "按岗位职责配置，使用企业身份与权限体系。承担专业任务，向授权范围内的请求者交付结果。",
-      },
-      {
-        title: "对话内审批写回",
-        body: "在对话中发起审批卡；批准、拒绝或过期后，结果写回发起方会话，跨参与者可见。外发与写入类操作在批准前不执行。",
+        title: "数字员工",
+        body: "岗位编制里的 AI 劳动力：按职责配置，使用企业身份、职责边界与权限，向授权范围内的请求者交付专业执行。",
       },
       {
         title: "个人搭档",
-        body: "固定归属个人账号，承接长期目标与个人工作连续性。与按岗位编制的数字员工分开管理，不共用身份与岗位权限。",
+        body: "个人侧助手，固定归属账号，承接长期目标与工作连续性。与岗位数字员工分开管理，不共用岗位编制与权限。",
+      },
+      {
+        title: "审批与治理",
+        body: "权限边界、模型与工具授权，以及对话内审批与写回：关键动作在治理框架内发生，外发与写入未批准不执行。",
       },
     ],
     enterpriseDocsAction: "阅读企业版产品说明",
@@ -405,10 +415,10 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     scope: "功能状态、部署方式、数据范围与验收标准在项目评估中确认，交付内容以合同约定为准。",
     architectureTitle: "边界与原则",
     architectureLead:
-      "企业版以岗位数字员工平台为主。个人搭档是独立能力；开放范围、模型与工具访问，以及对外写入，均以企业策略与审批为准。",
+      "AI Native 运作不等于取消人工决策。岗位员工与个人搭档分轨；能力开放、模型与工具调用及对外写入，均以企业策略与审批为准。",
     architecture: [
       { title: "岗位员工 ≠ 个人搭档", items: "数字员工按岗位或服务范围配属 / 个人搭档固定属于一个账号 / 二者身份与权限不混用" },
-      { title: "审批先于写入", items: "敏感步骤在对话内走审批卡 / 处理结果写回原会话 / 未批准不执行对外写入" },
+      { title: "治理先于执行", items: "权限与审批定义可执行范围 / 对话内可完成审批与结果回写 / 未批准不执行对外写入" },
       { title: "权限与留痕", items: "企业身份决定可见数据与可调用工具 / 受管工具检查请求者数据范围 / 操作事件供运行与合规排查" },
     ],
     deliveryOverline: "LANDING",
@@ -424,7 +434,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
       },
       {
         title: "纳入现有协作",
-        body: "将对话内审批与写回接入现有交接与审批习惯，完成试点验收后再评估人员与场景扩展。",
+        body: "将人机协作与治理接入现有交接、审批与管理习惯，完成试点验收后再评估人员与场景扩展。",
       },
     ],
     comparisonOverline: "OPEN DESKTOP & ENTERPRISE",
@@ -432,7 +442,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     comparisonHint: "左右滑动查看对比",
     headers: ["维度", "开源桌面版", "知远企业版"],
     comparison: [
-      ["定位", "个人在本机使用开源工作台", "组织内岗位数字员工与人 + AI 协作平台"],
+      ["定位", "个人在本机使用开源工作台", "AI Native 经营底座与企业人机协作"],
       ["主界面", "本机桌面应用", "Web 对话与管理端（支持私有化部署）"],
       ["身份与权限", "用户自行配置模型与工具", "企业身份、岗位权限、模型授权与受管工具数据范围"],
       ["起步方式", "下载安装，参考文档使用", "需求评估、岗位试点与分阶段交付"],
@@ -653,28 +663,34 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     footerBoundary: "/en/docs/faq/privacy",
     copyright: "© 2026 Beijing Rongxin Zhiyuan Technology Co., Ltd.",
     enterpriseBadge: "ZHIYUAN ENTERPRISE",
-    enterpriseTitle: ["Enterprise AI", "digital-employee platform"],
+    enterpriseTitle: ["AI Native", "operating foundation"],
     enterpriseLead:
-      "People and AI work within job roles; identity, data access and sensitive actions stay inside enterprise permissions and approvals. Web chat and admin consoles support private deployment.",
+      "ZhiYuan Enterprise is an AI Native operating foundation for organizations: digital employees and human–AI collaboration reshape how decisions are made, work is executed and operations keep running.",
     enterpriseStatus:
-      "Enterprise delivery is phased by use case. In-chat approval write-back and related flows can be validated in demo and pilot environments; production scope, deployment and acceptance criteria are confirmed per project.",
+      "The vision rolls out by scenario. Today: web chat and admin, with private deployment supported. Capabilities, acceptance criteria and production scope are confirmed per project.",
+    enterpriseVisionOverline: "AI NATIVE",
+    enterpriseVisionTitle: "AI-native enterprise operations and collaboration",
+    enterpriseVisionBody:
+      "The next stage of management is not a thin AI layer on old processes. AI becomes the default unit of production and collaboration: roles staffed with digital employees, individuals supported by companions, critical decisions inside permission and governance boundaries. ZhiYuan Enterprise reorganizes how the business runs in an AI-native way—from pilot roles toward repeatable operating patterns, not one-off demos. AI that can be staffed, held accountable and scaled is what changes how a company competes.",
     enterpriseAudienceTitle: "Who it is for",
     enterpriseAudienceBody:
-      "Teams piloting role-based human-and-AI collaboration that need compliance and approval boundaries. Typical starting points are bounded pilots in sales, operations or support—not organization-wide rollout on day one.",
-    enterpriseCapabilitiesOverline: "CAPABILITIES",
-    enterpriseBenefitsTitle: "Three capabilities",
+      "Teams bringing AI-native collaboration into how they operate, with clear permission and compliance boundaries. Typical starts are bounded pilots in sales, operations or support—not organization-wide rollout on day one.",
+    enterpriseCapabilitiesOverline: "ON THE BASE",
+    enterpriseCapabilitiesLead:
+      "On the AI Native foundation you get role workforce, personal assistants, and governance that keeps AI inside real operations without losing control.",
+    enterpriseBenefitsTitle: "Capability path",
     enterpriseBenefits: [
       {
-        title: "Role-based digital employees",
-        body: "Configured by job remit, using enterprise identity and permissions. They handle specialist work and deliver results to authorized requesters.",
-      },
-      {
-        title: "In-chat approval write-back",
-        body: "Start approval cards in conversation; after approve, reject or expiry, the outcome writes back to the originating thread for all participants. Outbound or write actions do not run before approval.",
+        title: "Digital employees",
+        body: "AI labor in the role structure: configured by remit with enterprise identity, duty boundaries and permissions; specialist execution for authorized requesters.",
       },
       {
         title: "Personal companion",
-        body: "Bound to an individual account for long-running goals and personal work continuity. Managed separately from role-based digital employees—no shared identity or role permissions.",
+        body: "Individual-side assistant bound to one account for long-running goals and continuity. Separate from role-based digital employees—no shared role staffing or permissions.",
+      },
+      {
+        title: "Approval and governance",
+        body: "Permission boundaries, model and tool authorization, in-conversation approval and write-back: critical actions stay inside the governance frame; outbound writes do not run without approval.",
       },
     ],
     enterpriseDocsAction: "Read the enterprise product overview",
@@ -683,10 +699,10 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     scope: "Feature availability, deployment, data scope and acceptance criteria are confirmed during evaluation. The contract defines deliverables.",
     architectureTitle: "Boundaries",
     architectureLead:
-      "Enterprise centers on role-based digital employees. Personal companions are a separate capability; what is exposed, which models and tools run, and outbound writes follow enterprise policy and approval.",
+      "AI-native operations do not remove human decision-making. Role employees and personal companions stay on separate tracks; capability exposure, models, tools and outbound writes follow enterprise policy and approval.",
     architecture: [
       { title: "Role employee ≠ personal companion", items: "Digital employees by role or service scope / Companions tied to one account / Identities and permissions stay separate" },
-      { title: "Approval before writes", items: "Sensitive steps use in-chat approval cards / Outcomes write back to the source thread / No outbound write until approved" },
+      { title: "Governance before execution", items: "Permissions and approval define what may run / Approvals and outcomes can complete in conversation / No outbound write until approved" },
       { title: "Permissions and records", items: "Enterprise identity sets data and tool access / Managed tools check requester scope / Events support operations and compliance review" },
     ],
     deliveryOverline: "LANDING",
@@ -702,7 +718,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
       },
       {
         title: "Fit existing collaboration",
-        body: "Wire in-chat approval and write-back to current handoffs and approval habits. Expand users and scenarios after pilot acceptance.",
+        body: "Connect human–AI workflows and governance to current handoffs, approval and management habits. Expand users and scenarios after pilot acceptance.",
       },
     ],
     comparisonOverline: "OPEN DESKTOP & ENTERPRISE",
@@ -710,7 +726,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     comparisonHint: "Scroll to compare",
     headers: ["Dimension", "Open-source desktop", "ZhiYuan Enterprise"],
     comparison: [
-      ["Focus", "Individual use of the open workbench on a local machine", "In-organization role digital employees and human + AI collaboration"],
+      ["Focus", "Individual use of the open workbench on a local machine", "AI Native operating foundation and governed human–AI operations"],
       ["Primary UI", "Local desktop app", "Web chat and admin (private deployment supported)"],
       ["Identity & access", "User-configured models and tools", "Enterprise identity, role permissions, model authorization and managed-tool data scope"],
       ["Getting started", "Download and follow the documentation", "Evaluation, role pilot and phased delivery"],
