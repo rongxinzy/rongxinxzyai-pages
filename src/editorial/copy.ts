@@ -137,6 +137,13 @@ export type EditorialCopy = {
   enterpriseBadge: string;
   enterpriseTitle: string[];
   enterpriseStatus: string;
+  enterpriseVisionOverline: string;
+  enterpriseVisionTitle: string;
+  enterpriseVisionBody: string;
+  enterpriseAudienceTitle: string;
+  enterpriseAudienceBody: string;
+  enterpriseCapabilitiesOverline: string;
+  enterpriseCapabilitiesLead: string;
   enterpriseBenefitsTitle: string;
   enterpriseBenefits: Array<{ title: string; body: string }>;
   enterpriseDocsAction: string;
@@ -372,63 +379,73 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     footerBoundary: `${DOC_BASE}faq/privacy`,
     copyright: "© 2026 北京容芯致远科技有限公司",
     enterpriseBadge: "ZHIYUAN ENTERPRISE",
-    enterpriseTitle: ["Persona Agent", "+ 企业级治理"],
+    enterpriseTitle: ["AI Native", "经营底座"],
     enterpriseLead:
-      "个人搭档围绕员工的日常工作持续协作，部门数字员工承担专业任务。企业级治理管理身份、模型授权与受管工具的数据范围，让协作进入业务流程。",
+      "知远企业版面向企业提供 AI Native 经营底座：用数字员工与人机协作，重塑组织怎么做决策、怎么落地、怎么持续运转。",
     enterpriseStatus:
-      "企业版按业务场景分阶段交付。持续工作、多搭档共享环境及跨员工协作的功能与验收范围，在项目评估中逐项确认。",
-    enterpriseBenefitsTitle: "从个人工作，连接部门协作",
+      "愿景按场景分阶段建设。当前以 Web 对话与管理端交付，支持私有化部署；可用能力、验收标准与生产范围在项目评估中确认。",
+    enterpriseVisionOverline: "AI NATIVE",
+    enterpriseVisionTitle: "AI Native 企业经营与组织协作",
+    enterpriseVisionBody:
+      "下一阶段的企业管理，不是把旧流程贴一层 AI 皮肤，而是以 AI 为默认生产力与协作单元：岗位有数字员工、个人有搭档、关键决策在权限与治理框架内发生。知远企业版要做的，是让企业用 AI Native 的方式重新组织经营——从试点岗位走向可复制的经营模式，而不是一次性的 demo。能被编制、能被问责、能被规模化的 AI，才会改变公司怎么打仗。",
+    enterpriseAudienceTitle: "为谁而做",
+    enterpriseAudienceBody:
+      "正在把 AI Native 协作纳入经营与运作、且需要权限与合规边界的团队。常见起点是销售、运营、客服等岗位的封闭试点，而非全员即时上线。",
+    enterpriseCapabilitiesOverline: "ON THE BASE",
+    enterpriseCapabilitiesLead:
+      "在 AI Native 底座上，你得到岗位劳动力、个人助手，以及让 AI 进入真实经营而不失控的治理机制。",
+    enterpriseBenefitsTitle: "能力路径",
     enterpriseBenefits: [
       {
-        title: "延续工作上下文",
-        body: "个人搭档（Persona Agent）面向固定用户，围绕目标、资料和待办持续协作，减少重复交代背景。",
+        title: "数字员工",
+        body: "岗位编制里的 AI 劳动力：按职责配置，使用企业身份、职责边界与权限，向授权范围内的请求者交付专业执行。",
       },
       {
-        title: "调用部门专业能力",
-        body: "部门数字员工按职责处理专业任务，将结果交付给请求者，支持员工直接交办与搭档协作。",
+        title: "个人搭档",
+        body: "个人侧助手，固定归属账号，承接长期目标与工作连续性。与岗位数字员工分开管理，不共用岗位编制与权限。",
       },
       {
-        title: "管理协作边界",
-        body: "企业管理身份与模型授权，受管业务工具检查请求者的数据范围，操作事件为运行排查提供依据。",
+        title: "审批与治理",
+        body: "权限边界、模型与工具授权，以及对话内审批与写回：关键动作在治理框架内发生，外发与写入未批准不执行。",
       },
     ],
-    enterpriseDocsAction: "阅读企业产品说明",
-    enterpriseDocsHref: "/docs/guide/what-is-zhiyuan#企业版persona-agent-与企业级治理",
+    enterpriseDocsAction: "阅读企业版产品说明",
+    enterpriseDocsHref: "/docs/guide/what-is-zhiyuan",
     contactAction: "讨论企业试点",
     scope: "功能状态、部署方式、数据范围与验收标准在项目评估中确认，交付内容以合同约定为准。",
-    architectureTitle: "个人搭档、部门能力与企业治理",
+    architectureTitle: "边界与原则",
     architectureLead:
-      "个人搭档承接用户目标，部门数字员工提供专业服务，治理层定义访问与运行边界。多搭档方案按用户设置个人工作环境（Personal Workspace），共享该用户的文件与浏览器登录状态，不同用户的环境相互隔离。",
+      "AI Native 运作不等于取消人工决策。岗位员工与个人搭档分轨；能力开放、模型与工具调用及对外写入，均以企业策略与审批为准。",
     architecture: [
-      { title: "个人搭档 · Persona Agent", items: "固定用户 / 持续工作上下文 / 个人工作环境" },
-      { title: "部门数字员工", items: "部门职责 / 专业工具与流程 / 任务结果交付" },
-      { title: "企业级治理", items: "企业身份 / 模型授权 / 受管工具数据范围" },
+      { title: "岗位员工 ≠ 个人搭档", items: "数字员工按岗位或服务范围配属 / 个人搭档固定属于一个账号 / 二者身份与权限不混用" },
+      { title: "治理先于执行", items: "权限与审批定义可执行范围 / 对话内可完成审批与结果回写 / 未批准不执行对外写入" },
+      { title: "权限与留痕", items: "企业身份决定可见数据与可调用工具 / 受管工具检查请求者数据范围 / 操作事件供运行与合规排查" },
     ],
-    deliveryOverline: "PILOT & DELIVERY",
-    deliveryTitle: "用具体任务验证协作价值",
+    deliveryOverline: "LANDING",
+    deliveryTitle: "怎么落地",
     delivery: [
       {
-        title: "选择试点任务",
-        body: "确认使用人员、日常任务与部门协作需求，约定效率、响应速度和结果质量的验收标准。",
+        title: "私有化或内网演示",
+        body: "在隔离环境演示 Web 对话与管理端，确认部署条件、网络与数据边界。",
       },
       {
-        title: "配置运行环境",
-        body: "根据试点范围确认模型、业务系统、数据访问与资源配置，明确可用能力和待开发项。",
+        title: "岗位试点",
+        body: "选定岗位、典型任务与参与人数，约定验收标准，并列出试点内可用能力与待开发项。",
       },
       {
-        title: "验证与扩展",
-        body: "以实际任务检查结果和运行记录，完成验收后再确定人员、场景与服务范围的扩展。",
+        title: "纳入现有协作",
+        body: "将人机协作与治理接入现有交接、审批与管理习惯，完成试点验收后再评估人员与场景扩展。",
       },
     ],
-    comparisonOverline: "DESKTOP & ENTERPRISE",
-    comparisonTitle: "个人桌面与企业方案",
+    comparisonOverline: "OPEN DESKTOP & ENTERPRISE",
+    comparisonTitle: "开源桌面与企业版",
     comparisonHint: "左右滑动查看对比",
-    headers: ["范围", "开源桌面版", "企业方案"],
+    headers: ["维度", "开源桌面版", "知远企业版"],
     comparison: [
-      ["服务对象", "个人在本机完成任务", "员工个人搭档与部门专业服务"],
-      ["工作环境", "用户授权的本机文件与工具", "按用户划分工作环境，接入企业系统"],
-      ["模型与管理", "用户配置模型和工具", "管理企业身份、模型授权与工具访问范围"],
-      ["获取方式", "下载安装，参考文档使用", "需求评估、试点与分阶段交付"],
+      ["定位", "个人在本机使用开源工作台", "AI Native 经营底座与企业人机协作"],
+      ["主界面", "本机桌面应用", "Web 对话与管理端（支持私有化部署）"],
+      ["身份与权限", "用户自行配置模型与工具", "企业身份、岗位权限、模型授权与受管工具数据范围"],
+      ["起步方式", "下载安装，参考文档使用", "需求评估、岗位试点与分阶段交付"],
     ],
     contactOverline: "CONTACT",
     contactTitle: "确定第一个试点场景",
@@ -646,63 +663,73 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     footerBoundary: "/en/docs/faq/privacy",
     copyright: "© 2026 Beijing Rongxin Zhiyuan Technology Co., Ltd.",
     enterpriseBadge: "ZHIYUAN ENTERPRISE",
-    enterpriseTitle: ["Persona Agent", "+ Enterprise governance"],
+    enterpriseTitle: ["AI Native", "operating foundation"],
     enterpriseLead:
-      "Personal companions work with employees across their daily tasks. Departmental digital employees handle specialized work. Enterprise governance manages identity, model authorization and data scope for managed tools.",
+      "ZhiYuan Enterprise is an AI Native operating foundation for organizations: digital employees and human–AI collaboration reshape how decisions are made, work is executed and operations keep running.",
     enterpriseStatus:
-      "Enterprise delivery is phased by use case. Ongoing work, shared environments for multiple companions and collaboration across employees are evaluated individually, with feature scope and acceptance criteria defined for each project.",
-    enterpriseBenefitsTitle: "From individual work to department collaboration",
+      "The vision rolls out by scenario. Today: web chat and admin, with private deployment supported. Capabilities, acceptance criteria and production scope are confirmed per project.",
+    enterpriseVisionOverline: "AI NATIVE",
+    enterpriseVisionTitle: "AI-native enterprise operations and collaboration",
+    enterpriseVisionBody:
+      "The next stage of management is not a thin AI layer on old processes. AI becomes the default unit of production and collaboration: roles staffed with digital employees, individuals supported by companions, critical decisions inside permission and governance boundaries. ZhiYuan Enterprise reorganizes how the business runs in an AI-native way—from pilot roles toward repeatable operating patterns, not one-off demos. AI that can be staffed, held accountable and scaled is what changes how a company competes.",
+    enterpriseAudienceTitle: "Who it is for",
+    enterpriseAudienceBody:
+      "Teams bringing AI-native collaboration into how they operate, with clear permission and compliance boundaries. Typical starts are bounded pilots in sales, operations or support—not organization-wide rollout on day one.",
+    enterpriseCapabilitiesOverline: "ON THE BASE",
+    enterpriseCapabilitiesLead:
+      "On the AI Native foundation you get role workforce, personal assistants, and governance that keeps AI inside real operations without losing control.",
+    enterpriseBenefitsTitle: "Capability path",
     enterpriseBenefits: [
       {
-        title: "Carry work context forward",
-        body: "A personal companion, or Persona Agent, serves a specific user across goals, materials and follow-ups, reducing the need to repeat background information.",
+        title: "Digital employees",
+        body: "AI labor in the role structure: configured by remit with enterprise identity, duty boundaries and permissions; specialist execution for authorized requesters.",
       },
       {
-        title: "Draw on department expertise",
-        body: "Departmental digital employees handle specialized tasks and deliver results to the requester, supporting direct employee requests and companion collaboration.",
+        title: "Personal companion",
+        body: "Individual-side assistant bound to one account for long-running goals and continuity. Separate from role-based digital employees—no shared role staffing or permissions.",
       },
       {
-        title: "Set working boundaries",
-        body: "The organization manages identity and model authorization. Managed business tools check the requester’s data scope, while event records support operational troubleshooting.",
+        title: "Approval and governance",
+        body: "Permission boundaries, model and tool authorization, in-conversation approval and write-back: critical actions stay inside the governance frame; outbound writes do not run without approval.",
       },
     ],
-    enterpriseDocsAction: "Read the enterprise overview",
-    enterpriseDocsHref: "/en/docs/guide/what-is-zhiyuan#enterprise-persona-agent-and-enterprise-governance",
+    enterpriseDocsAction: "Read the enterprise product overview",
+    enterpriseDocsHref: "/en/docs/guide/what-is-zhiyuan",
     contactAction: "Discuss a pilot",
     scope: "Feature availability, deployment, data scope and acceptance criteria are confirmed during evaluation. The contract defines deliverables.",
-    architectureTitle: "Personal companions, department expertise and governance",
+    architectureTitle: "Boundaries",
     architectureLead:
-      "Personal companions work toward user goals; departmental digital employees provide specialist services; governance defines access and operating boundaries. The multi-companion design uses a Personal Workspace per user, with shared files and browser sign-in state for that user's companions and isolation between users.",
+      "AI-native operations do not remove human decision-making. Role employees and personal companions stay on separate tracks; capability exposure, models, tools and outbound writes follow enterprise policy and approval.",
     architecture: [
-      { title: "Personal companion · Persona Agent", items: "Dedicated user / Ongoing work context / Personal Workspace" },
-      { title: "Departmental digital employee", items: "Defined remit / Specialized tools and workflows / Task deliverables" },
-      { title: "Enterprise governance", items: "Enterprise identity / Model authorization / Managed-tool data scope" },
+      { title: "Role employee ≠ personal companion", items: "Digital employees by role or service scope / Companions tied to one account / Identities and permissions stay separate" },
+      { title: "Governance before execution", items: "Permissions and approval define what may run / Approvals and outcomes can complete in conversation / No outbound write until approved" },
+      { title: "Permissions and records", items: "Enterprise identity sets data and tool access / Managed tools check requester scope / Events support operations and compliance review" },
     ],
-    deliveryOverline: "PILOT & DELIVERY",
-    deliveryTitle: "Evaluate collaboration through real work",
+    deliveryOverline: "LANDING",
+    deliveryTitle: "How to land",
     delivery: [
       {
-        title: "Choose pilot tasks",
-        body: "Identify users, daily tasks and department handoffs. Agree on acceptance criteria for efficiency, response time and result quality.",
+        title: "Private or intranet demo",
+        body: "Demonstrate web chat and admin in an isolated environment. Confirm deployment requirements, networking and data boundaries.",
       },
       {
-        title: "Configure the environment",
-        body: "Define models, business systems, data access and resources. Identify available capabilities and development work within the pilot scope.",
+        title: "Role pilot",
+        body: "Pick roles, representative tasks and participants. Agree acceptance criteria and list capabilities in scope versus follow-on work.",
       },
       {
-        title: "Validate and expand",
-        body: "Review task results and execution records. Agree on additional users, use cases and services after acceptance.",
+        title: "Fit existing collaboration",
+        body: "Connect human–AI workflows and governance to current handoffs, approval and management habits. Expand users and scenarios after pilot acceptance.",
       },
     ],
-    comparisonOverline: "DESKTOP & ENTERPRISE",
-    comparisonTitle: "Personal desktop and enterprise",
+    comparisonOverline: "OPEN DESKTOP & ENTERPRISE",
+    comparisonTitle: "Open desktop and enterprise",
     comparisonHint: "Scroll to compare",
-    headers: ["Scope", "Open-source desktop", "Enterprise"],
+    headers: ["Dimension", "Open-source desktop", "ZhiYuan Enterprise"],
     comparison: [
-      ["Users", "Individuals working on their own computer", "Employee companions and departmental digital employees"],
-      ["Environment", "Authorized local files and tools", "Per-user workspaces and business integrations"],
-      ["Models & management", "User-configured models and tools", "Enterprise identity, model authorization and tool access scope"],
-      ["Getting started", "Download and follow the documentation", "Evaluation, pilot and phased delivery"],
+      ["Focus", "Individual use of the open workbench on a local machine", "AI Native operating foundation and governed human–AI operations"],
+      ["Primary UI", "Local desktop app", "Web chat and admin (private deployment supported)"],
+      ["Identity & access", "User-configured models and tools", "Enterprise identity, role permissions, model authorization and managed-tool data scope"],
+      ["Getting started", "Download and follow the documentation", "Evaluation, role pilot and phased delivery"],
     ],
     contactOverline: "CONTACT",
     contactTitle: "Define your first pilot",

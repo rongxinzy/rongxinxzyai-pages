@@ -10,7 +10,7 @@ import { CardSpotlight } from "../effects/CardSpotlight";
 import { TracingBeam } from "../effects/TracingBeam";
 import { BackgroundBeams } from "../effects/BackgroundBeams";
 
-const ARCH_ICONS = ["person", "dataset", "shield"] as const;
+const BOUNDARY_ICONS = ["dataset", "description", "shield"] as const;
 
 const sectionPad = "mx-auto max-w-7xl px-6 pt-24 pb-16 md:pt-28 md:pb-20";
 
@@ -109,14 +109,49 @@ export function Enterprise({
       </section>
 
       <section
-        aria-labelledby="enterprise-benefits-title"
+        aria-labelledby="enterprise-vision-title"
+        className="border-t border-hairline bg-mist"
+      >
+        <div className={`${sectionPad} pt-16 md:pt-20`}>
+          <span className={overline}>{copy.enterpriseVisionOverline}</span>
+          <h2 id="enterprise-vision-title" className={sectionTitle}>
+            {copy.enterpriseVisionTitle}
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-muted md:text-lg">
+            {copy.enterpriseVisionBody}
+          </p>
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="enterprise-audience-title"
         className="bg-ground"
       >
         <div className={sectionPad}>
+          <h2 id="enterprise-audience-title" className={sectionTitle}>
+            {copy.enterpriseAudienceTitle}
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-muted md:text-lg">
+            {copy.enterpriseAudienceBody}
+          </p>
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="enterprise-capabilities-title"
+        className="border-t border-hairline bg-mist"
+      >
+        <div className={sectionPad}>
           <div className="grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
-            <h2 id="enterprise-benefits-title" className={sectionTitle}>
-              {copy.enterpriseBenefitsTitle}
-            </h2>
+            <div>
+              <span className={overline}>{copy.enterpriseCapabilitiesOverline}</span>
+              <h2 id="enterprise-capabilities-title" className={sectionTitle}>
+                {copy.enterpriseBenefitsTitle}
+              </h2>
+              <p className="mt-4 max-w-md text-base leading-7 text-muted">
+                {copy.enterpriseCapabilitiesLead}
+              </p>
+            </div>
             <ol className="divide-y divide-hairline border-y border-hairline">
               {copy.enterpriseBenefits.map((benefit, index) => (
                 <li key={benefit.title} className="flex gap-5 py-7 sm:gap-8">
@@ -137,30 +172,6 @@ export function Enterprise({
                 </li>
               ))}
             </ol>
-          </div>
-        </div>
-      </section>
-
-      <section aria-labelledby="architecture-title" className="bg-mist">
-        <div className={sectionPad}>
-          <h2 id="architecture-title" className={sectionTitle}>
-            {copy.architectureTitle}
-          </h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-muted">
-            {copy.architectureLead}
-          </p>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {copy.architecture.map((row, index) => (
-              <CardSpotlight key={row.title} className="p-6">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-hairline bg-mist text-accent">
-                  <Icon name={ARCH_ICONS[index]} size={20} />
-                </div>
-                <h3 className="mt-5 text-base font-semibold text-ink">
-                  {row.title}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-muted">{row.items}</p>
-              </CardSpotlight>
-            ))}
           </div>
         </div>
       </section>
@@ -191,6 +202,30 @@ export function Enterprise({
               ))}
             </ol>
           </TracingBeam>
+        </div>
+      </section>
+
+      <section aria-labelledby="enterprise-boundaries-title" className="bg-ground">
+        <div className={sectionPad}>
+          <h2 id="enterprise-boundaries-title" className={sectionTitle}>
+            {copy.architectureTitle}
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-muted">
+            {copy.architectureLead}
+          </p>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {copy.architecture.map((row, index) => (
+              <CardSpotlight key={row.title} className="p-6">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-hairline bg-mist text-accent">
+                  <Icon name={BOUNDARY_ICONS[index]} size={20} />
+                </div>
+                <h3 className="mt-5 text-base font-semibold text-ink">
+                  {row.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-muted">{row.items}</p>
+              </CardSpotlight>
+            ))}
+          </div>
         </div>
       </section>
 
