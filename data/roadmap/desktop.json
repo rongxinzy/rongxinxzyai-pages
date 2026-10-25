@@ -555,6 +555,18 @@
           "text": "桌面伙伴扩展为七种官方形象：保留小远，新增游栗、团团、绵绵、竹栗、云墨、麦小；通用设置可选形象并自动保存，空闲时播放更长的观察、点头、伸展、庆祝、小憩序列。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1327",
           "done": true
+        },
+        {
+          "date": "2026-10-24",
+          "text": "桌面伙伴待机时更鲜活：偶尔侧看、点头、慢走漫游，任务状态用头顶气泡提示；单击有开心反馈，右键可点播小动作，偶尔还会用本地短句碎碎念，漫游与碎碎念均可在设置关闭。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1320",
+          "done": true
+        },
+        {
+          "date": "2026-10-24",
+          "text": "界面交互与可读性打磨：发送键、模板卡等动效更安静，自动化弹窗改为单一滚动区、标题和操作始终可见；修正深色模式文字对比度，首页快捷动作按窗口宽度自适应排列，不再孤立换行。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1324",
+          "done": true
         }
       ]
     },
@@ -579,6 +591,12 @@
           "date": "2026-10-22",
           "text": "内置专家头像和自定义专家的图标、配色整体换新风格，并清理掉过时的内置技能引用。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1299",
+          "done": true
+        },
+        {
+          "date": "2026-10-24",
+          "text": "内置技能清单清理：移除没有对应文件的幽灵配置，补齐专家引用的技能，并保证正式安装包里专家绑定的技能也能装进会话。本地连接器目录同步整理：GitLab 改用官方接口，Excel 与文件访问须先指定授权目录。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1328",
           "done": true
         }
       ]
@@ -640,6 +658,12 @@
           "date": "2026-10-22",
           "text": "修复残留的开始菜单快捷方式抢走任务栏图标和名称的问题：启动时自动清理失效快捷方式，任务栏恢复显示正确的图标与名称。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1307",
+          "done": true
+        },
+        {
+          "date": "2026-10-24",
+          "text": "流式回复渲染继续减负：只处理新增文本、稳定段落批量提交，超长回复时的渲染开销明显下降；输入和切换页面时的重复刷新减少，界面交互更跟手。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1331",
           "done": true
         }
       ]
