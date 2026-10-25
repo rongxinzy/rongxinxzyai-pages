@@ -10,6 +10,7 @@ docs/.vitepress/cache
 src/docs/generated/
 src/blog/generated/
 public/docs-assets/
+scripts/.pet-frames.json
 .codex/
 .github/agents/
 .github/hooks/
