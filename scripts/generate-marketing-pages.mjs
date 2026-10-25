@@ -5,7 +5,16 @@ import { loadRoadmap } from "./validate-roadmap.mjs";
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://www.rongxzyai.com";
-const imageUrl = `${siteUrl}/product/zhiyuan-workspace.png`;
+const zhiyuanImageUrl = `${siteUrl}/product/zhiyuan-workspace.png`;
+const seriyaImageUrl = `${siteUrl}/brand/seriya-owl-scarf-logo.jpg`;
+
+const zhiyuanFavicons = `<link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />`;
+
+const seriyaFavicons = `<link rel="icon" type="image/png" sizes="32x32" href="/brand/seriya-favicon-32.png" />
+    <link rel="apple-touch-icon" href="/brand/seriya-apple-touch-icon.png" />`;
 const roadmap = await loadRoadmap();
 
 function escapeHtml(value) {
@@ -52,16 +61,17 @@ const pages = [
     page: "home",
     path: "/en/",
     alternatePath: "/",
-    title: "ZhiYuan — Open-source AI workbench that runs LLMs locally",
+    title: "Seriya — Open-source desktop companion that runs LLMs locally",
     description:
-      "ZhiYuan is an open-source desktop AI workbench for writing reports, organizing spreadsheets and editing code. It embeds llama.cpp to run GGUF models locally and connects to any OpenAI-compatible API across macOS, Windows and Linux.",
-    heroTitle: "Your computer, now an AI workbench.",
+      "Seriya is an open-source, local-first desktop AI companion for writing reports, organizing spreadsheets and editing code. It embeds llama.cpp to run GGUF models on your machine and connects to any OpenAI-compatible API across macOS, Windows and Linux.",
+    heroTitle: "Your desktop, with an intelligent companion.",
     heroLead:
-      "Write reports, organize spreadsheets and edit code in one window. ZhiYuan includes llama.cpp for running open models on your machine. Local inference does not send inputs to cloud models, while online tools process data through the services you configure.",
-    staticAction: "Download ZhiYuan",
+      "Write reports, organize spreadsheets and edit code in one window. Seriya includes llama.cpp for running open models locally. Local inference does not send inputs to cloud models, while online tools process data through the services you configure.",
+    staticAction: "Download Seriya",
     staticHref: "/en/#download",
-    imageAlt: "The ZhiYuan desktop workbench",
-    schemaName: "ZhiYuan",
+    imageAlt: "Seriya snowy owl companion mark",
+    schemaName: "Seriya",
+    imageUrl: seriyaImageUrl,
   },
   {
     file: "enterprise/index.html",
@@ -88,16 +98,17 @@ const pages = [
     page: "enterprise",
     path: "/en/enterprise/",
     alternatePath: "/enterprise/",
-    title: "ZhiYuan Enterprise — AI Native operating foundation",
+    title: "Seriya Enterprise — AI Native operating foundation",
     description:
-      "ZhiYuan Enterprise is an AI Native operating foundation: digital employees and human–AI collaboration reshape decisions, execution and ongoing operations. Web chat and admin; private deployment supported; phased delivery by scenario.",
+      "Seriya Enterprise is an AI Native operating foundation: digital employees and human–AI collaboration reshape decisions, execution and ongoing operations. Web chat and admin; private deployment supported; phased delivery by scenario.",
     heroTitle: "AI Native operating foundation",
     heroLead:
-      "ZhiYuan Enterprise is an AI Native operating foundation for organizations: digital employees and human–AI collaboration reshape how decisions are made, work is executed and operations keep running.",
+      "Seriya Enterprise is an AI Native operating foundation for organizations: digital employees and human–AI collaboration reshape how decisions are made, work is executed and operations keep running.",
     staticAction: "Discuss a pilot",
     staticHref: "/en/enterprise/#contact",
-    imageAlt: "The ZhiYuan desktop workbench",
-    schemaName: "ZhiYuan Enterprise",
+    imageAlt: "Seriya snowy owl companion mark",
+    schemaName: "Seriya Enterprise",
+    imageUrl: seriyaImageUrl,
   },
   {
     file: "roadmap/index.html",
@@ -123,16 +134,17 @@ const pages = [
     page: "roadmap",
     path: "/en/roadmap/",
     alternatePath: "/roadmap/",
-    title: "ZhiYuan roadmap — Desktop",
+    title: "Seriya roadmap — Desktop",
     description:
-      "Milestones for the ZhiYuan open-source desktop app: the release pipeline, macOS and Linux installers, llama.cpp local inference, and installer size. Each entry links to a pull request or issue.",
+      "Milestones for the Seriya open-source desktop app: the release pipeline, macOS and Linux installers, llama.cpp local inference, and installer size. Each entry links to a pull request or issue.",
     heroTitle: "Desktop roadmap",
     heroLead:
       "Milestones for the open-source desktop app. Each entry links to its pull request or issue.",
     staticAction: "Star on GitHub",
     staticHref: "https://github.com/rongxinzy/RongxinAI",
-    imageAlt: "The ZhiYuan desktop workbench",
-    schemaName: "ZhiYuan desktop roadmap",
+    imageAlt: "Seriya snowy owl companion mark",
+    schemaName: "Seriya desktop roadmap",
+    imageUrl: seriyaImageUrl,
   },
 ];
 
@@ -185,6 +197,7 @@ function renderPage(page) {
       .marketing-static-shell ul { max-width: 680px; padding-left: 1.2em; }
       @media (prefers-color-scheme: dark) { html, body { background: #10141c; } .marketing-static-shell { color: #f3f5f8; } .marketing-static-shell p, .marketing-static-shell li { color: #c5cedb; } }`
       : "";
+  const pageImage = page.imageUrl ?? zhiyuanImageUrl;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": page.page === "home" ? "SoftwareApplication" : "WebPage",
@@ -192,10 +205,10 @@ function renderPage(page) {
     description: page.description,
     url: canonical,
     inLanguage: page.lang,
-    image: imageUrl,
+    image: pageImage,
     ...(page.page === "home"
       ? {
-          alternateName: "ZhiYuan Agent",
+          alternateName: isEnglish ? "Seriya Agent" : "ZhiYuan Agent",
           codeRepository: "https://github.com/rongxinzy/RongxinAI",
           downloadUrl: `${siteUrl}${isEnglish ? "/en/#download" : "/#download"}`,
           applicationCategory: "DeveloperApplication",
@@ -222,16 +235,13 @@ function renderPage(page) {
     <meta property="og:url" content="${canonical}" />
     <meta property="og:title" content="${page.title}" />
     <meta property="og:description" content="${page.description}" />
-    <meta property="og:image" content="${imageUrl}" />
+    <meta property="og:image" content="${pageImage}" />
     <meta property="og:image:alt" content="${page.imageAlt}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${page.title}" />
     <meta name="twitter:description" content="${page.description}" />
-    <meta name="twitter:image" content="${imageUrl}" />
-    <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
-    <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="twitter:image" content="${pageImage}" />
+    ${isEnglish ? seriyaFavicons : zhiyuanFavicons}
     <title>${page.title}</title>
     <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
     <style>

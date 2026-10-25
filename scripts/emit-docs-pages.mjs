@@ -21,8 +21,8 @@ const LOCALES = [
     contentFile: "content-en.json",
     outDir: join("en", "docs"),
     lang: "en",
-    defaultTitle: "ZhiYuan Docs",
-    defaultDescription: "Install, use, and develop with the ZhiYuan agent.",
+    defaultTitle: "Seriya Docs",
+    defaultDescription: "Install, use, and develop with the Seriya desktop companion.",
   },
 ];
 
@@ -33,9 +33,25 @@ const escapeHtml = (value) =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 
+const ZHIYUAN_FAVICONS = `<link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />`;
+
+const SERIYA_FAVICONS = `<link rel="icon" type="image/png" sizes="32x32" href="/brand/seriya-favicon-32.png" />
+    <link rel="apple-touch-icon" href="/brand/seriya-apple-touch-icon.png" />`;
+
+function withLocaleFavicons(html, lang) {
+  const favicons = lang === "en" ? SERIYA_FAVICONS : ZHIYUAN_FAVICONS;
+  return html.replace(ZHIYUAN_FAVICONS, favicons);
+}
+
 async function emitLocale(shell, { contentFile, outDir, lang, defaultTitle, defaultDescription }) {
   const content = JSON.parse(await readFile(join(generatedDir, contentFile), "utf8"));
-  const localeShell = shell.replace(/<html lang="[^"]*">/, `<html lang="${lang}">`);
+  const localeShell = withLocaleFavicons(
+    shell.replace(/<html lang="[^"]*">/, `<html lang="${lang}">`),
+    lang === "en" ? "en" : "zh",
+  );
 
   for (const [route, page] of Object.entries(content)) {
     const title = `${page.title} · ${defaultTitle}`;

@@ -54,9 +54,9 @@ const UI = {
     prev: "Previous",
     next: "Next",
     prevNext: "Previous and next pages",
-    titleSuffix: "ZhiYuan Docs",
-    homeTitle: "ZhiYuan Docs",
-    homeLead: "Install ZhiYuan, set up models, and create tasks.",
+    titleSuffix: "Seriya Docs",
+    homeTitle: "Seriya Docs",
+    homeLead: "Install Seriya, set up models, and create tasks.",
     homeTailPre: "Start with ",
     homeTailLink: "Quick start",
     homeTailPost: ", or pick a page from the sidebar.",
@@ -251,7 +251,7 @@ const HOME_GROUPS: Record<
     {
       text: "Getting started",
       route: "guide/quick-start",
-      description: "Download and install ZhiYuan, set up a model, and create your first work page.",
+      description: "Download and install Seriya, set up a model, and create your first work page.",
     },
     {
       text: "Features",
@@ -329,6 +329,27 @@ export function DocsApp() {
 
   useEffect(() => {
     document.documentElement.lang = locale === "en" ? "en" : "zh-CN";
+  }, [locale]);
+
+  useEffect(() => {
+    if (locale !== "en") return;
+    document
+      .querySelectorAll('link[rel="icon"], link[rel="apple-touch-icon"]')
+      .forEach((node) => node.remove());
+    const add = (attrs: Record<string, string>) => {
+      const link = document.createElement("link");
+      for (const [key, value] of Object.entries(attrs)) {
+        link.setAttribute(key, value);
+      }
+      document.head.appendChild(link);
+    };
+    add({
+      rel: "icon",
+      type: "image/png",
+      sizes: "32x32",
+      href: "/brand/seriya-favicon-32.png",
+    });
+    add({ rel: "apple-touch-icon", href: "/brand/seriya-apple-touch-icon.png" });
   }, [locale]);
 
   useEffect(() => {
