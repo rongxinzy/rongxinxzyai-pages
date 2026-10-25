@@ -4,6 +4,7 @@ import type { EditorialCopy } from './copy';
 import { demoCopy } from './copy';
 import { DemoMessage, readDemoMessage } from '../live-demo/constants';
 import { Icon } from './icons';
+import { DesktopPetGallery } from './DesktopPetGallery';
 
 export function Showcase({ copy, locale }: { copy: EditorialCopy; locale: SiteLocale }) {
   const text = demoCopy(locale);
@@ -284,6 +285,7 @@ export function Showcase({ copy, locale }: { copy: EditorialCopy; locale: SiteLo
           ) : null}
           <p className="mt-2 text-[length:var(--fs-micro)] text-muted md:hidden">{text.mobile}</p>
         </div>
+        {locale !== 'en' ? <DesktopPetGallery /> : null}
       </div>
     </section>
   );

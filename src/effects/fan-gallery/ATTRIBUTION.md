@@ -1,0 +1,1 @@
+Fan gallery interaction adapted from [ReactDrops Fan Gallery](https://reactdrops.dev/components/gallery/fan-gallery) (crisjavr/reactdrops, `packages/components/src/fan-gallery/`). Used under the ReactDrops component license for this site; not republished as a standalone package.
