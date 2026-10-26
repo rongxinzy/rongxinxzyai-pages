@@ -255,6 +255,12 @@
           "text": "模型选择器的「使用本地模型」能正确列出正在运行的本地模型，不再一直显示暂无可用；本地模型上下文不足的校验也随之生效。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1306",
           "done": true
+        },
+        {
+          "date": "2026-10-24",
+          "text": "Windows GPU 版安装包内置双引擎本地推理运行时，本地推理页可浏览对应的模型目录（仅该版本提供）。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1319",
+          "done": true
         }
       ]
     },
@@ -597,6 +603,12 @@
           "date": "2026-10-24",
           "text": "内置技能清单清理：移除没有对应文件的幽灵配置，补齐专家引用的技能，并保证正式安装包里专家绑定的技能也能装进会话。本地连接器目录同步整理：GitLab 改用官方接口，Excel 与文件访问须先指定授权目录。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1328",
+          "done": true
+        },
+        {
+          "date": "2026-10-25",
+          "text": "内置与自定义专家、技能的头像统一为柔和可爱风格，连接器分类占位图也保持同一风格。",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1330",
           "done": true
         }
       ]
