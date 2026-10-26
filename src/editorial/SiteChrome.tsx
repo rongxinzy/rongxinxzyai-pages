@@ -11,19 +11,30 @@ export function Brand({
   home: string;
   small?: boolean;
 }) {
+  const en = home.startsWith("/en");
   return (
     <a
-      className="inline-flex shrink-0 items-center"
+      className="inline-flex shrink-0 items-center gap-2"
       href={home}
-      aria-label={home === "/en/" ? "ZhiYuan home" : "知远首页"}
+      aria-label={en ? "Seriya home" : "知远首页"}
     >
-      <img
-        src="/zhiyuan-logo.svg"
-        width={small ? 100 : 132}
-        height={24}
-        alt=""
-        className="h-6 w-auto"
-      />
+      {en ? (
+        <img
+          src="/brand/seriya-owl-scarf-logo.jpg"
+          width={small ? 32 : 36}
+          height={small ? 32 : 36}
+          alt=""
+          className="size-8 shrink-0 rounded-[10px] object-cover"
+        />
+      ) : (
+        <img
+          src="/zhiyuan-logo.svg"
+          width={small ? 100 : 132}
+          height={24}
+          alt=""
+          className="h-6 w-auto"
+        />
+      )}
     </a>
   );
 }

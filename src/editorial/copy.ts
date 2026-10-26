@@ -18,7 +18,7 @@ type DemoCopy = { [Key in keyof typeof demoZh]: (typeof demoZh)[Key] extends str
 const demoEn: DemoCopy = {
   title: 'Live demo', sample: 'Sample data · Accounts, bots and local resources require the desktop app',
   desktopOnly: 'This preview uses sample data. Use the desktop app to connect accounts, start bots, or access local resources.',
-  operationFailed: 'The operation could not finish. Reset the workbench and try again.',
+  operationFailed: 'The operation could not finish. Reset the demo and try again.',
   start: 'Explore the workspace', hint: 'Use the sidebar, search models, or send a task.',
   reset: 'Reset demo', expand: 'Enter fullscreen', collapse: 'Exit fullscreen',
   loading: 'Loading the workspace…', error: 'The demo could not load. Please retry.', retry: 'Retry',
@@ -458,7 +458,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     menu: "Navigation menu",
     close: "Close menu",
     skip: "Skip to content",
-    brandSub: "AI Workbench",
+    brandSub: "Desktop AI companion",
     navWorkflow: "Features",
     navInference: "Local models",
     navEnterprise: "For teams",
@@ -478,12 +478,12 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     headerDownload: "Download",
     star: "Star",
     releaseStable: "stable",
-    releaseFallback: "ZhiYuan",
-    heroBadgeSub: "Desktop workbench for local models and task automation",
-    headlineTop: "Your computer,",
-    headlineAccent: "now an AI workbench.",
+    releaseFallback: "Seriya",
+    heroBadgeSub: "Local models, task automation, optional desktop companions",
+    headlineTop: "Your desktop,",
+    headlineAccent: "with an intelligent companion.",
     heroLead:
-      "Write reports, organize spreadsheets and edit code in one window. ZhiYuan includes llama.cpp for running open models on your machine. Local inference does not send inputs to cloud models, while online tools process data through the services you configure.",
+      "Write reports, organize spreadsheets and edit code in one window. Seriya includes llama.cpp for running open models locally. Local inference does not send inputs to cloud models, while online tools process data through the services you configure.",
     heroCtaPrimary: "Download for free",
     agplChip: "AGPL-3.0",
     heroCtaSecondary: "Product tour",
@@ -492,19 +492,19 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
       "Windows · x64",
       "Linux · deb / AppImage",
     ],
-    showcaseOverline: "DESKTOP WORKBENCH",
+    showcaseOverline: "LOCAL-FIRST DESKTOP",
     showcaseTitle: "From task breakdown to file delivery in one workspace.",
     showcaseLead:
-      "Switch between sessions, local models and skills from the sidebar. Search and download GGUF weights in the model library to start the local inference service. Optional desktop companions with seven official appearances are configured under General settings.",
+      "Switch between sessions, local models and skills from the sidebar. Search and download GGUF weights in the model library to start the local inference service. Seven scarf companions live under General settings; the snowy owl is the lead mark.",
     showcaseCards: [
       {
         title: "Task chat",
-        desc: "Provide a goal and reference files. ZhiYuan breaks the task into steps and calls tools in sequence, keeping every action, argument and output in the thread.",
+        desc: "Provide a goal and reference files. Seriya breaks the task into steps and calls tools in sequence, keeping every action, argument and output in the thread.",
         alt: "Task chat view showing multi-step task execution",
       },
       {
         title: "Model library",
-        desc: "Search, download and load GGUF models from the UI. ZhiYuan manages the inference server in the background without terminal setup.",
+        desc: "Search, download and load GGUF models from the UI. Seriya manages the inference server in the background without terminal setup.",
         alt: "Model library listing downloadable local models",
       },
       {
@@ -514,19 +514,19 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
       },
       {
         title: "Local workspace",
-        desc: "ZhiYuan reads and writes only within directories you authorize, saving generated files directly back to the local folder.",
-        alt: "Main workbench window and task input area",
+        desc: "Seriya reads and writes only within directories you authorize, saving generated files directly back to the local folder.",
+        alt: "Main desktop window and task input area",
       },
       {
         title: "Desktop companion",
-        desc: "An optional on-desktop character reflects task state read-only and stays off by default. General settings offer seven official appearances, including Xiaoyuan and six new characters.",
+        desc: "An optional on-desktop character reflects task state read-only and stays off by default. General settings offer seven scarf companions, led by the snowy owl.",
         alt: "General settings for the desktop companion and appearance picker",
       },
     ],
     modelsOverline: "LOCAL INFERENCE · POWERED BY LLAMA.CPP",
     modelsTitle: "Run open models on your machine.",
     modelsLead:
-      "ZhiYuan embeds llama.cpp to handle model downloads, loading and server lifecycle. Supported model sizes depend on your system memory and GPU VRAM.",
+      "Seriya embeds llama.cpp to handle model downloads, loading and server lifecycle. Supported model sizes depend on your system memory and GPU VRAM.",
     monitorLabel: "VRAM in use",
     monitorValue: "8.4 GB / 32 GB",
     monitorState: "Running",
@@ -579,11 +579,11 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     pillarsOverline: "PRIVACY & CONTROL",
     pillarsTitle: "Control over files, models and execution.",
     pillarsLead:
-      "When working with source code, meeting notes and business sheets, you define which directories ZhiYuan can access, choose local or cloud models per task, and review tool parameters before execution.",
+      "When working with source code, meeting notes and business sheets, you define which directories Seriya can access, choose local or cloud models per task, and review tool parameters before execution.",
     principles: [
       {
         title: "Data stored on device",
-        body: "Session history, document indexes and settings are stored on your computer. ZhiYuan only accesses directories you explicitly authorize.",
+        body: "Session history, document indexes and settings are stored on your computer. Seriya only accesses directories you explicitly authorize.",
         foot: "Offline mode on macOS and Linux",
       },
       {
@@ -598,7 +598,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
       },
     ],
     downloadOverline: "DOWNLOAD",
-    downloadTitle: "Download ZhiYuan",
+    downloadTitle: "Download Seriya",
     downloadLead:
       "Select an installer for your operating system. Configure a local or cloud model after installation to start a task.",
     downloadAssurance: "Certum & Apple code-signed · SHA-256 verified",
@@ -624,7 +624,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     copyFailedCommand: "Copy failed. Select and copy the command manually.",
     ossStar: "Star on GitHub",
     footerBrand:
-      "ZhiYuan is an open-source desktop AI workbench with built-in llama.cpp inference for local file processing and multi-step tasks.",
+      "Seriya is an open-source, local-first desktop AI companion with built-in llama.cpp inference for local file processing and multi-step tasks.",
     footerRelease: "Stable",
     footerPlatforms: "macOS / Windows / Linux",
     footerColumns: [
@@ -662,16 +662,16 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     footerLegal: ["AGPL-3.0 License", "Release notes", "Privacy"],
     footerBoundary: "/en/docs/faq/privacy",
     copyright: "© 2026 Beijing Rongxin Zhiyuan Technology Co., Ltd.",
-    enterpriseBadge: "ZHIYUAN ENTERPRISE",
+    enterpriseBadge: "SERIYA ENTERPRISE",
     enterpriseTitle: ["AI Native", "operating foundation"],
     enterpriseLead:
-      "ZhiYuan Enterprise is an AI Native operating foundation for organizations: digital employees and human–AI collaboration reshape how decisions are made, work is executed and operations keep running.",
+      "Seriya Enterprise is an AI Native operating foundation for organizations: digital employees and human–AI collaboration reshape how decisions are made, work is executed and operations keep running.",
     enterpriseStatus:
       "The vision rolls out by scenario. Today: web chat and admin, with private deployment supported. Capabilities, acceptance criteria and production scope are confirmed per project.",
     enterpriseVisionOverline: "AI NATIVE",
     enterpriseVisionTitle: "AI-native enterprise operations and collaboration",
     enterpriseVisionBody:
-      "The next stage of management is not a thin AI layer on old processes. AI becomes the default unit of production and collaboration: roles staffed with digital employees, individuals supported by companions, critical decisions inside permission and governance boundaries. ZhiYuan Enterprise reorganizes how the business runs in an AI-native way—from pilot roles toward repeatable operating patterns, not one-off demos. AI that can be staffed, held accountable and scaled is what changes how a company competes.",
+      "The next stage of management is not a thin AI layer on old processes. AI becomes the default unit of production and collaboration: roles staffed with digital employees, individuals supported by companions, critical decisions inside permission and governance boundaries. Seriya Enterprise reorganizes how the business runs in an AI-native way—from pilot roles toward repeatable operating patterns, not one-off demos. AI that can be staffed, held accountable and scaled is what changes how a company competes.",
     enterpriseAudienceTitle: "Who it is for",
     enterpriseAudienceBody:
       "Teams bringing AI-native collaboration into how they operate, with clear permission and compliance boundaries. Typical starts are bounded pilots in sales, operations or support—not organization-wide rollout on day one.",
@@ -724,9 +724,9 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     comparisonOverline: "OPEN DESKTOP & ENTERPRISE",
     comparisonTitle: "Open desktop and enterprise",
     comparisonHint: "Scroll to compare",
-    headers: ["Dimension", "Open-source desktop", "ZhiYuan Enterprise"],
+    headers: ["Dimension", "Open-source desktop", "Seriya Enterprise"],
     comparison: [
-      ["Focus", "Individual use of the open workbench on a local machine", "AI Native operating foundation and governed human–AI operations"],
+      ["Focus", "Individual use of the open desktop companion on a local machine", "AI Native operating foundation and governed human–AI operations"],
       ["Primary UI", "Local desktop app", "Web chat and admin (private deployment supported)"],
       ["Identity & access", "User-configured models and tools", "Enterprise identity, role permissions, model authorization and managed-tool data scope"],
       ["Getting started", "Download and follow the documentation", "Evaluation, role pilot and phased delivery"],
