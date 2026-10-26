@@ -4,7 +4,7 @@ Last updated: 2026-10-12. Operator: Beijing Rongxin Zhiyuan Technology Co., Ltd.
 
 ## Product Data
 
-ZhiYuan is a local-first desktop application: sessions, tasks, configuration, and management data for local models are stored on the user's own device by default. We do not automatically collect this content because a user installs or uses ZhiYuan.
+Seriya is a local-first desktop application: sessions, tasks, configuration, and management data for local models are stored on the user's own device by default. We do not automatically collect this content because a user installs or uses Seriya.
 
 Users can configure cloud models, MCP services, web search, email, or instant messaging channels on their own. When the user explicitly enables these features or initiates a related operation, prompts, file contents, tool parameters, or results may be sent to the third-party service the user has chosen in order to complete that operation. Users should read the privacy policy of the corresponding service before enabling it, and avoid providing sensitive material that should not leave the device.
 

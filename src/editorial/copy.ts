@@ -694,7 +694,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
       },
     ],
     enterpriseDocsAction: "Read the enterprise product overview",
-    enterpriseDocsHref: "/en/docs/guide/what-is-zhiyuan",
+    enterpriseDocsHref: "/en/docs/guide/what-is-seriya",
     contactAction: "Discuss a pilot",
     scope: "Feature availability, deployment, data scope and acceptance criteria are confirmed during evaluation. The contract defines deliverables.",
     architectureTitle: "Boundaries",

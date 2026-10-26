@@ -1,6 +1,6 @@
 # Messaging Channels and Email
 
-After configuring messaging channels, you can assign tasks to ZhiYuan from the instant messaging tools you already use, and task results are replied to the same conversation.
+After configuring messaging channels, you can assign tasks to Seriya from the instant messaging tools you already use, and task results are replied to the same conversation.
 
 ## Supported Platforms
 
@@ -27,11 +27,11 @@ Except for WeChat, each platform supports multiple instances.
 
 Advanced Settings can configure direct-message and group policies, allowed users, the history message limit, the media size limit, the project, and the system prompt.
 
-Conversations created through messaging channels are read-only in ZhiYuan; continue on the corresponding platform. The run record of each channel message can be viewed in **Activity**.
+Conversations created through messaging channels are read-only in Seriya; continue on the corresponding platform. The run record of each channel message can be viewed in **Activity**.
 
 ## Email
 
-**Settings → Email** configures the email Skill so that ZhiYuan can read and send email.
+**Settings → Email** configures the email Skill so that Seriya can read and send email.
 
 1. Select an email provider: Gmail, Outlook, 163 Mail, 126 Mail, QQ Mail, or Custom.
 2. Enter the email address and password. Most providers require an app-specific password or an authorization code.

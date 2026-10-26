@@ -94,7 +94,7 @@ export const DOCS_NAV_EN: DocsNavGroup[] = [
   {
     text: "Getting started",
     items: [
-      { text: "What is Seriya", route: "guide/what-is-zhiyuan" },
+      { text: "What is Seriya", route: "guide/what-is-seriya" },
       { text: "Quick start", route: "guide/quick-start" },
       { text: "Your first work page", route: "guide/first-work-page" },
     ],

@@ -1,8 +1,8 @@
 # Development Overview
 
-The ZhiYuan agent is a desktop application built with Electron, React, and TypeScript. The source code is at [rongxinzy/RongxinAI](https://github.com/rongxinzy/RongxinAI) under the AGPL-3.0 license.
+Seriya is a desktop application built with Electron, React, and TypeScript. The source code is at [rongxinzy/RongxinAI](https://github.com/rongxinzy/RongxinAI) under the AGPL-3.0 license.
 
-The developer documentation covers the basics needed to develop and extend ZhiYuan. For user-facing usage instructions, start from [Getting Started](../guide/index.md).
+The developer documentation covers the basics needed to develop and extend Seriya. For user-facing usage instructions, start from [Getting Started](../guide/index.md).
 
 ## Running Locally
 

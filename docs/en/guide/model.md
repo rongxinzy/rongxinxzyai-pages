@@ -1,8 +1,8 @@
 # Model Configuration
 
-The model determines how ZhiYuan understands tasks, generates content, and advances work. Before getting started, configure a usable model first.
+The model determines how Seriya understands tasks, generates content, and advances work. Before getting started, configure a usable model first.
 
-ZhiYuan supports configuring cloud models, and also supports installing and using local models. You can choose the appropriate approach based on task type, response speed, privacy requirements, and device resources.
+Seriya supports configuring cloud models, and also supports installing and using local models. You can choose the appropriate approach based on task type, response speed, privacy requirements, and device resources.
 
 ## Selection Suggestions
 

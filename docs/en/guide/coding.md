@@ -8,7 +8,7 @@
 2. Enter a workspace name, add one or more source folders, and choose the primary folder.
 3. Select the default agent and save.
 
-ZhiYuan only mounts existing folders and never moves or renames files on disk. **Remove workspace** deletes only the coding records in ZhiYuan, not the files on disk.
+Seriya only mounts existing folders and never moves or renames files on disk. **Remove workspace** deletes only the coding records in Seriya, not the files on disk.
 
 ## Coding Tasks and Sessions
 

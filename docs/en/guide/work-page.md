@@ -1,11 +1,11 @@
 # Work Page
 
-ZhiYuan offers two modes, Work and Chat, switched at the top of the sidebar.
+Seriya offers two modes, Work and Chat, switched at the top of the sidebar.
 
 - Work mode is for assigning multi-step tasks. The sidebar contains **New Task** and the Local Inference, Coding, Todo, Automation, Activity, and Expert entries, and the **Projects** section below keeps related tasks and materials in one place.
 - Chat mode is for everyday Q&A. The sidebar provides **New Chat**, quick skills (PPT, Deep Research, Academic Research, Docs, Website, Sheets), and the list of recent conversations. After you select a quick skill, the input box shows a matching input hint.
 
-The Work Page is the main area where ZhiYuan processes tasks in Work mode. You can organize tasks, materials, context, and execution results in it.
+The Work Page is the main area where Seriya processes tasks in Work mode. You can organize tasks, materials, context, and execution results in it.
 
 ## Sidebar Entries
 
@@ -26,4 +26,4 @@ At the bottom of the sidebar are the sign-in and settings entries; see [Settings
 2. Provide materials or context related to the task.
 3. Describe the result you want to achieve.
 
-The Work Page is well suited for keeping consecutive tasks of the same project together, making it easier for ZhiYuan to understand related information across tasks.
+The Work Page is well suited for keeping consecutive tasks of the same project together, making it easier for Seriya to understand related information across tasks.

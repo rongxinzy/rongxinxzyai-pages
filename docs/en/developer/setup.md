@@ -1,6 +1,6 @@
 # Development Environment
 
-Developing the ZhiYuan agent requires Git, Node.js 24 (below 25), and Bun 1.4.x (below 1.5). The project uses Bun to manage dependencies and run scripts; do not create or commit an npm lockfile. If a native dependency has no prebuilt package, you also need Python and C/C++ build tools.
+Developing the Seriya requires Git, Node.js 24 (below 25), and Bun 1.4.x (below 1.5). The project uses Bun to manage dependencies and run scripts; do not create or commit an npm lockfile. If a native dependency has no prebuilt package, you also need Python and C/C++ build tools.
 
 Common commands:
 

@@ -1,0 +1,31 @@
+# Seriya (English product site)
+
+> Seriya is an open-source, local-first desktop AI agent. It embeds llama.cpp for GGUF models on your machine, exposes an OpenAI-compatible API, and ships under AGPL-3.0 for macOS, Windows, and Linux.
+
+The Chinese product name on this domain is 知远 (ZhiYuan). English marketing and documentation use Seriya.
+
+## Product
+
+- Home (EN): https://www.rongxzyai.com/en/
+- Download: https://www.rongxzyai.com/en/#download
+- Enterprise (EN): https://www.rongxzyai.com/en/enterprise/
+- Roadmap (EN): https://www.rongxzyai.com/en/roadmap/
+
+## Documentation (EN)
+
+- Docs home: https://www.rongxzyai.com/en/docs/
+- What is Seriya: https://www.rongxzyai.com/en/docs/guide/what-is-seriya/
+- Quick start: https://www.rongxzyai.com/en/docs/guide/quick-start/
+- Local inference (llama.cpp / GGUF): https://www.rongxzyai.com/en/docs/guide/local-inference/
+- FAQ: https://www.rongxzyai.com/en/docs/faq/
+- Developer overview: https://www.rongxzyai.com/en/docs/developer/
+
+## Source and releases
+
+- GitHub (AGPL-3.0): https://github.com/rongxinzy/RongxinAI
+- Release API (site): https://www.rongxzyai.com/api/release
+
+## Chinese locale
+
+- Home (zh-CN): https://www.rongxzyai.com/
+- Docs (zh-CN): https://www.rongxzyai.com/docs/

@@ -1,6 +1,6 @@
 # Contributing
 
-You are welcome to contribute to the ZhiYuan agent through issue reports, documentation improvements, Skill authoring, or code changes.
+You are welcome to contribute to the Seriya through issue reports, documentation improvements, Skill authoring, or code changes.
 
 ## Reporting Issues
 
