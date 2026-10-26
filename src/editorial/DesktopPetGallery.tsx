@@ -61,13 +61,6 @@ export function DesktopPetGallery() {
         once
         showTitle={false}
       />
-      <p className="mt-2 text-center text-[length:var(--fs-micro)] text-muted">
-        <a href={BLOG} className="underline decoration-hairline underline-offset-2 hover:text-ink">
-          桌面伙伴七种官方形象
-        </a>
-        {' · '}
-        默认关闭，只读展示任务状态
-      </p>
     </div>
   );
 }
