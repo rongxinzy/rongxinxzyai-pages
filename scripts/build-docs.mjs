@@ -17,9 +17,35 @@ const assetsTo = join(projectRoot, "public/docs-assets");
 const ASSETS_BASE = "/docs-assets/";
 
 const LOCALES = [
-  { id: "zh", srcDir: docsDir, outFile: "content.json", base: "/docs/", assetsBase: ASSETS_BASE },
-  { id: "en", srcDir: join(docsDir, "en"), outFile: "content-en.json", base: "/en/docs/", assetsBase: `${ASSETS_BASE}en/` },
+  {
+    id: "zh",
+    srcDir: docsDir,
+    outFile: "content.json",
+    base: "/docs/",
+    assetsBase: ASSETS_BASE,
+    defaultTitle: "知远智能体文档",
+  },
+  {
+    id: "en",
+    srcDir: join(docsDir, "en"),
+    outFile: "content-en.json",
+    base: "/en/docs/",
+    assetsBase: `${ASSETS_BASE}en/`,
+    defaultTitle: "Seriya Docs",
+  },
 ];
+
+function extractFaqPairs(body) {
+  /** @type {{ question: string, answer: string }[]} */
+  const pairs = [];
+  for (const line of body.split("\n")) {
+    const match = line.match(/^- \*\*(.+?)\*\*:?\s*(.+)$/);
+    if (match) {
+      pairs.push({ question: match[1].trim(), answer: match[2].trim() });
+    }
+  }
+  return pairs;
+}
 
 async function listMarkdown(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -80,7 +106,7 @@ function snapshotFor(src, srcDir, assetsBase) {
   return existsSync(join(srcDir, "assets", rest)) ? `${assetsBase}${rest}` : null;
 }
 
-async function buildLocale({ srcDir, outFile, base, assetsBase }) {
+async function buildLocale({ srcDir, outFile, base, assetsBase, defaultTitle }) {
   let files;
   try {
     files = await listMarkdown(srcDir);
@@ -121,12 +147,21 @@ async function buildLocale({ srcDir, outFile, base, assetsBase }) {
       });
     }
 
-    content[route] = {
-      title: title || route.split("/").pop() || "知远智能体文档",
+    /** @type {Record<string, unknown>} */
+    const page = {
+      title: title || route.split("/").pop() || defaultTitle,
       description: typeof data.description === "string" ? data.description : "",
       html,
       headings,
     };
+    if (typeof data.alternateRoute === "string" && data.alternateRoute.trim()) {
+      page.alternateRoute = data.alternateRoute.trim();
+    }
+    if (route === "faq" || route.startsWith("faq/")) {
+      const faq = extractFaqPairs(body);
+      if (faq.length > 0) page.faq = faq;
+    }
+    content[route] = page;
   }
 
   await mkdir(generatedDir, { recursive: true });

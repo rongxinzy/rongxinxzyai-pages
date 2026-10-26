@@ -1,6 +1,6 @@
 # Adding Files and Context
 
-When working with materials, placing the files and background information directly related to a task in the same Work Page helps ZhiYuan avoid back-and-forth clarification.
+When working with materials, placing the files and background information directly related to a task in the same Work Page helps Seriya avoid back-and-forth clarification.
 
 You can explain the purpose of the files first, then describe the task to complete. For example, state which files are source material, which are templates, and what result you expect at the end.
 
@@ -11,7 +11,7 @@ You can explain the purpose of the files first, then describe the task to comple
 
 A single image cannot exceed 25 MiB. When image input is not enabled for the current model, images are sent as file paths; if the model supports image understanding, you can enable image input in the model configuration.
 
-After you select a project for the task in Work mode, ZhiYuan can read and write files in the project folder directly, without adding them one by one.
+After you select a project for the task in Work mode, Seriya can read and write files in the project folder directly, without adding them one by one.
 
 ## Viewing Generated Files
 

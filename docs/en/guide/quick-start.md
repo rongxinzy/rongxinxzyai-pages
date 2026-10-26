@@ -1,6 +1,6 @@
 # Quick Start
 
-The ZhiYuan agent is a desktop application. On first use, prepare it in this order: download, install, configure a model, create a Work Page.
+Seriya is a desktop application. On first use, prepare it in this order: download, install, configure a model, create a Work Page.
 
 ## Download
 
@@ -17,23 +17,23 @@ The version number, file size, and download URLs shown in the download section u
 
 After downloading, complete the installation according to your operating system. The installation steps shown by the system vary by installer type.
 
-If the system asks you to confirm the source or permissions, first confirm the installer comes from the ZhiYuan agent [official website](https://www.rongxzyai.com/), then continue.
+If the system asks you to confirm the source or permissions, first confirm the installer comes from the Seriya [official website](https://www.rongxzyai.com/), then continue.
 
 ## First Launch
 
 The Windows installer has a single page: confirm the install location, check the box to agree to the license, and click **Install**. Keep the **Install local inference components** switch off: the CPU and CUDA editions already include the local inference runtime, and the lite edition does not provide local inference. The installer UI relies on the system WebView2 and prompts you if it is missing.
 
-![ZhiYuan installation options](../assets/guide/quick-start/installer-options.png)
+![Seriya installation options](../assets/guide/quick-start/installer-options.png)
 
-![ZhiYuan installation progress](../assets/guide/quick-start/install-progress.png)
+![Seriya installation progress](../assets/guide/quick-start/install-progress.png)
 
-After installation, launch ZhiYuan and you will see the Work Page. At the top of the sidebar you can switch between the two modes, **Work** and **Chat**: Work mode is for assigning multi-step tasks, and Chat mode is for everyday Q&A. The Work Page includes the task input area, project selection, permission mode, and model selection.
+After installation, launch Seriya and you will see the Work Page. At the top of the sidebar you can switch between the two modes, **Work** and **Chat**: Work mode is for assigning multi-step tasks, and Chat mode is for everyday Q&A. The Work Page includes the task input area, project selection, permission mode, and model selection.
 
-![ZhiYuan Work Page](../assets/guide/quick-start/work-page.png)
+![Seriya Work Page](../assets/guide/quick-start/work-page.png)
 
 It is recommended to complete the setup in the following order:
 
-1. Confirm the model. ZhiYuan ships with a free model from the "ZhiYuan" provider (**ZhiYuan Free**) that works online without an API Key. The free model has a daily quota; when it is used up, the app asks you to try again the next day. You can also connect a cloud model such as [DeepSeek](./model/cloud.md) in Settings, or [use a local model](./model/local.md).
+1. Confirm the model. Seriya ships with a free model from the "Seriya" provider (**Seriya Free**) that works online without an API Key. The free model has a daily quota; when it is used up, the app asks you to try again the next day. You can also connect a cloud model such as [DeepSeek](./model/cloud.md) in Settings, or [use a local model](./model/local.md).
 2. Create a [Work Page](./first-work-page.md).
 3. Confirm the model responds normally with a simple task.
 

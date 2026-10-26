@@ -7,7 +7,7 @@
 When creating an automation, you can set:
 
 - **Plan**: once, daily, weekly, monthly, hourly, or custom with a Cron expression. Cron can be edited visually or by entering the expression directly.
-- **Execution Prompt**: the task given to ZhiYuan on each run.
+- **Execution Prompt**: the task given to Seriya on each run.
 - **Model and Project**: the model this automation uses and the project it belongs to.
 - **Session mode**: a new session per run, a fixed task session, or an existing session.
 - **Timeout**: the maximum duration of a single run.
@@ -23,7 +23,7 @@ In the project menu, you can also create a scheduled task directly for that proj
 
 ## Todo
 
-**Todo** in the sidebar is a personal todo list, independent of the todo progress ZhiYuan shows in the conversation while executing tasks.
+**Todo** in the sidebar is a personal todo list, independent of the todo progress Seriya shows in the conversation while executing tasks.
 
 - The input box recognizes due dates and "important" markers.
 - Views include My Day, Important, Planned, All, and Completed, and you can also create custom lists.

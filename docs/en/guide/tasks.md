@@ -1,6 +1,6 @@
 # Creating and Running Tasks
 
-The clearer the task description you give ZhiYuan, the more usable the result usually is. It is recommended to state the goal, background materials, output format, and constraints.
+The clearer the task description you give Seriya, the more usable the result usually is. It is recommended to state the goal, background materials, output format, and constraints.
 
 A good task usually includes:
 
@@ -20,7 +20,7 @@ When working on important files or in an unfamiliar directory, keep **Ask before
 
 ## Execution Process
 
-After a task starts, ZhiYuan executes it step by step and shows the reasoning process, tool calls, and results in the conversation. At the top of the session, you can switch between **Conversation** and **Trace**; **Trace** lists the steps of the current run.
+After a task starts, Seriya executes it step by step and shows the reasoning process, tool calls, and results in the conversation. At the top of the session, you can switch between **Conversation** and **Trace**; **Trace** lists the steps of the current run.
 
 ## Commands in the Input Area
 

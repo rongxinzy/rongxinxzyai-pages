@@ -1,6 +1,6 @@
 # Project Structure
 
-The ZhiYuan agent consists of a renderer process, a preload script, and a main process. The renderer process only handles the interface and orchestration; the main process owns SQLite, the Pi execution kernel, the local inference process, and IPC handling.
+Seriya consists of a renderer process, a preload script, and a main process. The renderer process only handles the interface and orchestration; the main process owns SQLite, the Pi execution kernel, the local inference process, and IPC handling.
 
 | Path | Responsibility |
 | --- | --- |
@@ -22,4 +22,4 @@ The directories above describe the open-source desktop application. The enterpri
 
 Pi Durable is the technical direction for personal companions; departmental digital employees use DeerFlow for specialized tasks. These choices do not mean ongoing work, multi-companion environments and full collaboration have completed delivery acceptance. AEP means Agent Enterprise Protocol, covering identity, authorization and collaboration contracts. It is not the name of the whole platform.
 
-See the [enterprise overview](../guide/what-is-zhiyuan.md#enterprise-persona-agent-and-enterprise-governance) for product roles, Personal Workspace and phased delivery boundaries.
+See the [enterprise overview](../guide/what-is-seriya.md#enterprise-persona-agent-and-enterprise-governance) for product roles, Personal Workspace and phased delivery boundaries.

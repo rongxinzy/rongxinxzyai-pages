@@ -11,7 +11,7 @@ Click **Settings** at the bottom of the sidebar, or press Ctrl+, (Cmd+, on macOS
 ## Models and Memory
 
 - **Models**: manage model services. The **Providers** page adds and edits cloud model providers, the **Models** page refreshes the model catalog and sets the default model, and the **Network & sharing** page shows the local address and controls LAN sharing. See [Using Cloud Models](./model/cloud.md) for the steps.
-- **Memory**: manage ZhiYuan's long-term memory. **Long-term memory** can filter, search, add, or delete memories by scope and status; when adding one, you choose the scope (personal or workspace), type, and sensitivity. **Session summaries** is a read-only list.
+- **Memory**: manage Seriya's long-term memory. **Long-term memory** can filter, search, add, or delete memories by scope and status; when adding one, you choose the scope (personal or workspace), type, and sensitivity. **Session summaries** is a read-only list.
 
 ## Channels
 
@@ -24,4 +24,4 @@ Shows the current version, and lets you check for updates, enable the Beta updat
 
 ## Window and Tray
 
-When you close the main window, ZhiYuan minimizes to the system tray and keeps running, so channel messages and scheduled tasks are unaffected. The tray menu provides Open ZhiYuan, New Task, Settings, and Quit. To exit completely, choose **Quit** from the tray menu.
+When you close the main window, Seriya minimizes to the system tray and keeps running, so channel messages and scheduled tasks are unaffected. The tray menu provides Open Seriya, New Task, Settings, and Quit. To exit completely, choose **Quit** from the tray menu.

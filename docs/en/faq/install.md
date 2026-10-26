@@ -26,11 +26,11 @@ Signed builds are notarized by Apple and open normally once Gatekeeper verifies 
 
 ## Updates
 
-ZhiYuan checks for updates from the Stable channel by default. Under **Settings → About** you can click **Check for Updates** or enable the **Beta update channel** to get test builds earlier. When a new version is found, the sidebar shows **New update**. Click **Download update**, and after the download finishes click **Install and Restart** to install it.
+Seriya checks for updates from the Stable channel by default. Under **Settings → About** you can click **Check for Updates** or enable the **Beta update channel** to get test builds earlier. When a new version is found, the sidebar shows **New update**. Click **Download update**, and after the download finishes click **Install and Restart** to install it.
 
 ## Uninstalling
 
-On Windows, uninstall ZhiYuan from the system's Settings → Apps. Uninstalling removes the program files and the current edition's offline runtime components, and keeps the following data by default, so it remains available after reinstalling:
+On Windows, uninstall Seriya from the system's Settings → Apps. Uninstalling removes the program files and the current edition's offline runtime components, and keeps the following data by default, so it remains available after reinstalling:
 
 - `%APPDATA%\ZhiYuanAgent`: sessions, settings, memory, and Skills you created.
 - `%LOCALAPPDATA%\ZhiYuanAgent\models`: local model files.

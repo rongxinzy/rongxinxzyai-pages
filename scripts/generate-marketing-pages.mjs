@@ -61,9 +61,9 @@ const pages = [
     page: "home",
     path: "/en/",
     alternatePath: "/",
-    title: "Seriya — Open-source desktop companion that runs LLMs locally",
+    title: "Seriya — Local-first desktop AI agent (llama.cpp, GGUF, AGPL)",
     description:
-      "Seriya is an open-source, local-first desktop AI companion for writing reports, organizing spreadsheets and editing code. It embeds llama.cpp to run GGUF models on your machine and connects to any OpenAI-compatible API across macOS, Windows and Linux.",
+      "Seriya is an open-source desktop AI agent for reports, spreadsheets and code. Run GGUF models locally with llama.cpp or connect OpenAI-compatible cloud APIs. macOS, Windows and Linux.",
     heroTitle: "Your desktop, with an intelligent companion.",
     heroLead:
       "Write reports, organize spreadsheets and edit code in one window. Seriya includes llama.cpp for running open models locally. Local inference does not send inputs to cloud models, while online tools process data through the services you configure.",
@@ -98,9 +98,9 @@ const pages = [
     page: "enterprise",
     path: "/en/enterprise/",
     alternatePath: "/enterprise/",
-    title: "Seriya Enterprise — AI Native operating foundation",
+    title: "Seriya Enterprise — AI-native operating foundation for teams",
     description:
-      "Seriya Enterprise is an AI Native operating foundation: digital employees and human–AI collaboration reshape decisions, execution and ongoing operations. Web chat and admin; private deployment supported; phased delivery by scenario.",
+      "Seriya Enterprise: digital employees, personal companions and governance for AI-native operations. Web chat and admin, private deployment, phased delivery by scenario.",
     heroTitle: "AI Native operating foundation",
     heroLead:
       "Seriya Enterprise is an AI Native operating foundation for organizations: digital employees and human–AI collaboration reshape how decisions are made, work is executed and operations keep running.",
@@ -134,9 +134,9 @@ const pages = [
     page: "roadmap",
     path: "/en/roadmap/",
     alternatePath: "/roadmap/",
-    title: "Seriya roadmap — Desktop",
+    title: "Seriya roadmap — Open-source desktop agent milestones",
     description:
-      "Milestones for the Seriya open-source desktop app: the release pipeline, macOS and Linux installers, llama.cpp local inference, and installer size. Each entry links to a pull request or issue.",
+      "Release pipeline, macOS and Linux installers, llama.cpp local inference and installer size for the Seriya desktop agent. Each milestone links to a GitHub pull request or issue.",
     heroTitle: "Desktop roadmap",
     heroLead:
       "Milestones for the open-source desktop app. Each entry links to its pull request or issue.",
@@ -198,24 +198,70 @@ function renderPage(page) {
       @media (prefers-color-scheme: dark) { html, body { background: #10141c; } .marketing-static-shell { color: #f3f5f8; } .marketing-static-shell p, .marketing-static-shell li { color: #c5cedb; } }`
       : "";
   const pageImage = page.imageUrl ?? zhiyuanImageUrl;
+  const siteName = isEnglish ? "Seriya" : "知远";
+  /** @type {Record<string, unknown>[]} */
+  const graph = [];
+
+  if (isEnglish) {
+    graph.push({
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: "Seriya",
+      legalName: "Beijing Rongxin Zhiyuan Technology Co., Ltd.",
+      url: siteUrl,
+      logo: seriyaImageUrl,
+      sameAs: ["https://github.com/rongxinzy/RongxinAI"],
+    });
+    graph.push({
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: "Seriya",
+      url: `${siteUrl}/en/`,
+      inLanguage: "en",
+      publisher: { "@id": `${siteUrl}/#organization` },
+    });
+  }
+
+  if (page.page === "home") {
+    graph.push({
+      "@type": "SoftwareApplication",
+      name: page.schemaName,
+      description: page.description,
+      url: canonical,
+      inLanguage: page.lang,
+      image: pageImage,
+      alternateName: isEnglish ? "Seriya Agent" : "ZhiYuan Agent",
+      codeRepository: "https://github.com/rongxinzy/RongxinAI",
+      downloadUrl: `${siteUrl}${isEnglish ? "/en/#download" : "/#download"}`,
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Windows 10, Windows 11, macOS, Ubuntu Linux",
+      license: "https://www.gnu.org/licenses/agpl-3.0.html",
+      ...(isEnglish
+        ? {
+            isAccessibleForFree: true,
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+          }
+        : {}),
+    });
+  } else {
+    graph.push({
+      "@type": "WebPage",
+      name: page.schemaName,
+      description: page.description,
+      url: canonical,
+      inLanguage: page.lang,
+      image: pageImage,
+      ...(isEnglish ? { isPartOf: { "@id": `${siteUrl}/#website` } } : {}),
+    });
+  }
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": page.page === "home" ? "SoftwareApplication" : "WebPage",
-    name: page.schemaName,
-    description: page.description,
-    url: canonical,
-    inLanguage: page.lang,
-    image: pageImage,
-    ...(page.page === "home"
-      ? {
-          alternateName: isEnglish ? "Seriya Agent" : "ZhiYuan Agent",
-          codeRepository: "https://github.com/rongxinzy/RongxinAI",
-          downloadUrl: `${siteUrl}${isEnglish ? "/en/#download" : "/#download"}`,
-          applicationCategory: "DeveloperApplication",
-          operatingSystem: "Windows 10, Windows 11, macOS, Ubuntu Linux",
-          license: "https://www.gnu.org/licenses/agpl-3.0.html",
-        }
-      : {}),
+    "@graph": graph,
   };
 
   return `<!doctype html>
@@ -230,6 +276,7 @@ function renderPage(page) {
     <link rel="alternate" hreflang="en" href="${isEnglish ? canonical : alternate}" />
     <link rel="alternate" hreflang="x-default" href="${isEnglish ? alternate : canonical}" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="${siteName}" />
     <meta property="og:locale" content="${page.ogLocale}" />
     <meta property="og:locale:alternate" content="${isEnglish ? "zh_CN" : "en_US"}" />
     <meta property="og:url" content="${canonical}" />
