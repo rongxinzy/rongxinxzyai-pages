@@ -331,6 +331,13 @@
           "text": "技能自带的运行环境只内置常用办公与文档核心，安装包明显变小；不常用的大依赖改为首次使用时按需安装，较大的会先向用户确认。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1300",
           "done": true
+        },
+        {
+          "date": "2026-10-26",
+          "text": "安装与升级时按当前安装包的产品名校验目录归属，减少误拦合法升级或卸载。",
+          "textEn": "Install and upgrade now validate directory ownership against the build's product executable name, so legitimate upgrades and uninstalls are less likely to be blocked.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1346",
+          "done": true
         }
       ]
     },
@@ -409,6 +416,13 @@
           "date": "2026-10-22",
           "text": "模型设置从多个标签收为 3 个：服务商与模型、路由与用量、高级；填密钥、浏览模型、切换默认模型不用来回翻页。编程页可直接管理本地智能体工具的接入与状态。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1298",
+          "done": true
+        },
+        {
+          "date": "2026-10-26",
+          "text": "编程页智能体管理更紧凑；缩小窗口时弹窗关闭按钮不再被标题栏拖拽区域挡住点不到。",
+          "textEn": "Coding agent management is denser, and modal close buttons no longer get swallowed by the window-drag region when the window is small.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1340",
           "done": true
         }
       ]
@@ -572,6 +586,27 @@
           "date": "2026-10-24",
           "text": "界面交互与可读性打磨：发送键、模板卡等动效更安静，自动化弹窗改为单一滚动区、标题和操作始终可见；修正深色模式文字对比度，首页快捷动作按窗口宽度自适应排列，不再孤立换行。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1324",
+          "done": true
+        },
+        {
+          "date": "2026-10-26",
+          "text": "对话里引用本地文件时优先用相对路径，链接可以点开，不再被当成不可用地址。",
+          "textEn": "Local file references in chat now prefer relative paths, so the links stay clickable instead of being treated as blocked addresses.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1339",
+          "done": true
+        },
+        {
+          "date": "2026-10-26",
+          "text": "侧栏会话行的相对时间不再压住长标题：平时标题占满一行，悬停或打开菜单时再显示时间并自动截断标题。",
+          "textEn": "Relative timestamps in the session sidebar no longer overlap long titles: titles use the full row by default, and the time slot only appears on hover or when the menu is open, truncating the title as needed.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1335",
+          "done": true
+        },
+        {
+          "date": "2026-10-26",
+          "text": "桌面伙伴头顶铅笔气泡可聊天与交代任务：单击轻反馈、双击开聊，拖动不易误触；气泡边框跟随角色主题色，形象改在设置里切换；七位伙伴原画动画全部恢复可选。工作台运行信息收进浮层，权限与错误说明更直白。",
+          "textEn": "A pencil bubble above the desktop companion lets you chat and hand off tasks: single-click is light feedback, double-click opens chat, and dragging is less likely to misfire; the bubble border follows each character's theme color, character switching lives in settings, and all seven companions' original artwork animations are selectable again. Workbench run details move into a popover, with clearer permission and error copy.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1334",
           "done": true
         }
       ]
