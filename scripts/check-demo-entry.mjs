@@ -7,11 +7,10 @@ import { client } from './client-demo-source.mjs';
 
 const requireClient = createRequire(path.join(client, 'package.json'));
 const { chromium } = requireClient('playwright');
+const executablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE;
 const browser = await chromium.launch({
   headless: true,
-  executablePath:
-    process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE ||
-    'C:/Users/Administrator/AppData/Local/ms-playwright/chromium-1228/chrome-win64/chrome.exe',
+  ...(executablePath ? { executablePath } : {}),
 });
 const evidence = mkdtempSync(path.join(tmpdir(), 'zhiyuan-demo-entry-'));
 const results = [];
@@ -39,8 +38,7 @@ try {
       window.startupPhases = [];
       const observer = new MutationObserver(() => {
         for (const [name, selector] of [
-          ['particle', '#root [role="status"] canvas'],
-          ['static', '#root [role="status"] img'],
+          ['welcome', '#root [data-testid="companion-welcome"]'],
           ['skeleton', '#root [data-slot="skeleton"]'],
           ['logo', '#root .theme-logo-loading-mark'],
           ['home', '#root .theme-home-greeting'],
@@ -87,9 +85,7 @@ try {
       // User-initiated anchors remain available after initial positioning.
       await page.locator('a[href="#workbench"]').first().click();
       const frame = page.frameLocator('#workbench iframe');
-      const boot = frame
-        .locator(variant.reduced ? '[role="status"] img' : '[role="status"] canvas')
-        .first();
+      const boot = frame.locator('[data-testid="companion-welcome"]').first();
       await boot.waitFor({ timeout: 20000 });
       await page.locator('.demo-loading').waitFor({ state: 'hidden' });
       await page
@@ -100,7 +96,7 @@ try {
       const embedded = page.frames().find(item => item.url().includes('/client-demo/'));
       assert.ok(embedded);
       const phases = await embedded.evaluate(() => window.startupPhases);
-      assert.ok(phases.includes(variant.reduced ? 'static' : 'particle'));
+      assert.ok(phases.includes('welcome'), 'Companion welcome screen never appeared');
       assert.ok(phases.includes('skeleton'), 'Native session skeleton never appeared');
       assert.equal(phases.includes('logo'), false, 'A second logo loader appeared');
       assert.equal(phases.includes('home'), false, 'The empty home flashed before the session');
@@ -165,12 +161,12 @@ try {
       await page
         .getByRole('button', { name: english ? 'Reset demo' : '重置演示', exact: true })
         .click();
-      await frame.locator('[role="status"]').first().waitFor();
+      await frame.locator('[data-testid="companion-welcome"]').first().waitFor();
       await frame.locator('aside').waitFor({ timeout: 25000 });
       assert.deepEqual(errors, []);
       results.push({ ...variant, initialFrames: frames, phases, errors, passed: true });
       console.log(
-        `PASS ${variant.name}: first paint/reload, scroll autostart, particle-to-skeleton, removed controls, conversation fixtures`,
+        `PASS ${variant.name}: first paint/reload, scroll autostart, welcome-to-skeleton, removed controls, conversation fixtures`,
       );
     } catch (error) {
       await page

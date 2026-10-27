@@ -14,8 +14,6 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { client, clientPackage, clientSource } from './client-demo-source.mjs';
-import { clientLayoutPatches, clientSidebarLayoutPlugin } from './client-demo-layout-patch.mjs';
-import { clientLoadingPatches, clientLoadingPlugin } from './client-demo-loading-patch.mjs';
 import {
   clientCapabilityPatches,
   clientCapabilityPlugin,
@@ -34,8 +32,6 @@ if (process.argv.includes('--lint')) {
       'scripts/build-client-demo.mjs',
       'scripts/check-demo-interactions.mjs',
       'scripts/check-demo-sidebar.mjs',
-      'scripts/client-demo-layout-patch.mjs',
-      'scripts/client-demo-loading-patch.mjs',
       'scripts/client-demo-capability-patch.mjs',
       'scripts/check-demo-model-lifecycle.mjs',
       'scripts/check-demo-resilience.mjs',
@@ -143,8 +139,6 @@ const config = {
   base: '/client-demo/',
   publicDir: process.argv.includes('--serve') ? path.join(client, 'public') : false,
   plugins: [
-    clientSidebarLayoutPlugin,
-    clientLoadingPlugin,
     clientCapabilityPlugin,
     react(),
     tailwindcss(),
@@ -217,7 +211,7 @@ if (process.argv.includes('--serve')) {
         generatedBy: 'scripts/build-client-demo.mjs',
         interface:
           'Client React components with recorded renderer patches; browser-only mock bridge',
-        patches: [...clientLayoutPatches, ...clientLoadingPatches, ...clientCapabilityPatches],
+        patches: [...clientCapabilityPatches],
       },
       null,
       2,

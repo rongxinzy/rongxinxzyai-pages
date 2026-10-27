@@ -16,10 +16,10 @@ installDemoNavigationBoundary();
 const notify = (type: string, scene?: DemoScene) =>
   window.parent.postMessage({ type, scene }, location.origin);
 
-// Reveal the actual App's ParticleBootScreen as soon as it mounts. The host
-// must not cover it with its generic loading overlay while waiting for Ready.
+// Reveal the App's CompanionWelcomeScreen as soon as it mounts. The host must
+// not cover it with its generic loading overlay while waiting for Ready.
 const bootObserver = new MutationObserver(() => {
-  if (!document.querySelector('#root [role="status"] canvas, #root [role="status"] img')) return;
+  if (!document.querySelector('#root [data-testid="companion-welcome"]')) return;
   notify(DemoMessage.Booting);
   bootObserver.disconnect();
 });

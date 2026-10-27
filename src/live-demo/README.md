@@ -1,10 +1,10 @@
 # Website client demo
 
-The homepage `Showcase` mounts `/client-demo/index.html?locale=zh-CN` or `?locale=en` when the demo canvas enters the viewport. A one-shot IntersectionObserver starts the native particle boot; scrolling away and back keeps the same App instance. It uses one iframe, with navigation through the client's sidebar and no outer scene tabs, start button or fullscreen control. The website keeps its existing marketing design system; the iframe uses the client's own components and styling.
+The homepage `Showcase` mounts `/client-demo/index.html?locale=zh-CN` or `?locale=en` when the demo canvas enters the viewport. A one-shot IntersectionObserver starts the native companion welcome boot; scrolling away and back keeps the same App instance. It uses one iframe, with navigation through the client's sidebar and no outer scene tabs, start button or fullscreen control. The website keeps its existing marketing design system; the iframe uses the client's own components and styling.
 
 ## Architecture and source
 
-`src/client-demo/main.tsx` mounts the desktop client's React `App` and Redux store, importing its `index.css`, shared components, theme, dialogs, hover states, and motion. `src/client-demo/client-source.json` pins the repository, revision and default checkout. The current revision is `7a648be8f3562757f14d944c6726ea16bedfe119` (origin/main fetched on 2026-10-23). `ZHIYUAN_CLIENT_SOURCE` can select another installed checkout of that same revision.
+`src/client-demo/main.tsx` mounts the desktop client's React `App` and Redux store, importing its `index.css`, shared components, theme, dialogs, hover states, and motion. `src/client-demo/client-source.json` pins the repository, revision and default checkout. The current revision is `177900454c4426626daec888c335a957e1dd04d8` (origin/main fetched on 2026-10-27). `ZHIYUAN_CLIENT_SOURCE` can select another installed checkout of that same revision.
 
 `src/client-demo/mock-bridge.ts` defines the browser-local `window.electron` bridge before the App mounts. `feature-mocks.ts` supplies additional coding, automation, expert, and MCP responses. No Electron process runs in the browser. The UI is not mounted from exported HTML or reconstructed with website components.
 
@@ -12,9 +12,7 @@ The homepage `Showcase` mounts `/client-demo/index.html?locale=zh-CN` or `?local
 
 The generated client lives in `public/client-demo/`. Its `source.json` records the source repository, revision, package version and clean-source status. Build, lint, type and browser checks reject a checkout whose revision differs from the pin or whose client inputs have local changes. Updating the website alone does not update the embedded client.
 
-The sidebar renderer correction is applied by `scripts/client-demo-layout-patch.mjs` before JSX compilation. The pinned `AgentTaskRow` absolutely positions its timestamp over the title while reserving space only for action buttons. The patch moves the existing timestamp into the title button's flex flow, with a nonshrinking width and an 8px gap. Existing action space, theme, hover/focus transitions, title clipping/marquee and batch/rename behavior are preserved. The source checkout stays clean; `source.json` records the patch ID, target and patched-source SHA-256. Exact source anchors must match or the build fails. Remove this patch after pinning a client revision with the upstream fix.
-
-`scripts/check-demo-sidebar.mjs` checks both session rows at rest, hover, keyboard focus and menu-open states: the title viewport must end before the timestamp, which must end before the action controls. The check failed against the original bundle (161px title viewport overlapped the 45.8px timestamp by 43.8px). The patched production build passes at DPR 1/2 with normal/reduced motion (`C:/Users/Administrator/AppData/Local/Temp/zhiyuan-demo-interactions-J7Db7S/`). Chinese/English light/dark themes also pass at a 1280×800 client viewport (`C:/Users/Administrator/AppData/Local/Temp/zhiyuan-demo-interactions-SVJrlr/`). Theme verification sets both the client's `data-theme` and light/dark class; toggling the class alone does not change its generated theme tokens. Run just these locale/theme checks with `npm run demo:verify -- --sidebar-only`.
+`scripts/check-demo-sidebar.mjs` checks both session rows at rest, hover, keyboard focus and menu-open states: the title viewport must end before the timestamp, which must end before the action controls. Theme verification sets both the client's `data-theme` and light/dark class; toggling the class alone does not change its generated theme tokens. Run just these locale/theme checks with `npm run demo:verify -- --sidebar-only`.
 
 This revision renders thinking and tools directly in transcript order. `TurnBlock.tsx` no longer wraps them in the old execution-count summary. Tool rows expose paths/commands while closed, with localized status and expandable parameters/results. The demo uses these exact source components and recipes; it contains no replacement summary component.
 
@@ -44,9 +42,9 @@ Sales analysis and regional budget reconciliation have separate prompts, reasoni
 
 The sample-data notice belongs outside the iframe. Task answers and operation results use normal product wording without an appended “（演示）” label. Host copy lives in `src/editorial/copy.ts`; the App retains its own i18n.
 
-The App already renders its own `ParticleBootScreen`. A `Booting` message reveals that screen as soon as its canvas (or reduced-motion static logo) mounts; the host no longer covers it while waiting for `Ready`. Before the client bundle is available, the same product logo provides a static placeholder. Reset replays native boot. After 20 seconds without readiness, the host shows a slow-loading status and a retry control while keeping the same iframe loading; a late Ready message completes normally.
+The App renders its own `CompanionWelcomeScreen`. A `Booting` message reveals that screen as soon as it mounts; the host no longer covers it while waiting for `Ready`. Before the client bundle is available, the same product logo provides a static placeholder. Reset replays native boot. After 20 seconds without readiness, the host shows a slow-loading status and a retry control while keeping the same iframe loading; a late Ready message completes normally.
 
-`scripts/client-demo-loading-patch.mjs` replaces only CoworkView's intermediate blue LogoLoadingState with the client's own CoworkSessionColdStartSkeleton. The initial session loading ID is selected before App mount; after particle boot, initialization and transcript loading share that native skeleton without flashing the empty home. Ready is sent after the initial session is loaded. This second renderer patch also rejects changed source anchors and records its target and SHA-256 in source.json; the pinned client checkout remains clean.
+The initial session loading ID is selected before App mount; after the welcome exits, initialization and transcript loading use the native `CoworkSessionColdStartSkeleton` without flashing the empty home. Ready is sent after the initial session is loaded.
 
 Home entry sets manual browser scroll restoration before mounting, then positions the viewport in a layout effect before the first App paint. A home URL without a fragment starts at the top even after refreshing from the demo. Explicit section fragments and user-initiated anchor navigation retain their destinations.
 
@@ -92,8 +90,8 @@ Before updating the client pin, fetch `origin/main` in the client repository and
 
 ```sh
 git fetch origin
-git worktree add --detach ../zhiyuan-demo-client-20261023 7a648be8f3562757f14d944c6726ea16bedfe119
-cd ../zhiyuan-demo-client-20261023
+git worktree add --detach ../zhiyuan-demo-client-20261027 177900454c4426626daec888c335a957e1dd04d8
+cd ../zhiyuan-demo-client-20261027
 bun install --frozen-lockfile --ignore-scripts
 ```
 
@@ -115,7 +113,7 @@ Current production regression evidence for the boundary follow-up: `zhiyuan-demo
 
 Check first entry; scroll-triggered startup; every sidebar destination; model search/filter/install; task/chat submission; reasoning and tool expansion; expert/skill, todo, automation, coding, and settings controls; feature state retention; reset; and retry. Inspect Chinese and English, desktop DPR 1 and 2, 390px mobile, and reduced motion. Check the client console and page overflow separately from the outer site.
 
-`demo:verify:entry` records home-page animation frames on entry and refresh, verifies viewport-triggered startup and removed outer tabs/start/fullscreen controls, captures the native particle/static boot followed by the skeleton, and rejects a second logo loader or empty-home flash. It also checks desktop single-line explanation, outer-page overflow, both independent Chat fixtures, a concise follow-up and reset. Chinese desktop, English DPR 2, 390px mobile and reduced-motion production checks pass with zero console/page errors in `C:/Users/Administrator/AppData/Local/Temp/zhiyuan-demo-entry-sSuUML/` (2026-10-23).
+`demo:verify:entry` records home-page animation frames on entry and refresh, verifies viewport-triggered startup and removed outer tabs/start/fullscreen controls, captures the native companion welcome followed by the session skeleton, and rejects a second logo loader or empty-home flash. It also checks desktop single-line explanation, outer-page overflow, both independent Chat fixtures, a concise follow-up and reset.
 
 The latest-source native comparison is in `C:/Users/Administrator/AppData/Local/Temp/zhiyuan-latest-native-comparison/`: native client browser-preview and website captures at 1280×800, plus `styles.json`. The resting tool/reasoning styles and tool hover styles match, including font, spacing, colors, radius and transition; both report no page errors. The original client checkout was preserved.
 
