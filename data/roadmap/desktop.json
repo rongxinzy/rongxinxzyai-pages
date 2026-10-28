@@ -261,6 +261,13 @@
           "text": "Windows GPU 版安装包内置双引擎本地推理运行时，本地推理页可浏览对应的模型目录（仅该版本提供）。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1319",
           "done": true
+        },
+        {
+          "date": "2026-10-27",
+          "text": "Windows GPU 版内置本地推理运行时对齐到可用版本，发版不再因运行时资源缺失而失败。",
+          "textEn": "The Windows GPU edition now pins the local-inference runtime assets that actually ship, so releases no longer fail on missing runtime files.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1359",
+          "done": true
         }
       ]
     },
@@ -608,6 +615,20 @@
           "textEn": "A pencil bubble above the desktop companion lets you chat and hand off tasks: single-click is light feedback, double-click opens chat, and dragging is less likely to misfire; the bubble border follows each character's theme color, character switching lives in settings, and all seven companions' original artwork animations are selectable again. Workbench run details move into a popover, with clearer permission and error copy.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1334",
           "done": true
+        },
+        {
+          "date": "2026-10-27",
+          "text": "开屏欢迎动画节奏放缓更显从容，工作台在欢迎画面期间同步准备就绪，并取消二次加载屏，进入应用更顺畅。",
+          "textEn": "A calmer welcome animation with the workspace ready in the background — the second loading screen is gone.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1358",
+          "done": true
+        },
+        {
+          "date": "2026-10-27",
+          "text": "桌面伙伴动画更顺滑：画面渲染与播放帧对齐，繁重计算移出主流程，漫游动作更自然，整体更省资源。",
+          "textEn": "Desktop companion animations are smoother and lighter, and wandering feels more natural.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1357",
+          "done": true
         }
       ]
     },
@@ -644,6 +665,13 @@
           "date": "2026-10-25",
           "text": "内置与自定义专家、技能的头像统一为柔和可爱风格，连接器分类占位图也保持同一风格。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1330",
+          "done": true
+        },
+        {
+          "date": "2026-10-27",
+          "text": "启用或置顶技能时更稳妥，已失效的技能会被自动忽略，不再残留在设置中，技能列表保持干净。",
+          "textEn": "Invalid skills are now ignored instead of lingering, keeping your skill list clean.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1349",
           "done": true
         }
       ]
@@ -711,6 +739,13 @@
           "date": "2026-10-24",
           "text": "流式回复渲染继续减负：只处理新增文本、稳定段落批量提交，超长回复时的渲染开销明显下降；输入和切换页面时的重复刷新减少，界面交互更跟手。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1331",
+          "done": true
+        },
+        {
+          "date": "2026-10-27",
+          "text": "加固 HTML 产物预览的安全隔离，预览页面中的脚本无法触及应用自身权限，查看生成内容更安心。",
+          "textEn": "HTML artifact previews are now sandboxed, so previewed pages can no longer access app privileges.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1350",
           "done": true
         }
       ]
