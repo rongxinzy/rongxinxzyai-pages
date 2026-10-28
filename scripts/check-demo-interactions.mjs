@@ -6,8 +6,6 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { client, clientSource } from './client-demo-source.mjs';
 import { checkDemoSidebar } from './check-demo-sidebar.mjs';
-import { clientLayoutPatches } from './client-demo-layout-patch.mjs';
-import { clientLoadingPatches } from './client-demo-loading-patch.mjs';
 import { clientCapabilityPatches } from './client-demo-capability-patch.mjs';
 import { DemoMessage } from '../src/live-demo/constants.ts';
 
@@ -100,7 +98,7 @@ try {
       assert.equal(provenance.sourceTreeHasLocalChanges, false);
       assert.deepEqual(
         provenance.patches,
-        [...clientLayoutPatches, ...clientLoadingPatches, ...clientCapabilityPatches],
+        clientCapabilityPatches,
         'Preview renderer patches are stale',
       );
       const thinking = frame.getByRole('button', { name: /思考了 7 秒/ });
