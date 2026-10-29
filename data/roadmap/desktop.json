@@ -629,6 +629,27 @@
           "textEn": "Desktop companion animations are smoother and lighter, and wandering feels more natural.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1357",
           "done": true
+        },
+        {
+          "date": "2026-10-28",
+          "text": "编程模式长回复输出更流畅：流式内容改为增量更新，只传输新增片段、少做整段重算，长代码生成更顺滑。",
+          "textEn": "Long replies in coding mode stream more smoothly: output is now delivered incrementally with only new fragments transferred, so lengthy generations feel noticeably smoother.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1360",
+          "done": true
+        },
+        {
+          "date": "2026-10-28",
+          "text": "抛掷桌面伙伴的手感更真实：落地反弹明显收敛，不再像弹力球连弹多次，只有实打实的碰撞才会触发反馈。",
+          "textEn": "Tossing the desktop pet feels more natural: landings no longer bounce like a rubber ball, and only solid impacts now trigger feedback.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1362",
+          "done": true
+        },
+        {
+          "date": "2026-10-28",
+          "text": "桌面伙伴在 Windows 上更机灵：能感知其他窗口边缘并沿边攀爬行走，依附窗口时保持可见，遇到全屏应用会主动避让隐藏。",
+          "textEn": "The desktop pet gets smarter on Windows: it senses window edges and climbs along them, stays visible while perched, and politely hides when a full-screen app takes over.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1365",
+          "done": true
         }
       ]
     },
@@ -746,6 +767,20 @@
           "text": "加固 HTML 产物预览的安全隔离，预览页面中的脚本无法触及应用自身权限，查看生成内容更安心。",
           "textEn": "HTML artifact previews are now sandboxed, so previewed pages can no longer access app privileges.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1350",
+          "done": true
+        },
+        {
+          "date": "2026-10-28",
+          "text": "关闭主窗口后应用能干净退出，不再被残留进程挡住下次启动；托盘或再次打开也能随时找回窗口。",
+          "textEn": "The app now exits cleanly when the main window is closed, so nothing blocks the next launch, and the window can be brought back anytime from the tray or by launching again.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1361",
+          "done": true
+        },
+        {
+          "date": "2026-10-28",
+          "text": "记忆能力更稳定：内置记忆组件升级到自主维护的新版本，会话记忆的记录与收尾更可靠。",
+          "textEn": "Memory gets more stable: the built-in memory component has been upgraded to a release maintained by our team, making session memory recording and wrap-up more reliable.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1364",
           "done": true
         }
       ]
