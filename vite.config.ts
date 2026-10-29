@@ -56,6 +56,10 @@ export default defineConfig({
         englishRoadmap: fileURLToPath(
           new URL("./en/roadmap/index.html", import.meta.url),
         ),
+        browser: fileURLToPath(new URL("./browser/index.html", import.meta.url)),
+        englishBrowser: fileURLToPath(
+          new URL("./en/browser/index.html", import.meta.url),
+        ),
         docs: fileURLToPath(new URL("./docs.html", import.meta.url)),
         blog: fileURLToPath(new URL("./blog.html", import.meta.url)),
       },

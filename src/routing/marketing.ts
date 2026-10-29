@@ -1,5 +1,5 @@
 export const MARKETING_LOCALES = ["zh-CN", "en"] as const;
-export const MARKETING_PAGES = ["home", "enterprise", "roadmap"] as const;
+export const MARKETING_PAGES = ["home", "enterprise", "roadmap", "browser"] as const;
 
 export type MarketingLocale = (typeof MARKETING_LOCALES)[number];
 export type MarketingPage = (typeof MARKETING_PAGES)[number];
@@ -35,6 +35,13 @@ const ROUTES: Record<MarketingLocale, Record<MarketingPage, MarketingRoute>> = {
       alternatePath: "/en/roadmap/",
       documentationHref: "/docs/",
     },
+    browser: {
+      locale: "zh-CN",
+      page: "browser",
+      path: "/browser/",
+      alternatePath: "/en/browser/",
+      documentationHref: "/docs/",
+    },
   },
   en: {
     home: {
@@ -56,6 +63,13 @@ const ROUTES: Record<MarketingLocale, Record<MarketingPage, MarketingRoute>> = {
       page: "roadmap",
       path: "/en/roadmap/",
       alternatePath: "/roadmap/",
+      documentationHref: "/en/docs/",
+    },
+    browser: {
+      locale: "en",
+      page: "browser",
+      path: "/en/browser/",
+      alternatePath: "/browser/",
       documentationHref: "/en/docs/",
     },
   },
@@ -85,6 +99,10 @@ export function getMarketingRoute(pathname: string = window.location.pathname): 
       return ROUTES["zh-CN"].roadmap;
     case "/en/roadmap/":
       return ROUTES.en.roadmap;
+    case "/browser/":
+      return ROUTES["zh-CN"].browser;
+    case "/en/browser/":
+      return ROUTES.en.browser;
     default:
       return ROUTES["zh-CN"].home;
   }

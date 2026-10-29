@@ -10,6 +10,10 @@ const Enterprise = lazy(() =>
   import("./Enterprise").then((m) => ({ default: m.Enterprise })),
 );
 
+const Browser = lazy(() =>
+  import("./Browser").then((m) => ({ default: m.Browser })),
+);
+
 const RoadmapPage = lazy(() =>
   import("../roadmap/RoadmapPage").then((m) => ({ default: m.RoadmapPage })),
 );
@@ -63,6 +67,25 @@ export function EditorialSite(props: SiteSiteProps) {
           }
         >
           <RoadmapPage copy={copy} locale={props.locale} />
+        </Suspense>
+      ) : props.page === "browser" ? (
+        <Suspense
+          fallback={
+            <main
+              id="main"
+              className="flex min-h-[62vh] flex-col items-center justify-center px-6 pb-20 pt-28 text-center"
+              aria-busy="true"
+            >
+              <h1 className="text-4xl font-semibold leading-tight tracking-tight text-ink md:text-5xl">
+                {copy.browserTitle}
+              </h1>
+              <p className="mt-4 max-w-xl text-base leading-8 text-muted">
+                {copy.browserSlogan}
+              </p>
+            </main>
+          }
+        >
+          <Browser copy={copy} locale={props.locale} />
         </Suspense>
       ) : (
         <Suspense
