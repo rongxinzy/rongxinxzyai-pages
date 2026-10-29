@@ -146,6 +146,41 @@ const pages = [
     schemaName: "Seriya desktop roadmap",
     imageUrl: seriyaImageUrl,
   },
+  {
+    file: "browser/index.html",
+    lang: "zh-CN",
+    ogLocale: "zh_CN",
+    page: "browser",
+    path: "/browser/",
+    alternatePath: "/en/browser/",
+    title: "知远浏览器 — 人与 AI 共用的本机浏览器",
+    description:
+      "知远浏览器与知远桌面端配套，供人与 AI agent 在本机共用 Chromium 环境。支持 Space 隔离；需安装官方 ego lite。Windows 与 macOS 即将开放下载，Linux 规划中。",
+    heroTitle: "知远浏览器",
+    heroLead: "人与 AI 共用的本机浏览器",
+    staticAction: "即将开放下载",
+    staticHref: "/browser/#platforms",
+    imageAlt: "知远桌面工作台界面",
+    schemaName: "知远浏览器",
+  },
+  {
+    file: "en/browser/index.html",
+    lang: "en",
+    ogLocale: "en_US",
+    page: "browser",
+    path: "/en/browser/",
+    alternatePath: "/browser/",
+    title: "Seriya Browser — A local browser for you and AI agents",
+    description:
+      "Seriya Browser works with the Seriya desktop app for shared on-device Chromium browsing with Space isolation. Requires official ego lite. Windows and macOS downloads coming soon; Linux planned.",
+    heroTitle: "Seriya Browser",
+    heroLead: "A local browser for you and AI agents",
+    staticAction: "Download coming soon",
+    staticHref: "/en/browser/#platforms",
+    imageAlt: "Seriya snowy owl companion mark",
+    schemaName: "Seriya Browser",
+    imageUrl: seriyaImageUrl,
+  },
 ];
 
 function absoluteUrl(path) {
