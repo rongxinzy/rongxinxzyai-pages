@@ -195,10 +195,11 @@ export function Browser({
       </section>
 
       <section
+        id="browser-oss"
         aria-labelledby="browser-oss-title"
         className="border-t border-hairline bg-ground"
       >
-        <div className={sectionPad}>
+        <div className="mx-auto max-w-7xl px-6 pb-16 pt-28 md:pb-20 md:pt-36">
           <span className={overline}>{copy.browserOssOverline}</span>
           <h2 id="browser-oss-title" className={sectionTitle}>
             {copy.browserOssTitle}
