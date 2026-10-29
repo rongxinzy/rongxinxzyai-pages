@@ -79,9 +79,7 @@ export function Header({
       ? "enterprise/"
       : page === "roadmap"
         ? "roadmap/"
-        : page === "browser"
-          ? "browser/"
-          : "";
+        : "";
   const alternate = alternateHref ?? `${en ? "/" : "/en/"}${section}`;
 
   useEffect(() => {
@@ -168,15 +166,6 @@ export function Header({
       href: enterprise,
       current: page === "enterprise",
     },
-    ...(en
-      ? []
-      : [
-          {
-            label: copy.navBrowser,
-            href: "/browser/",
-            current: page === "browser",
-          },
-        ]),
     {
       label: copy.navRoadmap,
       href: `${home}roadmap/`,
