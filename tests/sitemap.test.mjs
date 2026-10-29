@@ -32,8 +32,6 @@ test("build output includes a valid sitemap and robots.txt", async () => {
     "/en/enterprise/",
     "/roadmap/",
     "/en/roadmap/",
-    "/browser/",
-    "/en/browser/",
     "/docs/",
     "/en/docs/",
     "/blog/",

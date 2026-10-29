@@ -61,34 +61,6 @@ export type EditorialCopy = {
   navRoadmap: string;
   navDocs: string;
   navBlog: string;
-  navBrowser: string;
-  browserBadge: string;
-  browserTitle: string;
-  browserSlogan: string;
-  browserCta: string;
-  browserHeroNote: string;
-  browserFeaturesOverline: string;
-  browserFeaturesTitle: string;
-  browserFeatures: Array<{ title: string; body: string }>;
-  browserPlatformsOverline: string;
-  browserPlatformsTitle: string;
-  browserPlatforms: Array<{
-    id: "windows" | "macos" | "linux";
-    name: string;
-    detail: string;
-    action: string;
-  }>;
-  browserSetupTitle: string;
-  browserSetupBodyBeforeLink: string;
-  browserSetupLinkLabel: string;
-  browserSetupBodyAfterLink: string;
-  browserOssOverline: string;
-  browserOssTitle: string;
-  browserOssBodyBeforeEgo: string;
-  browserOssBodyMid: string;
-  browserOssBodyAfter: string;
-  browserFaqTitle: string;
-  browserFaq: Array<{ q: string; a: string }>;
   roadmapBadge: string;
   roadmapTitle: string;
   roadmapLead: string;
@@ -210,78 +182,6 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     navRoadmap: "路线图",
     navDocs: "文档",
     navBlog: "博客",
-    navBrowser: "浏览器",
-    browserBadge: "LOCAL BROWSER",
-    browserTitle: "知远浏览器",
-    browserSlogan: "人与 AI 共用的本机浏览器",
-    browserCta: "即将开放下载",
-    browserHeroNote:
-      "知远浏览器是知远的本机浏览器能力，与知远桌面端配套使用，不取代桌面端。",
-    browserFeaturesOverline: "CAPABILITIES",
-    browserFeaturesTitle: "本机浏览器，为人与 agent 共用而设计",
-    browserFeatures: [
-      {
-        title: "共用本机 Chromium",
-        body: "人与 AI agent 在同一套本机浏览器环境中操作页面，任务上下文留在你的电脑上。",
-      },
-      {
-        title: "Space 隔离",
-        body: "按 Space 划分浏览上下文，减少不同任务之间的 Cookie、会话与标签页互相干扰。",
-      },
-      {
-        title: "与知远配套",
-        body: "作为知远桌面端的本机浏览器能力接入工作流，与桌面应用协同，而非单独替代桌面端。",
-      },
-    ],
-    browserPlatformsOverline: "PLATFORMS",
-    browserPlatformsTitle: "首发平台",
-    browserPlatforms: [
-      {
-        id: "windows",
-        name: "Windows",
-        detail: "x64",
-        action: "即将开放下载",
-      },
-      {
-        id: "macos",
-        name: "macOS",
-        detail: "Apple Silicon / Intel",
-        action: "即将开放下载",
-      },
-      {
-        id: "linux",
-        name: "Linux",
-        detail: "桌面发行版",
-        action: "即将推出",
-      },
-    ],
-    browserSetupTitle: "使用前准备",
-    browserSetupBodyBeforeLink: "知远浏览器需配合官方 ",
-    browserSetupLinkLabel: "ego lite",
-    browserSetupBodyAfterLink:
-      " 运行。请从上游仓库获取并安装官方版本，再与知远桌面端一起使用。",
-    browserOssOverline: "OPEN SOURCE",
-    browserOssTitle: "开源与致谢",
-    browserOssBodyBeforeEgo:
-      "知远浏览器本体不是本仓库的开源产品。能力基于上游 ",
-    browserOssBodyMid: " 与 ",
-    browserOssBodyAfter:
-      " 等项目构建；相关许可与源码请参见各项目说明。",
-    browserFaqTitle: "常见问题",
-    browserFaq: [
-      {
-        q: "与知远桌面端是什么关系？",
-        a: "知远浏览器提供本机浏览能力，与知远桌面端配套。桌面端仍是主要工作台，浏览器不取代桌面应用。",
-      },
-      {
-        q: "浏览器本身开源吗？",
-        a: "浏览器安装包不是本 GitHub 仓库发布的内容。上游 ego-lite 与 Chromium 各自遵循其开源许可；本页仅说明依赖关系。",
-      },
-      {
-        q: "支持哪些系统？",
-        a: "首发面向 Windows 与 macOS。Linux 版本规划中，页面状态更新后会在此列出。",
-      },
-    ],
     roadmapBadge: "DESKTOP · OPEN SOURCE",
     roadmapTitle: "桌面版路线图",
     roadmapLead: "开源桌面应用的里程碑。每条进展对应一个 Pull Request 或 Issue。",
@@ -565,78 +465,6 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     navRoadmap: "Roadmap",
     navDocs: "Docs",
     navBlog: "Blog",
-    navBrowser: "Browser",
-    browserBadge: "LOCAL BROWSER",
-    browserTitle: "Seriya Browser",
-    browserSlogan: "A local browser for you and AI agents",
-    browserCta: "Download coming soon",
-    browserHeroNote:
-      "Seriya Browser is the local browser capability for Seriya. It ships alongside the desktop app and does not replace it.",
-    browserFeaturesOverline: "CAPABILITIES",
-    browserFeaturesTitle: "Built for people and agents on one machine",
-    browserFeatures: [
-      {
-        title: "Shared local Chromium",
-        body: "You and AI agents operate in the same on-device browser environment. Task context stays on your computer.",
-      },
-      {
-        title: "Space isolation",
-        body: "Spaces separate browsing context so cookies, sessions, and tabs from different tasks interfere less.",
-      },
-      {
-        title: "Works with Seriya desktop",
-        body: "Connects to the Seriya desktop app as its local browser capability—companion software, not a replacement.",
-      },
-    ],
-    browserPlatformsOverline: "PLATFORMS",
-    browserPlatformsTitle: "First release platforms",
-    browserPlatforms: [
-      {
-        id: "windows",
-        name: "Windows",
-        detail: "x64",
-        action: "Download coming soon",
-      },
-      {
-        id: "macos",
-        name: "macOS",
-        detail: "Apple silicon / Intel",
-        action: "Download coming soon",
-      },
-      {
-        id: "linux",
-        name: "Linux",
-        detail: "Desktop distributions",
-        action: "Coming later",
-      },
-    ],
-    browserSetupTitle: "Before you start",
-    browserSetupBodyBeforeLink: "Seriya Browser requires the official ",
-    browserSetupLinkLabel: "ego lite",
-    browserSetupBodyAfterLink:
-      " runtime. Install it from the upstream repository, then use it together with the Seriya desktop app.",
-    browserOssOverline: "OPEN SOURCE",
-    browserOssTitle: "Licenses and acknowledgments",
-    browserOssBodyBeforeEgo:
-      "Seriya Browser is not an open-source product of this repository. It is built on ",
-    browserOssBodyMid: " and ",
-    browserOssBodyAfter:
-      ". See each project for license terms and source code.",
-    browserFaqTitle: "FAQ",
-    browserFaq: [
-      {
-        q: "How does this relate to the desktop app?",
-        a: "Seriya Browser adds local browsing alongside the desktop app. The desktop app remains the primary workspace.",
-      },
-      {
-        q: "Is the browser open source here?",
-        a: "Installers are not published from this GitHub repo. ego-lite and Chromium follow their own licenses; this page describes dependencies only.",
-      },
-      {
-        q: "Which systems are supported?",
-        a: "Windows and macOS are first. Linux is planned; this page will update when a build is available.",
-      },
-    ],
     roadmapBadge: "DESKTOP · OPEN SOURCE",
     roadmapTitle: "Desktop roadmap",
     roadmapLead: "Milestones for the open-source desktop app. Each entry links to its pull request or issue.",
