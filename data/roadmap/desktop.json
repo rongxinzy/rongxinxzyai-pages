@@ -268,6 +268,13 @@
           "textEn": "The Windows GPU edition now pins the local-inference runtime assets that actually ship, so releases no longer fail on missing runtime files.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1359",
           "done": true
+        },
+        {
+          "date": "2026-10-29",
+          "text": "停止本地模型时会在限时内结束推理进程并确认其退出后才释放端口，后台不再残留幽灵进程。",
+          "textEn": "Stopping a local model now ends the inference process within a time limit and releases the port only after confirming exit, leaving no ghost processes behind.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1377",
+          "done": true
         }
       ]
     },
@@ -430,6 +437,13 @@
           "text": "编程页智能体管理更紧凑；缩小窗口时弹窗关闭按钮不再被标题栏拖拽区域挡住点不到。",
           "textEn": "Coding agent management is denser, and modal close buttons no longer get swallowed by the window-drag region when the window is small.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1340",
+          "done": true
+        },
+        {
+          "date": "2026-10-29",
+          "text": "内置模型网关的端口变化后，外部编程工具里的连接地址会自动同步更新，接入不再悄悄失效。",
+          "textEn": "When the built-in model gateway port changes, the connection address in external coding tools updates automatically, so the integration no longer silently breaks.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1363",
           "done": true
         }
       ]
@@ -650,6 +664,20 @@
           "textEn": "The desktop pet gets smarter on Windows: it senses window edges and climbs along them, stays visible while perched, and politely hides when a full-screen app takes over.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1365",
           "done": true
+        },
+        {
+          "date": "2026-10-29",
+          "text": "修复编程模式一处会阻断发版编译的问题，日常构建与发布校验重新通过。",
+          "textEn": "Fixed a coding-mode defect that blocked the release build, so everyday compile and publish checks pass again.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1369",
+          "done": true
+        },
+        {
+          "date": "2026-10-29",
+          "text": "Windows 上通过 npm 安装的 OpenCode 编程智能体现在也能被正确识别，扫描本机智能体不再漏掉它。",
+          "textEn": "OpenCode installed via npm is now correctly detected on Windows, so scanning for local coding agents no longer misses it.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1366",
+          "done": true
         }
       ]
     },
@@ -781,6 +809,62 @@
           "text": "记忆能力更稳定：内置记忆组件升级到自主维护的新版本，会话记忆的记录与收尾更可靠。",
           "textEn": "Memory gets more stable: the built-in memory component has been upgraded to a release maintained by our team, making session memory recording and wrap-up more reliable.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1364",
+          "done": true
+        },
+        {
+          "date": "2026-10-29",
+          "text": "会话记忆升级为按会话生成结构化检查点，长对话的关键内容记录得更完整、更有条理。",
+          "textEn": "Session memory now writes structured per-conversation checkpoints, capturing key points in long chats more completely and coherently.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1367",
+          "done": true
+        },
+        {
+          "date": "2026-10-29",
+          "text": "被动记忆现在能正确理解中文的段落标题和按字计的长度，中文对话内容也能被完整学习。",
+          "textEn": "Passive memory now understands Chinese paragraph headings and character-based lengths correctly, so Chinese conversations are learned properly.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1370",
+          "done": true
+        },
+        {
+          "date": "2026-10-29",
+          "text": "会话检查点的保存与发送绑定执行，断网或重启后会自动按原顺序补发，记录不再丢失。",
+          "textEn": "Session checkpoints are now saved and delivered as one step — after outages or restarts they are re-delivered in order automatically, so nothing is lost.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1371",
+          "done": true
+        },
+        {
+          "date": "2026-10-29",
+          "text": "会话检查点保留全部历史版本，旧内容仍可随时召回，不会因生成新检查点而被覆盖丢失。",
+          "textEn": "Session checkpoints keep their full history, so older content stays recallable and is never overwritten by newer updates.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1372",
+          "done": true
+        },
+        {
+          "date": "2026-10-29",
+          "text": "中断的记忆写入会先确认结果再恢复，对话续写时的上下文记录不重不漏。",
+          "textEn": "Interrupted memory writes are verified before being recovered, keeping the context of resumed conversations accurate without duplicates or gaps.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1373",
+          "done": true
+        },
+        {
+          "date": "2026-10-29",
+          "text": "会话收尾时待发送的记忆摘要按实际修改时间扫描补发，并有自动重试，收尾不重不漏。",
+          "textEn": "Pending memory summaries during session close are now re-delivered based on their actual update time with automatic retries, so finalization misses nothing.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1374",
+          "done": true
+        },
+        {
+          "date": "2026-10-29",
+          "text": "会话关闭后又继续写入的新内容会单独收尾归档，不再被当作已结束而漏记。",
+          "textEn": "Content written after a session has closed now gets its own finalization, so it is never skipped as already finished.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1375",
+          "done": true
+        },
+        {
+          "date": "2026-10-29",
+          "text": "会话收尾记录与各自的会话周期一一绑定，不再被旧收尾任务误覆盖，最终状态始终准确。",
+          "textEn": "Finalization records are now bound to their own session lifecycle, so stale tasks can no longer overwrite the completed state.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1378",
           "done": true
         }
       ]
