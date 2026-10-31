@@ -180,7 +180,7 @@ export function Header({
   ];
 
   const downloadClass =
-    "header-download inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-ink px-4 py-2 text-sm font-medium text-white shadow-[0_1px_2px_rgb(9_13_22/0.2),0_4px_12px_rgb(9_13_22/0.12)] transition-[transform,background-color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:bg-black hover:shadow-[0_8px_24px_rgb(9_13_22/0.2)] active:translate-y-0 active:scale-[0.97] motion-reduce:transition-none motion-reduce:hover:translate-y-0";
+    "header-download inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-ink px-4 py-1.5 text-sm font-medium text-white transition-colors duration-200 ease-out hover:bg-black motion-reduce:transition-none";
 
   return (
     <header
@@ -199,16 +199,16 @@ export function Header({
     >
       {/* 栏体布局在两个滚动状态下保持恒定；滚动态的悬浮玻璃 pill 作为背景层
           只做 opacity/transform 合成器动画，避免布局属性过渡带来的横向滑动与边框闪现。 */}
-      <div className="mx-auto max-w-7xl px-3 pt-3 sm:px-4">
-        <div className="relative flex items-center justify-between gap-4 rounded-full px-2 py-2 sm:px-3">
+      <div className="mx-auto max-w-7xl px-3 pt-2 sm:px-4">
+        <div className="relative flex items-center justify-between gap-3 rounded-full px-2 py-1.5 sm:px-3">
           <span
             aria-hidden="true"
             className={cn(
-              "glass-chip absolute inset-0 -z-10 rounded-full border border-hairline shadow-[0_8px_30px_rgb(12_18_34/0.06)]",
+              "header-shell absolute inset-0 -z-10 rounded-full border border-hairline",
               "motion-safe:transition-[opacity,transform] motion-safe:duration-300 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
               scrolled
                 ? "translate-y-0 opacity-100"
-                : "pointer-events-none -translate-y-1 scale-[0.99] opacity-0",
+                : "pointer-events-none -translate-y-0.5 scale-[0.995] opacity-0",
             )}
           />
           <div className="flex items-center gap-3">
@@ -366,7 +366,7 @@ export function Footer({
             </p>
             <p className="tnum mt-5 inline-flex max-w-full items-center gap-2 rounded-full border border-hairline bg-ground px-3 py-1.5 text-[13px] text-muted">
               <span
-                className="size-1.5 shrink-0 rounded-full bg-accent-2"
+                className="size-1.5 shrink-0 rounded-full bg-accent"
                 aria-hidden="true"
               />
               {release

@@ -188,14 +188,22 @@
       background: #ffffff;
     }
   }
+
+  .chip-quiet {
+    background: var(--color-ground);
+  }
+
+  .header-shell {
+    background: var(--color-ground);
+    box-shadow: 0 1px 0 rgb(15 23 42 / var(--hairline-alpha));
+  }
 }
 
 .site-main section[id] {
   scroll-margin-top: 6rem;
 }
 
-/* 首屏主 Slogan：方案 2（宋黑对排）+ 方案 3（天顶黑曜石 + 单次天光掠影）
-   第一行以人文宋刻/衬线斜体舒展引出，第二行以紧排重黑体承载黑曜石天顶受光面与入场一次掠光。 */
+/* 首屏主 Slogan：宋黑对排 — 衬线引句 + 重黑 accent 行（静态墨色，无渐变掠光）。 */
 @keyframes hero-obsidian-sweep {
   0% {
     background-position: 118% 0, 0 0;
@@ -210,15 +218,16 @@
   font-weight: var(--hero-serif-weight);
   letter-spacing: 0.04em;
   color: #172133;
-  text-shadow: 0 1px 0 rgb(255 255 255 / 0.75);
 }
 
 .hero-accent-line {
   font-family: var(--font-sans);
   font-weight: 700;
   letter-spacing: -0.03em;
-  filter: drop-shadow(0 1px 0 rgb(255 255 255 / 0.78))
-    drop-shadow(0 16px 34px rgb(9 13 22 / 0.08));
+}
+
+.hero-accent-static {
+  color: var(--color-ink);
 }
 
 .hero-obsidian-glint {

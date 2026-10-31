@@ -330,7 +330,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     windowsGuide: "查看 Windows 安装指南",
     signingNote:
       "Windows 安装包经 Certum 代码签名，macOS 签名版本通过 Apple 公证。更新清单附带签名与 SHA-256 校验值。",
-    ossOverline: "OPEN SOURCE · AGPL-3.0",
+    ossOverline: "开源 · AGPL-3.0",
     ossTitle: "核心代码开源，可检视、可构建。",
     ossBody:
       "工作流编排、任务界面与本地模型管理的代码托管于 GitHub，采用 AGPL-3.0 协议发布。你可以克隆仓库自行构建，或通过 Issue 与 Pull Request 参与开发。",
@@ -614,7 +614,7 @@ export const COPY: Record<SiteLocale, EditorialCopy> = {
     windowsGuide: "Windows setup guide",
     signingNote:
       "Windows installers are Certum code-signed, and signed macOS builds are notarized by Apple. Update manifests include signatures and SHA-256 checksums.",
-    ossOverline: "OPEN SOURCE · AGPL-3.0",
+    ossOverline: "Open source · AGPL-3.0",
     ossTitle: "Core source code open for inspection and builds.",
     ossBody:
       "Workflow orchestration, the task UI and local model management are hosted on GitHub under AGPL-3.0. Clone the repository to build from source, or contribute via issues and pull requests.",

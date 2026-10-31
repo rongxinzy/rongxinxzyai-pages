@@ -7,14 +7,13 @@ import { Showcase } from "./Showcase";
 import { Models } from "./Models";
 import { Pillars } from "./Pillars";
 import { Downloads } from "./Downloads";
-import { CloudShader } from "../effects/CloudShader";
-import { TextGenerateEffect } from "../effects/TextGenerateEffect";
-import { MovingBorderButton } from "../effects/MovingBorder";
-import { BackgroundBeams } from "../effects/BackgroundBeams";
 
 const PLATFORM_ICONS = ["laptop", "monitor", "terminal"] as const;
 
-const sectionPad = "pt-24 pb-16 md:pt-32 md:pb-20";
+const sectionPad = "pt-24 pb-16 md:pt-28 md:pb-20";
+
+const chipClass =
+  "chip-quiet tnum inline-flex h-8 items-center gap-1.5 rounded-full border border-hairline px-3 text-[length:var(--fs-micro)] font-medium text-muted";
 
 export function Home({
   copy,
@@ -27,89 +26,64 @@ export function Home({
     <main id="main" className="site-main" tabIndex={-1}>
       <section
         aria-labelledby="hero-title"
-        className="relative flex min-h-svh flex-col overflow-hidden bg-ground"
+        className="border-b border-hairline bg-ground"
       >
-        <div className="absolute inset-0" aria-hidden="true">
-          <CloudShader
-            speed={0.6}
-            count={6}
-            className="mask-fade-b h-full w-full"
-          />
-        </div>
-        <div
-          className="pointer-events-none absolute inset-x-0 top-0 h-[72%] bg-[radial-gradient(58%_58%_at_50%_36%,rgb(255_255_255/0.6),transparent_75%)]"
-          aria-hidden="true"
-        />
-        <div className="relative z-10 flex flex-1 flex-col items-center px-6 pt-[24vh] text-center md:pt-[26vh]">
-          <div className="glass-chip inline-flex items-center gap-2.5 rounded-full border border-hairline px-4 py-2">
+        <div className="mx-auto flex max-w-3xl flex-col items-center px-6 pt-28 pb-16 text-center md:pt-32 md:pb-20">
+          <div className={`${chipClass} gap-2 px-4 text-sm text-ink`}>
             <span
-              className="h-1.5 w-1.5 rounded-full bg-accent"
+              className="size-1.5 shrink-0 rounded-full bg-accent"
               aria-hidden="true"
             />
-            <span className="text-sm font-medium text-ink">
+            <span className="font-medium">
               {releaseStatus === "ready" && release
                 ? `v${release.version} ${copy.releaseStable}`
                 : copy.releaseFallback}
             </span>
           </div>
-          <p className="mt-3 text-[13px] text-muted">{copy.heroBadgeSub}</p>
-          <h1
-            id="hero-title"
-            className="mt-8 text-ink"
-          >
-            <TextGenerateEffect
-              words={copy.headlineTop}
-              staggerDelay={0.055}
+          <p className="mt-2 text-[13px] leading-5 text-muted">
+            {copy.heroBadgeSub}
+          </p>
+          <h1 id="hero-title" className="mt-6 text-ink md:mt-8">
+            <span
               className={`hero-editorial-lead block ${
                 locale === "en"
                   ? "text-[clamp(28px,4.4vw,50px)] leading-[1.16] italic tracking-[0.01em]"
                   : "pl-[0.42em] text-[clamp(28px,4.2vw,48px)] leading-[1.22]"
               }`}
-            />
-            <TextGenerateEffect
-              words={copy.headlineAccent}
-              staggerDelay={0.06}
-              initialDelay={0.22}
-              tokenClassName="hero-obsidian-glint"
-              className={`hero-accent-line mt-2 block text-[clamp(42px,7.2vw,80px)] leading-[1.06] md:mt-2.5 ${
+            >
+              {copy.headlineTop}
+            </span>
+            <span
+              className={`hero-accent-line hero-accent-static mt-2 block text-[clamp(40px,7vw,76px)] leading-[1.06] md:mt-3 ${
                 locale === "en" ? "" : "pl-[0.36em]"
               }`}
-            />
+            >
+              {copy.headlineAccent}
+            </span>
           </h1>
-          <p className="mt-6 max-w-[62ch] text-base leading-8 text-muted md:text-lg">
+          <p className="mt-5 max-w-[62ch] text-base leading-7 text-muted md:mt-6 md:text-[17px] md:leading-8">
             {copy.heroLead}
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <MovingBorderButton
-              as="a"
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 md:mt-10">
+            <a
               href="#download"
-              borderRadius="9999px"
-              className="border-transparent bg-ink px-7 py-3 text-[15px] font-semibold text-white shadow-[0_1px_3px_rgb(9_13_22/0.25),0_10px_24px_rgb(9_13_22/0.14)] transition-colors hover:bg-black"
+              className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-black"
             >
-              <span className="inline-flex items-center gap-2">
-                <Icon name="download" size={16} />
-                {copy.heroCtaPrimary}
-              </span>
-            </MovingBorderButton>
+              <Icon name="download" size={16} />
+              {copy.heroCtaPrimary}
+            </a>
             <a
               href="#workbench"
-              className="inline-flex items-center gap-2 rounded-full border border-hairline bg-white px-7 py-3 text-[15px] font-medium text-ink transition-colors hover:border-ink/25"
+              className="inline-flex items-center gap-2 rounded-full border border-hairline bg-ground px-6 py-2.5 text-[15px] font-medium text-ink transition-colors hover:border-ink/20 hover:bg-mist"
             >
               <Icon name="play" size={16} />
               {copy.heroCtaSecondary}
             </a>
           </div>
-        </div>
-        <div className="relative z-10 flex justify-center px-6 pt-16 pb-8">
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="glass-chip tnum rounded-full border border-hairline px-3 py-1.5 font-mono text-[length:var(--fs-micro)] font-medium uppercase tracking-[0.12em] text-muted">
-              {copy.agplChip}
-            </span>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-2 md:mt-12">
+            <span className={chipClass}>{copy.agplChip}</span>
             {copy.platforms.map((platform, index) => (
-              <span
-                key={platform}
-                className="glass-chip tnum inline-flex items-center gap-1.5 rounded-full border border-hairline px-3 py-1.5 text-[length:var(--fs-micro)] font-medium text-muted"
-              >
+              <span key={platform} className={chipClass}>
                 <Icon name={PLATFORM_ICONS[index]} size={14} />
                 {platform}
               </span>
@@ -169,7 +143,6 @@ function OssSection({ copy }: { copy: EditorialCopy }) {
       setCopyStatus("copied");
     } catch {
       setCopyStatus("error");
-      // Keep the full command available when clipboard access is unavailable.
       if (command.current) {
         command.current.focus();
         const range = document.createRange();
@@ -184,23 +157,22 @@ function OssSection({ copy }: { copy: EditorialCopy }) {
   return (
     <section
       aria-labelledby="oss-title"
-      className="relative overflow-hidden bg-ground"
+      className="border-t border-hairline bg-ground"
     >
-      <BackgroundBeams />
-      <div className="relative mx-auto max-w-3xl px-6 pt-28 pb-20 text-center md:pt-36 md:pb-24">
-        <span className="font-mono text-[length:var(--fs-micro)] font-medium uppercase tracking-[0.2em] text-accent">
+      <div className="mx-auto max-w-3xl px-6 pt-24 pb-16 text-center md:pt-28 md:pb-20">
+        <p className="text-[length:var(--fs-micro)] font-medium text-muted">
           {copy.ossOverline}
-        </span>
+        </p>
         <h2
           id="oss-title"
-          className="mt-4 text-3xl font-semibold tracking-[-0.02em] text-ink md:text-4xl"
+          className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-ink md:text-4xl"
         >
           {copy.ossTitle}
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-muted">
           {copy.ossBody}
         </p>
-        <div className="mx-auto mt-10 flex max-w-xl items-center gap-2 rounded-2xl bg-ink p-2 pl-5">
+        <div className="mx-auto mt-8 flex max-w-xl items-center gap-2 rounded-xl bg-ink p-2 pl-4 md:mt-10 md:pl-5">
           <code
             ref={command}
             tabIndex={-1}
@@ -213,7 +185,7 @@ function OssSection({ copy }: { copy: EditorialCopy }) {
             onClick={onCopy}
             disabled={copyStatus === "copying"}
             aria-busy={copyStatus === "copying"}
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-white/10 px-3.5 py-2 text-[13px] font-medium text-white transition-colors hover:bg-white/20"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-white/10 px-3 py-2 text-[13px] font-medium text-white transition-colors hover:bg-white/16"
           >
             <Icon name={copied ? "check" : "copy"} size={14} />
             {copied ? copy.copiedCommand : copy.copyCommand}
@@ -233,7 +205,7 @@ function OssSection({ copy }: { copy: EditorialCopy }) {
           href={GITHUB}
           target="_blank"
           rel="noreferrer"
-          className="mt-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-white px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-ink/30 hover:bg-mist"
+          className="mt-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-ground px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-ink/20 hover:bg-mist"
         >
           <Icon name="star" size={15} />
           {copy.ossStar}
