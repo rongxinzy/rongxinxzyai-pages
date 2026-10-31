@@ -95,6 +95,13 @@
           "text": "Windows 上点击「重启更新」后改为无窗口静默安装，不再弹出原生安装向导，装完自动重启到新版本。",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1308",
           "done": true
+        },
+        {
+          "date": "2026-10-30",
+          "text": "修复 macOS 版发布流程中公证步骤偶发卡住的问题，新版安装包的交付更准时可靠。",
+          "textEn": "Fixed an intermittent hang in the macOS release notarization step, keeping new installers on a more reliable delivery schedule.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1381",
+          "done": true
         }
       ]
     },
@@ -445,6 +452,13 @@
           "textEn": "When the built-in model gateway port changes, the connection address in external coding tools updates automatically, so the integration no longer silently breaks.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1363",
           "done": true
+        },
+        {
+          "date": "2026-10-30",
+          "text": "模型列表现在会标注服务商名称并支持按名称搜索，例如 GLM-5.3-Flash 会显示为智谱 GLM，挑模型更一目了然。",
+          "textEn": "Model lists now show supplier names and support searching by name — for example, GLM-5.3-Flash appears under Zhipu GLM — making it easier to find the right model.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1382",
+          "done": true
         }
       ]
     },
@@ -678,6 +692,27 @@
           "textEn": "OpenCode installed via npm is now correctly detected on Windows, so scanning for local coding agents no longer misses it.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1366",
           "done": true
+        },
+        {
+          "date": "2026-10-30",
+          "text": "设置保存失败时，自动备份开关会自动恢复原值，语言切换也不会再覆盖尚未保存的偏好。",
+          "textEn": "The automatic backup toggle now reverts safely when saving preferences fails, and language changes no longer overwrite unsaved settings.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1376",
+          "done": true
+        },
+        {
+          "date": "2026-10-30",
+          "text": "PPT、Word、Excel、PDF 文档现在直接按原生流程生成交付，不再强制附带校验报告，完成体验更顺畅。",
+          "textEn": "PPT, Word, Excel, and PDF documents now export directly through the native completion path without mandatory validation reports, for a smoother delivery experience.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1384",
+          "done": true
+        },
+        {
+          "date": "2026-10-30",
+          "text": "侧边栏会话列表的按压反馈现在覆盖整行，选中会话上的标题区域不再出现局部变暗。",
+          "textEn": "Press feedback in the session sidebar now covers the whole row, removing the darker overlay on selected session titles.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1385",
+          "done": true
         }
       ]
     },
@@ -865,6 +900,20 @@
           "text": "会话收尾记录与各自的会话周期一一绑定，不再被旧收尾任务误覆盖，最终状态始终准确。",
           "textEn": "Finalization records are now bound to their own session lifecycle, so stale tasks can no longer overwrite the completed state.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1378",
+          "done": true
+        },
+        {
+          "date": "2026-10-30",
+          "text": "为网页搜索的底层组件完成一轮安全依赖更新，搜索行为与权限设置保持不变。",
+          "textEn": "Shipped a security update for web search's underlying components, with no changes to search behavior or permissions.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1379",
+          "done": true
+        },
+        {
+          "date": "2026-10-30",
+          "text": "新增一批离线质量对比测试，持续守护任务续答与收尾判断的稳定性。",
+          "textEn": "Added a new batch of offline comparison tests to keep task continuation and wrap-up decisions consistently stable.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1380",
           "done": true
         }
       ]
