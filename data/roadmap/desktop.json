@@ -102,6 +102,20 @@
           "textEn": "Fixed an intermittent hang in the macOS release notarization step, keeping new installers on a more reliable delivery schedule.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1381",
           "done": true
+        },
+        {
+          "date": "2026-10-31",
+          "text": "macOS 应用签名在苹果时间戳服务临时不可用时会自动重试，更新发布不再被偶发故障拖延。",
+          "textEn": "macOS signing now retries automatically when Apple's timestamp service is briefly unavailable, so releases are less often delayed by a temporary outage.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1383",
+          "done": true
+        },
+        {
+          "date": "2026-10-31",
+          "text": "macOS 更新校验中系统 Gatekeeper 评估改为仅告警，签名与公证检查依旧严格，发版不再被偶发环境问题卡住。",
+          "textEn": "In release checks for macOS, the Gatekeeper assessment now only warns instead of blocking, while signing and notarization checks stay strict, so occasional environment issues no longer stall updates.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1388",
+          "done": true
         }
       ]
     },
@@ -713,6 +727,13 @@
           "textEn": "Press feedback in the session sidebar now covers the whole row, removing the darker overlay on selected session titles.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1385",
           "done": true
+        },
+        {
+          "date": "2026-10-31",
+          "text": "主界面完成一轮细节打磨：间距与图标描边更统一，快捷操作与输入框对齐，首页提示文案更清晰易读。",
+          "textEn": "The main interface got a round of polish: more consistent spacing and icon strokes, quick actions aligned with the input box, and clearer home-screen text.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1387",
+          "done": true
         }
       ]
     },
@@ -914,6 +935,13 @@
           "text": "新增一批离线质量对比测试，持续守护任务续答与收尾判断的稳定性。",
           "textEn": "Added a new batch of offline comparison tests to keep task continuation and wrap-up decisions consistently stable.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1380",
+          "done": true
+        },
+        {
+          "date": "2026-10-31",
+          "text": "会话摘要现在只统计真实完成的工作，并在恢复或续接会话时保留最初的目标，任务接续更准确不跑偏。",
+          "textEn": "Session summaries now count only real completed work and keep your original goal when resuming, so picking a task back up stays on track.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1386",
           "done": true
         }
       ]
