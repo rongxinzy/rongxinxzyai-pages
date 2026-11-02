@@ -116,6 +116,13 @@
           "textEn": "In release checks for macOS, the Gatekeeper assessment now only warns instead of blocking, while signing and notarization checks stay strict, so occasional environment issues no longer stall updates.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1388",
           "done": true
+        },
+        {
+          "date": "2026-11-01",
+          "text": "修复快捷操作栏图标配置导致发版构建失败的问题，新版本客户端得以按时顺畅发布。",
+          "textEn": "Fixed a release build failure caused by icon configuration in the quick action bar, keeping new client versions shipping on schedule.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1389",
+          "done": true
         }
       ]
     },
