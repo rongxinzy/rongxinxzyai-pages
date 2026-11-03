@@ -123,6 +123,13 @@
           "textEn": "Fixed a release build failure caused by icon configuration in the quick action bar, keeping new client versions shipping on schedule.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1389",
           "done": true
+        },
+        {
+          "date": "2026-11-02",
+          "text": "修复发布流程中过期旧版本文件清理偶发卡住的问题，历史发布产物的清理更顺畅可靠。",
+          "textEn": "Fixed an issue in the release pipeline where cleaning up expired older release files could get stuck, so outdated artifacts are now removed smoothly and reliably.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1390",
+          "done": true
         }
       ]
     },
