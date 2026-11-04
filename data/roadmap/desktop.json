@@ -130,6 +130,13 @@
           "textEn": "Fixed an issue in the release pipeline where cleaning up expired older release files could get stuck, so outdated artifacts are now removed smoothly and reliably.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1390",
           "done": true
+        },
+        {
+          "date": "2026-11-03",
+          "text": "发版前的真实安装自检恢复工作，有问题的安装包会在发布前被拦下，你下载到的每次更新都更可靠。",
+          "textEn": "Pre-release installation checks are back, catching broken installers before they ever reach your download.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1393",
+          "done": true
         }
       ]
     },
@@ -386,6 +393,13 @@
           "text": "安装与升级时按当前安装包的产品名校验目录归属，减少误拦合法升级或卸载。",
           "textEn": "Install and upgrade now validate directory ownership against the build's product executable name, so legitimate upgrades and uninstalls are less likely to be blocked.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1346",
+          "done": true
+        },
+        {
+          "date": "2026-11-03",
+          "text": "修复了 Windows 离线安装包的组件校验问题，Lite、CPU、CUDA 版本现在都能一次装好。",
+          "textEn": "Fixed offline installer component checks on Windows so Lite, CPU, and CUDA bundles all install cleanly again.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1392",
           "done": true
         }
       ]
@@ -747,6 +761,13 @@
           "text": "主界面完成一轮细节打磨：间距与图标描边更统一，快捷操作与输入框对齐，首页提示文案更清晰易读。",
           "textEn": "The main interface got a round of polish: more consistent spacing and icon strokes, quick actions aligned with the input box, and clearer home-screen text.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1387",
+          "done": true
+        },
+        {
+          "date": "2026-11-03",
+          "text": "桌面伙伴的对话新增手绘气泡样式，你和伙伴的消息各有配色与手绘轮廓，明暗主题下都更有温度。",
+          "textEn": "Companion chats now get hand-drawn message bubbles with distinct colors and outlines for you and your companion, adding warmth in both light and dark themes.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1391",
           "done": true
         }
       ]
