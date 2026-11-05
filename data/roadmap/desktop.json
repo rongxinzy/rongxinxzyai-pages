@@ -137,6 +137,62 @@
           "textEn": "Pre-release installation checks are back, catching broken installers before they ever reach your download.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1393",
           "done": true
+        },
+        {
+          "date": "2026-11-04",
+          "text": "新增了可手动触发的桌面端发版入口，覆盖 Windows、macOS 与 Linux，且不再依赖麒麟打包，原有发版方式保持不变。",
+          "textEn": "Added a manually triggered desktop release entry covering Windows, macOS, and Linux that no longer depends on Kylin packaging, with the original release flow unchanged.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1394",
+          "done": true
+        },
+        {
+          "date": "2026-11-04",
+          "text": "麒麟 V11 打包从主发版流程中拆出为独立手动流程，Windows、macOS 与 Linux 的发版不再被它卡住。",
+          "textEn": "Kylin V11 packaging is now a separate manual process, so releases for Windows, macOS, and Linux are no longer blocked by it.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1395",
+          "done": true
+        },
+        {
+          "date": "2026-11-04",
+          "text": "修复了 Linux 版终端功能缺失的问题：发版前会重新编译终端组件，并确认已打入安装包。",
+          "textEn": "Fixed missing terminal features on Linux by rebuilding the terminal component before release and verifying it is included in the installer.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1397",
+          "done": true
+        },
+        {
+          "date": "2026-11-04",
+          "text": "提升了 Linux 安装包在较老发行版上的兼容性：终端与本地数据库组件改为按更通用的系统库基线编译。",
+          "textEn": "Improved Linux installer compatibility on older distributions by building the terminal and local database components against a more widely compatible system baseline.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1399",
+          "done": true
+        },
+        {
+          "date": "2026-11-04",
+          "text": "为 Linux 打包环境补上了缺失的解压工具，修复安装文件无法解压导致的 Linux 发版失败。",
+          "textEn": "Added the missing extraction tool to the Linux packaging environment, fixing Linux release failures caused by files that could not be unpacked.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1400",
+          "done": true
+        },
+        {
+          "date": "2026-11-04",
+          "text": "修复了 Linux 打包误要求仅 macOS 才有的组件而失败的问题，编译完成后不再出错。",
+          "textEn": "Fixed Linux packaging failures caused by mistakenly requiring a component that only exists on macOS.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1401",
+          "done": true
+        },
+        {
+          "date": "2026-11-04",
+          "text": "解决了 Linux 安装包缺少本地数据库组件的问题，改为在打包环境中从头编译并确保随包提供。",
+          "textEn": "Fixed Linux installers missing the local database component by building it from scratch in the packaging environment so it ships with the package.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1403",
+          "done": true
+        },
+        {
+          "date": "2026-11-04",
+          "text": "修复了 Linux CPU 版安装包发版失败的问题：打包时会彻底重新编译本地数据库组件，确保组件真正可用。",
+          "textEn": "Fixed the failing release of the Linux CPU build by fully recompiling the local database component during packaging so it actually works.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1404",
+          "done": true
         }
       ]
     },
@@ -316,6 +372,13 @@
           "text": "停止本地模型时会在限时内结束推理进程并确认其退出后才释放端口，后台不再残留幽灵进程。",
           "textEn": "Stopping a local model now ends the inference process within a time limit and releases the port only after confirming exit, leaving no ghost processes behind.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1377",
+          "done": true
+        },
+        {
+          "date": "2026-11-04",
+          "text": "本地推理页更简洁了：去掉了多余的硬件目录入口，现有模型卡片和模型市场保持不变。",
+          "textEn": "Streamlined the local inference page by removing an unused hardware catalog entry, while existing model cards and the model marketplace stay unchanged.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1402",
           "done": true
         }
       ]
