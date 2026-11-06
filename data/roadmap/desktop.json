@@ -380,6 +380,20 @@
           "textEn": "Streamlined the local inference page by removing an unused hardware catalog entry, while existing model cards and the model marketplace stay unchanged.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1402",
           "done": true
+        },
+        {
+          "date": "2026-11-05",
+          "text": "Windows GPU 版安装包在无 NVIDIA 显卡、驱动不支持或明确选择 CPU 的电脑上不再启动失败，会自动改用兼容的内置运行时，CPU 版也支持 Vulkan，开箱即可使用。",
+          "textEn": "The Windows GPU build no longer fails to start on PCs without a supported NVIDIA GPU or driver—it automatically falls back to a compatible CPU runtime (with Vulkan still available on the CPU build), so local inference works out of the box.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1396",
+          "done": true
+        },
+        {
+          "date": "2026-11-05",
+          "text": "Windows GPU 双引擎本地推理更稳：切换模型按顺序执行，启动失败或超时会自动清理并给出明确结果，不再卡在「启动中」或状态互相覆盖。",
+          "textEn": "Windows GPU local inference is now more stable: model switching is queued properly, and failed or timed-out launches are cleaned up and end in a clear state instead of getting stuck on \"starting\".",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1407",
+          "done": true
         }
       ]
     },
@@ -831,6 +845,13 @@
           "text": "桌面伙伴的对话新增手绘气泡样式，你和伙伴的消息各有配色与手绘轮廓，明暗主题下都更有温度。",
           "textEn": "Companion chats now get hand-drawn message bubbles with distinct colors and outlines for you and your companion, adding warmth in both light and dark themes.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1391",
+          "done": true
+        },
+        {
+          "date": "2026-11-05",
+          "text": "保存到工作区之外的最终文件（比如你自定义输出路径的文档）现在也能正常作为交付物保留，只有未声明的外部文件和中间产物仍会被过滤。",
+          "textEn": "Final files saved outside the workspace—such as documents written to your custom output path—are now kept as declared deliverables; only undeclared external files and intermediate artifacts are still filtered out.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1408",
           "done": true
         }
       ]
