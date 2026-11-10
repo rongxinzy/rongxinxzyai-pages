@@ -193,6 +193,13 @@
           "textEn": "Fixed the failing release of the Linux CPU build by fully recompiling the local database component during packaging so it actually works.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1404",
           "done": true
+        },
+        {
+          "date": "2026-11-09",
+          "text": "发版前新增类型检查，且真实安装预检必须针对这一版代码完成，旧的通过记录不再作数，有问题的安装包会在发布前被拦住。",
+          "textEn": "Releases now require a passing type check, and the real installation pre-check must cover that exact version—stale passing records no longer count, so problematic installers are stopped before they ship.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1412",
+          "done": true
         }
       ]
     },
