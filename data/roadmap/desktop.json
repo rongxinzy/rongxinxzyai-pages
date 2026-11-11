@@ -200,6 +200,13 @@
           "textEn": "Releases now require a passing type check, and the real installation pre-check must cover that exact version—stale passing records no longer count, so problematic installers are stopped before they ship.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1412",
           "done": true
+        },
+        {
+          "date": "2026-11-10",
+          "text": "发版前会真正安装最终的 Linux deb 和 AppImage，核对版本、大小和校验值，并确认带侧栏和输入框的主界面能正常打开，有问题的安装包会在发布前被拦住。",
+          "textEn": "Pre-release checks now install the final Linux deb and AppImage, verify version, size, and checksum, and only pass once the main window with sidebar and input box opens — broken packages are stopped before they ship.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1417",
+          "done": true
         }
       ]
     },
@@ -401,6 +408,20 @@
           "textEn": "Windows GPU local inference is now more stable: model switching is queued properly, and failed or timed-out launches are cleaned up and end in a clear state instead of getting stuck on \"starting\".",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1407",
           "done": true
+        },
+        {
+          "date": "2026-11-10",
+          "text": "安装包里预置了 424 个 ModelScope 仓库的离线目录，搜索和安装信息不联网也能查，目录站点慢或连不上时照样能挑模型、直连 ModelScope 安装。",
+          "textEn": "The app now ships with an offline catalog of 424 ModelScope repositories, so search and install info work without a network connection, and a slow or unreachable catalog site no longer blocks browsing or direct ModelScope installs.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1419",
+          "done": true
+        },
+        {
+          "date": "2026-11-10",
+          "text": "Windows CUDA 版的模型市场可以下载并安装九个固定版本的本地推理模型包，下载能看进度、可取消可续传，装好后能启动或停止对应版本。",
+          "textEn": "The Windows CUDA marketplace can now download and install nine fixed versions of local inference model packages, with visible progress, cancel and resume; once installed, you can start or stop the exact version you have.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1422",
+          "done": true
         }
       ]
     },
@@ -584,6 +605,13 @@
           "text": "模型列表现在会标注服务商名称并支持按名称搜索，例如 GLM-5.3-Flash 会显示为智谱 GLM，挑模型更一目了然。",
           "textEn": "Model lists now show supplier names and support searching by name — for example, GLM-5.3-Flash appears under Zhipu GLM — making it easier to find the right model.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1382",
+          "done": true
+        },
+        {
+          "date": "2026-11-10",
+          "text": "模型渠道现在可以给模型单独设置上下文窗口，渠道卡片会显示每个模型实际生效的窗口及其来源（手动或自动）；渠道测试把网页误报为成功、改地址后旧报错还挂着的问题也修好了。",
+          "textEn": "You can now set a context window for each model in a provider channel, and the channel card shows the window actually in effect and whether it was set manually or detected automatically. Channel tests no longer pass just because a webpage loaded, and stale errors are cleared when you change the address.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1418",
           "done": true
         }
       ]
