@@ -207,6 +207,13 @@
           "textEn": "Pre-release checks now install the final Linux deb and AppImage, verify version, size, and checksum, and only pass once the main window with sidebar and input box opens — broken packages are stopped before they ship.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1417",
           "done": true
+        },
+        {
+          "date": "2026-11-11",
+          "text": "发布页手动下载 Windows 安装包时，只会看到 Lite、CPU、CUDA 三个安装程序，自动更新用的文件不再混在下载列表里，不容易下错包；应用内自动更新不受影响。",
+          "textEn": "Manual Windows downloads on the release page now show only the Lite, CPU, and CUDA installers, so auto-update files no longer clutter the list and it is harder to grab the wrong package; in-app auto-update is unaffected.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1426",
+          "done": true
         }
       ]
     },
@@ -421,6 +428,13 @@
           "text": "Windows CUDA 版的模型市场可以下载并安装九个固定版本的本地推理模型包，下载能看进度、可取消可续传，装好后能启动或停止对应版本。",
           "textEn": "The Windows CUDA marketplace can now download and install nine fixed versions of local inference model packages, with visible progress, cancel and resume; once installed, you can start or stop the exact version you have.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1422",
+          "done": true
+        },
+        {
+          "date": "2026-11-11",
+          "text": "取消模型下载时，已成功写入的部分会按实际字节保留，下次可从断点继续，不会再出现进度显示已下载、文件却是空的或对不上的情况。",
+          "textEn": "If you cancel a model download, the bytes already written are kept accurately, so the next try can resume from where it left off instead of showing progress for an empty or mismatched file.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1424",
           "done": true
         }
       ]
@@ -1096,6 +1110,27 @@
           "text": "会话摘要现在只统计真实完成的工作，并在恢复或续接会话时保留最初的目标，任务接续更准确不跑偏。",
           "textEn": "Session summaries now count only real completed work and keep your original goal when resuming, so picking a task back up stays on track.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1386",
+          "done": true
+        },
+        {
+          "date": "2026-11-11",
+          "text": "长任务中途被截断时，现在会自动接着补完（有次数上限），模型启动的上下文上限也与预检保持一致，到上限时会给出更清楚的中英文提示。",
+          "textEn": "If a long task is cut off mid-way, it can now continue automatically (up to a retry limit). The model's context limit now matches the pre-check, and you get a clearer Chinese and English message when you hit it.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1423",
+          "done": true
+        },
+        {
+          "date": "2026-11-11",
+          "text": "长时间任务不再因为次数限制或等待你确认而被提前结束，批准后会继续做完；重复的记忆会被整理掉，任务上下文更干净。",
+          "textEn": "Long-running tasks are no longer stopped early by a round limit or while waiting for your approval — they carry on once you confirm — and duplicate memories are tidied up so the task context stays cleaner.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1427",
+          "done": true
+        },
+        {
+          "date": "2026-11-11",
+          "text": "任务中途被截断或验收没有通过时，不会再被标成已完成，你会看到明确的中断或失败结果，而不是一份不完整却显示成功的回答。",
+          "textEn": "Tasks that get cut off mid-way or fail acceptance are no longer marked as complete — you get a clear interrupted or failed result instead of an incomplete reply that still claims success.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1428",
           "done": true
         }
       ]
