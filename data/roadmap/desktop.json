@@ -214,6 +214,13 @@
           "textEn": "Manual Windows downloads on the release page now show only the Lite, CPU, and CUDA installers, so auto-update files no longer clutter the list and it is harder to grab the wrong package; in-app auto-update is unaffected.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1426",
           "done": true
+        },
+        {
+          "date": "2026-11-12",
+          "text": "发版前会对已签名的 Windows Lite、CPU、CUDA 三个安装包分别封存，并各自完成安装、升级、卸载和运行检查，不再只完整验收 Lite。",
+          "textEn": "Before release, the signed Windows Lite, CPU, and CUDA installers are each frozen and independently checked for install, upgrade, uninstall, and runtime — previously only the Lite installer went through full acceptance.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1432",
+          "done": true
         }
       ]
     },
@@ -902,6 +909,13 @@
           "textEn": "Final files saved outside the workspace—such as documents written to your custom output path—are now kept as declared deliverables; only undeclared external files and intermediate artifacts are still filtered out.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1408",
           "done": true
+        },
+        {
+          "date": "2026-11-13",
+          "text": "任务执行不再被中途的确认环节打断，任务面板改为只读地展示进展和历史，卡片上的确认与继续按钮已移除，任务可以完整跑完，你之后再检查结果。",
+          "textEn": "Task execution is no longer interrupted by mid-run confirmation steps; the task panel is now a read-only view of progress and history, the accept and resume buttons on the card are gone, and you review the result after the run completes.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1440",
+          "done": true
         }
       ]
     },
@@ -945,6 +959,13 @@
           "text": "启用或置顶技能时更稳妥，已失效的技能会被自动忽略，不再残留在设置中，技能列表保持干净。",
           "textEn": "Invalid skills are now ignored instead of lingering, keeping your skill list clean.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1349",
+          "done": true
+        },
+        {
+          "date": "2026-11-13",
+          "text": "内置技能（Word、PDF、邮件、联网搜索、仓库检查）不再依赖额外捆绑的命令行环境，改用 Python 或 Node 脚本，在 Windows 上更可靠；连接器统一走同一套接入方式，图片和扫描版 PDF 的文字识别也由同一个文档读取工具完成。",
+          "textEn": "Built-in skills (Word, PDF, email, web search, and repo review) no longer depend on a bundled command-line environment — they now use Python or Node scripts, which is more reliable on Windows; connectors share one native integration path, and image and scanned-PDF text recognition is handled by the same document-reading tool.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1441",
           "done": true
         }
       ]
@@ -1131,6 +1152,41 @@
           "text": "任务中途被截断或验收没有通过时，不会再被标成已完成，你会看到明确的中断或失败结果，而不是一份不完整却显示成功的回答。",
           "textEn": "Tasks that get cut off mid-way or fail acceptance are no longer marked as complete — you get a clear interrupted or failed result instead of an incomplete reply that still claims success.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1428",
+          "done": true
+        },
+        {
+          "date": "2026-11-12",
+          "text": "长会话接近上下文上限时，压缩后继续对话更可靠了；失败和取消会明确提示，回复不再被挤得像中途被打断，恢复后仍反复截断的任务也会如实标记为失败。",
+          "textEn": "Long chats near the context limit now compress and continue more reliably — failures and cancellations are shown clearly instead of the reply looking squeezed and interrupted, and a task that keeps getting truncated after recovery is marked as failed rather than successful.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1429",
+          "done": true
+        },
+        {
+          "date": "2026-11-12",
+          "text": "历史记录超出模型上下文的会话，现在可以通过分块压缩历史来恢复；如果总结失败、被截断或被取消，只压缩了一半的结果不会被保存。",
+          "textEn": "Sessions whose history is too long for the model's context can now be restored by compressing the history in chunks; if the summary fails, gets cut off, or is cancelled, a half-finished compression is never saved.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1433",
+          "done": true
+        },
+        {
+          "date": "2026-11-12",
+          "text": "上下文较短的小模型也能正常恢复会话，不会再因为预留空间过大而拒绝本可完成的短请求；摘要会尽量在完整的词或段落边界断开，避免从词语中间截断。",
+          "textEn": "Recovery now also works for models with a smaller context window, so short requests that should have fit are no longer rejected because too much space was reserved, and summaries prefer to split on word or paragraph boundaries instead of cutting a word in half.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1434",
+          "done": true
+        },
+        {
+          "date": "2026-11-13",
+          "text": "长任务运行期间，应用会阻止电脑休眠，避免任务被挂起而失败；本地模型服务启动失败或意外退出时会自动尝试恢复（包括电脑唤醒之后），并在界面上给出清晰的错误提示和重启建议。",
+          "textEn": "While a long task is running, the app keeps your computer from going to sleep so the task isn't suspended and lost; if the local model service fails to start or exits unexpectedly, the app tries to recover (including after the computer wakes) and shows a clear error with a restart suggestion.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1439",
+          "done": true
+        },
+        {
+          "date": "2026-11-13",
+          "text": "拒绝某个工具权限时，当前任务不再被中止，可以继续执行；任务中更新的技能会等到空闲时再重新加载；达到输出长度上限时会干净收尾而不是显示成中断；追问消息会正确排队，聊天回复也不再被额外的输出上限截短。",
+          "textEn": "Denying a tool permission no longer aborts the current task, so it can keep going; skills updated mid-task reload when idle instead of while the model is still writing; hitting the output length limit now finishes cleanly instead of showing as an interruption; follow-up messages queue properly, and chat replies are no longer cut short by an extra output cap.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1442",
           "done": true
         }
       ]
