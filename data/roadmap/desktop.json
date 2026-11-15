@@ -916,6 +916,20 @@
           "textEn": "Task execution is no longer interrupted by mid-run confirmation steps; the task panel is now a read-only view of progress and history, the accept and resume buttons on the card are gone, and you review the result after the run completes.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1440",
           "done": true
+        },
+        {
+          "date": "2026-11-14",
+          "text": "任务结束时界面展示真实的执行状态，不再被自动标成“成功”或“已完成”；记录保存出错不会打断正在进行的任务；停止、删除或退出应用时会先完成必要的写入清理。",
+          "textEn": "A finished task now shows its real end state instead of being auto-marked as completed; a failed log write no longer interrupts a running task; stopping, deleting, or quitting the app first finishes the necessary saves so nothing is left half-written.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1449",
+          "done": true
+        },
+        {
+          "date": "2026-11-14",
+          "text": "工作排队列表改为只读，已排队的输入不能再编辑、删除或调整优先级；编程窗口的新引导会直接进入正在执行的任务；点停止后，排队内容不会自动重发，图片出错后的恢复也不会越过你的停止去重建对话；界面展示出错时，最终回复仍会保存，不会把整段对话判为失败并丢失。",
+          "textEn": "The work queue is now read-only, so queued inputs can no longer be edited, deleted, or reordered; new guidance from the coding window goes straight into the running task; after you press stop, queued items are not resent, and recovery from an image error will not rebuild the conversation past your stop; if the display hits an error, the final reply is still saved rather than failing the whole conversation.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1451",
+          "done": true
         }
       ]
     },
@@ -966,6 +980,13 @@
           "text": "内置技能（Word、PDF、邮件、联网搜索、仓库检查）不再依赖额外捆绑的命令行环境，改用 Python 或 Node 脚本，在 Windows 上更可靠；连接器统一走同一套接入方式，图片和扫描版 PDF 的文字识别也由同一个文档读取工具完成。",
           "textEn": "Built-in skills (Word, PDF, email, web search, and repo review) no longer depend on a bundled command-line environment — they now use Python or Node scripts, which is more reliable on Windows; connectors share one native integration path, and image and scanned-PDF text recognition is handled by the same document-reading tool.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1441",
+          "done": true
+        },
+        {
+          "date": "2026-11-14",
+          "text": "中文环境下的提示更干净，不再夹带英文默认说明；只读类工具可按需使用，权限判断更贴合工具本身；任务中更新的连接器会在合适时机重新加载；中途引导和追问改走统一队列，更不容易丢失或排错。",
+          "textEn": "Prompts in Chinese are now cleaner, without leftover English boilerplate; read-only tools can be used as needed, and permission checks follow each tool's own labeling; connectors updated mid-task reload at the right moment; mid-task guidance and follow-up questions now share one queue, so fewer items get lost or arrive out of order.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1444",
           "done": true
         }
       ]
