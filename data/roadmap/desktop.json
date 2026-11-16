@@ -634,6 +634,20 @@
           "textEn": "You can now set a context window for each model in a provider channel, and the channel card shows the window actually in effect and whether it was set manually or detected automatically. Channel tests no longer pass just because a webpage loaded, and stale errors are cleared when you change the address.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1418",
           "done": true
+        },
+        {
+          "date": "2026-11-15",
+          "text": "模型服务只会在已被启用且当前处于停止状态时才尝试自动启动，尚未配置服务商时打开设置或模型页不会再看到莫名的启动失败提示；相关说明也统一称为「模型服务」，不再容易让人以为必须使用本地推理。",
+          "textEn": "The model service now only attempts to auto-start when it is already enabled and currently stopped, so opening settings or the models page before configuring a provider no longer shows a confusing startup failure; the wording consistently says “model service,” so it is less likely to sound like local inference is required.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1453",
+          "done": true
+        },
+        {
+          "date": "2026-11-15",
+          "text": "常见预置服务商现在会显示品牌头像，早前以自动生成名称保存的服务商也能被正确识别；点击服务商即可进入编辑，添加向导搜索无结果时可以一键改用自定义服务商。",
+          "textEn": "Popular providers now show their brand avatars — including ones previously saved under auto-generated names — a provider can be edited with one click, and if the add-provider wizard finds no match you can switch to a custom provider in a single step.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1454",
+          "done": true
         }
       ]
     },
@@ -929,6 +943,20 @@
           "text": "工作排队列表改为只读，已排队的输入不能再编辑、删除或调整优先级；编程窗口的新引导会直接进入正在执行的任务；点停止后，排队内容不会自动重发，图片出错后的恢复也不会越过你的停止去重建对话；界面展示出错时，最终回复仍会保存，不会把整段对话判为失败并丢失。",
           "textEn": "The work queue is now read-only, so queued inputs can no longer be edited, deleted, or reordered; new guidance from the coding window goes straight into the running task; after you press stop, queued items are not resent, and recovery from an image error will not rebuild the conversation past your stop; if the display hits an error, the final reply is still saved rather than failing the whole conversation.",
           "url": "https://github.com/rongxinzy/RongxinAI/pull/1451",
+          "done": true
+        },
+        {
+          "date": "2026-11-15",
+          "text": "设置页按「个人、AI 能力、连接、系统」四个分组重新整理，还没配置模型的用户打开设置会直达模型页，跟着分步向导就能添加服务商，输入密钥后会自动测通，设置和对话输入里的模型选择也更直观统一。",
+          "textEn": "Settings are reorganized into four groups — personal, AI capabilities, connections, and system; if you have not set up a model yet, you land right on the models page with a step-by-step wizard for adding a provider (your key is tested automatically), and choosing models is now more intuitive in both settings and the chat input.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1452",
+          "done": true
+        },
+        {
+          "date": "2026-11-15",
+          "text": "全应用完成一轮细节修复：编程工作台顶部的操作条不再遮挡第一条对话，同名的并行实例会自动加上序号，侧栏标题不再因悬停被裁掉开头，快捷键、用量、技能、连接器等页面的排版与文案更清晰易读，模型服务的运行状态和「备用组合」等叫法也更好懂。",
+          "textEn": "A round of detail fixes landed across the app: the coding workspace's top bar no longer covers the first message, parallel instances with the same name are numbered, sidebar titles no longer get clipped at the start on hover, pages such as shortcuts, usage, skills, and connectors are clearer, and the model service running status and wording such as “backup combinations” are easier to understand.",
+          "url": "https://github.com/rongxinzy/RongxinAI/pull/1455",
           "done": true
         }
       ]
